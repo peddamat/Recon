@@ -1,9 +1,9 @@
 //
 //  DefaultsController.m
-//  nmapX-coredata
+//  recon
 //
 //  Created by Sumanth Peddamatham on 7/2/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 bafoontecha.com. All rights reserved.
 //
 
 #import "PrefsController.h"
@@ -22,7 +22,7 @@
    
    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
-   return [basePath stringByAppendingPathComponent:@"nmapX"];
+   return [basePath stringByAppendingPathComponent:@"recon"];
 }
 
 + (NSString *)applicationSessionsFolder {

@@ -1,9 +1,9 @@
 //
 //  XMLController.h
-//  nmapX
+//  recon
 //
 //  Created by Sumanth Peddamatham on 6/30/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 bafoontecha.com. All rights reserved.
 //
 //  http://developer.apple.com/documentation/Cocoa/Conceptual/XMLParsing/Articles/UsingParser.html
 //
