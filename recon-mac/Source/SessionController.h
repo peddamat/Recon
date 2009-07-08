@@ -32,15 +32,21 @@
    NSString *outputFile;   
    NSString *sessionUUID;
    
+   BOOL isRunning;
+   
    NmapController *nmapController;
 }
 
-   @property (readonly) NSString *sessionUUID;
+@property (readonly) NSString *sessionUUID;
+@property (readonly) BOOL isRunning;
 
-- (void) launchNewSessionWithProfile:(Profile *)profile 
-                         withTarget:(NSString *)sessionTarget 
-             inManagedObjectContext:(NSManagedObjectContext *)context;
+- (void) initWithProfile:(Profile *)profile 
+                     withTarget:(NSString *)sessionTarget   
+         inManagedObjectContext:(NSManagedObjectContext *)context;
 
 + (NSString *) stringWithUUID;
+
+- (void)startScan;
+- (void)abortScan;
 
 @end

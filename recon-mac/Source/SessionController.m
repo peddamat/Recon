@@ -22,6 +22,7 @@
 @implementation SessionController
 
 @synthesize sessionUUID;
+@synthesize isRunning;
 
 - (id)init
 {
@@ -29,14 +30,16 @@
       return nil;
    
    // Generate a unique identifier for this controller
-   sessionUUID = [SessionController stringWithUUID];
+   sessionUUID = [[SessionController stringWithUUID] retain];
+   
+   isRunning = FALSE;
 }
 
-- (void) launchNewSessionWithProfile:(Profile *)profile 
-                          withTarget:(NSString *)sessionTarget 
-              inManagedObjectContext:(NSManagedObjectContext *)context
+- (void) initWithProfile:(Profile *)profile                           
+              withTarget:(NSString *)sessionTarget               
+  inManagedObjectContext:(NSManagedObjectContext *)context
 {
-   NSLog(@"SessionController: startNewSession!");
+   NSLog(@"SessionController: initWithProfile!");
       
    // Create new session in managedObjectContext
    session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" 
@@ -45,7 +48,7 @@
    [session setTarget:sessionTarget];     // Store session target
    [session setDate:[NSDate date]];       // Store session start date
    [session setUUID:[self sessionUUID]];  // Store session UUID
-   [session setStatus:@"Running"];        // Store session status
+   [session setStatus:@"Queued"];        // Store session status
    session.profile = profile;             // Store session profile
       
    // Check PrefsController for user-specified sessions directory
@@ -59,16 +62,13 @@
    
    if ([NSFm createDirectoryAtPath:sessionDir attributes: nil] == NO) {
       NSLog (@"Couldn't create directory!\n");
-      // TODO: Notify MyDocument of file creation error
+      // TODO: Notify SessionManager of file creation error
       return;
    }
    
    // Growl notifier: Session Started!
-	[[SPGrowlController sharedGrowlController] notifyWithTitle:@"Initiating Nmap Session"
-                                                  description:[NSString stringWithFormat: @"On target: %@", sessionTarget]
-                                             notificationName:@"Connected"];   
-   
-   
+	[[SPGrowlController sharedGrowlController] notifyWithTitle:@"Queued Nmap Session" description:[NSString stringWithFormat: @"On target: %@", sessionTarget] notificationName:@"Connected"];   
+      
    // Convert selected profile to nmap arguments
    NSArray *args = [ArgumentListGenerator convertProfileToArgs:profile withTarget:sessionTarget withOutputFile:outputFile];   
    
@@ -78,22 +78,56 @@
       // TODO: Notify MyDocument that nmap was already called
       return;
    }
+      
+   nmapController = [[NmapController alloc] initWithNmapBinary:@"/usr/local/bin/nmap" 
+                                                      withArgs:args 
+                                            withOutputFilePath:sessionDir];   
    
+   // Keep outputFile around until nmap finishes scan
+   [outputFile retain];
+   [session retain];
+   [nmapController retain];
+}
+
+- (void)startScan
+{
    // Register to receive notifications from NmapController
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc addObserver:self
           selector:@selector(terminatedNotification:)
               name:NSTaskDidTerminateNotification //@"terminatedNotification"
             object:nil];
-   NSLog(@"Registered with notification center");   
+   NSLog(@"SessionController: Registered with notification center");   
    
-   nmapController = [[NmapController alloc] init];   
-   [nmapController launchScan:@"/usr/local/bin/nmap" withArgs:args withOutputFile:outputFile];
-//   [nmapController launchScan:[PrefsController nmapBinary] withArgs:args withOutputFile:outputFile withObserver:self];
-   
-   // Keep outputFile around until nmap finishes scan
-   [outputFile retain];
+   [nmapController startScan];
 }
+
+- (void)abortScan
+{
+   [nmapController abortScan];
+}
+
+// Sets the taskComplete flag when a terminated notification is received.
+- (void)terminatedNotification: (NSNotification *)notification
+{
+
+   // Call XMLController with session directory and managedObjectContext
+   XMLController *xmlController = [[XMLController alloc] init];     
+   [xmlController parseXMLFile:outputFile inSession:session onlyReadProgress:FALSE];      
+   
+   NSLog(@"SessionController: Output: %@", outputFile);   
+	[[SPGrowlController sharedGrowlController] notifyWithTitle:@"Session complete" description:@"" notificationName:@"Connected"];   
+   
+   [session setStatus:@"Done"];
+   [outputFile release];
+   
+   // TODO: Send notification to MyDocument that session is complete
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+   [nc postNotificationName:@"sessionTerminated" object:self];
+      
+   NSLog(@"SessionController: Back!");   
+}
+
 
 /** Returns a UUID string
  */
@@ -105,26 +139,11 @@
    return [uuidString autorelease];
 }
 
-// Sets the taskComplete flag when a terminated notification is received.
-- (void)terminatedNotification: (NSNotification *)notification
+- (void)dealloc
 {
-
-   // Call XMLController with session directory and managedObjectContext
-   XMLController *xmlController = [[XMLController alloc] init];     
-   [xmlController parseXMLFile:outputFile inSession:session];      
-   
-   NSLog(@"Output: %@", outputFile);
-   
-	[[SPGrowlController sharedGrowlController] notifyWithTitle:@"Session complete"
-                                                  description:@"" //[NSString stringWithFormat: @"On target: %@", sessionTarget]
-                                             notificationName:@"Connected"];   
-   
-   // TODO: Send notification to MyDocument that session is complete
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc postNotificationName:@"sessionTerminated" object:self];
-   
-   [session setStatus:@"Done"];
-   [outputFile release];
+   [nc removeObserver:self];
+   [super dealloc];
 }
 
 @end

@@ -19,9 +19,16 @@
 	NSMutableData *standardOutput;
 	NSMutableData *standardError;
 	NSString *outputString;
-	NSString *errorString;   
+	NSString *errorString; 
+   
+   NSString *outputFilePath;
+   
+   BOOL isRunning;
 }
 
-- (void) launchScan:(NSString *)nmapBinary withArgs:(NSArray *)args withOutputFile:(NSString *)outputFile;
+- (id) initWithNmapBinary:(NSString *)nmapBinary 
+                 withArgs:(NSArray *)nmapArgs 
+       withOutputFilePath:(NSString *)outputFilePath;
+- (void) startScan;
 - (void) abortScan;
 @end

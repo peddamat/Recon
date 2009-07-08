@@ -12,6 +12,8 @@
 #import <BWToolkitFramework/BWSplitView.h>
 #import <BWToolkitFramework/BWAnchoredButton.h>
 
+@class SessionManager;
+
 // User application default keys
 extern NSString * const BAFNmapXRunOnce;
 extern NSString * const BAFNmapBinaryLocation;
@@ -44,7 +46,7 @@ extern NSString * const BAFSessionSaveDirectory;
    IBOutlet NSMenuItem *menuSettings;
    IBOutlet NSMenuItem *menuResults;   
       
-   NSMutableDictionary *runningSessionDictionary;
+   SessionManager *sessionManager;
    
 }
 
@@ -54,7 +56,9 @@ extern NSString * const BAFSessionSaveDirectory;
 - (IBAction) sessionDrawerRemove:(id)sender;
 - (IBAction) sessionDrawerShowInFinder:(id)sender;
 
-- (IBAction) startButton:(id)sender;
+// Session Manager click-handlers
+- (IBAction) queueSession:(id)sender;
+- (IBAction) processQueue:(id)sender;
 
 - (IBAction) toggleSettings:(id)sender;
 - (IBAction) toggleResults:(id)sender;
@@ -72,5 +76,6 @@ extern NSString * const BAFSessionSaveDirectory;
 - (void)updatePrefsWindow;
 - (BOOL)hasRun;
 - (void)setRun;
+
 
 @end

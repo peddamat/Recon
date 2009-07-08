@@ -7,17 +7,21 @@
 //
 
 #import "XMLController.h"
+#import "Profile.h"
+#import "Host.h"
+#import "Port.h"
+#import "Session.h"
 
 
 @implementation XMLController
 
-- (void)parseXMLFile:(NSString *)pathToFile inSession:(Session *)session onlyReadProgress:(BOOL)onlyReadProgress
+- (void)parseXMLFile:(NSString *)pathToFile inSession:(Session *)session onlyReadProgress:(BOOL)oReadProgress
 {   
    BOOL success;
    NSURL *xmlURL = [NSURL fileURLWithPath:pathToFile];
    
    inRunstats = FALSE;
-   onlyReadProgress = onlyReadProgress;
+   onlyReadProgress = oReadProgress;
    
    // Save current session
    currentSession = session;

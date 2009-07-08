@@ -10,51 +10,58 @@
 
 @implementation NmapController
 
-
-- (void) launchScan:(NSString *)nmapBinary withArgs:(NSArray *)args withOutputFile:(NSString *)outputFile
+- (id) initWithNmapBinary:(NSString *)nmapBinary 
+                 withArgs:(NSArray *)nmapArgs 
+       withOutputFilePath:(NSString *)oFilePath;
 {
+   if (self = [super init]) 
+   {
+      task = [[NSTask alloc] init];
+      
+      [task setLaunchPath:nmapBinary];
+      [task setArguments:nmapArgs];
+      [task setStandardOutput:[NSPipe pipe]];
+      [task setStandardError:[NSPipe pipe]];   
+      
+      standardOutput = [[NSMutableData alloc] init];
+      standardError = [[NSMutableData alloc] init];
+      
+      NSFileHandle *standardOutputFile = [[task standardOutput] fileHandleForReading];
+      NSFileHandle *standardErrorFile = [[task standardError] fileHandleForReading];
+      
+      [[NSNotificationCenter defaultCenter]
+       addObserver:self
+       selector:@selector(standardOutNotification:)
+       name:NSFileHandleDataAvailableNotification
+       object:standardOutputFile];
+      [[NSNotificationCenter defaultCenter]
+       addObserver:self
+       selector:@selector(standardErrorNotification:)
+       name:NSFileHandleDataAvailableNotification
+       object:standardErrorFile];
+      [[NSNotificationCenter defaultCenter]
+       addObserver:self
+       selector:@selector(terminatedNotification:)
+       name:NSTaskDidTerminateNotification
+       object:task];
+      
+      [standardOutputFile waitForDataInBackgroundAndNotify];
+      [standardErrorFile waitForDataInBackgroundAndNotify];         
+      
+      outputFilePath = [oFilePath retain];      
+   }
    
-   task = [[NSTask alloc] init];
-   
-	[task setLaunchPath:nmapBinary];
-	[task setArguments:args];
-	[task setStandardOutput:[NSPipe pipe]];
-	[task setStandardError:[NSPipe pipe]];   
+   return self;
+}
 
-   standardOutput = [[NSMutableData alloc] init];
-   standardError = [[NSMutableData alloc] init];
-   
-   NSFileHandle *standardOutputFile = [[task standardOutput] fileHandleForReading];
-   NSFileHandle *standardErrorFile = [[task standardError] fileHandleForReading];
-   
-   [[NSNotificationCenter defaultCenter]
-    addObserver:self
-    selector:@selector(standardOutNotification:)
-    name:NSFileHandleDataAvailableNotification
-    object:standardOutputFile];
-   [[NSNotificationCenter defaultCenter]
-    addObserver:self
-    selector:@selector(standardErrorNotification:)
-    name:NSFileHandleDataAvailableNotification
-    object:standardErrorFile];
-   [[NSNotificationCenter defaultCenter]
-    addObserver:self
-    selector:@selector(terminatedNotification:)
-    name:NSTaskDidTerminateNotification
-    object:task];
-   
-   [standardOutputFile waitForDataInBackgroundAndNotify];
-   [standardErrorFile waitForDataInBackgroundAndNotify];   
-   
+- (void) startScan
+{
    // TODO: Check for error on task launch
    
 	[task launch];   
+   isRunning = TRUE;
    
-   // If error, send unsuccessfulLaunch
-}
-
-- (void)readProgress
-{
+   // If error, send unsuccessfulLaunch notification
 }
 
 
@@ -67,6 +74,8 @@
       [task terminate];
 //      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 //      [nc postNotificationName:@"sessionTerminated" object:self];      
+      
+      isRunning = FALSE;
    }
 }
 
@@ -132,8 +141,26 @@
    //  - unsuccessfulTermination
    
    // TODO: Parse errorString and notify if errors occurred.
-   NSLog(@"%@", outputString);
-   NSLog(@"%@", errorString);   
+//   NSLog(@"%@", outputString);
+//   NSLog(@"%@", errorString);
+   
+   NSError *error;
+   NSString *standardOutPath = [outputFilePath stringByAppendingPathComponent:@"nmap-stdout.txt"];
+   NSString *standardErrPath = [outputFilePath stringByAppendingPathComponent:@"nmap-stdout.txt"];
+   
+   // Write standardOut and standardError to file
+   BOOL ok = [outputString writeToFile:standardOutPath atomically:YES 
+                              encoding:NSUnicodeStringEncoding error:&error];
+   ok = [errorString writeToFile:standardErrPath atomically:YES 
+                              encoding:NSUnicodeStringEncoding error:&error];
+
+}
+
+- (void)dealloc
+{
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+   [nc removeObserver:self];
+   [super dealloc];
 }
 
 @end

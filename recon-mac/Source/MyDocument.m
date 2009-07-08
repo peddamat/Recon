@@ -7,7 +7,7 @@
 //
 
 #import "MyDocument.h"
-#import "SessionController.h"
+#import "SessionManager.h"
 
 @class Profile;
 
@@ -16,30 +16,6 @@ NSString * const BAFNmapBinLoc = @"NmapBinaryLocation";
 NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
 
 
-//@interface SessionManager :NSObject
-//{
-//	NSMutableDictionary *runningSessionDictionary;
-//   int sessionCount;
-//}
-//
-//- (id)init
-//{
-//   runningSessionDictionary = [[NSMutableDictionary alloc] init];   
-//   sessionCount = 0;
-//}
-//
-//- (void)addSession:(Session *)session
-//{
-//   [runningSessionDictionary setObject:session forKey:[session sessionUUID]];   
-//   
-//}
-//
-//@end
-
-@implementation SessionManager
-
-@end
-
 @implementation MyDocument
 
 - (id)init 
@@ -47,6 +23,7 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
     self = [super init];
     if (self != nil) {
         // initialization code
+       sessionManager = [[SessionManager alloc] init];
 //       runningSessionDictionary = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -63,7 +40,6 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
     // user interface preparation code
 }
 
-
 /** Initialize UI defaults
  */
 - (void)awakeFromNib
@@ -77,18 +53,15 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
    [self registerDefaults];
    
    // If this is the first run, show Preferences window
-   if ([self hasRun] == FALSE)
-   {
-      [self setRun];
-      
+   if ([self hasRun] == FALSE) {
+      [self setRun];      
       NSLog(@"Hasn't run");      
-//      [self showPrefWindow:self];
    }
    
-   // Use Preferences controller to verify nmap binary
-   //   and log directory are set.
+   // Use Preferences controller to verify nmap binary and log directory are set.
    PrefsController *prefs = [[PrefsController alloc] init];
    [prefs checkPrefs];
+   [prefs release];
    
    // Open sessions drawer
    [sessionsDrawer toggle:self];   
@@ -99,54 +72,31 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
 
 /** Start button handler
  */
-- (IBAction)startButton:(id)sender 
-{
-   NSLog(@"MyDocument: startButton!");
-   
-   // TODO: Disable start button until ready to handle cancel event 
-   
+- (IBAction)queueSession:(id)sender 
+{   
    // Retrieve currently selected profile
    NSArray *profiles = [profileController selectedObjects];
    Profile *profile = [profiles lastObject];
-   
-   // Switch main view to Results
-//   [mainTabView selectTabViewItemAtIndex:1];
-//   [self collapseProfileView];
-   
+      
    // TODO: Check to make sure input arguments are valid
    
-   SessionController *currentSession = [[SessionController alloc] init];
-   NSString *sessionUUID = [currentSession sessionUUID];
-   
-   // Store a pointer to the session in session Dictionary
-   [runningSessionDictionary setObject:currentSession forKey:sessionUUID];
-   
-   // Register to receive notifications from SessionController
-   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc addObserver:self
-          selector:@selector(sessionTerminated:)
-              name:@"sessionTerminated"
-            object:nil];
-   NSLog(@"Registered with notification center");   
-   
-   // Initiate a new session
-   [currentSession launchNewSessionWithProfile:profile withTarget:[sessionTarget stringValue] inManagedObjectContext:[self managedObjectContext]];
-   
+   [sessionManager queueSessionWithProfile:profile andTarget:[sessionTarget stringValue]];
 }
 
-- (void)sessionTerminated: (NSNotification *)notification
+- (IBAction)processQueue:(id)sender
 {
-   NSLog(@"MyDocument: Notification of session termination received!");
+   NSLog(@"MyDocument: processSessions!");
    
-   // TODO: Remove completed session from Dictionary.  Notify user as needed.
+   [sessionManager processQueue];
 }
 
 - (void)addProfileDefaults
 {
    NSManagedObjectContext * context = [self managedObjectContext]; 
-   NSManagedObject * profile = nil; 
-   profile = [NSEntityDescription insertNewObjectForEntityForName: @"Profile"  inManagedObjectContext: context]; 
+   NSManagedObject *profile = nil; 
+   profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
    [profile setValue: @"Default" forKey: @"name"]; 
+   
    NSLog (@"The Profile's name is: %@", [profile valueForKey:@"name"]);       
 }
 
