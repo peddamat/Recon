@@ -8,6 +8,9 @@
 
 #import "MyDocument.h"
 #import "SessionManager.h"
+#import "SessionController.h"
+
+#import "Session.h"
 
 @class Profile;
 
@@ -20,11 +23,9 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
 
 - (id)init 
 {
-    self = [super init];
-    if (self != nil) {
-        // initialization code
+    if (self = [super init])
+    {
        sessionManager = [[SessionManager alloc] init];
-//       runningSessionDictionary = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -68,18 +69,20 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
    
    // Add some default profiles   
    [self addProfileDefaults];   
+   
+   [sessionsTableView setTarget:self];
+   [sessionsTableView setDoubleAction:@selector(sessionsTableDoubleClick)];
 }
+
 
 /** Start button handler
  */
 - (IBAction)queueSession:(id)sender 
 {   
    // Retrieve currently selected profile
-   NSArray *profiles = [profileController selectedObjects];
-   Profile *profile = [profiles lastObject];
+   Profile *profile = [[profileController selectedObjects] lastObject];
       
    // TODO: Check to make sure input arguments are valid
-   
    [sessionManager queueSessionWithProfile:profile andTarget:[sessionTarget stringValue]];
 }
 
@@ -198,6 +201,15 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
    [sessionsDrawer toggle:self];    
 }
 
+- (NSString *)clickedUUID
+{
+   // Find clicked row from sessionsTableView
+   NSInteger clickedRow = [sessionsTableView clickedRow];
+   // Get selected object from sessionsController 
+   return [[[sessionsController arrangedObjects] objectAtIndex:clickedRow] UUID];
+   
+}
+
 // Session Drawer Menu key-handlers
 - (IBAction) sessionDrawerRun:(id)sender
 {
@@ -213,11 +225,36 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
 }
 - (IBAction) sessionDrawerShowInFinder:(id)sender
 {
-   NSLog(@"Click!");   
+   // Retrieve currently selected session
+//   Session *selectedSession = [[sessionsController selectedObjects] lastObject]; 
+
+//   [[NSWorkspace sharedWorkspace] openFile:[savedSessionsDirectory stringByAppendingPathComponent:[selectedSession UUID]]
+//                           withApplication:@"Finder"];
+
+   NSString *savedSessionsDirectory = [PrefsController applicationSessionsFolder];     
+   [[NSWorkspace sharedWorkspace] openFile:[savedSessionsDirectory stringByAppendingPathComponent:[self clickedUUID]]
+                           withApplication:@"Finder"];
+
 }
 
 
-// Handle context menu clicks
+/// Sessions Drawer click-handlers
+
+- (void)sessionsTableDoubleClick
+{
+   NSLog(@"MyDocument: doubleClick!");
+   
+   // Retrieve currently selected session
+   Session *selectedSession = [[sessionsController selectedObjects] lastObject];   
+   // Retrieve currently selected profile
+   Profile *storedProfile = [selectedSession profile];
+   [profileController setSelectedObjects:[NSArray arrayWithObject:storedProfile]];
+   
+   //   [[profileController selectedObjects] lastObject];
+   
+}
+
+// Handle context menu clicks in Sessions TableView
 - (void)menuNeedsUpdate:(NSMenu *)menu 
 {
    NSInteger clickedRow = [sessionsTableView clickedRow];
@@ -229,6 +266,17 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
    
    // TODO: If Sessions Context Menu
    if (menu == sessionsContextMenu) {
+      NSArray *menuItems = [menu itemArray];
+      NSMenuItem *menuItem = nil;
+      
+      // First iterate through boolean arguments
+      NSEnumerator *e = [menuItems objectEnumerator];
+      
+      while ( menuItem = [e nextObject] )
+      {
+         [menuItem setEnabled:FALSE];
+      }
+         
       NSLog(@"MyDocument: sessionsTableView clicked row: %i!", clickedRow);
       NSLog(@"MyDocument: sessionsTableView selected row: %i!", selectedRow);      
    }
