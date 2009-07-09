@@ -72,6 +72,9 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
    
    [sessionsTableView setTarget:self];
    [sessionsTableView setDoubleAction:@selector(sessionsTableDoubleClick)];
+   
+   [hostsTableView setTarget:self];
+   [hostsTableView setDoubleAction:@selector(hostsTableDoubleClick)];
 }
 
 
@@ -237,6 +240,11 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
 
 }
 
+
+- (void)hostsTableDoubleClick
+{
+   [self toggleResults:self];
+}
 
 /// Sessions Drawer click-handlers
 
