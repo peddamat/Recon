@@ -9,6 +9,20 @@
 /* Begin PBXBuildFile section */
 		775BDEF1067A8BF0009058FE /* MyDocument.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 775BDEF0067A8BF0009058FE /* MyDocument.xcdatamodel */; };
 		775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		8C2F056F1006815D008179E3 /* ManagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F056E1006815D008179E3 /* ManagingViewController.m */; };
+		8C2F057D100681CF008179E3 /* ExpertSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F057C100681CF008179E3 /* ExpertSettingsViewController.m */; };
+		8C2F058810068233008179E3 /* ExpertSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2F058710068233008179E3 /* ExpertSettingsView.xib */; };
+		8C2F059D100683F0008179E3 /* ExpertResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F059C100683F0008179E3 /* ExpertResultsViewController.m */; };
+		8C2F05A110068452008179E3 /* ExpertResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2F05A010068452008179E3 /* ExpertResultsView.xib */; };
+		8C548CA01005B4140075C582 /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F7891004908600A4648B /* MyDocument.xib */; };
+		8C548CA11005B4140075C582 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C41003E3BA00A4648B /* MainMenu.xib */; };
+		8C548CA61005B43A0075C582 /* button_pane_show_icon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F67E1004235900A4648B /* button_pane_show_icon.tif */; };
+		8C548CA71005B43A0075C582 /* button_pane_hide_icon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F67F1004235900A4648B /* button_pane_hide_icon.tif */; };
+		8C548CA81005B43A0075C582 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C31003E3BA00A4648B /* Info.plist */; };
+		8C548CA91005B43A0075C582 /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C51003E3BA00A4648B /* Growl Registration Ticket.growlRegDict */; };
+		8C548CAA1005B43A0075C582 /* tentacle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C61003E3BA00A4648B /* tentacle.icns */; };
+		8C548CAB1005B43A0075C582 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
+		8C548CAC1005B43A0075C582 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8C55E41F100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C55E41E100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m */; };
 		8C55E43810052E72002F5013 /* SessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C55E43710052E72002F5013 /* SessionManager.m */; };
 		8C79E1360FFBB31800A4648B /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C79E1350FFBB31800A4648B /* BWToolkitFramework.framework */; };
@@ -26,16 +40,6 @@
 		8C79F2EE10033DF200A4648B /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C79F2ED10033DF200A4648B /* Growl.framework */; };
 		8C79F2F810033E3C00A4648B /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C79F2ED10033DF200A4648B /* Growl.framework */; };
 		8C79F30B10033EF200A4648B /* SPGrowlController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79F30A10033EF200A4648B /* SPGrowlController.m */; };
-		8C79F4C71003E3BA00A4648B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C31003E3BA00A4648B /* Info.plist */; };
-		8C79F4C81003E3BA00A4648B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C41003E3BA00A4648B /* MainMenu.xib */; };
-		8C79F4C91003E3BA00A4648B /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C51003E3BA00A4648B /* Growl Registration Ticket.growlRegDict */; };
-		8C79F4CA1003E3BA00A4648B /* tentacle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C61003E3BA00A4648B /* tentacle.icns */; };
-		8C79F52F1003ED7E00A4648B /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F52E1003ED7E00A4648B /* Resources */; };
-		8C79F6801004235900A4648B /* button_pane_show_icon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F67E1004235900A4648B /* button_pane_show_icon.tif */; };
-		8C79F6811004235900A4648B /* button_pane_hide_icon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F67F1004235900A4648B /* button_pane_hide_icon.tif */; };
-		8C79F78A1004908600A4648B /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F7891004908600A4648B /* MyDocument.xib */; };
-		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
-		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 /* End PBXBuildFile section */
@@ -65,9 +69,17 @@
 		32DBCF750370BD2300C91783 /* recon_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = recon_Prefix.pch; path = Source/recon_Prefix.pch; sourceTree = "<group>"; };
 		775BDEF0067A8BF0009058FE /* MyDocument.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = MyDocument.xcdatamodel; path = Models/MyDocument.xcdatamodel; sourceTree = "<group>"; };
 		7788DA0506752A1600599AAD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		8C2F056D1006815D008179E3 /* ManagingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManagingViewController.h; path = Source/ManagingViewController.h; sourceTree = "<group>"; };
+		8C2F056E1006815D008179E3 /* ManagingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManagingViewController.m; path = Source/ManagingViewController.m; sourceTree = "<group>"; };
+		8C2F057B100681CF008179E3 /* ExpertSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpertSettingsViewController.h; path = Source/ExpertSettingsViewController.h; sourceTree = "<group>"; };
+		8C2F057C100681CF008179E3 /* ExpertSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpertSettingsViewController.m; path = Source/ExpertSettingsViewController.m; sourceTree = "<group>"; };
+		8C2F058710068233008179E3 /* ExpertSettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExpertSettingsView.xib; path = Resources/ExpertSettingsView.xib; sourceTree = "<group>"; };
+		8C2F059B100683F0008179E3 /* ExpertResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpertResultsViewController.h; path = Source/ExpertResultsViewController.h; sourceTree = "<group>"; };
+		8C2F059C100683F0008179E3 /* ExpertResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExpertResultsViewController.m; path = Source/ExpertResultsViewController.m; sourceTree = "<group>"; };
+		8C2F05A010068452008179E3 /* ExpertResultsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ExpertResultsView.xib; path = Resources/ExpertResultsView.xib; sourceTree = "<group>"; };
 		8C55E41E100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTask+OneLineTasksWithOutput.m"; path = "Source/NSTask+OneLineTasksWithOutput.m"; sourceTree = "<group>"; };
-		8C55E43610052E72002F5013 /* SessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionManager.h; sourceTree = "<group>"; };
-		8C55E43710052E72002F5013 /* SessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionManager.m; sourceTree = "<group>"; };
+		8C55E43610052E72002F5013 /* SessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionManager.h; path = Source/SessionManager.h; sourceTree = "<group>"; };
+		8C55E43710052E72002F5013 /* SessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionManager.m; path = Source/SessionManager.m; sourceTree = "<group>"; };
 		8C79E1350FFBB31800A4648B /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = ../../../Library/Frameworks/BWToolkitFramework.framework; sourceTree = SOURCE_ROOT; };
 		8C79E1920FFBC09600A4648B /* XMLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLController.m; path = Source/XMLController.m; sourceTree = "<group>"; };
 		8C79E1930FFBC09600A4648B /* XMLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLController.h; path = Source/XMLController.h; sourceTree = "<group>"; };
@@ -96,7 +108,6 @@
 		8C79F4C41003E3BA00A4648B /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = Resources/MainMenu.xib; sourceTree = "<group>"; };
 		8C79F4C51003E3BA00A4648B /* Growl Registration Ticket.growlRegDict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Growl Registration Ticket.growlRegDict"; path = "Resources/Growl Registration Ticket.growlRegDict"; sourceTree = "<group>"; };
 		8C79F4C61003E3BA00A4648B /* tentacle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = tentacle.icns; path = Resources/tentacle.icns; sourceTree = "<group>"; };
-		8C79F52E1003ED7E00A4648B /* Resources */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
 		8C79F67E1004235900A4648B /* button_pane_show_icon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = button_pane_show_icon.tif; path = Resources/button_pane_show_icon.tif; sourceTree = "<group>"; };
 		8C79F67F1004235900A4648B /* button_pane_hide_icon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = button_pane_hide_icon.tif; path = Resources/button_pane_hide_icon.tif; sourceTree = "<group>"; };
 		8C79F7891004908600A4648B /* MyDocument.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MyDocument.xib; path = Resources/MyDocument.xib; sourceTree = "<group>"; };
@@ -158,7 +169,6 @@
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
-				8C79F52E1003ED7E00A4648B /* Resources */,
 			);
 			name = "nmapX-coredata";
 			sourceTree = "<group>";
@@ -170,6 +180,12 @@
 				8C79E4D50FFE9FA500A4648B /* Managed Objects */,
 				2A37F4AEFDCFA73011CA2CEA /* MyDocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */,
+				8C2F056D1006815D008179E3 /* ManagingViewController.h */,
+				8C2F056E1006815D008179E3 /* ManagingViewController.m */,
+				8C2F057B100681CF008179E3 /* ExpertSettingsViewController.h */,
+				8C2F057C100681CF008179E3 /* ExpertSettingsViewController.m */,
+				8C2F059B100683F0008179E3 /* ExpertResultsViewController.h */,
+				8C2F059C100683F0008179E3 /* ExpertResultsViewController.m */,
 				8C55E43610052E72002F5013 /* SessionManager.h */,
 				8C55E43710052E72002F5013 /* SessionManager.m */,
 				8C79E22E0FFC23D800A4648B /* SessionController.h */,
@@ -200,11 +216,13 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C79F4C41003E3BA00A4648B /* MainMenu.xib */,
 				8C79F7891004908600A4648B /* MyDocument.xib */,
+				8C2F058710068233008179E3 /* ExpertSettingsView.xib */,
+				8C2F05A010068452008179E3 /* ExpertResultsView.xib */,
 				8C79F67E1004235900A4648B /* button_pane_show_icon.tif */,
 				8C79F67F1004235900A4648B /* button_pane_hide_icon.tif */,
 				8C79F4C31003E3BA00A4648B /* Info.plist */,
-				8C79F4C41003E3BA00A4648B /* MainMenu.xib */,
 				8C79F4C51003E3BA00A4648B /* Growl Registration Ticket.growlRegDict */,
 				8C79F4C61003E3BA00A4648B /* tentacle.icns */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
@@ -252,10 +270,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 26FC0AA50875C8B900E6366F /* Build configuration list for PBXNativeTarget "recon" */;
 			buildPhases = (
-				8D15AC2B0486D014006FF6A4 /* Resources */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8C79F2F510033E1B00A4648B /* CopyFiles */,
+				8C548CA51005B41C0075C582 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -285,20 +303,21 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8D15AC2B0486D014006FF6A4 /* Resources */ = {
+		8C548CA51005B41C0075C582 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
-				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
-				8C79F4C71003E3BA00A4648B /* Info.plist in Resources */,
-				8C79F4C81003E3BA00A4648B /* MainMenu.xib in Resources */,
-				8C79F4C91003E3BA00A4648B /* Growl Registration Ticket.growlRegDict in Resources */,
-				8C79F4CA1003E3BA00A4648B /* tentacle.icns in Resources */,
-				8C79F52F1003ED7E00A4648B /* Resources in Resources */,
-				8C79F6801004235900A4648B /* button_pane_show_icon.tif in Resources */,
-				8C79F6811004235900A4648B /* button_pane_hide_icon.tif in Resources */,
-				8C79F78A1004908600A4648B /* MyDocument.xib in Resources */,
+				8C548CA61005B43A0075C582 /* button_pane_show_icon.tif in Resources */,
+				8C548CA71005B43A0075C582 /* button_pane_hide_icon.tif in Resources */,
+				8C548CA81005B43A0075C582 /* Info.plist in Resources */,
+				8C548CA91005B43A0075C582 /* Growl Registration Ticket.growlRegDict in Resources */,
+				8C548CAA1005B43A0075C582 /* tentacle.icns in Resources */,
+				8C548CAB1005B43A0075C582 /* Credits.rtf in Resources */,
+				8C548CAC1005B43A0075C582 /* InfoPlist.strings in Resources */,
+				8C548CA01005B4140075C582 /* MyDocument.xib in Resources */,
+				8C548CA11005B4140075C582 /* MainMenu.xib in Resources */,
+				8C2F058810068233008179E3 /* ExpertSettingsView.xib in Resources */,
+				8C2F05A110068452008179E3 /* ExpertResultsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +343,9 @@
 				8C79F30B10033EF200A4648B /* SPGrowlController.m in Sources */,
 				8C55E41F100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m in Sources */,
 				8C55E43810052E72002F5013 /* SessionManager.m in Sources */,
+				8C2F056F1006815D008179E3 /* ManagingViewController.m in Sources */,
+				8C2F057D100681CF008179E3 /* ExpertSettingsViewController.m in Sources */,
+				8C2F059D100683F0008179E3 /* ExpertResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,10 +406,10 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = nmapX_coredata_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
+				GCC_PREFIX_HEADER = Source/recon_Prefix.pch;
+				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = "nmapX-coredata";
+				PRODUCT_NAME = recon;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

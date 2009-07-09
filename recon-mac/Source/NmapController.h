@@ -17,10 +17,7 @@
 	NSTask *task;   
    
 	NSMutableData *standardOutput;
-	NSMutableData *standardError;
-	NSString *outputString;
-	NSString *errorString; 
-   
+	NSMutableData *standardError;   
    NSString *outputFilePath;
    
    BOOL isRunning;

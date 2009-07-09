@@ -24,7 +24,7 @@
    onlyReadProgress = oReadProgress;
    
    // Save current session
-   currentSession = session;
+   currentSession = [session retain];
    
    if (addressParser) // addressParser is an NSXMLParser instance variable
       [addressParser release];
@@ -57,7 +57,7 @@
          
          // Create new host object in managedObjectContext
          NSManagedObjectContext *context = [currentSession managedObjectContext]; 
-         currentHost = [NSEntityDescription insertNewObjectForEntityForName: @"Host" inManagedObjectContext:context];          
+         currentHost = [[NSEntityDescription insertNewObjectForEntityForName: @"Host" inManagedObjectContext:context] retain];
          
          // Point back to current session
          [currentHost setSession:currentSession];
@@ -115,7 +115,7 @@
          
          // Create new port object in managedObjectContext
          NSManagedObjectContext * context = [currentSession managedObjectContext]; 
-         currentPort = [NSEntityDescription insertNewObjectForEntityForName: @"Port" inManagedObjectContext: context];          
+         currentPort = [[NSEntityDescription insertNewObjectForEntityForName: @"Port" inManagedObjectContext: context] retain];          
          
          // Point back to current session
          [currentPort setHost:currentHost];
@@ -218,49 +218,15 @@
    
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-- (void)openXMLFile 
-{         
-   NSArray *fileTypes = [NSArray arrayWithObject:@"xml"];   
-   NSOpenPanel *oPanel = [NSOpenPanel openPanel];   
-   NSString *startingDir = [[NSUserDefaults standardUserDefaults] objectForKey:@"StartingDirectory"];
-   
-   if (!startingDir)      
-      startingDir = NSHomeDirectory();
-   
-   [oPanel setAllowsMultipleSelection:NO];   
-   [oPanel beginSheetForDirectory:startingDir file:nil types:fileTypes    
-                   modalForWindow:[self window] modalDelegate:self   
-                   didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)    
-                      contextInfo:nil];   
+- (void)dealloc
+{
+   [currentStringValue release];
+   [currentSession release];
+   [addressParser release];   
+   [currentHost release];
+   [currentPort release];
+   [super dealloc];
 }
 
-- (void)openPanelDidEnd:(NSOpenPanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo 
-{   
-   NSString *pathToFile = nil;
-   
-   if (returnCode == NSOKButton) {      
-      pathToFile = [[[sheet filenames] objectAtIndex:0] copy];      
-   }
-   
-   if (pathToFile) {
-      
-      NSString *startingDir = [pathToFile stringByDeletingLastPathComponent];
-      [[NSUserDefaults standardUserDefaults] setObject:startingDir forKey:@"StartingDirectory"];
-      [self parseXMLFile:pathToFile];
-   }
-}
 
 @end

@@ -124,6 +124,9 @@
 - (void)terminatedNotification: (NSNotification *)notification
 {
    NSLog(@"NmapController: Received task termination!");
+
+	NSString *outputString = nil;
+	NSString *errorString = nil; 
    
    outputString =
    [[[NSString alloc]
@@ -146,7 +149,7 @@
    
    NSError *error;
    NSString *standardOutPath = [outputFilePath stringByAppendingPathComponent:@"nmap-stdout.txt"];
-   NSString *standardErrPath = [outputFilePath stringByAppendingPathComponent:@"nmap-stdout.txt"];
+   NSString *standardErrPath = [outputFilePath stringByAppendingPathComponent:@"nmap-stderr.txt"];
    
    // Write standardOut and standardError to file
    BOOL ok = [outputString writeToFile:standardOutPath atomically:YES 
@@ -158,8 +161,11 @@
 
 - (void)dealloc
 {
-   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc removeObserver:self];
+   [[NSNotificationCenter defaultCenter] removeObserver:self];
+   [outputFilePath release];
+   [standardOutput release];
+   [standardError release];
+   [task release];    
    [super dealloc];
 }
 

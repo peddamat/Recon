@@ -10,6 +10,9 @@
 #import "SessionManager.h"
 #import "SessionController.h"
 
+#import "ExpertSettingsViewController.h"
+#import "ExpertResultsViewController.h"
+
 #import "Session.h"
 
 @class Profile;
@@ -26,6 +29,19 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
     if (self = [super init])
     {
        sessionManager = [[SessionManager alloc] init];
+       
+       viewControllers = [[NSMutableArray alloc] init];
+       
+       ManagingViewController *vc;
+       vc = [[ExpertSettingsViewController alloc] init];
+       [vc setManagedObjectContext:[self managedObjectContext]];
+       [viewControllers addObject:vc];
+       [vc release];
+       
+       vc = [[ExpertResultsViewController alloc] init];
+       [vc setManagedObjectContext:[self managedObjectContext]];
+       [viewControllers addObject:vc];
+       [vc release];       
     }
     return self;
 }
@@ -58,6 +74,9 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
       [self setRun];      
       NSLog(@"Hasn't run");      
    }
+   
+   // Setup initial view
+   [self displayViewController:0];
    
    // Use Preferences controller to verify nmap binary and log directory are set.
    PrefsController *prefs = [[PrefsController alloc] init];
@@ -193,12 +212,25 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
    [profileView toggleCollapse:profileButton];      
 }
 
+- (void) displayViewController:(int)i
+{
+   ManagingViewController *vc = [viewControllers objectAtIndex:i];
+   NSWindow *w = [mainBox window];
+   BOOL ended = [w makeFirstResponder:w];
+   if (!ended) {
+      NSBeep();
+      return;
+   }
+   // Put the view in the box
+   [mainBox setContentView:[vc view]]; 
+}
+
 // Main Menu key-handlers
 - (IBAction) toggleSettings:(id)sender {
-   [mainTabView selectTabViewItemAtIndex:0];
+   [self displayViewController:0];
 }
 - (IBAction) toggleResults:(id)sender {
-   [mainTabView selectTabViewItemAtIndex:1];
+   [self displayViewController:1];
 }
 - (IBAction) toggleSessionsDrawer:(id)sender {
    [sessionsDrawer toggle:self];    
@@ -300,6 +332,12 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
    // TODO: If Profiles Context Menu
    
    
+}
+
+- (void)dealloc
+{
+   [viewControllers release];
+   [super dealloc];
 }
 
 /**

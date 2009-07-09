@@ -21,18 +21,24 @@ extern NSString * const BAFSessionSaveDirectory;
 
 @interface MyDocument : NSPersistentDocument {
    
+   SessionManager *sessionManager;
+   NSMutableArray *viewControllers;
+   IBOutlet NSBox *mainBox;
+   
    IBOutlet NSView *mainView;
 
-   // Session Drawer outlets
+   // Session Drawer
    IBOutlet NSDrawer *sessionsDrawer;
    IBOutlet NSTableView *sessionsTableView;
    IBOutlet NSMenu *sessionsContextMenu;
+   IBOutlet NSArrayController *sessionsController;
    
    IBOutlet NSButton *startButton;
    IBOutlet NSArrayController *profileController;   
    IBOutlet NSTextField *sessionTarget;
    IBOutlet NSTabView *mainTabView;
    
+   // Preference Window
    IBOutlet NSWindow *prefWindow;
    IBOutlet NSTextField *nmapBinaryString;   
    IBOutlet NSTextField *sessionDirectoryString;   
@@ -41,14 +47,16 @@ extern NSString * const BAFSessionSaveDirectory;
    
    IBOutlet BWSplitView *profileView;
    IBOutlet BWAnchoredButton *profileButton;
+
+   IBOutlet NSTableView *hostsTableView;
    
-   // Main Menu outlets
+   // Main Menu 
    IBOutlet NSMenuItem *menuSettings;
    IBOutlet NSMenuItem *menuResults;   
-      
-   SessionManager *sessionManager;
    
 }
+
+- (void) displayViewController:(int)i;
 
 // Sessions Drawer click-handlers
 - (IBAction) sessionDrawerRun:(id)sender;
@@ -72,6 +80,7 @@ extern NSString * const BAFSessionSaveDirectory;
 - (void) collapseProfileView;
 - (IBAction) toggleProfileView:(id)sender;
 
+- (void)addProfileDefaults;
 - (void)registerDefaults;
 - (void)updatePrefsWindow;
 - (BOOL)hasRun;

@@ -26,13 +26,14 @@
 
 - (id)init
 {
-   if (![super init])
-      return nil;
+   if ((self = [super init])) {   
+      // Generate a unique identifier for this controller
+      sessionUUID = [[SessionController stringWithUUID] retain];
+      
+      isRunning = FALSE;      
+   }   
    
-   // Generate a unique identifier for this controller
-   sessionUUID = [[SessionController stringWithUUID] retain];
-   
-   isRunning = FALSE;
+   return self;
 }
 
 - (void) initWithProfile:(Profile *)profile                           
@@ -41,6 +42,22 @@
 {
    NSLog(@"SessionController: initWithProfile!");
       
+   // Make a copy of the selected profile
+   
+   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Profile" 
+                                                        inManagedObjectContext:[profile managedObjectContext]];
+   
+   NSDictionary *profileAttributes = [entityDescription attributesByName];       
+   NSArray *profileKeys = [profileAttributes allKeys];                           
+   profileAttributes = [profile dictionaryWithValuesForKeys:profileKeys];     
+   
+   Profile *profileCopy = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
+                                                        inManagedObjectContext:context];
+   
+   [profileCopy setValuesForKeysWithDictionary:profileAttributes];
+   [profileCopy setName:@"Saved Session"];
+   
+   
    // Create new session in managedObjectContext
    session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" 
                                                     inManagedObjectContext:context];
@@ -48,8 +65,9 @@
    [session setTarget:sessionTarget];     // Store session target
    [session setDate:[NSDate date]];       // Store session start date
    [session setUUID:[self sessionUUID]];  // Store session UUID
-   [session setStatus:@"Queued"];        // Store session status
-   session.profile = profile;             // Store session profile
+   [session setStatus:@"Queued"];         // Store session status
+   session.profile = profileCopy;         // Store session profile
+   [session setProgress:[NSNumber numberWithInt:1]];
       
    // Check PrefsController for user-specified sessions directory
 //   NSString *nmapBinary = [PrefsController nmapBinaryString]       
@@ -86,7 +104,6 @@
    // Keep outputFile around until nmap finishes scan
    [outputFile retain];
    [session retain];
-   [nmapController retain];
 }
 
 - (void)startScan
@@ -95,7 +112,7 @@
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc addObserver:self
           selector:@selector(terminatedNotification:)
-              name:NSTaskDidTerminateNotification //@"terminatedNotification"
+              name:NSTaskDidTerminateNotification
             object:nil];
    NSLog(@"SessionController: Registered with notification center");   
    
@@ -112,14 +129,13 @@
 {
 
    // Call XMLController with session directory and managedObjectContext
-   XMLController *xmlController = [[XMLController alloc] init];     
-   [xmlController parseXMLFile:outputFile inSession:session onlyReadProgress:FALSE];      
+   XMLController *xmlController = [[[XMLController alloc] init] autorelease];     
+   [xmlController parseXMLFile:outputFile inSession:session onlyReadProgress:FALSE];  
    
    NSLog(@"SessionController: Output: %@", outputFile);   
 	[[SPGrowlController sharedGrowlController] notifyWithTitle:@"Session complete" description:@"" notificationName:@"Connected"];   
    
    [session setStatus:@"Done"];
-   [outputFile release];
    
    // TODO: Send notification to MyDocument that session is complete
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -141,8 +157,10 @@
 
 - (void)dealloc
 {
-   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc removeObserver:self];
+   [[NSNotificationCenter defaultCenter] removeObserver:self];
+   [nmapController release];
+   [sessionUUID release];   
+   [outputFile release];   
    [super dealloc];
 }
 
