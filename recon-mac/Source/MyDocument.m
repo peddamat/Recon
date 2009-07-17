@@ -9,6 +9,7 @@
 #import "MyDocument.h"
 #import "SessionManager.h"
 #import "SessionController.h"
+#import "ArgumentListGenerator.h"
 
 #import "Session.h"
 #import "Profile.h"
@@ -77,7 +78,7 @@
 
 - (NSPredicate *)testy
 {
-   NSLog(@"HI");
+   NSLog(@"MyDocument: testy");
    if (testy == nil) {
       testy = [NSPredicate predicateWithFormat: @"ANY ports.number == 23"];   
    }
@@ -253,15 +254,52 @@
 
 
 // -------------------------------------------------------------------------------
-//	queueSession: Use current state of the selected Profile and queue a session.
+//	queueSession: Use current state of the selected Profile and queue a session.              
+//   http://arstechnica.com/apple/guides/2009/04/cocoa-dev-the-joy-of-nspredicates-and-matching-strings.ars
 // -------------------------------------------------------------------------------
 - (IBAction)queueSession:(id)sender 
 {   
-   // Retrieve currently selected profile
-   Profile *profile = [[profileController selectedObjects] lastObject];
+   NSLog(@"MyDocument: queueSession");
    
-   // TODO: Check to make sure input arguments are valid
-   [sessionManager queueSessionWithProfile:profile withTarget:[sessionTarget stringValue]];
+   // Read the manual entry textfield, tokenize the string, and pull out
+   //  arguments that start with '-', ie. nmap commands
+   NSString *nmapCommand  = [nmapCommandTextField stringValue];
+   NSArray *parsedNmapCommand = [nmapCommand componentsSeparatedByString:@" "];
+   NSArray *commands = [parsedNmapCommand filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF beginswith '-'"]];
+   
+   // Check if the user entered any commands
+   if ([commands count] == 0)
+   {
+      // Retrieve currently selected profile
+      Profile *profile = [[profileController selectedObjects] lastObject];
+      
+      // TODO: Check to make sure input arguments are valid
+      [sessionManager queueSessionWithProfile:profile withTarget:[sessionTarget stringValue]];      
+   }
+   // ... otherwise, parse the input commands and queue the session
+   else
+   {
+      // Make sure the user-specified commands are valid
+      ArgumentListGenerator *a = [[ArgumentListGenerator alloc] init];   
+      
+      if ([a checkArgList:commands] == TRUE)
+      {
+         // Create a brand spankin' profile
+         Profile *profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
+                                                          inManagedObjectContext:[self managedObjectContext]];
+         [profile setName:@"Direct Entry"];
+         
+         // Populate new profile with command line args
+         [a populateProfile:profile withArgString:commands];
+         
+         // TODO: Check to make sure input arguments are valid
+         [sessionManager queueSessionWithProfile:profile withTarget:[parsedNmapCommand lastObject]];         
+
+         // Cleanup
+         [[self managedObjectContext] deleteObject:profile];
+         [nmapCommandTextField setStringValue:@""];
+      }
+   }
 }
 
 // -------------------------------------------------------------------------------
@@ -774,7 +812,7 @@
 // -------------------------------------------------------------------------------
 - (void)controlTextDidEndEditing:(NSNotification *)obj
 {
-   NSLog(@"%@", obj);
+//   NSLog(@"%@", obj);
 }
 
 - (BOOL)isDocumentEdited
