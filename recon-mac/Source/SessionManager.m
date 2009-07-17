@@ -102,8 +102,6 @@
    if ([sessionControllers valueForKey:sessionUUID] != nil) {
       
       [[sessionControllers valueForKey:sessionUUID] deleteSession]; 
-      [sessionControllers removeObjectForKey:sessionUUID];
-      [self updateQueueFlag];      
    }
    // ... otherwise, remove it manually
    else {
