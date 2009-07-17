@@ -92,8 +92,9 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    
    [self createSessionDirectory:sessionUUID];
          
+   ArgumentListGenerator *a = [[ArgumentListGenerator alloc] init];
    // Convert selected profile to nmap arguments
-   self.nmapArguments = [ArgumentListGenerator convertProfileToArgs:profile withTarget:sessionTarget withOutputFile:sessionOutputFile];   
+   self.nmapArguments = [a convertProfileToArgs:profile withTarget:sessionTarget withOutputFile:sessionOutputFile];   
    
    [self initNmapController];
    
@@ -108,8 +109,9 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 
    [self createSessionDirectory:[s UUID]];
 
+   ArgumentListGenerator *a = [[ArgumentListGenerator alloc] init];
    // Convert selected profile to nmap arguments
-   self.nmapArguments = [ArgumentListGenerator convertProfileToArgs:profile withTarget:[s target] withOutputFile:sessionOutputFile];   
+   self.nmapArguments = [a convertProfileToArgs:profile withTarget:[s target] withOutputFile:sessionOutputFile];   
    
    [self initNmapController];   
 }
@@ -119,12 +121,27 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (Profile *)copyProfile:(Profile *)profile
 {
+   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
+   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile"    
+                                             inManagedObjectContext:[profile managedObjectContext]];
+   [request setEntity:entity];
+
+   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", @"Saved Sessions"];   
+   [request setPredicate:predicate];
+
+   NSError *error = nil;   
+   NSArray *array = [[profile managedObjectContext] executeFetchRequest:request error:&error];   
+   
+   // Saved Sessions Folder
+   Profile *savedSessions = [array lastObject];
+   
    // Make a copy of the selected profile
    Profile *profileCopy = [[NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:[profile managedObjectContext]] retain];
    NSDictionary *values = [profile dictionaryWithValuesForKeys:[[profileCopy entity] attributeKeys]];      
    [profileCopy setValuesForKeysWithDictionary:values];      
    [profileCopy setName:[NSString stringWithFormat:@"Copy of %@",[profile name]]];
-   [profileCopy setIsEnabled:NO];
+   [profileCopy setIsEnabled:NO];   
+   [profileCopy setParent:savedSessions];
    
    return profileCopy;
 }
