@@ -7,11 +7,28 @@
 //
 
 #import "NetstatController.h"
+
+#import "MyDocument.h"
+#import "SessionController.h"
+#import "SessionManager.h"
+
 #import "Connection.h"
+#import "Profile.h"
+#import "Session.h"
+
+#include <arpa/inet.h>
+#include <net/if.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <errno.h>
+#include <ifaddrs.h>
+#include <stdio.h>
+
 
 @implementation NetstatController
 
 @synthesize connections;
+@synthesize testy;
 
 - (id)init 
 {
@@ -27,6 +44,14 @@
    return self;
 }
 
+- (void)dealloc
+{
+   [connections release];
+   [timer invalidate];
+   [timer release];
+   [super dealloc];
+}
+
 // -------------------------------------------------------------------------------
 //	chooseTask: 
 // -------------------------------------------------------------------------------
@@ -37,9 +62,23 @@
    NSLog(@"Selected: %i", row);
    
    switch (row) {
+      // Find computers on local network
       case 0:
+         NSLog(@"CIDR: %d", [self cidrForInterface:@"en1"]);
+         break;
+      // Find Bonjour-compatible
+      case 1:
+         break;
+      // See connected machines
+      case 2:
          [self refreshConnectionsList:self];
          [self autoRefreshConnections];
+         break;
+      // Check for services on machine
+      case 3:
+         break;
+      // Check if a machine is online
+      case 4:
          break;
       default:
          break;
@@ -49,7 +88,90 @@
 }
 
 
+- (IBAction)searchLocalNetwork:(id)sender
+{
+   SessionManager *sessionManager = [SessionManager sharedSessionManager];
 
+   Profile *profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
+                                                inManagedObjectContext:[sessionManager context]];
+
+   Session *session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" 
+                                                    inManagedObjectContext:[sessionManager context]];
+   
+   [session setProfile:profile];
+   [session setUUID:@"generated"];
+   [session setTarget:[NSString stringWithFormat:@"192.168.0.1/%d",[self cidrForInterface:@"en0"]]];
+   
+//   [profile setEnableAggressive:[NSNumber numberWithBool:TRUE]];
+   [profile setFastScan:[NSNumber numberWithBool:TRUE]];
+   [profile setTraceRoute:[NSNumber numberWithBool:TRUE]];
+   
+   // TODO: Check to make sure input arguments are valid
+   [sessionManager queueExistingSession:session];
+   [sessionManager launchSession:session];
+   [sessionsController setSelectedObjects:[NSArray arrayWithObject:session]];
+   
+}
+
+- (NSPredicate *)testy
+{
+   NSLog(@"NetstatController: testy");
+   if (testy == nil) {
+      testy = [NSPredicate predicateWithFormat: @"UUID == 'generate'"];   
+   }
+   return testy;
+}
+
+// -------------------------------------------------------------------------------
+//	cidrForInterface: Gets the CIDR for the passed IP address 
+//   TODO: Doing this the lazy way using ifconfig, fix this!!!
+// -------------------------------------------------------------------------------
+- (int)cidrForInterface:(NSString *)ifName {
+   NSAssert(nil != ifName, @"Interface name cannot be nil");
+   
+   // Prepare a task object
+   NSTask *task = [[NSTask alloc] init];
+   [task setLaunchPath:@"/bin/tcsh"];     // For some reason, using /bin/sh screws up the debug console   
+   [task setArguments:[NSArray arrayWithObjects: @"-c", @"ifconfig | grep netmask | grep 192 | awk '{print $4}'", nil]];
+   
+   // Create the pipe to read from
+   NSPipe *outPipe = [[NSPipe alloc] init];
+   [task setStandardOutput:outPipe];
+   [outPipe release];
+   
+   // Start the process
+   [task launch];
+   
+   // Read the output
+   NSData *data = [[outPipe fileHandleForReading]
+                   readDataToEndOfFile];
+   
+   // Make sure the task terminates normally
+   [task waitUntilExit];
+   [task release];
+
+   // Convert to a string
+   NSString *aString = [[NSString alloc] initWithData:data
+                                             encoding:NSUTF8StringEncoding];
+
+   
+   // Convert hexadecimal to int
+   int p;
+   sscanf([aString cStringUsingEncoding:NSUTF8StringEncoding], "%x", &p);
+   
+   //return [NSString stringWithCString:cstring];
+   return bitcount(p);
+}
+
+
+int bitcount (unsigned int n) {
+   int count = 0;
+   while (n) {
+      count += n & 0x1u;
+      n >>= 1;
+   }
+   return count;
+}
 
 
 // -------------------------------------------------------------------------------
@@ -72,6 +194,8 @@
 // -------------------------------------------------------------------------------
 - (IBAction)refreshConnectionsList:(id)sender
 {      
+   NSLog(@"NetstatController: refreshConnectionsList");
+   
    // The helper-script prepares the netstat output for us
 //   NSString *scriptPath = [[NSBundle mainBundle] pathForResource:@"connections" ofType:@"sh"];   
 //   NSLog(@"%@", scriptPath);
@@ -102,7 +226,7 @@
    
    // Make sure the task terminates normally
    [task waitUntilExit];
-   int status = [task terminationStatus];
+//   int status = [task terminationStatus];
    [task release];
       
    // Check status
@@ -186,6 +310,53 @@
 - (void)checkThem:(NSTimer *)aTimer
 {
    [self refreshConnectionsList:self];
+}
+
+// -------------------------------------------------------------------------------
+//	registerNotificationsFromSessionController: Session Controllers notify the Session Manager upon completion.
+// -------------------------------------------------------------------------------
+- (void)registerNotificationsFromSessionController:(SessionController *)sc
+{
+   // Register to receive notifications from the new SessionController
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+   [nc addObserver:self
+          selector:@selector(successfulRunNotification:)
+              name:@"SCsuccessfulRun"
+            object:sc];
+   [nc addObserver:self
+          selector:@selector(abortedRunNotification:)
+              name:@"SCabortedRun"
+            object:sc];
+   [nc addObserver:self
+          selector:@selector(unsuccessfulRunNotification:)
+              name:@"SCunsuccessfulRun"
+            object:sc];   
+   
+   NSLog(@"SessionManager: Registered with notification center");        
+}
+
+// -------------------------------------------------------------------------------
+//	successfulRunNotification: Session Controllers notify the Session Manager upon completion.
+// -------------------------------------------------------------------------------
+- (void)successfulRunNotification: (NSNotification *)notification
+{   
+   NSLog(@"NetstatController: Success!");
+}
+
+// -------------------------------------------------------------------------------
+//	abortedRunNotification: 
+// -------------------------------------------------------------------------------
+- (void)abortedRunNotification: (NSNotification *)notification
+{   
+   NSLog(@"NetstatController: Success!");
+}
+
+// -------------------------------------------------------------------------------
+//	unsuccessfulRunNotification: 
+// -------------------------------------------------------------------------------
+- (void)unsuccessfulRunNotification: (NSNotification *)notification
+{   
+   NSLog(@"NetstatController: Success!");
 }
 
 @end
