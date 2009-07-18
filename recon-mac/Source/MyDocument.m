@@ -47,7 +47,10 @@
 {
     if (self = [super init])
     {
-       sessionManager = [[SessionManager alloc] init];
+//       sessionManager = [[SessionManager alloc] init];
+       sessionManager = [SessionManager sharedSessionManager];
+       [sessionManager setContext:[self managedObjectContext]];
+       
        interfacesDictionary = [[NSMutableDictionary alloc] init];
        
        NSFileManager *fileManager;
@@ -71,8 +74,11 @@
 
 - (void)dealloc
 {
-   [sessionManager dealloc];
-   [interfacesDictionary dealloc];
+   [sessionManager release];
+   [interfacesDictionary release];
+   
+   [nmapErrorTimer invalidate];
+   [nmapErrorTimer release];
    [super dealloc];
 }
 
@@ -105,8 +111,6 @@
 //   NSLog(@"MyDoc: Array: %i", [array count]);
    NSLog(@"HIHIHIH");
 }
-
-
 
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController 
@@ -299,8 +303,36 @@
          [[self managedObjectContext] deleteObject:profile];
          [nmapCommandTextField setStringValue:@""];
       }
+      else
+      {
+         // Flash textfield to indicate entry error
+         
+         nmapErrorCount = 1.0;
+         // Setup a timer to auto-refresh list
+         nmapErrorTimer = [[NSTimer scheduledTimerWithTimeInterval:0.05
+                                                   target:self
+                                                 selector:@selector(fadeRed:)
+                                                 userInfo:nil
+                                                  repeats:YES] retain]; 
+      }
    }
 }
+
+// -------------------------------------------------------------------------------
+//	fadeRed: Timer helper-function indicating nmap command entry error
+// -------------------------------------------------------------------------------
+- (void)fadeRed:(NSTimer *)aTimer
+{
+   nmapErrorCount -= 0.04;
+   if (nmapErrorCount <= 0) {
+      [nmapErrorTimer invalidate];
+      [nmapCommandTextField setTextColor:[NSColor blackColor]];  
+      return;
+   }      
+   
+   [nmapCommandTextField setTextColor:[NSColor colorWithDeviceRed:nmapErrorCount green:0 blue:0 alpha:1]];
+}         
+
 
 // -------------------------------------------------------------------------------
 //	dequeueSession: Use current state of the selected Profile and queue a session.
@@ -318,6 +350,9 @@
    [sessionManager processQueue];
 }
 
+// -------------------------------------------------------------------------------
+//	addQueuedSessions:
+// -------------------------------------------------------------------------------
 - (void)addQueuedSessions
 {
    NSManagedObjectContext *context = [self managedObjectContext];
@@ -333,8 +368,8 @@
    id object;
    
    while ((object = [enumerator nextObject])) {
-      NSString *status = [object valueForKey:@"status"];
-      NSLog(@"%@", status);
+//      NSString *status = [object valueForKey:@"status"];
+//      NSLog(@"%@", status);
 //      if ([status compare:@"Queued"] == TRUE)
 //         NSLog(@"QUEUED!");
    }
@@ -498,22 +533,6 @@
    [containerView replaceSubview:oldSubview with:newSubview];   
 }
 
-// -------------------------------------------------------------------------------
-//	Main Menu key-handlers
-// -------------------------------------------------------------------------------
-
-- (IBAction) toggleSettings:(id)sender {
-   [mainTabView selectTabViewItemAtIndex:0];
-   [self switchToScanView:self];
-}
-- (IBAction) toggleResults:(id)sender {
-   [mainTabView selectTabViewItemAtIndex:1];
-   [self switchToScanView:self];   
-}
-- (IBAction) toggleSessionsDrawer:(id)sender {
-   [sessionsDrawer toggle:self];    
-}
-
 
 // -------------------------------------------------------------------------------
 //	Session Drawer Menu key-handlers
@@ -565,7 +584,26 @@
 - (IBAction) sessionDrawerAbort:(id)sender
 {
    NSLog(@"MyDocument: Aborting session");
-   [sessionManager abortSession:[self clickedUUID]];
+   
+   int numberOfSelectedRows = [sessionsTableView numberOfSelectedRows];
+   
+   if (numberOfSelectedRows > 1)
+   {
+      NSIndexSet *selectedRows = [sessionsTableView selectedRowIndexes];
+      NSArray *selectedSessions = [[sessionsController arrangedObjects] objectsAtIndexes:selectedRows];   
+      
+      id session;
+      NSEnumerator *e = [selectedSessions objectEnumerator];
+      
+      while (session = [e nextObject])
+         [sessionManager abortSession:session];         
+   }
+   else 
+   {
+      NSInteger clickedRow = [sessionsTableView clickedRow];
+      // Get selected object from sessionsController 
+      [sessionManager abortSession:[[sessionsController arrangedObjects] objectAtIndex:clickedRow]];      
+   }
 }
 - (IBAction) sessionDrawerRemove:(id)sender
 {
@@ -654,6 +692,27 @@
    }
 }
 
+
+// -------------------------------------------------------------------------------
+//	Main Menu key-handlers
+// -------------------------------------------------------------------------------
+
+- (IBAction) toggleSettings:(id)sender {
+   [mainTabView selectTabViewItemAtIndex:0];
+   [self switchToScanView:self];
+}
+- (IBAction) toggleResults:(id)sender {
+   [mainTabView selectTabViewItemAtIndex:1];
+   [self switchToScanView:self];   
+}
+- (IBAction) toggleSessionsDrawer:(id)sender {
+   [sessionsDrawer toggle:self];    
+}
+
+// -------------------------------------------------------------------------------
+//	Menu click handlers
+// -------------------------------------------------------------------------------
+
 // Enable/Disable menu depending on context
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
@@ -711,15 +770,18 @@
 
 - (IBAction)setuidNmap:(id)sender
 {
-   [self rootNmap];
+   [PrefsController rootNmap];
 }
 
 - (IBAction)unsetuidNmap:(id)sender
 {
-   [self unrootNmap];
+   [PrefsController unrootNmap];
 }
 
 
+// -------------------------------------------------------------------------------
+//	Sort Descriptors for the various table views
+// -------------------------------------------------------------------------------
 
 // http://fadeover.org/blog/archives/13
 - (NSArray *)hostSortDescriptor
@@ -783,20 +845,22 @@
    return @"MyDocument";
 }
 
+// -------------------------------------------------------------------------------
+//	displayName: Override NSPersistentDocument window title
+// -------------------------------------------------------------------------------
+- (NSString *)displayName
+{
+   return @"Recon";
+}
 
-
-
-
-
-
-
-
+// -------------------------------------------------------------------------------
+//	NSDocument functions that we can potentially override
+// -------------------------------------------------------------------------------
 
 - (IBAction)saveDocument:(id)sender
 {
    NSLog(@"SAVY?");
 }
-
 - (IBAction)saveDocumentTo:(id)sender
 {
    NSLog(@"SAVY?");
@@ -806,15 +870,7 @@
    NSLog(@"SAVY?");
 }
 
-
-// -------------------------------------------------------------------------------
-//	controlTextDidEndEditing
-// -------------------------------------------------------------------------------
-- (void)controlTextDidEndEditing:(NSNotification *)obj
-{
-//   NSLog(@"%@", obj);
-}
-
+// Overriding this allows us to create the illusion of Autosave
 - (BOOL)isDocumentEdited
 {
    return NO;
@@ -834,7 +890,7 @@
 // -------------------------------------------------------------------------------
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
    
-   NSLog(@"QUITTING APASD");
+   NSLog(@"MyDocument: Closing main window");
    
    NSError *error;
    int reply = NSTerminateNow;
