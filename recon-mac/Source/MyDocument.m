@@ -80,6 +80,9 @@
    [nmapErrorTimer invalidate];
    [nmapErrorTimer release];
    
+   [nmapErrorTimer invalidate];
+   [nmapErrorTimer release];
+   
    [mainsubView release];
    [mainsubView2 release];   
    [super dealloc];
@@ -154,6 +157,20 @@
    
    [mainsubView retain];
    [mainsubView2 retain];
+   
+   nmapErrorTimer = [[NSTimer scheduledTimerWithTimeInterval:1
+                                                      target:self
+                                                    selector:@selector(expandProfileView:)
+                                                    userInfo:nil
+                                                     repeats:YES] retain]; 
+   
+}
+
+- (void)expandProfileView:(NSTimer *)aTimer
+{
+   [nmapErrorTimer invalidate];
+   [profilesOutlineView expandItem:nil expandChildren:YES];   
+   [profileController setSelectionIndexPath:[NSIndexPath indexPathWithIndex:0]];
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
@@ -408,6 +425,42 @@
          
       }
    }
+}
+
+// -------------------------------------------------------------------------------
+//	addProfile: Add a new profile to the Persistent Store
+// -------------------------------------------------------------------------------
+- (IBAction)addProfile:(id)sender
+{
+   NSManagedObjectContext *context = [self managedObjectContext];
+   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
+   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile"
+                                             inManagedObjectContext:[self managedObjectContext]];
+   
+   [request setEntity:entity];
+   
+   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = 'User Profiles'"];
+   [request setPredicate:predicate];
+   
+   NSError *error = nil;
+   NSArray *array = [context executeFetchRequest:request error:&error];   
+   Profile *profileParent = [array lastObject];
+   
+   if (profileParent == nil)
+   {
+      profileParent = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+      [profileParent setName:@"User Profiles"];
+   }
+   
+   Profile *profile = nil; 
+   
+   // Add a few defaults
+   profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+   [profile setValue: @"New Profile" forKey: @"name"]; 
+   [profile setValue:profileParent forKey:@"parent"];
+   
+   // Expand the profiles window
+   [profilesOutlineView expandItem:nil expandChildren:YES];   
 }
 
 // -------------------------------------------------------------------------------
@@ -794,7 +847,7 @@
 - (NSArray *)sessionSortDescriptor
 {
 	if(sessionSortDescriptor == nil){
-		sessionSortDescriptor = [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES]];
+		sessionSortDescriptor = [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO]];
    }
    
 	return sessionSortDescriptor;
