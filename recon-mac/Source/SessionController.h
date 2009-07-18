@@ -1,6 +1,6 @@
 //
 //  ScanController.h
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 7/1/09.
 //  Copyright 2009 bafoontecha.com. All rights reserved.
@@ -25,6 +25,7 @@
 @class Session;
 @class Profile;
 @class NmapController;
+@class XMLController;
 
 @interface SessionController : NSObject {
    
@@ -39,19 +40,21 @@
    
    NSArray *nmapArguments;   
    NmapController *nmapController;
+   
+   NSTimer *resultsTimer;
+   XMLController *xmlController;
 }
 
-@property (readonly, retain) NSString *sessionUUID;
 @property (readonly, assign) BOOL hasRun;
 @property (readonly, assign) BOOL isRunning;
+@property (readwrite, retain) Session *session;
+@property (readonly, retain) NSString *sessionUUID;
 
 - (void) initWithProfile:(Profile *)profile 
                      withTarget:(NSString *)sessionTarget   
          inManagedObjectContext:(NSManagedObjectContext *)context;
 
 - (void)initWithSession:(Session *)s;
-
-+ (NSString *) stringWithUUID;
 
 - (Profile *)copyProfile:(Profile *)profile;
 - (BOOL)createSessionDirectory:(NSString *)uuid;
@@ -60,5 +63,7 @@
 - (void)startScan;
 - (void)abortScan;
 - (void)deleteSession;
+
++ (NSString *) stringWithUUID;
 
 @end

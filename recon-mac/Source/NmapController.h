@@ -1,6 +1,6 @@
 //
 //  NmapController.h
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 7/1/09.
 //  Copyright 2009 bafoontecha.com. All rights reserved.
@@ -22,7 +22,6 @@
    NSString *outputFilePath;
    
    BOOL hasRun;
-   
 }
 
 @property(readonly) BOOL hasRun;
@@ -34,5 +33,6 @@
 - (BOOL) isRunning;
 - (void) startScan;
 - (void) abortScan;
+
 
 @end

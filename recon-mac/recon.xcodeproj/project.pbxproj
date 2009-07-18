@@ -11,6 +11,8 @@
 		775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		8C2A17A7100B29D10060D931 /* OperatingSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A17A6100B29D10060D931 /* OperatingSystem.m */; };
 		8C2A17B5100B2A6E0060D931 /* Host.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A17B4100B2A6E0060D931 /* Host.m */; };
+		8C4163861010D6310066A4F8 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4163851010D6310066A4F8 /* BWToolkitFramework.framework */; };
+		8C4163891010D6340066A4F8 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C4163851010D6310066A4F8 /* BWToolkitFramework.framework */; };
 		8C55E41F100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C55E41E100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m */; };
 		8C55E43810052E72002F5013 /* SessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C55E43710052E72002F5013 /* SessionManager.m */; };
 		8C79E1960FFBC09600A4648B /* XMLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E1920FFBC09600A4648B /* XMLController.m */; };
@@ -23,13 +25,11 @@
 		8C79F2EE10033DF200A4648B /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C79F2ED10033DF200A4648B /* Growl.framework */; };
 		8C79F2F810033E3C00A4648B /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C79F2ED10033DF200A4648B /* Growl.framework */; };
 		8C79F30B10033EF200A4648B /* SPGrowlController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79F30A10033EF200A4648B /* SPGrowlController.m */; };
-		8C79F4C71003E3BA00A4648B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C31003E3BA00A4648B /* Info.plist */; };
 		8C79F4C81003E3BA00A4648B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C41003E3BA00A4648B /* MainMenu.xib */; };
 		8C79F4C91003E3BA00A4648B /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F4C51003E3BA00A4648B /* Growl Registration Ticket.growlRegDict */; };
 		8C79F6801004235900A4648B /* button_pane_show_icon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F67E1004235900A4648B /* button_pane_show_icon.tif */; };
 		8C79F6811004235900A4648B /* button_pane_hide_icon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F67F1004235900A4648B /* button_pane_hide_icon.tif */; };
 		8C79F78A1004908600A4648B /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F7891004908600A4648B /* MyDocument.xib */; };
-		8CAA0C3B10072AA00084C6D5 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CAA0C3A10072AA00084C6D5 /* BWToolkitFramework.framework */; };
 		8CAA1231100A078B0084C6D5 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAA1230100A078B0084C6D5 /* Profile.m */; };
 		8CC32789100CDCA700483939 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC32788100CDCA700483939 /* Security.framework */; };
 		8CC3278F100CDCF000483939 /* NetstatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3278E100CDCF000483939 /* NetstatController.m */; };
@@ -45,12 +45,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8C2A146E100A9E670060D931 /* CopyFiles */ = {
+		8C4163841010D5E00066A4F8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 7;
+			dstSubfolderSpec = 10;
 			files = (
+				8C4163891010D6340066A4F8 /* BWToolkitFramework.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +83,7 @@
 		8C2A17A6100B29D10060D931 /* OperatingSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OperatingSystem.m; path = "Source/Managed Objects/OperatingSystem.m"; sourceTree = "<group>"; };
 		8C2A17B3100B2A6E0060D931 /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Host.h; path = "Source/Managed Objects/Host.h"; sourceTree = "<group>"; };
 		8C2A17B4100B2A6E0060D931 /* Host.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Host.m; path = "Source/Managed Objects/Host.m"; sourceTree = "<group>"; };
+		8C4163851010D6310066A4F8 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = ../../../Library/Frameworks/BWToolkitFramework.framework; sourceTree = SOURCE_ROOT; };
 		8C55E41E100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTask+OneLineTasksWithOutput.m"; path = "Source/NSTask+OneLineTasksWithOutput.m"; sourceTree = "<group>"; };
 		8C55E43610052E72002F5013 /* SessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionManager.h; path = Source/SessionManager.h; sourceTree = "<group>"; };
 		8C55E43710052E72002F5013 /* SessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionManager.m; path = Source/SessionManager.m; sourceTree = "<group>"; };
@@ -109,7 +111,6 @@
 		8C79F67E1004235900A4648B /* button_pane_show_icon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = button_pane_show_icon.tif; path = Resources/button_pane_show_icon.tif; sourceTree = "<group>"; };
 		8C79F67F1004235900A4648B /* button_pane_hide_icon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = button_pane_hide_icon.tif; path = Resources/button_pane_hide_icon.tif; sourceTree = "<group>"; };
 		8C79F7891004908600A4648B /* MyDocument.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MyDocument.xib; path = Resources/MyDocument.xib; sourceTree = "<group>"; };
-		8CAA0C3A10072AA00084C6D5 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = ../../Library/Frameworks/BWToolkitFramework.framework; sourceTree = SOURCE_ROOT; };
 		8CAA122F100A078B0084C6D5 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Profile.h; path = "Source/Managed Objects/Profile.h"; sourceTree = "<group>"; };
 		8CAA1230100A078B0084C6D5 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Profile.m; path = "Source/Managed Objects/Profile.m"; sourceTree = "<group>"; };
 		8CC32788100CDCA700483939 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
@@ -132,8 +133,8 @@
 			files = (
 				775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */,
 				8C79F2EE10033DF200A4648B /* Growl.framework in Frameworks */,
-				8CAA0C3B10072AA00084C6D5 /* BWToolkitFramework.framework in Frameworks */,
 				8CC32789100CDCA700483939 /* Security.framework in Frameworks */,
+				8C4163861010D6310066A4F8 /* BWToolkitFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,8 +144,8 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C4163851010D6310066A4F8 /* BWToolkitFramework.framework */,
 				8CC32788100CDCA700483939 /* Security.framework */,
-				8CAA0C3A10072AA00084C6D5 /* BWToolkitFramework.framework */,
 				8C79F2ED10033DF200A4648B /* Growl.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 			);
@@ -286,21 +287,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D15AC270486D014006FF6A4 /* recon */ = {
+		8D15AC270486D014006FF6A4 /* Recon */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 26FC0AA50875C8B900E6366F /* Build configuration list for PBXNativeTarget "recon" */;
+			buildConfigurationList = 26FC0AA50875C8B900E6366F /* Build configuration list for PBXNativeTarget "Recon" */;
 			buildPhases = (
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8C79F2F510033E1B00A4648B /* CopyFiles */,
-				8C2A146E100A9E670060D931 /* CopyFiles */,
+				8C4163841010D5E00066A4F8 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = recon;
+			name = Recon;
 			productInstallPath = "$(HOME)/Applications";
 			productName = "nmapX-coredata";
 			productReference = 8D15AC370486D014006FF6A4 /* recon.app */;
@@ -318,7 +319,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D15AC270486D014006FF6A4 /* recon */,
+				8D15AC270486D014006FF6A4 /* Recon */,
 			);
 		};
 /* End PBXProject section */
@@ -330,7 +331,6 @@
 			files = (
 				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
-				8C79F4C71003E3BA00A4648B /* Info.plist in Resources */,
 				8C79F4C81003E3BA00A4648B /* MainMenu.xib in Resources */,
 				8C79F4C91003E3BA00A4648B /* Growl Registration Ticket.growlRegDict in Resources */,
 				8C79F6801004235900A4648B /* button_pane_show_icon.tif in Resources */,
@@ -433,7 +433,7 @@
 				GCC_PREFIX_HEADER = Source/recon_Prefix.pch;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = recon;
+				PRODUCT_NAME = Recon;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -466,7 +466,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		26FC0AA50875C8B900E6366F /* Build configuration list for PBXNativeTarget "recon" */ = {
+		26FC0AA50875C8B900E6366F /* Build configuration list for PBXNativeTarget "Recon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26FC0AA60875C8B900E6366F /* Debug */,

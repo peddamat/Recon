@@ -2,7 +2,7 @@
 //  Profile.m
 //  recon
 //
-//  Created by Sumanth Peddamatham on 7/16/09.
+//  Created by Sumanth Peddamatham on 7/17/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
@@ -14,7 +14,7 @@
 
 @dynamic osDetection;
 @dynamic fragmentIP;
-@dynamic setSourceIPString;
+@dynamic setNetworkInterface;
 @dynamic maxRetries;
 @dynamic icmpTimeStamp;
 @dynamic maxScanDelay;
@@ -85,9 +85,9 @@
 @dynamic idleScanString;
 @dynamic disableRandom;
 @dynamic udpProbe;
+@dynamic setSourceIPString;
 @dynamic extraOptions;
 @dynamic portsToScan;
-@dynamic setNetworkInterface;
 @dynamic sessions;
 @dynamic children;
 @dynamic parent;

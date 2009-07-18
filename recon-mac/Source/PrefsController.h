@@ -1,6 +1,6 @@
 //
 //  DefaultsController.h
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 7/2/09.
 //  Copyright 2009 bafoontecha.com. All rights reserved.
@@ -24,8 +24,8 @@
 - (void) checkFirstRun;
 
 // Nmap set/desetuid functions
-- (BOOL)rootNmap;
-- (BOOL)unrootNmap;
++ (BOOL)rootNmap;
++ (BOOL)unrootNmap;
 
 + (NSString *)applicationSessionsFolder;
 + (NSString *)applicationSupportFolder;

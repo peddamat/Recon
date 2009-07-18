@@ -1,6 +1,6 @@
 //
 //  ScanController.m
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 7/1/09.
 //  Copyright 2009 bafoontecha.com. All rights reserved.
@@ -21,7 +21,7 @@
 
 @interface SessionController ()
 
-@property (readwrite, retain) Session *session; 
+//@property (readwrite, retain) Session *session; 
 @property (readwrite, retain) NSString *sessionUUID;   
 @property (readwrite, retain) NSString *sessionDirectory;
 @property (readwrite, retain) NSString *sessionOutputFile;   
@@ -31,7 +31,10 @@
 @property (readwrite, assign) BOOL deleteAfterAbort;
 
 @property (readwrite, retain) NSArray *nmapArguments;   
-@property (readwrite, retain) NmapController *nmapController;
+@property (readwrite, assign) NmapController *nmapController;
+
+@property (readwrite, retain) NSTimer *resultsTimer;
+@property (readwrite, retain) XMLController *xmlController;
 
 @end
 
@@ -50,6 +53,9 @@
 @synthesize nmapArguments;
 @synthesize nmapController;
 
+@synthesize resultsTimer;
+@synthesize xmlController;
+
 - (id)init
 {
    if (![super init])
@@ -57,12 +63,37 @@
    
    // Generate a unique identifier for this controller
    self.sessionUUID = [SessionController stringWithUUID];
-   
+      
    self.hasRun = FALSE;
    self.isRunning = FALSE;
    self.deleteAfterAbort = FALSE;   
    
+   self.xmlController = [[XMLController alloc] init];
    return self;
+}
+
+- (void)dealloc
+{
+   NSLog(@"");
+   NSLog(@"SessionController: deallocating");      
+   
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+   [nc removeObserver:self];
+   
+   [session release];
+   [sessionUUID release];   
+   [sessionDirectory release];   
+   [sessionOutputFile release];
+   
+   [nmapArguments release];   
+   [nmapController release];
+   
+   NSLog(@"Retain count %d", [nmapController retainCount]);
+   
+   [xmlController release];
+   [resultsTimer invalidate];   
+   [resultsTimer release];
+   [super dealloc];
 }
 
 // -------------------------------------------------------------------------------
@@ -78,7 +109,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    Profile *profileCopy = [[self copyProfile:profile] autorelease];
    
    // Create new session in managedObjectContext
-   self.session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" 
+   session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" 
                                                     inManagedObjectContext:context];
    
    [session setTarget:sessionTarget];     // Store session target
@@ -100,6 +131,9 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    
 }
 
+// -------------------------------------------------------------------------------
+//	initWithSession: 
+// -------------------------------------------------------------------------------
 - (void)initWithSession:(Session *)s
 {
    Profile *profile = [s profile];
@@ -136,7 +170,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    Profile *savedSessions = [array lastObject];
    
    // Make a copy of the selected profile
-   Profile *profileCopy = [[NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:[profile managedObjectContext]] retain];
+   Profile *profileCopy = [[NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
+                                                         inManagedObjectContext:[profile managedObjectContext]] retain];
    NSDictionary *values = [profile dictionaryWithValuesForKeys:[[profileCopy entity] attributeKeys]];      
    [profileCopy setValuesForKeysWithDictionary:values];      
    [profileCopy setName:[NSString stringWithFormat:@"Copy of %@",[profile name]]];
@@ -207,8 +242,27 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    self.isRunning = TRUE;
    [session setStatus:@"Running"];
    
+   // Setup a timer to read the progress
+   resultsTimer = [[NSTimer scheduledTimerWithTimeInterval:0.5
+                                             target:self
+                                           selector:@selector(checkProgress:)
+                                           userInfo:nil
+                                            repeats:YES] retain];   
+   
    [nmapController startScan];
 }
+
+// -------------------------------------------------------------------------------
+//	checkProgress: Called by the resultsTimer
+// -------------------------------------------------------------------------------
+- (void)checkProgress:(NSTimer *)aTimer
+{
+   // Call XMLController with session directory and managedObjectContext
+   [xmlController parseXMLFile:sessionOutputFile inSession:session onlyReadProgress:TRUE];      
+   
+//   NSLog(@"SessionController: Percent: %@", [session progress]);
+}
+
 
 // -------------------------------------------------------------------------------
 //	abortScan
@@ -225,7 +279,6 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)deleteSession
 {
-   NSLog(@"SessionController: Remove after abort");
    self.hasRun = TRUE;
    self.deleteAfterAbort = TRUE;   
    [nmapController abortScan];
@@ -236,12 +289,15 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)successfulRunNotification: (NSNotification *)notification
 {
+   // Invalidate the progess timer
+   [resultsTimer invalidate];
+   
    // Call XMLController with session directory and managedObjectContext
-   XMLController *xmlController = [[XMLController alloc] init];     
    [xmlController parseXMLFile:sessionOutputFile inSession:session onlyReadProgress:FALSE];      
     
    self.isRunning = FALSE;
    [session setStatus:@"Done"];
+   [session setProgress:[NSNumber numberWithFloat:100]];   
    
    // Send notification to SessionManager that session is complete
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -253,15 +309,17 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)abortedRunNotification: (NSNotification *)notification
 {
+   // Invalidate the progess timer
+   [resultsTimer invalidate];   
+   
    self.isRunning = FALSE;
    [session setStatus:@"Aborted"];
-   NSLog(@"SessionController: Aborted!");
+   [session setProgress:[NSNumber numberWithFloat:0]];
       
    if (deleteAfterAbort == TRUE)
    {            
-      NSManagedObjectContext *context = [[session managedObjectContext] retain];
+      NSManagedObjectContext *context = [session managedObjectContext];
       [context deleteObject:session];
-      [context release];      
    }   
    
    // Send notification to SessionManager that session is complete
@@ -272,10 +330,14 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 //	unsuccessfulRunNotification: 
 // -------------------------------------------------------------------------------
-- (void)unsuccessfulRunNotification: (NSNotification *)notification
+- (void)unsuccessfulRunNotification:(NSNotification *)notification
 {
+   // Invalidate the progess timer
+   [resultsTimer invalidate];   
+   
    self.isRunning = FALSE;
    [session setStatus:@"Error"];   
+   [session setProgress:[NSNumber numberWithFloat:0]];   
    
    // Send notification to SessionManager that session is complete
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -285,31 +347,12 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 //	stringWithUUID
 // -------------------------------------------------------------------------------
-+ (NSString *) stringWithUUID 
++ (NSString *)stringWithUUID 
 {
    CFUUIDRef uuidObj = CFUUIDCreate(nil);
    NSString *uuidString = (NSString*)CFUUIDCreateString(nil, uuidObj);
    CFRelease(uuidObj);
    return [uuidString autorelease];
-}
-
-- (void)dealloc
-{
-   NSLog(@"");
-   NSLog(@"SessionController: deallocating");      
-   
-   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc removeObserver:self];
-   
-   [session release];
-   [sessionUUID release];   
-   [sessionDirectory release];   
-   [sessionOutputFile release];
-   
-   [nmapArguments release];   
-   [nmapController release];
-   
-   [super dealloc];
 }
 
 @end

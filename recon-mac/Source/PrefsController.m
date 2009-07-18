@@ -1,6 +1,6 @@
 //
 //  DefaultsController.m
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 7/2/09.
 //  Copyright 2009 bafoontecha.com. All rights reserved.
@@ -85,7 +85,7 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
 // -------------------------------------------------------------------------------
 //	rootNmap:
 // -------------------------------------------------------------------------------
-- (BOOL)rootNmap
++ (BOOL)rootNmap
 {
    // Paraphrased from http://developer.apple.com/documentation/Security/Conceptual/authorization_concepts/03authtasks/chapter_3_section_4.html
    OSStatus myStatus;
@@ -128,7 +128,7 @@ NSString * const BAFSesSaveDir = @"SessionSaveDirectory";
 // -------------------------------------------------------------------------------
 //	unrootNmap:
 // -------------------------------------------------------------------------------
-- (BOOL)unrootNmap
++ (BOOL)unrootNmap
 {
    // Paraphrased from http://developer.apple.com/documentation/Security/Conceptual/authorization_concepts/03authtasks/chapter_3_section_4.html
    OSStatus myStatus;

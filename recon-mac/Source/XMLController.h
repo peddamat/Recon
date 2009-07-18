@@ -1,6 +1,6 @@
 //
 //  XMLController.h
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 6/30/09.
 //  Copyright 2009 bafoontecha.com. All rights reserved.
@@ -15,21 +15,22 @@
 @class Port;
 @class OperatingSystem;
 
-@interface XMLController : NSObject {
+@interface XMLController : NSObject 
+{
    NSXMLParser *addressParser;
    NSMutableString *currentStringValue;
-   
+
+   // Managed objects that we populate
    Session *currentSession;
    Host *currentHost;
    Port *currentPort;
    OperatingSystem *currentOperatingSystem;   
-   
-   BOOL inRunstats;
+
+   // State-machine helper flag
+   BOOL inRunstats;   
    BOOL onlyReadProgress;
 }
 
-+ (void) readResults: (NSArray *)sessionDirectory 
-          forSession: (Session *)session inManagedObjectContext:(NSManagedObjectContext *)context;
 
 - (void)parseXMLFile:(NSString *)pathToFile inSession:(Session *)session onlyReadProgress:(BOOL)oReadProgress;
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict ;

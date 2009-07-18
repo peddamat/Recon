@@ -1,6 +1,6 @@
 //
 //  XMLController.m
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 6/30/09.
 //  Copyright 2009 bafoontecha.com. All rights reserved.
@@ -13,24 +13,61 @@
 #import "Session.h"
 #import "OperatingSystem.h"
 
+@interface XMLController ()
+
+   @property (readwrite, retain) NSXMLParser *addressParser;
+   @property (readwrite, retain) NSMutableString *currentStringValue;
+
+// Managed objects that we populate
+   @property (readwrite, retain) Session *currentSession;
+   @property (readwrite, retain) Host *currentHost;
+   @property (readwrite, retain) Port *currentPort;
+   @property (readwrite, retain) OperatingSystem *currentOperatingSystem;   
+
+// State-machine helper flag
+   @property (readwrite, assign) BOOL inRunstats;   
+   @property (readwrite, assign) BOOL onlyReadProgress;
+
+@end
+
 
 @implementation XMLController
 
+@synthesize addressParser;
+@synthesize currentStringValue;
+@synthesize currentSession;
+@synthesize currentHost;
+@synthesize currentPort;
+@synthesize currentOperatingSystem;
+@synthesize inRunstats;
+@synthesize onlyReadProgress;
+
+- (void)dealloc
+{
+   [addressParser release];
+   [currentStringValue release];
+   [currentSession release];
+   [currentHost release];
+   [currentPort release];
+   [currentOperatingSystem release];
+   [super dealloc];
+}
+
+// -------------------------------------------------------------------------------
+//	parseXMLFile: 
+// -------------------------------------------------------------------------------
 - (void)parseXMLFile:(NSString *)pathToFile inSession:(Session *)session onlyReadProgress:(BOOL)oReadProgress
 {   
    BOOL success;
    NSURL *xmlURL = [NSURL fileURLWithPath:pathToFile];
    
-   inRunstats = FALSE;
-   onlyReadProgress = oReadProgress;
+   self.inRunstats = FALSE;
+   self.onlyReadProgress = oReadProgress;
    
    // Save current session
-   currentSession = session;
-   
-   if (addressParser) // addressParser is an NSXMLParser instance variable
-      [addressParser release];
-   
-   addressParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
+   self.currentSession = session;
+      
+   self.addressParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
    [addressParser setDelegate:self];
    [addressParser setShouldResolveExternalEntities:YES];
    success = [addressParser parse]; // return value not used
@@ -38,13 +75,17 @@
 }
 
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict 
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName 
+  namespaceURI:(NSString *)namespaceURI 
+ qualifiedName:(NSString *)qName 
+    attributes:(NSDictionary *)attributeDict 
 {
-//   NSLog(@"XMLParser: startElement: %@", elementName);
    
    /// TASKPROGRESS 
    if ( [elementName isEqualToString:@"taskprogress"] ) {
-      [currentSession setProgress:[attributeDict objectForKey:@"percent"]];
+      NSString *progress = [attributeDict objectForKey:@"percent"];
+      [currentSession setProgress:[NSNumber numberWithFloat:[progress floatValue]]];
+      [currentSession setStatus:[attributeDict objectForKey:@"task"]];
    }
    
    if ( onlyReadProgress == TRUE )
@@ -58,7 +99,7 @@
          
          // Create new host object in managedObjectContext
          NSManagedObjectContext *context = [currentSession managedObjectContext]; 
-         currentHost = [NSEntityDescription insertNewObjectForEntityForName: @"Host" inManagedObjectContext:context];          
+         self.currentHost = [NSEntityDescription insertNewObjectForEntityForName: @"Host" inManagedObjectContext:context];          
          
          // Point back to current session
          [currentHost setSession:currentSession];
@@ -117,7 +158,6 @@
    }
    
    
-
    /// PORT
    if ( [elementName isEqualToString:@"port"] ) {
       
@@ -125,7 +165,7 @@
          
          // Create new port object in managedObjectContext
          NSManagedObjectContext * context = [currentSession managedObjectContext]; 
-         currentPort = [NSEntityDescription insertNewObjectForEntityForName: @"Port" inManagedObjectContext: context];          
+         self.currentPort = [NSEntityDescription insertNewObjectForEntityForName: @"Port" inManagedObjectContext: context];          
          
          // Point back to current session
          [currentPort setHost:currentHost];
@@ -178,7 +218,7 @@
    
    /// SERVICE - RUNSTATS
    if ( [elementName isEqualToString:@"runstats"] ) {
-      inRunstats = TRUE;
+      self.inRunstats = TRUE;
       
       return;
    }   
@@ -189,7 +229,7 @@
 //         [currentSession setHostsDown:[[attributeDict objectForKey:@"down"] integerValue]];
 //         [currentSession setHostsTotal:[[attributeDict objectForKey:@"total"] integerValue]];   
          
-         inRunstats = FALSE;          
+         self.inRunstats = FALSE;          
       }
       
       return;
@@ -203,7 +243,7 @@
          
          // Create new port object in managedObjectContext
          NSManagedObjectContext * context = [currentSession managedObjectContext]; 
-         currentOperatingSystem = [NSEntityDescription insertNewObjectForEntityForName: @"OperatingSystem" inManagedObjectContext: context];                   
+         self.currentOperatingSystem = [NSEntityDescription insertNewObjectForEntityForName: @"OperatingSystem" inManagedObjectContext: context];                   
 
          // Point back to current session
          [currentOperatingSystem setHost:currentHost];
@@ -221,7 +261,9 @@
    
 }
 
-
+// -------------------------------------------------------------------------------
+//	parser:foundCharacters:
+// -------------------------------------------------------------------------------
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string 
 {   
    if (!currentStringValue) {      
@@ -233,25 +275,27 @@
    [currentStringValue appendString:string];   
 }
 
-
+// -------------------------------------------------------------------------------
+//	parser:didEndElement:namespaceURI:
+// -------------------------------------------------------------------------------
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName 
 {
 //   NSLog(@"XMLParser: endElement: %@", elementName);
    
    if ( [elementName isEqualToString:@"host"] ) {
-      currentHost = nil;
+      self.currentHost = nil;
       
       return;
    }
    
    if ( [elementName isEqualToString:@"port"] ) {
-      currentPort = nil;
+      self.currentPort = nil;
       
       return;
    }
    
    if ( [elementName isEqualToString:@"osclass"] || [elementName isEqualToString:@"osmatch"] ) {
-      currentOperatingSystem = nil;
+      self.currentOperatingSystem = nil;
       
       return;
    }

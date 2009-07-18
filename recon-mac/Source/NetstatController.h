@@ -1,6 +1,6 @@
 //
 //  NetstatController.h
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 7/14/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 @class Connection;
+@class SessionController;
+@class SessionManager;
 
 @interface NetstatController : NSObject {
 
@@ -17,6 +19,12 @@
    // Choices Tab
    IBOutlet NSMatrix *mainSelector;   
 
+
+   // Find computers Tab
+   SessionManager *SessionManager;
+   IBOutlet NSArrayController *sessionsController;
+   NSPredicate *testy;   
+   
    // Netstat Tab
    NSMutableArray *connections;
    IBOutlet NSArrayController *connectionsController;
@@ -25,13 +33,20 @@
    
 }
 
+@property (readonly) NSPredicate *testy;
+@property (readwrite, retain)NSMutableArray *connections;
+
 // Choices Tab
 - (IBAction)chooseTask:(id)sender;
 
+// Find computers Tab
+int bitcount (unsigned int n);
+- (int)cidrForInterface:(NSString *)ifName;
+- (IBAction)searchLocalNetwork:(id)sender;
+   
 // Netstat Tab
 - (IBAction)refreshConnectionsList:(id)sender;
+- (void)autoRefreshConnections;
 - (void)setConnections:(NSMutableArray *)a;
-
-@property (readwrite, retain)NSMutableArray *connections;
 
 @end

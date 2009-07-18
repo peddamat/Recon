@@ -1,6 +1,6 @@
 //
 //  MyDocument.h
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 7/1/09.
 //  Copyright bafoontecha.com 2009 . All rights reserved.
@@ -23,17 +23,17 @@ extern NSString * const BAFSessionSaveDirectory;
 @interface MyDocument : NSPersistentDocument {
    
    SessionManager *sessionManager;
-   IBOutlet NSBox *mainBox;
 
    IBOutlet NSView *mainsubView;
    IBOutlet NSView *mainsubView2;
    
    IBOutlet NSView *mainView;
+   IBOutlet NSTabView *mainTabView;
+   
+   // Toolbar Outlets
    IBOutlet NSToolbar *mainToolbar;
    IBOutlet NSToolbarItem *settingsToolbarItem;
    IBOutlet NSToolbarItem *resultsToolbarItem;  
-   
-   IBOutlet NSOutlineView *profilesOutlineView;
    
    // Queue Controls
    IBOutlet NSSegmentedControl *queueSegmentedControl;
@@ -63,13 +63,12 @@ extern NSString * const BAFSessionSaveDirectory;
    IBOutlet NSDrawer *profilesDrawer;
    IBOutlet NSTableView *profilesTableView;
    IBOutlet NSMenu *profilesContextMenu;
-   IBOutlet NSArrayController *profilesController;   
+   IBOutlet NSArrayController *profilesController;  
    
-   IBOutlet NSButton *startButton;
+   IBOutlet NSOutlineView *profilesOutlineView;   
+   
    IBOutlet NSTreeController *profileController;   
    IBOutlet NSTextField *sessionTarget;
-   
-   IBOutlet NSTabView *mainTabView;
    
    // Preference Window
    IBOutlet NSWindow *prefWindow;
@@ -81,6 +80,7 @@ extern NSString * const BAFSessionSaveDirectory;
    IBOutlet BWSplitView *profileView;
    IBOutlet BWAnchoredButton *profileButton;
 
+   // Various Results Outlets
    IBOutlet NSTableView *hostsTableView;
    IBOutlet NSTableView *resultsPortsTableView;   
    IBOutlet NSArrayController *portsInHostController;      
@@ -89,10 +89,18 @@ extern NSString * const BAFSessionSaveDirectory;
    IBOutlet NSMenuItem *menuSettings;
    IBOutlet NSMenuItem *menuResults;   
    
+   // Sort-descriptors for the various table views
    NSArray *hostSortDescriptor;
    NSArray *portSortDescriptor;   
    NSArray *profileSortDescriptor;      
    NSArray *sessionSortDescriptor;        
+   
+   // Manual-entry Outlets
+   IBOutlet NSTextField *nmapCommandTextField;
+
+   // Defines for flashing direct-entry TextField
+   float nmapErrorCount;   
+   NSTimer *nmapErrorTimer;
    
    NSPredicate *testy;
 }
@@ -105,7 +113,7 @@ extern NSString * const BAFSessionSaveDirectory;
 
 - (IBAction)peanut:(id)sender;
 
-- (void)controlTextDidEndEditing:(NSNotification *)obj;
+//- (void)controlTextDidEndEditing:(NSNotification *)obj;
 
 - (IBAction) switchToScanView:(id)sender;
 - (IBAction) switchToInspectorView:(id)sender;
@@ -128,8 +136,8 @@ extern NSString * const BAFSessionSaveDirectory;
 - (IBAction) sessionDrawerRemove:(id)sender;
 - (IBAction) sessionDrawerShowInFinder:(id)sender;
 
-- (Session *)clickedUUID;
-- (Session *)selectedUUID;
+- (Session *)clickedSessionInDrawer;
+- (Session *)selectedSessionInDrawer;
 
 // Session Manager click-handlers
 - (IBAction) queueSession:(id)sender;
@@ -144,14 +152,10 @@ extern NSString * const BAFSessionSaveDirectory;
 
 - (IBAction) toggleSessionsDrawer:(id)sender;
 
-- (void) expandProfileView;
-- (void) collapseProfileView;
-- (IBAction) toggleProfileView:(id)sender;
-
 - (void)addQueuedSessions;
 
 - (void)addProfileDefaults;
-- (void)updatePrefsWindow;
+//- (void)updatePrefsWindow;
 
 - (IBAction)setuidNmap:(id)sender;
 - (IBAction)unsetuidNmap:(id)sender;

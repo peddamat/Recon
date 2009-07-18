@@ -1,6 +1,6 @@
 //
 //  NmapController.m
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 7/1/09.
 //  Copyright 2009 bafoontecha.com. All rights reserved.
@@ -9,8 +9,6 @@
 #import "NmapController.h"
 
 @interface NmapController ()
-
-
 
 @property (readwrite, retain) NSTask *task;   
 
@@ -34,6 +32,9 @@
 @synthesize outputFilePath;
 @synthesize hasRun;
 
+// -------------------------------------------------------------------------------
+//	initWithNmapBinary
+// -------------------------------------------------------------------------------
 - (id) initWithNmapBinary:(NSString *)nmapBinary 
                  withArgs:(NSArray *)nmapArgs 
        withOutputFilePath:(NSString *)oFilePath;
@@ -47,9 +48,9 @@
       [task setStandardOutput:[NSPipe pipe]];
       [task setStandardError:[NSPipe pipe]];   
       
-      self.standardOutput = [[NSMutableData alloc] init];
-      self.standardError = [[NSMutableData alloc] init];
-      
+      self.standardOutput = [[[NSMutableData alloc] init] autorelease];
+      self.standardError = [[[NSMutableData alloc] init] autorelease];
+            
       NSFileHandle *standardOutputFile = [[task standardOutput] fileHandleForReading];
       NSFileHandle *standardErrorFile = [[task standardError] fileHandleForReading];
       
@@ -73,10 +74,24 @@
       [standardErrorFile waitForDataInBackgroundAndNotify];         
       
       self.outputFilePath = oFilePath;
-      
    }
    
    return self;
+}
+
+- (void)dealloc
+{   
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+   [nc removeObserver:self];
+      
+   [standardOutput release];
+   [standardError release];
+   [outputString release];
+   [errorString release];
+   [outputFilePath release];   
+   [task release];
+   
+   [super dealloc];
 }
 
 // -------------------------------------------------------------------------------
@@ -200,7 +215,7 @@
 // -------------------------------------------------------------------------------
 //	terminatedNotification: Called by NTask when Nmap has returned.
 // -------------------------------------------------------------------------------
-- (void)terminatedNotification: (NSNotification *)notification
+- (void)terminatedNotification:(NSNotification *)notification
 {
    NSLog(@"NmapController: Received task termination!");
  
@@ -237,19 +252,5 @@
    }
 }
 
-- (void)dealloc
-{
-   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc removeObserver:self];
-      
-   [standardOutput release];
-   [standardError release];
-   [outputString release];
-   [errorString release];
-   [outputFilePath release];   
-   [task release];
-      
-   [super dealloc];
-}
 
 @end

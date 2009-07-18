@@ -1,6 +1,6 @@
 //
 //  SessionManager.h
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 7/8/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
@@ -16,7 +16,13 @@
 {
 	NSMutableDictionary *sessionControllers;   
    BOOL processingQueue;
+
 }
+
++ (SessionManager *)sharedSessionManager;
+@property (readonly) NSManagedObjectContext *context;
+
+- (void)setContext:(NSManagedObjectContext *)c;
 
 - (void)queueSessionWithProfile:(Profile *)profile withTarget:(NSString *)target;
 - (void)queueExistingSession:(Session *)session;

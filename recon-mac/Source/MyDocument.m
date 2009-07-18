@@ -1,6 +1,6 @@
 //
 //  MyDocument.m
-//  recon
+//  Recon
 //
 //  Created by Sumanth Peddamatham on 7/1/09.
 //  Copyright bafoontecha.com 2009 . All rights reserved.
@@ -79,40 +79,24 @@
    
    [nmapErrorTimer invalidate];
    [nmapErrorTimer release];
+   
+   [mainsubView release];
+   [mainsubView2 release];   
    [super dealloc];
 }
 
-- (NSPredicate *)testy
+// -------------------------------------------------------------------------------
+//	displayName: Override NSPersistentDocument window title
+// -------------------------------------------------------------------------------
+- (NSString *)displayName
 {
-   NSLog(@"MyDocument: testy");
-   if (testy == nil) {
-      testy = [NSPredicate predicateWithFormat: @"ANY ports.number == 23"];   
-   }
-   return testy;
+   return @"Recon";
 }
 
-
-- (IBAction)peanut:(id)sender
-{
-   
-//   NSManagedObjectContext *context = [self managedObjectContext];
-//   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
-//   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Host"
-//                                             inManagedObjectContext:[self managedObjectContext]];
-//   
-//   [request setEntity:entity];
-//   
-//   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY ports.number == 23"];
-//   [request setPredicate:predicate];
-//   
-//   NSError *error = nil;
-//   NSArray *array = [context executeFetchRequest:request error:&error];   
-//   
-//   NSLog(@"MyDoc: Array: %i", [array count]);
-   NSLog(@"HIHIHIH");
-}
-
-
+// -------------------------------------------------------------------------------
+//	windowControllerDidLoadNib: This is where we perform most of the initial app
+//                             setup.
+// -------------------------------------------------------------------------------
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController 
 {
     [super windowControllerDidLoadNib:windowController];
@@ -135,7 +119,7 @@
    // Add some default profiles   
    [self addProfileDefaults];   
    
-   // Load queued sessions to session manager
+   // Load queued sessions in the persistent store into session manager
    [self addQueuedSessions];
    
    // Beauty up the profiles drawer
@@ -147,16 +131,20 @@
    [sessionsDrawer toggle:self];      
    [profilesDrawer openOnEdge:NSMinXEdge];
    
+   // Set up click-handlers for the Sessions Drawer
    [sessionsTableView setTarget:self];
    [sessionsTableView setDoubleAction:@selector(sessionsTableDoubleClick)];
    [sessionsContextMenu setAutoenablesItems:YES];      
    
+   // ... and the Host TableView
    [hostsTableView setTarget:self];
    [hostsTableView setDoubleAction:@selector(hostsTableDoubleClick)];
    
+   // ... and the Ports TableView in the Results Tab
    [resultsPortsTableView setTarget:self];
    [resultsPortsTableView setDoubleAction:@selector(resultsPortsTableDoubleClick)];   
    
+   // Setup up interfaces Popup Button
    [self getNetworkInterfaces];
    [self populateInterfacePopUp];   
    
@@ -166,7 +154,6 @@
    
    [mainsubView retain];
    [mainsubView2 retain];
-   
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
@@ -177,7 +164,8 @@
 }
 
 // -------------------------------------------------------------------------------
-//	awakeFromNib: Initialize UI defaults
+//	awakeFromNib: Everything in here was moved to windowControllerDidLoadNib, since
+//               awakeFromNib tends to be called after Panels are displayed.
 // -------------------------------------------------------------------------------
 - (void)awakeFromNib
 {
@@ -222,11 +210,7 @@
    NSMenu *menu = [interfacesPopUp menu];
    int i;
    
-   id dictKey;
-   NSArray *allKeys = [interfacesDictionary allKeys];   
-   NSEnumerator *e = [allKeys objectEnumerator];
-
-   while (dictKey = [e nextObject])
+   for (NSString *dictKey in [interfacesDictionary allKeys])
    {
       NSString *dictValue = [interfacesDictionary valueForKey:dictKey];
       
@@ -269,16 +253,14 @@
    //  arguments that start with '-', ie. nmap commands
    NSString *nmapCommand  = [nmapCommandTextField stringValue];
    NSArray *parsedNmapCommand = [nmapCommand componentsSeparatedByString:@" "];
-   NSArray *commands = [parsedNmapCommand filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF beginswith '-'"]];
+   NSArray *nmapFlags = [parsedNmapCommand filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF beginswith '-'"]];
    
    // Check if the user entered any commands
-   if ([commands count] == 0)
-   {
-      // Retrieve currently selected profile
-      Profile *profile = [[profileController selectedObjects] lastObject];
-      
+   if ([nmapFlags count] == 0)
+   {      
       // TODO: Check to make sure input arguments are valid
-      [sessionManager queueSessionWithProfile:profile withTarget:[sessionTarget stringValue]];      
+      [sessionManager queueSessionWithProfile:[[profileController selectedObjects] lastObject]
+                                   withTarget:[sessionTarget stringValue]];      
    }
    // ... otherwise, parse the input commands and queue the session
    else
@@ -286,32 +268,31 @@
       // Make sure the user-specified commands are valid
       ArgumentListGenerator *a = [[ArgumentListGenerator alloc] init];   
       
-      if ([a checkArgList:commands] == TRUE)
+      if ([a areFlagsValid:nmapFlags] == YES)
       {
          // Create a brand spankin' profile
          Profile *profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
                                                           inManagedObjectContext:[self managedObjectContext]];
-         [profile setName:@"Direct Entry"];
          
          // Populate new profile with command line args
-         [a populateProfile:profile withArgString:commands];
+         [a populateProfile:profile 
+              withArgString:nmapFlags];
          
          // TODO: Check to make sure input arguments are valid
-         [sessionManager queueSessionWithProfile:profile withTarget:[parsedNmapCommand lastObject]];         
+         [sessionManager queueSessionWithProfile:profile 
+                                      withTarget:[parsedNmapCommand lastObject]];         
 
          // Cleanup
          [[self managedObjectContext] deleteObject:profile];
          [nmapCommandTextField setStringValue:@""];
       }
+      // Flash textfield to indicate entry error
       else
       {
-         // Flash textfield to indicate entry error
-         
          nmapErrorCount = 1.0;
-         // Setup a timer to auto-refresh list
          nmapErrorTimer = [[NSTimer scheduledTimerWithTimeInterval:0.05
                                                    target:self
-                                                 selector:@selector(fadeRed:)
+                                                 selector:@selector(indicateEntryError:)
                                                  userInfo:nil
                                                   repeats:YES] retain]; 
       }
@@ -319,9 +300,9 @@
 }
 
 // -------------------------------------------------------------------------------
-//	fadeRed: Timer helper-function indicating nmap command entry error
+//	indicateEntryError: Timer helper-function indicating nmap command entry error
 // -------------------------------------------------------------------------------
-- (void)fadeRed:(NSTimer *)aTimer
+- (void)indicateEntryError:(NSTimer *)aTimer
 {
    nmapErrorCount -= 0.04;
    if (nmapErrorCount <= 0) {
@@ -339,7 +320,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)dequeueSession:(id)sender 
 {   
-   [sessionManager deleteSession:[self selectedUUID]];  
+   [sessionManager deleteSession:[self selectedSessionInDrawer]];  
 }
 
 // -------------------------------------------------------------------------------
@@ -351,7 +332,10 @@
 }
 
 // -------------------------------------------------------------------------------
-//	addQueuedSessions:
+//	addQueuedSessions: When the application loads, previous sessions are loaded
+//                    from the persistent store.  We have to add queued sessions
+//                    to the Session Manager, so continuity in the user experience
+//                    is maintained.
 // -------------------------------------------------------------------------------
 - (void)addQueuedSessions
 {
@@ -364,10 +348,8 @@
    NSError *error = nil;
    NSArray *array = [context executeFetchRequest:request error:&error];
 
-   NSEnumerator *enumerator = [array objectEnumerator];
-   id object;
-   
-   while ((object = [enumerator nextObject])) {
+   for (id object in array)
+   {
 //      NSString *status = [object valueForKey:@"status"];
 //      NSLog(@"%@", status);
 //      if ([status compare:@"Queued"] == TRUE)
@@ -461,22 +443,6 @@
    [prefWindow orderOut:sender];
 }
 
-// -------------------------------------------------------------------------------
-//	Profile Split View key-handlers
-// -------------------------------------------------------------------------------
-
-- (void) collapseProfileView {
-   if ([profileView collapsibleSubviewCollapsed] == FALSE)
-      [profileView toggleCollapse:profileButton];      
-}
-- (void) expandProfileView {
-   if ([profileView collapsibleSubviewCollapsed] == TRUE)
-      [profileView toggleCollapse:profileButton];      
-}
-- (IBAction) toggleProfileView:(id)sender {
-//   [profileView toggleCollapse:profileButton];   
-   [profilesDrawer toggle:self];   
-}
 
 // -------------------------------------------------------------------------------
 //	View togglers
@@ -509,7 +475,9 @@
 // -------------------------------------------------------------------------------
 //	swapView: Swaps view with animated resize
 // -------------------------------------------------------------------------------
-- (void)swapView:(NSView *)oldSubview withSubView:(NSView *)newSubview inContaningView:(NSView *)containerView
+- (void)swapView:(NSView *)oldSubview 
+     withSubView:(NSView *)newSubview 
+ inContaningView:(NSView *)containerView
 {
    NSWindow *w = [containerView window];
    
@@ -538,7 +506,7 @@
 //	Session Drawer Menu key-handlers
 // -------------------------------------------------------------------------------
 
-- (Session *)clickedUUID
+- (Session *)clickedSessionInDrawer
 {
    // Find clicked row from sessionsTableView
    NSInteger clickedRow = [sessionsTableView clickedRow];
@@ -546,7 +514,7 @@
    return [[sessionsController arrangedObjects] objectAtIndex:clickedRow];
 }
 
-- (Session *)selectedUUID
+- (Session *)selectedSessionInDrawer
 {
    // Find clicked row from sessionsTableView
    NSInteger selectedRow = [sessionsTableView selectedRow];
@@ -554,7 +522,7 @@
    return [[sessionsController arrangedObjects] objectAtIndex:selectedRow];   
 }
 
-- (IBAction) sessionDrawerRun:(id)sender
+- (IBAction)sessionDrawerRun:(id)sender
 {
    NSLog(@"MyDocument: launching session");
    int numberOfSelectedRows = [sessionsTableView numberOfSelectedRows];
@@ -563,11 +531,8 @@
    {
       NSIndexSet *selectedRows = [sessionsTableView selectedRowIndexes];
       NSArray *selectedSessions = [[sessionsController arrangedObjects] objectsAtIndexes:selectedRows];   
-      
-      id session;
-      NSEnumerator *e = [selectedSessions objectEnumerator];
-      
-      while (session = [e nextObject])
+            
+      for (id session in selectedSessions)
          [sessionManager launchSession:session];         
    }
    else 
@@ -577,7 +542,7 @@
       [sessionManager launchSession:[[sessionsController arrangedObjects] objectAtIndex:clickedRow]];      
    }
 }
-- (IBAction) sessionDrawerRunCopy:(id)sender
+- (IBAction)sessionDrawerRunCopy:(id)sender
 {
    NSLog(@"MyDocument: sessionDrawerRunCopy - NOT IMPLEMENTED!");
 }
@@ -592,10 +557,7 @@
       NSIndexSet *selectedRows = [sessionsTableView selectedRowIndexes];
       NSArray *selectedSessions = [[sessionsController arrangedObjects] objectsAtIndexes:selectedRows];   
       
-      id session;
-      NSEnumerator *e = [selectedSessions objectEnumerator];
-      
-      while (session = [e nextObject])
+      for (id session in selectedSessions)
          [sessionManager abortSession:session];         
    }
    else 
@@ -616,10 +578,7 @@
       NSIndexSet *selectedRows = [sessionsTableView selectedRowIndexes];
       NSArray *selectedSessions = [[sessionsController arrangedObjects] objectsAtIndexes:selectedRows];   
       
-      id session;
-      NSEnumerator *e = [selectedSessions objectEnumerator];
-      
-      while (session = [e nextObject])
+      for (id session in selectedSessions)
          [sessionManager deleteSession:session];         
    }
    else 
@@ -633,8 +592,8 @@
 {
    // Retrieve currently selected session
    NSString *savedSessionsDirectory = [PrefsController applicationSessionsFolder];  
-   NSLog(@"%@", [self clickedUUID]);
-   [[NSWorkspace sharedWorkspace] openFile:[savedSessionsDirectory stringByAppendingPathComponent:[[self clickedUUID] UUID]]
+   NSLog(@"%@", [self clickedSessionInDrawer]);
+   [[NSWorkspace sharedWorkspace] openFile:[savedSessionsDirectory stringByAppendingPathComponent:[[self clickedSessionInDrawer] UUID]]
                            withApplication:@"Finder"];
 
 }
@@ -673,6 +632,8 @@
       default:
          break;
    }
+   
+   // TODO: Parse the port name for services running on non-standard ports
 }
 
 // Sessions Drawer click-handlers
@@ -720,7 +681,7 @@
    
    if (
     ([menuItem action] == @selector(sessionDrawerRun:)) ||
-//    ([menuItem action] == @selector(sessionDrawerRunCopy:)) ||
+    ([menuItem action] == @selector(sessionDrawerRunCopy:)) ||
     ([menuItem action] == @selector(sessionDrawerAbort:)) ||       
     ([menuItem action] == @selector(sessionDrawerRemove:)) ||
     ([menuItem action] == @selector(sessionDrawerShowInFinder:))       
@@ -768,11 +729,15 @@
 //   [sessionsContextMenu update];
 }
 
+
+// -------------------------------------------------------------------------------
+//	Hands this functionality off to the PrefsController
+// -------------------------------------------------------------------------------
+
 - (IBAction)setuidNmap:(id)sender
 {
    [PrefsController rootNmap];
 }
-
 - (IBAction)unsetuidNmap:(id)sender
 {
    [PrefsController unrootNmap];
@@ -843,14 +808,6 @@
 - (NSString *)windowNibName 
 {
    return @"MyDocument";
-}
-
-// -------------------------------------------------------------------------------
-//	displayName: Override NSPersistentDocument window title
-// -------------------------------------------------------------------------------
-- (NSString *)displayName
-{
-   return @"Recon";
 }
 
 // -------------------------------------------------------------------------------
@@ -932,6 +889,43 @@
 
 //   exit(0);
    return reply;
+}
+
+
+// -------------------------------------------------------------------------------
+//	testy: Test function for playing around with predicates
+// -------------------------------------------------------------------------------
+- (NSPredicate *)testy
+{
+   NSLog(@"MyDocument: testy");
+   Session *session = [self selectedSessionInDrawer];
+   if (testy == nil) {
+      testy = [NSPredicate predicateWithFormat: @"ANY session == %@", session];   
+   }
+   return testy;
+}
+
+// -------------------------------------------------------------------------------
+//	peanut: Test function for playing around with predicates
+// -------------------------------------------------------------------------------
+- (IBAction)peanut:(id)sender
+{
+   
+   //   NSManagedObjectContext *context = [self managedObjectContext];
+   //   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
+   //   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Host"
+   //                                             inManagedObjectContext:[self managedObjectContext]];
+   //   
+   //   [request setEntity:entity];
+   //   
+   //   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY ports.number == 23"];
+   //   [request setPredicate:predicate];
+   //   
+   //   NSError *error = nil;
+   //   NSArray *array = [context executeFetchRequest:request error:&error];   
+   //   
+   //   NSLog(@"MyDoc: Array: %i", [array count]);
+   NSLog(@"HIHIHIH");
 }
 
 @end

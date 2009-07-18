@@ -2,7 +2,7 @@
 //  Profile.h
 //  recon
 //
-//  Created by Sumanth Peddamatham on 7/16/09.
+//  Created by Sumanth Peddamatham on 7/17/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
@@ -16,7 +16,7 @@
 
 @property (nonatomic, retain) NSNumber * osDetection;
 @property (nonatomic, retain) NSNumber * fragmentIP;
-@property (nonatomic, retain) NSString * setSourceIPString;
+@property (nonatomic, retain) NSNumber * setNetworkInterface;
 @property (nonatomic, retain) NSNumber * maxRetries;
 @property (nonatomic, retain) NSNumber * icmpTimeStamp;
 @property (nonatomic, retain) NSNumber * maxScanDelay;
@@ -87,9 +87,9 @@
 @property (nonatomic, retain) NSString * idleScanString;
 @property (nonatomic, retain) NSNumber * disableRandom;
 @property (nonatomic, retain) NSNumber * udpProbe;
+@property (nonatomic, retain) NSString * setSourceIPString;
 @property (nonatomic, retain) NSNumber * extraOptions;
 @property (nonatomic, retain) NSNumber * portsToScan;
-@property (nonatomic, retain) NSNumber * setNetworkInterface;
 @property (nonatomic, retain) NSSet* sessions;
 @property (nonatomic, retain) NSSet* children;
 @property (nonatomic, retain) Profile * parent;
