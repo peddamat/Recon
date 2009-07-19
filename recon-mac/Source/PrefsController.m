@@ -106,7 +106,6 @@ static PrefsController *sharedPrefsController = nil;
    
    [self setRun];
    
-   
    // Return to normal event handling
    [NSApp endSheet:prefWindow];
    
