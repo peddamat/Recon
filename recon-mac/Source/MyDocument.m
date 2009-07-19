@@ -11,10 +11,12 @@
 #import "SessionController.h"
 #import "ArgumentListGenerator.h"
 
-#import "Session.h"
-#import "Profile.h"
-#import "Port.h"
 #import "Host.h"
+#import "Port.h"
+#import "Profile.h"
+#import "Session.h"
+
+#import "Connection.h"
 
 // For reading interface addresses
 #include <sys/types.h>
@@ -22,10 +24,6 @@
 #include <ifaddrs.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-
-#import "Connection.h"
-
-@class Profile;
 
 @implementation MyDocument
 
@@ -36,18 +34,12 @@
 
 @synthesize testy;
 
-- (NSString *)applicationSupportFolder {
-   
-   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-   NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
-   return [basePath stringByAppendingPathComponent:@"Recon"];
-}
 
 - (id)init 
 {
     if (self = [super init])
     {
-//       sessionManager = [[SessionManager alloc] init];
+       // The Session Manager is a singleton instance
        sessionManager = [SessionManager sharedSessionManager];
        [sessionManager setContext:[self managedObjectContext]];
        
@@ -59,7 +51,7 @@
        NSError *error;
        
        fileManager = [NSFileManager defaultManager];
-       applicationSupportFolder = [self applicationSupportFolder];
+       applicationSupportFolder = [PrefsController applicationSupportFolder];
        if ( ![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL] ) {
           [fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
        }
@@ -116,8 +108,16 @@
 //   }
    
    // Use Preferences controller to verify nmap binary and log directory are set.
-   PrefsController *prefs = [[[PrefsController alloc] init] autorelease];
-   [prefs checkPrefs];
+//   prefsController = [[PrefsController alloc] 
+//                      initWithMainWindow:[[[ self windowControllers ] objectAtIndex:0 ] window ]
+//                            andPrefWindow:prefWindow];
+//   [prefsController setMainWindow:[ [ [ self windowControllers ] objectAtIndex:0 ] window ]];
+//   [prefsController setPrefWindow:prefWindow];
+//   [prefsController registerDefaults];
+//   [prefsController checkPrefs];
+
+   prefsController = [PrefsController sharedPrefsControllerWithMainWindow:[[[ self windowControllers ] objectAtIndex:0 ] window ] 
+                                                            andPrefWindow:prefWindow];
    
    // Add some default profiles   
    [self addProfileDefaults];   
@@ -163,7 +163,6 @@
                                                     selector:@selector(expandProfileView:)
                                                     userInfo:nil
                                                      repeats:YES] retain]; 
-   
 }
 
 - (void)expandProfileView:(NSTimer *)aTimer
@@ -464,40 +463,6 @@
 }
 
 // -------------------------------------------------------------------------------
-//	Preference Window key-handlers
-// -------------------------------------------------------------------------------
-
-- (IBAction)showPrefWindow:(id)sender {
-   // First update the Prefs window
-   [self updatePrefsWindow];
-   
-   // Then display as sheet
-   [NSApp beginSheet:prefWindow
-      modalForWindow:[mainView window]
-       modalDelegate:nil
-      didEndSelector:NULL
-         contextInfo:NULL];
-}
-- (IBAction)endPrefWindow:(id)sender {
-   // Verify user-specified settings are valid
-   
-   // Then store them to User Defaults 
-   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-   NSString *nmapBinaryLocation = [nmapBinaryString stringValue];
-   NSString *savedSessionsDirectory = [sessionDirectoryString stringValue];
-   
-//   [defaults setObject:nmapBinaryLocation forKey:BAFNmapBinLoc];
-//   [defaults setObject:savedSessionsDirectory forKey:BAFSesSaveDir];
-      
-   // Return to normal event handling
-   [NSApp endSheet:prefWindow];
-   
-   // Hide the sheet
-   [prefWindow orderOut:sender];
-}
-
-
-// -------------------------------------------------------------------------------
 //	View togglers
 // -------------------------------------------------------------------------------
 
@@ -741,10 +706,32 @@
     )
    {
       NSInteger clickedRow = [sessionsTableView clickedRow];
-      if (clickedRow == -1)
+      if (clickedRow == -1) {
          enabled = NO;
-      else
+      }
+      else 
+      {
          enabled = YES;
+         Session *s = [self clickedSessionInDrawer];
+         
+//         // Only enable Abort if session is running
+//         if (
+//             ([menuItem action] == @selector(sessionDrawerAbort:)) &&
+//             ([s status] != @"Queued")
+//            )         
+//         {
+//            NSLog(@"1");
+//            enabled = NO;
+//         }
+//         
+//         // Only enable Run if session is not running
+//         else if (([menuItem action] == @selector(sessionDrawerRun:)) &&
+//                 ([s status] != @"Queued"))
+//         {
+//
+//            enabled = NO;
+//         }
+      }
    } 
    else
    {
@@ -765,10 +752,13 @@
    // If clickedRow == -1, the user hasn't clicked on a session
    
    // TODO: If Sessions Context Menu
-   if (menu == sessionsContextMenu) {
-         
+   if (menu == sessionsContextMenu) 
+   {
+      Session *s = [self clickedSessionInDrawer];
+//      if ([s status] == @"
    }
    else
+   {
       NSLog(@"MyDocument: fart!");      
    
    // TODO: If Hosts Context Menu
@@ -780,6 +770,7 @@
    // TODO: If Profiles Context Menu
    
 //   [sessionsContextMenu update];
+   }
 }
 
 
@@ -794,6 +785,10 @@
 - (IBAction)unsetuidNmap:(id)sender
 {
    [PrefsController unrootNmap];
+}
+- (IBAction)showPrefWindow:(id)sender
+{
+   [prefsController showPrefWindow:self];
 }
 
 
