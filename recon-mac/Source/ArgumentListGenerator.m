@@ -113,13 +113,12 @@
                                    nil];
       
       nmapArgsTimingString = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   @"",@"0",
-                                   @"-T0",@"1",
-                                   @"-T1",@"2",
-                                   @"-T2",@"3",
-                                   @"-T3",@"4",
-                                   @"-T4",@"5",
-                                   @"-T5",@"6",
+                                   @"-T0",@"0",
+                                   @"-T1",@"1",
+                                   @"-T2",@"2",
+                                   @"-T3",@"3",
+                                   @"-T4",@"4",
+                                   @"-T5",@"5",
                                    nil];
    }
    
@@ -189,22 +188,23 @@
    //	These are hard-coded dictionaries for the popups.  HACKY CODE!  
    // -------------------------------------------------------------------------------
    
-//   dictValue = [profile valueForKey:@"tcpScanTag"];
-//   if (dictValue == nil) dictValue = [NSNumber numberWithInt:0];
-//   [nmapArgs addObject:[nmapArgsTcpString valueForKey:[dictValue stringValue]]];
-//   
-//   dictValue = [profile valueForKey:@"nonTcpScanTag"];
-//   if (dictValue == nil) dictValue = [NSNumber numberWithInt:0];
-//   [nmapArgs addObject:[nmapArgsNonTcpString valueForKey:[dictValue stringValue]]];
-//   
-//   dictValue = [profile valueForKey:@"timingTemplateTag"];
-//   if (dictValue == nil) dictValue = [NSNumber numberWithInt:0];
-//   [nmapArgs addObject:[nmapArgsTimingString valueForKey:[dictValue stringValue]]];
+   
+   dictValue = [profile valueForKey:@"tcpScanTag"];
+   if (dictValue != nil)
+      [nmapArgs addObject:[nmapArgsTcpString valueForKey:[dictValue stringValue]]];
+
+   dictValue = [profile valueForKey:@"nonTcpScanTag"];
+   if (dictValue != nil)
+      [nmapArgs addObject:[nmapArgsNonTcpString valueForKey:[dictValue stringValue]]];
+
+   dictValue = [profile valueForKey:@"timingTemplateTag"];
+   if (dictValue != nil)
+      [nmapArgs addObject:[nmapArgsTimingString valueForKey:[dictValue stringValue]]];
    
    // -------------------------------------------------------------------------------
    //	/END hacky code...
-   // -------------------------------------------------------------------------------    
-      
+   // -------------------------------------------------------------------------------
+   
    // Finally add XML output location and target(s)
    [nmapArgs addObject:@"-stats-every"];
    [nmapArgs addObject:@"50"];   
