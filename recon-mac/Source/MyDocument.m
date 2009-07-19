@@ -106,18 +106,9 @@
 //      [self setRun];      
 //      NSLog(@"Hasn't run");      
 //   }
-   
-   // Use Preferences controller to verify nmap binary and log directory are set.
-//   prefsController = [[PrefsController alloc] 
-//                      initWithMainWindow:[[[ self windowControllers ] objectAtIndex:0 ] window ]
-//                            andPrefWindow:prefWindow];
-//   [prefsController setMainWindow:[ [ [ self windowControllers ] objectAtIndex:0 ] window ]];
-//   [prefsController setPrefWindow:prefWindow];
-//   [prefsController registerDefaults];
-//   [prefsController checkPrefs];
-
-   prefsController = [PrefsController sharedPrefsControllerWithMainWindow:[[[ self windowControllers ] objectAtIndex:0 ] window ] 
-                                                            andPrefWindow:prefWindow];
+      
+   prefsController = [PrefsController sharedPrefsController];
+   [prefsController displayOnFirstRun];
    
    // Add some default profiles   
    [self addProfileDefaults];   
@@ -939,6 +930,13 @@
    return reply;
 }
 
+// -------------------------------------------------------------------------------
+//	applicationShouldTerminateAfterLastWindowClosed: Kills application properly
+// -------------------------------------------------------------------------------
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
+{
+   return TRUE;
+}
 
 // -------------------------------------------------------------------------------
 //	testy: Test function for playing around with predicates

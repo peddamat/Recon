@@ -119,7 +119,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    session.profile = profileCopy;         // Store session profile
       
    // Check PrefsController for user-specified sessions directory
-//   NSString *nmapBinary = [PrefsController nmapBinaryString]       
+//   NSString *nmapBinary = [PrefsController nmapBinary]       
    
    [self createSessionDirectory:sessionUUID];
          
@@ -186,9 +186,12 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (BOOL)createSessionDirectory:(NSString *)uuid
 {
+   PrefsController *prefs = [PrefsController sharedPrefsController];
+   
    // Create directory for new session   
    NSFileManager *NSFm = [NSFileManager defaultManager];
-   NSString *dirName = [PrefsController applicationSessionsFolder];   
+//   NSString *dirName = [PrefsController applicationSessionsFolder];   
+   NSString *dirName = [prefs sessionDirectory];      
    self.sessionDirectory = [dirName stringByAppendingPathComponent:uuid];
    self.sessionOutputFile = [sessionDirectory stringByAppendingPathComponent:@"nmap-output.xml"];
    
@@ -206,8 +209,10 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)initNmapController
 {
+   PrefsController *prefs = [PrefsController sharedPrefsController];
+   
    // Call NmapController with outputFile and argument list   
-   self.nmapController = [[NmapController alloc] initWithNmapBinary:@"/usr/local/bin/nmap"                                                     
+   self.nmapController = [[NmapController alloc] initWithNmapBinary:[prefs nmapBinary]                                                   
                                                            withArgs:nmapArguments 
                                                  withOutputFilePath:sessionDirectory];   
    

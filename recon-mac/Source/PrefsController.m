@@ -248,7 +248,6 @@ static PrefsController *sharedPrefsController = nil;
 - (void)displayOnFirstRun
 {
    if ([self hasRun] == NO) {
-      NSLog(@"FUCKTARD");
       // Hack to prevent detached sheet
       //  See: http://www.cocoadev.com/index.pl?HowToPutASheetOnADocumentJustAfterOpeningIt
       [self performSelector:@selector(showPrefWindow:) withObject:self afterDelay:0.5];

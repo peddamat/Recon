@@ -14,21 +14,24 @@
 
 @class Session;
 @class SessionManager;
+@class PrefsController;
 
 // User application default keys
-extern NSString * const BAFNmapXRunOnce;
+extern NSString * const BAFReconHasRun;
 extern NSString * const BAFNmapBinaryLocation;
-extern NSString * const BAFSessionSaveDirectory;
+extern NSString * const BAFSavedSessionsDirectory;
 
 @interface MyDocument : NSPersistentDocument {
-   
-   SessionManager *sessionManager;
+
 
    IBOutlet NSView *mainsubView;
    IBOutlet NSView *mainsubView2;
    
    IBOutlet NSView *mainView;
    IBOutlet NSTabView *mainTabView;
+
+   PrefsController *prefsController;
+   SessionManager *sessionManager;
    
    // Toolbar Outlets
    IBOutlet NSToolbar *mainToolbar;
@@ -66,17 +69,11 @@ extern NSString * const BAFSessionSaveDirectory;
    IBOutlet NSArrayController *profilesController;  
    
    IBOutlet NSOutlineView *profilesOutlineView;   
+   NSTimer *profileTimer; // Shitty hack to hook outlineview expansion
    
    IBOutlet NSTreeController *profileController;   
    IBOutlet NSTextField *sessionTarget;
-   
-   // Preference Window
-   IBOutlet NSWindow *prefWindow;
-   IBOutlet NSTextField *nmapBinaryString;   
-   IBOutlet NSTextField *sessionDirectoryString;   
-   IBOutlet NSButton *nmapBinaryBrowse;
-   IBOutlet NSButton *logDirectoryBrowse;
-   
+      
    IBOutlet BWSplitView *profileView;
    IBOutlet BWAnchoredButton *profileButton;
 
@@ -109,6 +106,7 @@ extern NSString * const BAFSessionSaveDirectory;
 @property (readonly) NSArray *portSortDescriptor;
 @property (readonly) NSArray *profileSortDescriptor;
 @property (readonly) NSArray *sessionSortDescriptor;
+
 @property (readonly) NSPredicate *testy;
 
 - (IBAction)peanut:(id)sender;
@@ -147,19 +145,19 @@ extern NSString * const BAFSessionSaveDirectory;
 - (IBAction) toggleSettings:(id)sender;
 - (IBAction) toggleResults:(id)sender;
 
-- (IBAction) showPrefWindow:(id)sender;
-- (IBAction) endPrefWindow:(id)sender;
-
 - (IBAction) toggleSessionsDrawer:(id)sender;
 
 - (void)addQueuedSessions;
 
 - (void)addProfileDefaults;
-//- (void)updatePrefsWindow;
+//- (void)readUserDefaults;
+- (IBAction)addProfile:(id)sender;
 
 - (IBAction)setuidNmap:(id)sender;
 - (IBAction)unsetuidNmap:(id)sender;
 
+- (void)expandProfileView:(NSTimer *)aTimer;
 
+- (IBAction)showPrefWindow:(id)sender;
 
 @end
