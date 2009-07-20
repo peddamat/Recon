@@ -28,6 +28,8 @@
 
    // State-machine helper flag
    BOOL inRunstats;   
+   BOOL inOsclass;
+   BOOL inOsmatch;
    BOOL onlyReadProgress;
 }
 

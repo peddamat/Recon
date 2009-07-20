@@ -34,7 +34,6 @@
 		8CC32789100CDCA700483939 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC32788100CDCA700483939 /* Security.framework */; };
 		8CC3278F100CDCF000483939 /* NetstatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3278E100CDCF000483939 /* NetstatController.m */; };
 		8CC32794100CDFE400483939 /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC32793100CDFE400483939 /* Connection.m */; };
-		8CC32866100DB47400483939 /* connections.sh in Resources */ = {isa = PBXBuildFile; fileRef = 8CC32865100DB47400483939 /* connections.sh */; };
 		8CC329D1100DF9D700483939 /* ClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC329D0100DF9D700483939 /* ClientController.m */; };
 		8CC32EAE100FBBA600483939 /* nmap-icon-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CC32EAD100FBBA600483939 /* nmap-icon-button.png */; };
 		8CC32EC7100FC57700483939 /* nmap-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8CC32EC6100FC57700483939 /* nmap-icon.icns */; };
@@ -118,7 +117,6 @@
 		8CC3278E100CDCF000483939 /* NetstatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetstatController.m; path = Source/NetstatController.m; sourceTree = "<group>"; };
 		8CC32792100CDFE400483939 /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Connection.h; path = Source/Connection.h; sourceTree = "<group>"; };
 		8CC32793100CDFE400483939 /* Connection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Connection.m; path = Source/Connection.m; sourceTree = "<group>"; };
-		8CC32865100DB47400483939 /* connections.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = connections.sh; path = Resources/connections.sh; sourceTree = "<group>"; };
 		8CC329CF100DF9D700483939 /* ClientController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientController.h; path = Source/ClientController.h; sourceTree = "<group>"; };
 		8CC329D0100DF9D700483939 /* ClientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientController.m; path = Source/ClientController.m; sourceTree = "<group>"; };
 		8CC32EAD100FBBA600483939 /* nmap-icon-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nmap-icon-button.png"; path = "Resources/nmap-icon-button.png"; sourceTree = "<group>"; };
@@ -222,17 +220,16 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8CC32EC6100FC57700483939 /* nmap-icon.icns */,
-				8CC32EAD100FBBA600483939 /* nmap-icon-button.png */,
-				8CC32865100DB47400483939 /* connections.sh */,
 				8C79F4C41003E3BA00A4648B /* MainMenu.xib */,
 				8C79F7891004908600A4648B /* MyDocument.xib */,
+				8CC32EC6100FC57700483939 /* nmap-icon.icns */,
+				8CC32EAD100FBBA600483939 /* nmap-icon-button.png */,
 				8C79F67E1004235900A4648B /* button_pane_show_icon.tif */,
 				8C79F67F1004235900A4648B /* button_pane_hide_icon.tif */,
 				8C79F4C31003E3BA00A4648B /* Info.plist */,
+				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				8C79F4C51003E3BA00A4648B /* Growl Registration Ticket.growlRegDict */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
-				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -336,7 +333,6 @@
 				8C79F6801004235900A4648B /* button_pane_show_icon.tif in Resources */,
 				8C79F6811004235900A4648B /* button_pane_hide_icon.tif in Resources */,
 				8C79F78A1004908600A4648B /* MyDocument.xib in Resources */,
-				8CC32866100DB47400483939 /* connections.sh in Resources */,
 				8CC32EAE100FBBA600483939 /* nmap-icon-button.png in Resources */,
 				8CC32EC7100FC57700483939 /* nmap-icon.icns in Resources */,
 			);

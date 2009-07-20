@@ -262,10 +262,7 @@ static PrefsController *sharedPrefsController = nil;
    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
    self.autoSetuid = [defaults boolForKey:BAFAutoSetuid]; 
    self.nmapBinary = (NSString *)[defaults objectForKey:BAFNmapBinaryLocation]; 
-   self.sessionDirectory = (NSString *)[defaults objectForKey:BAFSavedSessionDirectory];
-   
-   NSLog(@"nb: %@", self.nmapBinary);
-   NSLog(@"sd: %@", self.sessionDirectory);   
+   self.sessionDirectory = (NSString *)[defaults objectForKey:BAFSavedSessionDirectory];   
 }
 
 // -------------------------------------------------------------------------------

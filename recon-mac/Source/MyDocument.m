@@ -15,6 +15,7 @@
 #import "Port.h"
 #import "Profile.h"
 #import "Session.h"
+#import "OperatingSystem.h"
 
 #import "Connection.h"
 
@@ -133,6 +134,14 @@
    // ... and the Host TableView
    [hostsTableView setTarget:self];
    [hostsTableView setDoubleAction:@selector(hostsTableDoubleClick)];
+
+   // ... and the Services TableView
+   [portsTableView setTarget:self];
+   [portsTableView setDoubleAction:@selector(portsTableDoubleClick)];   
+
+   // ... and the Oses TableView
+   [osesTableView setTarget:self];
+   [osesTableView setDoubleAction:@selector(osesTableDoubleClick)];   
    
    // ... and the Ports TableView in the Results Tab
    [resultsPortsTableView setTarget:self];
@@ -352,17 +361,34 @@
                                              inManagedObjectContext:[self managedObjectContext]];
    [request setEntity:entity];
    
+   NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                             @"(status LIKE[c] 'Queued')"];
+   
+   [request setPredicate:predicate];   
+   
    NSError *error = nil;
    NSArray *array = [context executeFetchRequest:request error:&error];
 
    for (id object in array)
    {
-//      NSString *status = [object valueForKey:@"status"];
-//      NSLog(@"%@", status);
-//      if ([status compare:@"Queued"] == TRUE)
-//         NSLog(@"QUEUED!");
+      [sessionManager queueExistingSession:object];
    }
       
+   
+   // This should probably be moved to it's own method, buuuuut...
+   predicate = [NSPredicate predicateWithFormat:
+                             @"(status != 'Queued') AND (status != 'Done') AND (status != 'Aborted')"];
+   
+   [request setPredicate:predicate];   
+   
+   array = [context executeFetchRequest:request error:&error];
+
+   // Set incomplete scans to 'Aborted'
+   for (id object in array)
+   {
+      [object setStatus:@"Aborted"];
+   }
+   
 }
 
 // -------------------------------------------------------------------------------
@@ -618,6 +644,31 @@
    [self toggleResults:self];
 }
 
+- (void)portsTableDoubleClick
+{
+   // Get selected port
+   Port *selectedPort = [[portsInSessionController selectedObjects] lastObject];
+   // Get host for selected port
+   Host *selectedHost = selectedPort.host;
+   
+   [hostsInSessionController setSelectedObjects:[NSArray arrayWithObject:selectedHost]];
+   // If user double-clicks on a Host menu item, switch to results view
+   [self toggleResults:self];
+}
+
+- (void)osesTableDoubleClick
+{
+   // Get selected port
+   OperatingSystem *selectedOs = [[osesInSessionController selectedObjects] lastObject];
+   // Get host for selected port
+   Host *selectedHost = selectedOs.host;
+   
+   [hostsInSessionController setSelectedObjects:[NSArray arrayWithObject:selectedHost]];
+   // If user double-clicks on a Host menu item, switch to results view
+   [self toggleResults:self];
+}
+
+
 - (void)resultsPortsTableDoubleClick
 {
    // Find clicked row from sessionsTableView
@@ -843,6 +894,21 @@
 {
 	sessionSortDescriptor = newSortDescriptor;
 }
+
+- (NSArray *)osSortDescriptor
+{
+	if(osSortDescriptor == nil){
+		osSortDescriptor = [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO]];
+   }
+   
+	return osSortDescriptor;
+}
+
+- (void)setOsSortDescriptor:(NSArray *)newSortDescriptor
+{
+	osSortDescriptor = newSortDescriptor;
+}
+
 
 - (NSString *)windowNibName 
 {

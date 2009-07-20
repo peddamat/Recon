@@ -26,6 +26,9 @@
 
 // State-machine helper flag
    @property (readwrite, assign) BOOL inRunstats;   
+   @property (readwrite, assign) BOOL inOsclass;   
+   @property (readwrite, assign) BOOL inOsmatch;   
+
    @property (readwrite, assign) BOOL onlyReadProgress;
 
 @end
@@ -40,6 +43,8 @@
 @synthesize currentPort;
 @synthesize currentOperatingSystem;
 @synthesize inRunstats;
+@synthesize inOsclass;
+@synthesize inOsmatch;
 @synthesize onlyReadProgress;
 
 - (void)dealloc
@@ -237,7 +242,7 @@
    
    
    /// HOST - OSCLASS
-   if ( [elementName isEqualToString:@"osclass"] || [elementName isEqualToString:@"osmatch"] ) {
+   if ( [elementName isEqualToString:@"osclass"] ) {
 
       if (!currentOperatingSystem) {
          
@@ -249,11 +254,32 @@
          [currentOperatingSystem setHost:currentHost];
       }
       
+      inOsclass = TRUE;
+      
       [currentOperatingSystem setType:[attributeDict objectForKey:@"type"]];
       [currentOperatingSystem setVendor:[attributeDict objectForKey:@"vendor"]];
       [currentOperatingSystem setFamily:[attributeDict objectForKey:@"osfamily"]];               
       [currentOperatingSystem setGen:[attributeDict objectForKey:@"osgen"]];                     
       [currentOperatingSystem setAccuracy:[attributeDict objectForKey:@"accuracy"]];  
+
+      
+      return;
+   }
+   
+   if ( [elementName isEqualToString:@"osmatch"] ) {
+
+      if (!currentOperatingSystem) {
+         
+         // Create new port object in managedObjectContext
+         NSManagedObjectContext * context = [currentSession managedObjectContext]; 
+         self.currentOperatingSystem = [NSEntityDescription insertNewObjectForEntityForName: @"OperatingSystem" inManagedObjectContext: context];                   
+         
+         // Point back to current session
+         [currentOperatingSystem setHost:currentHost];
+      }
+      
+      inOsmatch = TRUE;
+      
       [currentOperatingSystem setName:[attributeDict objectForKey:@"name"]];      
       
       return;
@@ -294,12 +320,22 @@
       return;
    }
    
-   if ( [elementName isEqualToString:@"osclass"] || [elementName isEqualToString:@"osmatch"] ) {
-      self.currentOperatingSystem = nil;
+   if ( [elementName isEqualToString:@"osclass"] ) {
+      inOsclass = FALSE;
+      
+      if (inOsmatch == FALSE)
+         self.currentOperatingSystem = nil;
       
       return;
    }
    
+   if ( [elementName isEqualToString:@"osmatch"] ) {
+      inOsmatch = FALSE;
+      
+      if (inOsclass == FALSE)
+         self.currentOperatingSystem = nil;
+      
+   }
 }
 
 @end

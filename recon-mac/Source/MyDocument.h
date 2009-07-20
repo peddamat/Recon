@@ -79,14 +79,21 @@ extern NSString * const BAFSavedSessionsDirectory;
 
    // Various Results Outlets
    IBOutlet NSTableView *hostsTableView;
+   IBOutlet NSTableView *portsTableView;   
    IBOutlet NSTableView *resultsPortsTableView;   
+   IBOutlet NSTableView *osesTableView;      
    IBOutlet NSArrayController *portsInHostController;      
+   
+   IBOutlet NSArrayController *hostsInSessionController;
+   IBOutlet NSArrayController *portsInSessionController;
+   IBOutlet NSArrayController *osesInSessionController;
    
    // Main Menu 
    IBOutlet NSMenuItem *menuSettings;
    IBOutlet NSMenuItem *menuResults;   
    
    // Sort-descriptors for the various table views
+   NSArray *osSortDescriptor;
    NSArray *hostSortDescriptor;
    NSArray *portSortDescriptor;   
    NSArray *profileSortDescriptor;      
@@ -102,6 +109,7 @@ extern NSString * const BAFSavedSessionsDirectory;
    NSPredicate *testy;
 }
 
+@property (readonly) NSArray *osSortDescriptor;
 @property (readonly) NSArray *hostSortDescriptor;
 @property (readonly) NSArray *portSortDescriptor;
 @property (readonly) NSArray *profileSortDescriptor;

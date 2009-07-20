@@ -186,12 +186,14 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (BOOL)createSessionDirectory:(NSString *)uuid
 {
-   PrefsController *prefs = [PrefsController sharedPrefsController];
+//   PrefsController *prefs = [PrefsController sharedPrefsController];
+   PrefsController *prefs = [PrefsController applicationSessionsFolder];
    
    // Create directory for new session   
    NSFileManager *NSFm = [NSFileManager defaultManager];
 //   NSString *dirName = [PrefsController applicationSessionsFolder];   
-   NSString *dirName = [prefs sessionDirectory];      
+//   NSString *dirName = [prefs sessionDirectory];      
+   NSString *dirName = @"/Users/me/Library/Application Support/Recon/Sessions";
    self.sessionDirectory = [dirName stringByAppendingPathComponent:uuid];
    self.sessionOutputFile = [sessionDirectory stringByAppendingPathComponent:@"nmap-output.xml"];
    

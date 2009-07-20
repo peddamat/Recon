@@ -1,1 +1,0 @@
-netstat -d -n -f inet | grep "ESTABLISHED" | grep -v 127 | awk '{print $4, $5, $6 }'
