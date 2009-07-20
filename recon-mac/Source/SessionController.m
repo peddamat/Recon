@@ -135,6 +135,13 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 - (void)initWithSession:(Session *)s
 {
    Profile *profile = [s profile];
+   
+   // Make sure profile is a copied profile
+   if ([[profile name] hasPrefix:@"Copy"] == NO)
+   {
+      profile = [[self copyProfile:profile] autorelease];
+      s.profile = profile;
+   }
 
    self.session = s;
    self.sessionUUID = [s UUID];

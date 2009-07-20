@@ -342,20 +342,9 @@
 //                    is maintained.
 // -------------------------------------------------------------------------------
 - (void)addQueuedSessions
-{
-   NSManagedObjectContext *context = [self managedObjectContext];
-   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
-   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Session"
-                                             inManagedObjectContext:[self managedObjectContext]];
-   [request setEntity:entity];
-   
-   NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                             @"(status LIKE[c] 'Queued')"];
-   
-   [request setPredicate:predicate];   
-   
-   NSError *error = nil;
-   NSArray *array = [context executeFetchRequest:request error:&error];
+{   
+   NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Session" withPredicate:
+                     @"(status LIKE[c] 'Queued')"];   
 
    for (id object in array)
    {
@@ -363,13 +352,9 @@
    }      
    
    // This should probably be moved to it's own method, buuuuut...
-   predicate = [NSPredicate predicateWithFormat:
-                             @"(status != 'Queued') AND (status != 'Done') AND (status != 'Aborted')"];
+   array = [[self managedObjectContext] fetchObjectsForEntityName:@"Session" withPredicate:
+                     @"(status != 'Queued') AND (status != 'Done')"];   
    
-   [request setPredicate:predicate];   
-   
-   array = [context executeFetchRequest:request error:&error];
-
    // Set incomplete scans to 'Aborted'
    for (id object in array)
    {
@@ -384,19 +369,16 @@
 // -------------------------------------------------------------------------------
 - (void)createHostsMenu
 {
-   NSManagedObjectContext *context = [self managedObjectContext];
-   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
-   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile"
-                                             inManagedObjectContext:[self managedObjectContext]];
-   [request setEntity:entity];
-   
+   NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:
+                 @"(parent.name LIKE[c] 'Defaults') OR (parent.name LIKE[c] 'User Profiles')"];   
+
    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
                                        initWithKey:@"name" ascending:YES];
-   [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-   [sortDescriptor release];   
-   
-   NSError *error = nil;
-   NSArray *array = [context executeFetchRequest:request error:&error];
+
+   NSMutableArray *sa = [NSMutableArray arrayWithArray:array];
+   [sa sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+   [sortDescriptor release];
 
    NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:@"Queue with"
                                                action:@selector(handleHostsMenuClick:)
@@ -404,7 +386,7 @@
    NSMenu *submenu = [[NSMenu alloc] initWithTitle:@"Profile"];
    [mi setSubmenu:submenu];
    
-   for (id obj in array)
+   for (id obj in sa)
    {
       NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:[obj name]
                                                   action:@selector(handleHostsMenuClick:)
@@ -891,6 +873,9 @@
 {
    BOOL enabled = NO;
    
+   
+   NSLog(@"HI: %d", [[hostsInSessionController selectedObjects] count]);
+   
    if (
     ([menuItem action] == @selector(sessionDrawerRun:)) ||
     ([menuItem action] == @selector(sessionDrawerRunCopy:)) ||
@@ -927,6 +912,13 @@
 //         }
       }
    } 
+   else if ([menuItem action] == @selector(handleHostsMenuClick:))
+   {
+      if ([[hostsInSessionController selectedObjects] count] == 0)
+         enabled = NO;
+      else
+         enabled = YES;
+   }
    else
    {
       enabled = [super validateMenuItem:menuItem];
