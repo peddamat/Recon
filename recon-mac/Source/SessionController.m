@@ -88,8 +88,6 @@
    [nmapArguments release];   
    [nmapController release];
    
-   NSLog(@"Retain count %d", [nmapController retainCount]);
-   
    [xmlController release];
    [resultsTimer invalidate];   
    [resultsTimer release];
