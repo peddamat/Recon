@@ -110,12 +110,12 @@
    // Link the session to the profile
    [session setProfile:profile];
 
-   // The interface needs the new session to be selected
-   [sessionsController setSelectsInsertedObjects:TRUE];
-   
    // Queue and launch the session
    [sessionManager queueExistingSession:session];
    [sessionManager launchSession:session];
+
+   // The interface needs the new session to be selected
+   [sessionsController setSelectedObjects:[NSArray arrayWithObject:session]];
 }
 
 - (NSPredicate *)testy

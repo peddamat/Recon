@@ -72,13 +72,16 @@ extern NSString * const BAFSavedSessionsDirectory;
    NSTimer *profileTimer; // Shitty hack to hook outlineview expansion
    
    IBOutlet NSTreeController *profileController;   
-   IBOutlet NSTextField *sessionTarget;
-      
+//   IBOutlet NSTextField *sessionTarget;
+   IBOutlet NSComboBox *sessionTarget;   
+   
    IBOutlet BWSplitView *profileView;
    IBOutlet BWAnchoredButton *profileButton;
 
    // Various Results Outlets
    IBOutlet NSTableView *hostsTableView;
+   IBOutlet NSMenu *hostsContextMenu;
+   
    IBOutlet NSTableView *portsTableView;   
    IBOutlet NSTableView *resultsPortsTableView;   
    IBOutlet NSTableView *osesTableView;      
@@ -106,7 +109,7 @@ extern NSString * const BAFSavedSessionsDirectory;
    float nmapErrorCount;   
    NSTimer *nmapErrorTimer;
    
-   NSPredicate *testy;
+   NSPredicate *testy;   
 }
 
 @property (readonly) NSArray *osSortDescriptor;

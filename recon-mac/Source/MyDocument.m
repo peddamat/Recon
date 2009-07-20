@@ -11,6 +11,8 @@
 #import "SessionController.h"
 #import "ArgumentListGenerator.h"
 
+#import "NSManagedObjectContext-helper.h"
+
 #import "Host.h"
 #import "Port.h"
 #import "Profile.h"
@@ -138,10 +140,13 @@
    [queueSegmentedControl setTarget:self];   
    [queueSegmentedControl setAction:@selector(segControlClicked:)];   
    
+   // Generate the Hosts Context Menu items
+   [self createHostsMenu];
+   
    [mainsubView retain];
    [mainsubView2 retain];
    
-   nmapErrorTimer = [[NSTimer scheduledTimerWithTimeInterval:1
+   nmapErrorTimer = [[NSTimer scheduledTimerWithTimeInterval:0.1
                                                       target:self
                                                     selector:@selector(expandProfileView:)
                                                     userInfo:nil
@@ -355,8 +360,7 @@
    for (id object in array)
    {
       [sessionManager queueExistingSession:object];
-   }
-      
+   }      
    
    // This should probably be moved to it's own method, buuuuut...
    predicate = [NSPredicate predicateWithFormat:
@@ -373,6 +377,80 @@
       [object setProgress:[NSNumber numberWithFloat:0.0]];
    }
    
+}
+
+// -------------------------------------------------------------------------------
+//	createHostsMenu: The hosts context menu displays a list of Profile.  
+// -------------------------------------------------------------------------------
+- (void)createHostsMenu
+{
+   NSManagedObjectContext *context = [self managedObjectContext];
+   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
+   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile"
+                                             inManagedObjectContext:[self managedObjectContext]];
+   [request setEntity:entity];
+   
+   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                       initWithKey:@"name" ascending:YES];
+   [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+   [sortDescriptor release];   
+   
+   NSError *error = nil;
+   NSArray *array = [context executeFetchRequest:request error:&error];
+
+   NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:@"Queue with"
+                                               action:@selector(handleHostsMenuClick:)
+                                        keyEquivalent:@""];   
+   NSMenu *submenu = [[NSMenu alloc] initWithTitle:@"Profile"];
+   [mi setSubmenu:submenu];
+   
+   for (id obj in array)
+   {
+      NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:[obj name]
+                                                  action:@selector(handleHostsMenuClick:)
+                                           keyEquivalent:@""];
+      [mi setTag:10];
+      [submenu addItem:mi];
+      [mi release];      
+      
+   }
+   [hostsContextMenu addItem:mi];
+}
+
+
+// -------------------------------------------------------------------------------
+//	handleHostsMenuClick: 
+// -------------------------------------------------------------------------------
+- (IBAction)handleHostsMenuClick:(id)sender
+{
+   NSLog(@"handleHostsMenuClick: %@", [sender title]);
+   
+   // If we want to queue selected hosts...
+   if ([sender tag] == 10)
+   {
+      // Grab the selected hosts from the hostsController
+      NSArray *a = [hostsInSessionController selectedObjects];
+      
+      // Create a Target string based on the hosts ip's
+      NSString *ip = [[a lastObject] ipv4Address];
+      
+      // Grab the desired profile...
+      NSArray *s = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:
+       @"(name LIKE[c] %@)", [sender title]]; 
+      Profile *p = [s lastObject];
+      
+      // Hand-craft a Session...
+      Session *session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" 
+                                                       inManagedObjectContext:[self managedObjectContext]];             
+      [session setProfile:p];
+      [session setTarget:ip];
+      [session setStatus:@"Queued"];
+      [session setDate:[NSDate date]];
+      [session setUUID:[SessionController stringWithUUID]];
+      
+      // Queue session in Session Manager
+      [sessionManager queueExistingSession:session];
+   }
 }
 
 // -------------------------------------------------------------------------------
@@ -572,7 +650,6 @@
    [profilesDrawer close];
    
    [self swapView:mainsubView withSubView:mainsubView2 inContaningView:mainView];
-   
 }
 
 // -------------------------------------------------------------------------------
@@ -582,26 +659,31 @@
      withSubView:(NSView *)newSubview 
  inContaningView:(NSView *)containerView
 {
-   NSWindow *w = [containerView window];
+   if (newSubview == [[containerView subviews] objectAtIndex:0])
+      return;
    
-   // Compute the new window frame
-   NSSize currentSize = [oldSubview frame].size;
-   NSSize newSize = [newSubview frame].size;
-   float deltaWidth = newSize.width - currentSize.width;
-   float deltaHeight = newSize.height - currentSize.height;
-   NSRect windowFrame = [w frame];
-   windowFrame.size.height += deltaHeight;
-   windowFrame.origin.y -= deltaHeight;
-   windowFrame.size.width += deltaWidth;
-   
-   // Clear the box for resizing
-   [w setFrame:windowFrame
-       display:YES
-       animate:YES];
-   
+//   NSWindow *w = [containerView window];
+//   
+//   // Compute the new window frame
+//   NSSize currentSize = [oldSubview frame].size;
+//   NSSize newSize = [newSubview frame].size;
+//   float deltaWidth = newSize.width - currentSize.width;
+//   float deltaHeight = newSize.height - currentSize.height;
+//   NSRect windowFrame = [w frame];
+//   windowFrame.size.height += deltaHeight;
+//   windowFrame.origin.y -= deltaHeight;
+//   windowFrame.size.width += deltaWidth;
+//   
+//   [containerView setHidden:TRUE];
+//   // Clear the box for resizing
+//   [w setFrame:windowFrame
+//       display:YES
+//       animate:YES];
+//   
    NSPoint myPoint = {0, 34};
    [newSubview setFrameOrigin:myPoint];
    [containerView replaceSubview:oldSubview with:newSubview];   
+   [containerView setHidden:FALSE];   
 }
 
 
@@ -868,6 +950,9 @@
    {
 //      Session *s = [self clickedSessionInDrawer];
 //      if ([s status] == @"
+   }
+   else if (menu == hostsContextMenu)
+   {
    }
    else
    {

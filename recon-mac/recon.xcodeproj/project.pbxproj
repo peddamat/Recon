@@ -110,6 +110,7 @@
 		8C79F67E1004235900A4648B /* button_pane_show_icon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = button_pane_show_icon.tif; path = Resources/button_pane_show_icon.tif; sourceTree = "<group>"; };
 		8C79F67F1004235900A4648B /* button_pane_hide_icon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = button_pane_hide_icon.tif; path = Resources/button_pane_hide_icon.tif; sourceTree = "<group>"; };
 		8C79F7891004908600A4648B /* MyDocument.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MyDocument.xib; path = Resources/MyDocument.xib; sourceTree = "<group>"; };
+		8C7E9C731014D34E00762319 /* NSManagedObjectContext-helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext-helper.h"; path = "Source/NSManagedObjectContext-helper.h"; sourceTree = "<group>"; };
 		8CAA122F100A078B0084C6D5 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Profile.h; path = "Source/Managed Objects/Profile.h"; sourceTree = "<group>"; };
 		8CAA1230100A078B0084C6D5 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Profile.m; path = "Source/Managed Objects/Profile.m"; sourceTree = "<group>"; };
 		8CC32788100CDCA700483939 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
@@ -203,6 +204,7 @@
 				8C79E2B30FFCF0FF00A4648B /* PrefsController.m */,
 				8C79F30910033EF200A4648B /* SPGrowlController.h */,
 				8C79F30A10033EF200A4648B /* SPGrowlController.m */,
+				8C7E9C731014D34E00762319 /* NSManagedObjectContext-helper.h */,
 				8CC3297F100DEE3E00483939 /* Network Assistant */,
 			);
 			name = Classes;
