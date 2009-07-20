@@ -46,21 +46,6 @@
        
        interfacesDictionary = [[NSMutableDictionary alloc] init];
        
-       NSFileManager *fileManager;
-       NSString *applicationSupportFolder = nil;
-       NSURL *url;
-       NSError *error;
-       
-       fileManager = [NSFileManager defaultManager];
-       applicationSupportFolder = [PrefsController applicationSupportFolder];
-       if ( ![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL] ) {
-          [fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
-       }
-       
-       url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Library.sessions"]];       
-  
-       NSLog(@"MyDocument: Persistent Store URL: %@",url);
-       [self configurePersistentStoreCoordinatorForURL:url ofType:NSSQLiteStoreType error:&error];              
     }
     return self;
 }
@@ -98,18 +83,16 @@
     [super windowControllerDidLoadNib:windowController];
 
    [NSApp setServicesProvider:self];
-   
-   // Register user defaults
-//   [self registerDefaults];
-   
-   // If this is the first run, show Preferences window
-//   if ([self hasRun] == FALSE) {
-//      [self setRun];      
-//      NSLog(@"Hasn't run");      
-//   }
-      
+
+   // Grab a copy of the Prefs Controller
    prefsController = [PrefsController sharedPrefsController];
-   [prefsController displayOnFirstRun];
+   
+   NSError *error;
+   NSURL *url = [NSURL fileURLWithPath: [[prefsController reconSupportFolder]
+                                  stringByAppendingPathComponent: @"Library.sessions"]];       
+   
+   // Set a custom Persistent Store location
+   [self configurePersistentStoreCoordinatorForURL:url ofType:NSSQLiteStoreType error:&error];              
    
    // Add some default profiles   
    [self addProfileDefaults];   
@@ -624,10 +607,9 @@
    }
 }
 - (IBAction) sessionDrawerShowInFinder:(id)sender
-{
+{   
    // Retrieve currently selected session
-   NSString *savedSessionsDirectory = [PrefsController applicationSessionsFolder];  
-   NSLog(@"%@", [self clickedSessionInDrawer]);
+   NSString *savedSessionsDirectory = [prefsController reconSessionFolder];
    [[NSWorkspace sharedWorkspace] openFile:[savedSessionsDirectory stringByAppendingPathComponent:[[self clickedSessionInDrawer] UUID]]
                            withApplication:@"Finder"];
 
@@ -706,7 +688,7 @@
    
    if (selectedSession != nil) {
       // Retrieve currently selected profile
-      Profile *storedProfile = [selectedSession profile];
+//      Profile *storedProfile = [selectedSession profile];
 //      [profileController setContent:[NSArray arrayWithObject:storedProfile]];
       
       //   [[profileController selectedObjects] lastObject];
@@ -728,6 +710,9 @@
 }
 - (IBAction) toggleSessionsDrawer:(id)sender {
    [sessionsDrawer toggle:self];    
+}
+- (IBAction) toggleProfilesDrawer:(id)sender {
+   [profilesDrawer toggle:self];    
 }
 
 // -------------------------------------------------------------------------------
@@ -754,7 +739,7 @@
       else 
       {
          enabled = YES;
-         Session *s = [self clickedSessionInDrawer];
+//         Session *s = [self clickedSessionInDrawer];
          
 //         // Only enable Abort if session is running
 //         if (
@@ -796,7 +781,7 @@
    // TODO: If Sessions Context Menu
    if (menu == sessionsContextMenu) 
    {
-      Session *s = [self clickedSessionInDrawer];
+//      Session *s = [self clickedSessionInDrawer];
 //      if ([s status] == @"
    }
    else

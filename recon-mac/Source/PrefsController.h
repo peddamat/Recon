@@ -38,8 +38,11 @@
 + (NSString *)applicationSessionsFolder;
 + (NSString *)applicationSupportFolder;
 
+- (NSString *)reconSupportFolder;
+- (NSString *)reconSessionFolder;
+
 - (void)registerDefaults;
-- (void)checkPrefs;
+- (void)checkDirectories;
 
 - (IBAction)showPrefWindow:(id)sender;
 - (IBAction)endPrefWindow:(id)sender;
@@ -49,16 +52,13 @@
 + (BOOL)rootNmap;
 + (BOOL)unrootNmap;
 
-+ (NSString *)nmapBinary;
-+ (NSString *)logDirectory;
-
 - (BOOL)hasRun;
 - (void)setRun;
 
 // Add methods to retrieve nmap binary
 //   and log directory
 
-- (void) checkPrefs;
+- (void) checkDirectories;
 
 - (IBAction)browseNmapBinary:(id)sender;
 - (IBAction)browseSessionDirectory:(id)sender;

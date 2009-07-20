@@ -154,6 +154,7 @@ extern NSString * const BAFSavedSessionsDirectory;
 - (IBAction) toggleResults:(id)sender;
 
 - (IBAction) toggleSessionsDrawer:(id)sender;
+- (IBAction) toggleProfilesDrawer:(id)sender;
 
 - (void)addQueuedSessions;
 

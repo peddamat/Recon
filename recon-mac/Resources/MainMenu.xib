@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="57"/>
+			<integer value="424"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -780,7 +780,7 @@
 								</object>
 								<object class="NSMenuItem" id="698799749">
 									<reference key="NSMenu" ref="200699227"/>
-									<string key="NSTitle">Toggle Profile List</string>
+									<string key="NSTitle">Toggle Profiles Drawer</string>
 									<string key="NSKeyEquiv">r</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1297,14 +1297,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleProfileView:</string>
-						<reference key="source" ref="569835777"/>
-						<reference key="destination" ref="698799749"/>
-					</object>
-					<int key="connectionID">460</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">switchToScanView:</string>
 						<reference key="source" ref="569835777"/>
 						<reference key="destination" ref="1071079495"/>
@@ -1326,6 +1318,14 @@
 						<reference key="destination" ref="930243026"/>
 					</object>
 					<int key="connectionID">468</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleProfilesDrawer:</string>
+						<reference key="source" ref="569835777"/>
+						<reference key="destination" ref="698799749"/>
+					</object>
+					<int key="connectionID">469</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2320,7 +2320,7 @@
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
-					<string>{{604, 763}, {197, 73}}</string>
+					<string>{{626, 757}, {197, 73}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2331,12 +2331,12 @@
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
-					<string>{{360, 830}, {398, 20}}</string>
+					<string>{{489, 836}, {398, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
-					<string>{{576, 587}, {259, 243}}</string>
+					<string>{{705, 593}, {259, 243}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2417,7 +2417,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">468</int>
+			<int key="maxID">469</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2452,8 +2452,10 @@
 							<string>sessionDrawerRunCopy:</string>
 							<string>sessionDrawerShowInFinder:</string>
 							<string>setuidNmap:</string>
+							<string>showPrefWindow:</string>
 							<string>switchToInspectorView:</string>
 							<string>switchToScanView:</string>
+							<string>toggleProfilesDrawer:</string>
 							<string>toggleResults:</string>
 							<string>toggleSessionsDrawer:</string>
 							<string>toggleSettings:</string>
@@ -2482,12 +2484,15 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>hostsInSessionController</string>
 							<string>hostsTableView</string>
 							<string>interfacesPopUp</string>
 							<string>mainTabView</string>
@@ -2499,8 +2504,11 @@
 							<string>menuSettings</string>
 							<string>nmapCommandTextField</string>
 							<string>nonTcpScanPopUp</string>
+							<string>osesInSessionController</string>
+							<string>osesTableView</string>
 							<string>portsInHostController</string>
-							<string>prefWindow</string>
+							<string>portsInSessionController</string>
+							<string>portsTableView</string>
 							<string>profileButton</string>
 							<string>profileController</string>
 							<string>profileView</string>
@@ -2527,6 +2535,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSArrayController</string>
 							<string>NSTableView</string>
 							<string>NSPopUpButton</string>
 							<string>NSTabView</string>
@@ -2539,7 +2548,10 @@
 							<string>NSTextField</string>
 							<string>NSPopUpButton</string>
 							<string>NSArrayController</string>
-							<string>NSWindow</string>
+							<string>NSTableView</string>
+							<string>NSArrayController</string>
+							<string>NSArrayController</string>
+							<string>NSTableView</string>
 							<string>BWAnchoredButton</string>
 							<string>NSTreeController</string>
 							<string>BWSplitView</string>
@@ -2572,7 +2584,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">PrefsController</string>
-					<string key="superclassName">NSObject</string>
+					<string key="superclassName">NSWindowController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
@@ -2597,7 +2609,6 @@
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>autoSetuidButton</string>
-							<string>mainView</string>
 							<string>mainWindow</string>
 							<string>nmapBinaryTextField</string>
 							<string>prefWindow</string>
@@ -2607,7 +2618,6 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSButton</string>
-							<string>NSView</string>
 							<string>NSWindow</string>
 							<string>NSTextField</string>
 							<string>NSWindow</string>

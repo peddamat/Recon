@@ -41,13 +41,15 @@ static PrefsController *sharedPrefsController = nil;
 {
    if (self = [super init])
    {
+      // The order that these occur matter...
       [self registerDefaults];
       [self readUserDefaults];
       [self checkPermsOnNmap];
+      [self checkDirectories];
+      [self displayOnFirstRun];      
    }
    
    return self;
-   
 }
 
 - (void)awakeFromNib
@@ -62,7 +64,7 @@ static PrefsController *sharedPrefsController = nil;
    NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];
    
    NSString *nmapBinaryLocation = @"/usr/local/bin/nmap";
-   NSString *savedSessionsDirectory = [PrefsController applicationSessionsFolder];
+   NSString *savedSessionsDirectory = [PrefsController applicationSupportFolder];
    
    // Put defaults in the dictionary
    [defaultValues setObject:[NSNumber numberWithBool:NO]
@@ -79,6 +81,18 @@ static PrefsController *sharedPrefsController = nil;
    
    NSLog(@"PrefsController: Registered defaults");
 }
+
+// -------------------------------------------------------------------------------
+//	readUserDefaults:
+// -------------------------------------------------------------------------------
+- (void)readUserDefaults 
+{   
+   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+   self.autoSetuid = [defaults boolForKey:BAFAutoSetuid]; 
+   self.nmapBinary = (NSString *)[defaults objectForKey:BAFNmapBinaryLocation]; 
+   self.sessionDirectory = (NSString *)[defaults objectForKey:BAFSavedSessionDirectory];   
+}
+
 
 // -------------------------------------------------------------------------------
 //	Preference Window key-handlers
@@ -113,20 +127,17 @@ static PrefsController *sharedPrefsController = nil;
    [prefWindow orderOut:sender];
 }
 
-
 // -------------------------------------------------------------------------------
-//	checkPrefs: 
+//	checkDirectories: 
 // -------------------------------------------------------------------------------
-- (void)checkPrefs
+- (void)checkDirectories
 {   
    // Verify nmap binary location points to valid nmap binary
    
    // Create application support directory, if needed
-   NSFileManager *fileManager;
-   NSString *applicationSupportFolder = nil;
-   
-   fileManager = [NSFileManager defaultManager];
-   applicationSupportFolder = [PrefsController applicationSupportFolder];
+   NSFileManager *fileManager = [NSFileManager defaultManager];
+   NSString *applicationSupportFolder = [self reconSupportFolder];   
+
    if ( ![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL] ) {
       [fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
    }
@@ -134,17 +145,12 @@ static PrefsController *sharedPrefsController = nil;
    // Create sessions folder, if needed
    NSString *applicationSessionsFolder = nil;
    
-   fileManager = [NSFileManager defaultManager];
-   applicationSessionsFolder = [PrefsController applicationSessionsFolder];
+   applicationSessionsFolder = [self reconSessionFolder];      
    if ( ![fileManager fileExistsAtPath:applicationSessionsFolder isDirectory:NULL] ) {
       [fileManager createDirectoryAtPath:applicationSessionsFolder attributes:nil];
    }
    
-   // If log directory is valid, check for saved sessions
-   
-   // If there are saved sessions, load them into the sessions controller
-   
-   NSLog(@"PrefsController: checkPrefs!");   
+   NSLog(@"PrefsController: checkDirectories!");   
 }
 
 // -------------------------------------------------------------------------------
@@ -252,17 +258,6 @@ static PrefsController *sharedPrefsController = nil;
       [self performSelector:@selector(showPrefWindow:) withObject:self afterDelay:0.5];
    }      
    
-}
-
-// -------------------------------------------------------------------------------
-//	readUserDefaults:
-// -------------------------------------------------------------------------------
-- (void)readUserDefaults 
-{   
-   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-   self.autoSetuid = [defaults boolForKey:BAFAutoSetuid]; 
-   self.nmapBinary = (NSString *)[defaults objectForKey:BAFNmapBinaryLocation]; 
-   self.sessionDirectory = (NSString *)[defaults objectForKey:BAFSavedSessionDirectory];   
 }
 
 // -------------------------------------------------------------------------------
@@ -391,6 +386,13 @@ static PrefsController *sharedPrefsController = nil;
    return [[PrefsController applicationSupportFolder] stringByAppendingPathComponent:@"Sessions"];
 }
 
+- (NSString *)reconSupportFolder {
+   return self.sessionDirectory;
+}
+
+- (NSString *)reconSessionFolder {
+   return [sessionDirectory stringByAppendingPathComponent:@"Sessions"];
+}
 
 // -------------------------------------------------------------------------------
 //	hasRun:

@@ -12742,14 +12742,6 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 					<int key="connectionID">103450</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">prefWindow</string>
-						<reference key="source" ref="488872867"/>
-						<reference key="destination" ref="743174752"/>
-					</object>
-					<int key="connectionID">103451</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">endPrefWindow:</string>
 						<reference key="source" ref="36127416"/>
@@ -12868,14 +12860,6 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 						<reference key="destination" ref="827802848"/>
 					</object>
 					<int key="connectionID">103523</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">firstRunPrefView</string>
-						<reference key="source" ref="36127416"/>
-						<reference key="destination" ref="555855957"/>
-					</object>
-					<int key="connectionID">103585</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -20293,8 +20277,8 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{577, 101}, {719, 432}}</string>
-					<string>{{577, 101}, {719, 432}}</string>
+					<string>{{421, 101}, {719, 432}}</string>
+					<string>{{421, 101}, {719, 432}}</string>
 					<reference ref="9"/>
 					<reference ref="9"/>
 					<string>{131.131, 86}</string>
@@ -20360,6 +20344,7 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 							<string>showPrefWindow:</string>
 							<string>switchToInspectorView:</string>
 							<string>switchToScanView:</string>
+							<string>toggleProfilesDrawer:</string>
 							<string>toggleResults:</string>
 							<string>toggleSessionsDrawer:</string>
 							<string>toggleSettings:</string>
@@ -20367,6 +20352,7 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -20412,6 +20398,7 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 							<string>portsInHostController</string>
 							<string>portsInSessionController</string>
 							<string>portsTableView</string>
+							<string>prefWindow</string>
 							<string>profileButton</string>
 							<string>profileController</string>
 							<string>profileView</string>
@@ -20455,6 +20442,7 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 							<string>NSArrayController</string>
 							<string>NSArrayController</string>
 							<string>NSTableView</string>
+							<string>NSWindow</string>
 							<string>BWAnchoredButton</string>
 							<string>NSTreeController</string>
 							<string>BWSplitView</string>
@@ -20568,6 +20556,7 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>autoSetuidButton</string>
+							<string>firstRunPrefView</string>
 							<string>mainWindow</string>
 							<string>nmapBinaryTextField</string>
 							<string>prefWindow</string>
@@ -20577,6 +20566,7 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSButton</string>
+							<string>NSView</string>
 							<string>NSWindow</string>
 							<string>NSTextField</string>
 							<string>NSWindow</string>
