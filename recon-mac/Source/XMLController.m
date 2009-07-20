@@ -91,6 +91,7 @@
       NSString *progress = [attributeDict objectForKey:@"percent"];
       [currentSession setProgress:[NSNumber numberWithFloat:[progress floatValue]]];
       [currentSession setStatus:[attributeDict objectForKey:@"task"]];
+//      NSLog(@"XMLController: Progress: %@", progress);
    }
    
    if ( onlyReadProgress == TRUE )

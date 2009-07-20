@@ -31,6 +31,8 @@
    BOOL inOsclass;
    BOOL inOsmatch;
    BOOL onlyReadProgress;
+   
+   float tempProgress;
 }
 
 

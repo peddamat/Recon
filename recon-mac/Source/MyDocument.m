@@ -370,6 +370,7 @@
    for (id object in array)
    {
       [object setStatus:@"Aborted"];
+      [object setProgress:[NSNumber numberWithFloat:0.0]];
    }
    
 }
@@ -401,21 +402,105 @@
          profileParent = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
          [profileParent setValue: @"Defaults" forKey: @"name"]; 
          [profileParent setIsEnabled:NO];
-         
+                  
          Profile *profile = nil; 
          
          // Add a few defaults
          profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
-         [profile setValue: @"Ping Scan" forKey: @"name"]; 
-         [profile setEnableAggressive:[NSNumber numberWithInt:1]];
-         
+         [profile setValue: @"Intense Scan" forKey: @"name"]; 
+         [profile setTimingTemplateTag:[NSNumber numberWithInt:4]];      
+         [profile setEnableAggressive:[NSNumber numberWithInt:1]];         
+         [profile setIcmpPing:[NSNumber numberWithBool:TRUE]];
+         [profile setSynPing:[NSNumber numberWithBool:TRUE]];
+         [profile setSynPingString:@"22,25,80"];
+         [profile setAckPing:[NSNumber numberWithBool:TRUE]];
+         [profile setAckPingString:@"21,23,80,3389"];
+         [profile setValue:profileParent forKey:@"parent"];
+
+         profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+         [profile setValue: @"Intense Scan+UDP" forKey: @"name"]; 
+         [profile setTimingTemplateTag:[NSNumber numberWithInt:4]];      
+         [profile setTcpScanTag:[NSNumber numberWithInt:5]];      
+         [profile setNonTcpScanTag:[NSNumber numberWithInt:1]];      
+         [profile setEnableAggressive:[NSNumber numberWithInt:1]];         
+         [profile setIcmpPing:[NSNumber numberWithBool:TRUE]];
+         [profile setSynPing:[NSNumber numberWithBool:TRUE]];
+         [profile setSynPingString:@"22,25,80"];
+         [profile setAckPing:[NSNumber numberWithBool:TRUE]];
+         [profile setAckPingString:@"21,23,80,3389"];
          [profile setValue:profileParent forKey:@"parent"];
          
          profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
-         [profile setValue: @"OS Detection" forKey: @"name"]; 
+         [profile setValue: @"Intense Scan+TCP" forKey: @"name"]; 
+         [profile setPortsToScan:[NSNumber numberWithBool:TRUE]];
+         [profile setPortsToScanString:@"1-65535"];
+         [profile setTimingTemplateTag:[NSNumber numberWithInt:4]];      
          [profile setEnableAggressive:[NSNumber numberWithInt:1]];         
+         [profile setIcmpPing:[NSNumber numberWithBool:TRUE]];
+         [profile setSynPing:[NSNumber numberWithBool:TRUE]];
+         [profile setSynPingString:@"22,25,80"];
+         [profile setAckPing:[NSNumber numberWithBool:TRUE]];
+         [profile setAckPingString:@"21,23,80,3389"];
+         [profile setValue:profileParent forKey:@"parent"];
+
+         profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+         [profile setValue: @"Intense Scan-Ping" forKey: @"name"]; 
+         [profile setTimingTemplateTag:[NSNumber numberWithInt:4]];      
+         [profile setEnableAggressive:[NSNumber numberWithInt:1]];         
+         [profile setDontPing:[NSNumber numberWithBool:TRUE]];
+         [profile setValue:profileParent forKey:@"parent"];         
+         
+         profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+         [profile setValue: @"Ping Scan" forKey: @"name"]; 
+         [profile setNonTcpScanTag:[NSNumber numberWithInt:4]];
+         [profile setIcmpPing:[NSNumber numberWithBool:TRUE]];
+         [profile setAckPing:[NSNumber numberWithBool:TRUE]];
+         [profile setAckPingString:@"21,23,80,3389"];
          [profile setValue:profileParent forKey:@"parent"];
          
+         profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+         [profile setValue: @"Quick Scan" forKey: @"name"]; 
+         [profile setTimingTemplateTag:[NSNumber numberWithInt:4]];
+         [profile setFastScan:[NSNumber numberWithBool:TRUE]];
+         [profile setValue:profileParent forKey:@"parent"];
+         
+         profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+         [profile setValue: @"Quick Scan+" forKey: @"name"]; 
+         [profile setVersionDetection:[NSNumber numberWithBool:TRUE]];
+         [profile setTimingTemplateTag:[NSNumber numberWithInt:4]];
+         [profile setOsDetection:[NSNumber numberWithBool:TRUE]];
+         [profile setFastScan:[NSNumber numberWithBool:TRUE]];
+         [profile setValue:profileParent forKey:@"parent"];
+         // TODO: add --version-light
+         
+         profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+         [profile setValue: @"Quick Traceroute" forKey: @"name"]; 
+         [profile setNonTcpScanTag:[NSNumber numberWithInt:4]];
+         [profile setIcmpPing:[NSNumber numberWithBool:TRUE]];
+         [profile setSynPing:[NSNumber numberWithBool:TRUE]];
+         [profile setSynPingString:@"22,25,80"];         
+         [profile setAckPing:[NSNumber numberWithBool:TRUE]];
+         [profile setAckPingString:@"21,23,80,3389"];
+         [profile setUdpProbe:[NSNumber numberWithBool:TRUE]];
+         [profile setIpprotoProbe:[NSNumber numberWithBool:TRUE]];
+         [profile setTraceRoute:[NSNumber numberWithBool:TRUE]];
+         [profile setValue:profileParent forKey:@"parent"];
+         
+         profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+         [profile setValue: @"Comprehensive" forKey: @"name"]; 
+         [profile setTcpScanTag:[NSNumber numberWithInt:5]];               
+         [profile setNonTcpScanTag:[NSNumber numberWithInt:1]];
+         [profile setIcmpPing:[NSNumber numberWithBool:TRUE]];
+         [profile setIcmpTimeStamp:[NSNumber numberWithBool:TRUE]];
+         [profile setSynPing:[NSNumber numberWithBool:TRUE]];
+         [profile setSynPingString:@"21,22,23,25,80,113,31339"];         
+         [profile setAckPing:[NSNumber numberWithBool:TRUE]];
+         [profile setAckPingString:@"80,113,443,10042"];
+         [profile setUdpProbe:[NSNumber numberWithBool:TRUE]];
+         [profile setIpprotoProbe:[NSNumber numberWithBool:TRUE]];
+         [profile setTraceRoute:[NSNumber numberWithBool:TRUE]];
+         // TODO: add --script-all
+         [profile setValue:profileParent forKey:@"parent"];         
          
          // Add Saved Sessions parent folder
          profileParent = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 

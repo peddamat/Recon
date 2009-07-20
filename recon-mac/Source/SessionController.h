@@ -66,4 +66,6 @@
 
 + (NSString *) stringWithUUID;
 
+- (void)readProgress:(NSTimer *)aTimer;
+
 @end

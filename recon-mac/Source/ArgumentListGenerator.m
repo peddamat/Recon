@@ -50,8 +50,8 @@
                         @"--scan-delay",@"scanDelay",
                         @"-p",@"portsToScan",
                         @"-iR",@"scanRandom",
-                        @"--script-args",@"scriptArgs",
-                        @"--script",@"scriptsToRun",
+                        @"--script-args=",@"scriptArgs",
+                        @"--script=",@"scriptsToRun",
                         @"--ttl",@"setIPv4TTL",
                         @"-e",@"setNetworkInterface",
                         @"-S",@"setSourceIP",
@@ -184,13 +184,30 @@
    {
       if([[profileAttributes valueForKey:dictKey] compare:numYes])
       {
-         // First add argument flag
          dictValue = [nmapArgsString valueForKey:dictKey];
-         [nmapArgs addObject:dictValue];
+         
+         //  NOTE: Nmap is picky with spaces after arguments...
+         if ((dictValue == @"-PA") ||
+            (dictValue == @"-PS") ||
+            (dictValue == @"-PU") ||
+            (dictValue == @"-PO") ||
+            (dictValue == @"-p"))
+         {
+            id dictValue2 = [profile valueForKey:[dictKey stringByAppendingString:@"String"]];
+            if (dictValue2 != nil)
+               [nmapArgs addObject:[dictValue stringByAppendingString:dictValue2]];            
+            else
+               [nmapArgs addObject:dictValue];
+         }
+         else
+         {
+            [nmapArgs addObject:dictValue];
 
-         // Next, add user string from profile
-         dictValue = [profile valueForKey:[dictKey stringByAppendingString:@"String"]];
-         [nmapArgs addObject:dictValue];   
+            // Next, add user string from profile
+            dictValue = [profile valueForKey:[dictKey stringByAppendingString:@"String"]];
+            [nmapArgs addObject:dictValue];   
+            
+         }
       }      
    }   
    

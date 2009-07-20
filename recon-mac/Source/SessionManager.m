@@ -175,7 +175,6 @@ static SessionManager *sharedSessionManager = nil;
    if ([sessionControllers count] > 0)
    {
       self.processingQueue = TRUE;      
-      NSLog(@"Pinng");      
       [self launchNextSession];
    }
    else

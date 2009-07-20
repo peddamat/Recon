@@ -246,22 +246,70 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    [session setStatus:@"Running"];
    
    // Setup a timer to read the progress
-   resultsTimer = [[NSTimer scheduledTimerWithTimeInterval:0.5
+   resultsTimer = [[NSTimer scheduledTimerWithTimeInterval:0.8
                                              target:self
-                                           selector:@selector(checkProgress:)
+                                           selector:@selector(readProgress:)
                                            userInfo:nil
                                             repeats:YES] retain];   
    
    [nmapController startScan];
 }
 
+
 // -------------------------------------------------------------------------------
-//	checkProgress: Called by the resultsTimer
+//	readProgress: Called by the resultsTimer.  Parses nmap-output.xml for 'taskprogress'
+//               to update the status bar in the Sessions Drawer.
+// -------------------------------------------------------------------------------
+- (void)readProgress:(NSTimer *)aTimer
+{
+   NSTask *task = [[NSTask alloc] init];
+   [task setLaunchPath:@"/bin/tcsh"];     // For some reason, using /bin/sh screws up the debug console   
+   NSString *p = [NSString stringWithFormat:@"cat '%@' | grep taskprogress | tail -1 | awk -F '\"' '{print $2 \",\" $6}'", sessionOutputFile];
+   [task setArguments:[NSArray arrayWithObjects: @"-c", p, nil]];
+   
+   // Create the pipe to read from
+   NSPipe *outPipe = [[NSPipe alloc] init];
+   [task setStandardOutput:outPipe];
+   [outPipe release];
+   
+   // Start the process
+   [task launch];
+   
+   // Read the output
+   NSData *data = [[outPipe fileHandleForReading]
+                   readDataToEndOfFile];
+   
+   // Make sure the task terminates normally
+   [task waitUntilExit];
+   [task release];
+   
+   // Convert to a string
+   NSString *aString = [[NSString alloc] initWithData:data
+                                             encoding:NSUTF8StringEncoding];
+   
+   NSArray *a = [aString componentsSeparatedByString:@","];
+   
+   if ([a count] == 2)
+   {
+      NSString *a1 = [a objectAtIndex:0];
+      NSString *a2 = [a objectAtIndex:1];
+      
+      if ((a1 != nil) && (a2 != nil))
+      {
+         [session setStatus:[a objectAtIndex:0]];
+         [session setProgress:[NSNumber numberWithFloat:[[a objectAtIndex:1] floatValue]]];
+      }
+//      NSLog(@"%@ \\ %@", [a objectAtIndex:0], [a objectAtIndex:1]);      
+   }
+}
+
+// -------------------------------------------------------------------------------
+//	DEPRECATED: checkProgress: Called by the resultsTimer
 // -------------------------------------------------------------------------------
 - (void)checkProgress:(NSTimer *)aTimer
 {
    // Call XMLController with session directory and managedObjectContext
-   [xmlController parseXMLFile:sessionOutputFile inSession:session onlyReadProgress:TRUE];      
+//   [xmlController parseXMLFile:sessionOutputFile inSession:session onlyReadProgress:TRUE];      
    
 //   NSLog(@"SessionController: Percent: %@", [session progress]);
 }
