@@ -34,7 +34,7 @@
 {
    if (self = [super init])
    {
-      connections = [[NSMutableArray alloc] init];          
+      connections = [[NSMutableArray alloc] init];             
    }
    
    return self;
@@ -46,6 +46,29 @@
    [timer invalidate];
    [timer release];
    [super dealloc];
+}
+
+
+- (IBAction)changeInspectorTask:(id)sender
+{
+   NSLog(@"NetstatController: changeInspectorTask: %d", [sender tag]);
+   
+   if ([[sender title] hasPrefix:@"See"])
+   {
+      [self refreshConnectionsList:self];
+      [regularHostsScrollView setHidden:TRUE];
+      [netstatHostsScrollView setHidden:FALSE];
+   }
+   else
+   {
+      [regularHostsScrollView setHidden:FALSE];
+      [netstatHostsScrollView setHidden:TRUE];      
+   }
+   
+   if ([[sender title] hasPrefix:@"Find computers"])
+   {
+      [self searchLocalNetwork:self];
+   }
 }
 
 // -------------------------------------------------------------------------------
@@ -112,10 +135,18 @@
 
    // Queue and launch the session
    [sessionManager queueExistingSession:session];
-   [sessionManager launchSession:session];
+//   [sessionManager launchSession:session];
 
    // The interface needs the new session to be selected
    [sessionsController setSelectedObjects:[NSArray arrayWithObject:session]];
+}
+
+- (IBAction)launchScan:(id)sender
+{
+   // Grab the Session Manager object
+   SessionManager *sessionManager = [SessionManager sharedSessionManager];
+   
+   [sessionManager processQueue];   
 }
 
 - (NSPredicate *)testy

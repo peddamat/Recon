@@ -31,10 +31,15 @@
    Connection *selectedConnection;
    NSTimer *timer;
    
+   IBOutlet NSScrollView *regularHostsScrollView;
+   IBOutlet NSScrollView *netstatHostsScrollView;
 }
 
 @property (readonly) NSPredicate *testy;
 @property (readwrite, retain)NSMutableArray *connections;
+
+- (IBAction)changeInspectorTask:(id)sender;
+- (IBAction)launchScan:(id)sender;
 
 // Choices Tab
 - (IBAction)chooseTask:(id)sender;

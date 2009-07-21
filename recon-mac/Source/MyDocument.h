@@ -110,6 +110,8 @@ extern NSString * const BAFSavedSessionsDirectory;
    NSTimer *nmapErrorTimer;
    
    NSPredicate *testy;   
+   
+   IBOutlet NSWindow *testWindow;
 }
 
 @property (readonly) NSArray *osSortDescriptor;
@@ -164,6 +166,7 @@ extern NSString * const BAFSavedSessionsDirectory;
 - (void)addProfileDefaults;
 //- (void)readUserDefaults;
 - (IBAction)addProfile:(id)sender;
+- (IBAction)deleteProfile:(id)sender;
 
 - (IBAction)setuidNmap:(id)sender;
 - (IBAction)unsetuidNmap:(id)sender;
@@ -171,5 +174,7 @@ extern NSString * const BAFSavedSessionsDirectory;
 - (void)expandProfileView:(NSTimer *)aTimer;
 
 - (IBAction)showPrefWindow:(id)sender;
+
+- (void)createHostsMenu;
 
 @end

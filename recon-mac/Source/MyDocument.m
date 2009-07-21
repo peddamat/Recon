@@ -376,8 +376,7 @@
                                        initWithKey:@"name" ascending:YES];
 
    NSMutableArray *sa = [NSMutableArray arrayWithArray:array];
-   [sa sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    
+   [sa sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];    
    [sortDescriptor release];
 
    NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:@"Queue with"
@@ -398,7 +397,6 @@
    }
    [hostsContextMenu addItem:mi];
 }
-
 
 // -------------------------------------------------------------------------------
 //	handleHostsMenuClick: 
@@ -608,6 +606,26 @@
 }
 
 // -------------------------------------------------------------------------------
+//	deleteProfile: TODO: This is teh b0rk.
+// -------------------------------------------------------------------------------
+- (IBAction)deleteProfile:(id)sender
+{
+   // Get selected profile
+   Profile *selectedProfile = [[profileController selectedObjects] lastObject];
+   
+   // Make sure it's not a Default
+   if ((selectedProfile.parent.name == @"Defaults") || (selectedProfile.name == @"Defaults")) {
+      NSLog(@"FUCKO");
+      return;
+   }
+   else {
+      NSLog(@"SHIT");
+      // Delete profile
+      [[self managedObjectContext] deleteObject:selectedProfile];
+   }
+}
+
+// -------------------------------------------------------------------------------
 //	View togglers
 // -------------------------------------------------------------------------------
 
@@ -616,10 +634,13 @@
 // -------------------------------------------------------------------------------
 - (IBAction)switchToScanView:(id)sender
 {   
+   [NSApp endSheet:testWindow];
+   [testWindow orderOut:sender];
+
    [sessionsDrawer open];
    [profilesDrawer open];   
    
-   [self swapView:mainsubView2 withSubView:mainsubView inContaningView:mainView];   
+//   [self swapView:mainsubView2 withSubView:mainsubView inContaningView:mainView];   
    
 }
 
@@ -628,10 +649,16 @@
 // -------------------------------------------------------------------------------
 - (IBAction)switchToInspectorView:(id)sender
 {
+   [NSApp beginSheet:testWindow
+      modalForWindow:[mainView window]
+       modalDelegate:self
+      didEndSelector:NULL
+         contextInfo:NULL];      
+   
    [sessionsDrawer close];
    [profilesDrawer close];
    
-   [self swapView:mainsubView withSubView:mainsubView2 inContaningView:mainView];
+//   [self swapView:mainsubView withSubView:mainsubView2 inContaningView:mainView];
 }
 
 // -------------------------------------------------------------------------------
@@ -873,9 +900,6 @@
 {
    BOOL enabled = NO;
    
-   
-   NSLog(@"HI: %d", [[hostsInSessionController selectedObjects] count]);
-   
    if (
     ([menuItem action] == @selector(sessionDrawerRun:)) ||
     ([menuItem action] == @selector(sessionDrawerRunCopy:)) ||
@@ -914,7 +938,8 @@
    } 
    else if ([menuItem action] == @selector(handleHostsMenuClick:))
    {
-      if ([[hostsInSessionController selectedObjects] count] == 0)
+//      if ([[hostsInSessionController selectedObjects] count] == 0)
+      if ([hostsTableView clickedRow] == -1)
          enabled = NO;
       else
          enabled = YES;
