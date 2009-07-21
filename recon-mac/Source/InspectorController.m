@@ -36,7 +36,6 @@
    if (self = [super init])
    {
       connections = [[NSMutableArray alloc] init];             
-      [taskSelectionPopUp selectItemAtIndex:0];
       self.autoRefresh = TRUE;
       self.resolveHostnames = FALSE;
    }
@@ -50,6 +49,13 @@
    [timer invalidate];
    [timer release];
    [super dealloc];
+}
+
+- (void)awakeFromNib
+{
+   [taskSelectionPopUp selectItemAtIndex:0];
+   [autoRefreshButton setEnabled:FALSE];
+   [resolveHostnamesButton setEnabled:FALSE];   
 }
 
 // -------------------------------------------------------------------------------
@@ -93,6 +99,7 @@
       [hostsTextField setEnabled:FALSE];
       [hostsTextFieldLabel setEnabled:FALSE];
    }
+   
 }
 
 // -------------------------------------------------------------------------------
