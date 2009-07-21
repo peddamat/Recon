@@ -14,20 +14,32 @@
 
 @interface InspectorController : NSObject {
 
+   
+   // Main PopUpButton at top
    IBOutlet NSPopUpButton *taskSelectionPopUp;
+
+   IBOutlet NSButton *scanButton;
    
    // Find computers mode
+   NSPredicate *testy;      
    SessionManager *SessionManager;
    IBOutlet NSArrayController *sessionsController;
-   NSPredicate *testy;   
    
    // See connected computers mode
+   NSTimer *timer;   
    NSMutableArray *connections;
-   IBOutlet NSArrayController *connectionsController;
+
    Connection *selectedConnection;
-   NSTimer *timer;
-   IBOutlet NSButton *alwaysRefresh;
+   BOOL autoRefresh;
+   BOOL resolveHostnames;
+   BOOL doneRefresh;
+   IBOutlet NSButton *autoRefreshButton;
+   IBOutlet NSButton *resolveHostnamesButton;
+
    
+   IBOutlet NSArrayController *connectionsController;
+   
+   // Text Fields for host entry
    IBOutlet NSTextField *hostsTextField;
    IBOutlet NSTextField *hostsTextFieldLabel;   
    
@@ -35,20 +47,22 @@
    IBOutlet NSScrollView *netstatHostsScrollView;
 }
 
-@property (readonly) NSPredicate *testy;
 @property (readwrite, retain)NSMutableArray *connections;
+@property (readwrite, assign)BOOL autoRefresh;
+@property (readwrite, assign)BOOL resolveHostnames;
 
 - (IBAction)changeInspectorTask:(id)sender;
 - (IBAction)launchScan:(id)sender;
 
-// Find computers Tab
+// Find computers mode
 int bitcount (unsigned int n);
 - (int)cidrForInterface:(NSString *)ifName;
 - (IBAction)searchLocalNetwork:(id)sender;
    
-// Netstat Tab
+// See connected computers mode
 - (IBAction)refreshConnectionsList:(id)sender;
-- (void)autoRefreshConnections;
 - (void)setConnections:(NSMutableArray *)a;
+- (IBAction)clickAutoRefresh:(id)sender;
+- (IBAction)clickResolveHostnames:(id)sender;
 
 @end

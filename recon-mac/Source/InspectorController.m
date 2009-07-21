@@ -28,7 +28,8 @@
 @implementation InspectorController
 
 @synthesize connections;
-@synthesize testy;
+@synthesize autoRefresh;
+@synthesize resolveHostnames;
 
 - (id)init 
 {
@@ -36,6 +37,8 @@
    {
       connections = [[NSMutableArray alloc] init];             
       [taskSelectionPopUp selectItemAtIndex:0];
+      self.autoRefresh = TRUE;
+      self.resolveHostnames = FALSE;
    }
    
    return self;
@@ -56,16 +59,21 @@
 {
    NSLog(@"InspectorController: changeInspectorTask: %d", [sender tag]);
    
+   // I overlayed the Hosts Tableviews for 
    if ([[sender title] hasPrefix:@"See the machines connected"])
    {
+      [scanButton setTitle:@"Refresh"];
       [self refreshConnectionsList:self];
-      [alwaysRefresh setEnabled:TRUE];
+      [autoRefreshButton setEnabled:TRUE];
+      [resolveHostnamesButton setEnabled:TRUE];
       [regularHostsScrollView setHidden:TRUE];
       [netstatHostsScrollView setHidden:FALSE];
    }
    else
    {
-      [alwaysRefresh setEnabled:FALSE];      
+      [scanButton setTitle:@"Scan"];      
+      [autoRefreshButton setEnabled:FALSE];      
+      [resolveHostnamesButton setEnabled:FALSE];      
       [regularHostsScrollView setHidden:FALSE];
       [netstatHostsScrollView setHidden:TRUE];      
    }
@@ -88,6 +96,25 @@
 }
 
 // -------------------------------------------------------------------------------
+//	launchScan: 
+// -------------------------------------------------------------------------------
+- (IBAction)launchScan:(id)sender
+{
+   if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Find computers"])
+   {
+      [self searchLocalNetwork:self];
+      // Grab the Session Manager object
+      SessionManager *sessionManager = [SessionManager sharedSessionManager];
+      
+      [sessionManager processQueue];   
+   }
+   else if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"See the machines"])
+   {
+      [self refreshConnectionsList:self];
+   }
+}
+
+// -------------------------------------------------------------------------------
 //	searchLocalNetwork: Wrapper-function for ping-scanning local subnet
 // -------------------------------------------------------------------------------
 - (IBAction)searchLocalNetwork:(id)sender
@@ -105,28 +132,6 @@
    [sessionManager queueSessionWithProfile:profile 
                                 withTarget:[NSString stringWithFormat:@"192.168.0.1/%d",[self cidrForInterface:@"en0"]]];
 
-}
-
-- (IBAction)launchScan:(id)sender
-{
-   if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Find computers"])
-   {
-      [self searchLocalNetwork:self];
-      // Grab the Session Manager object
-      SessionManager *sessionManager = [SessionManager sharedSessionManager];
-      
-      [sessionManager processQueue];   
-   }
-}
-
-- (NSPredicate *)testy
-{
-   NSLog(@"InspectorController: testy");
-   if (testy == nil) {
-      //testy = [NSPredicate predicateWithFormat: @"UUID == 'generate'"];   
-      testy = nil;
-   }
-   return testy;
 }
 
 // -------------------------------------------------------------------------------
@@ -196,23 +201,28 @@ int bitcount (unsigned int n)
 }
 
 // -------------------------------------------------------------------------------
-//	refreshConnectionsList: 
+//	refreshConnectionsList: TODO: This ain't thread-safe.  Fix this.
 // -------------------------------------------------------------------------------
 - (IBAction)refreshConnectionsList:(id)sender
-{      
+{    
+   doneRefresh = NO;
+   
    NSLog(@"InspectorController: refreshConnectionsList");
       
-   selectedConnection = [[connectionsController selectedObjects] lastObject];
+//   selectedConnection = [[connectionsController selectedObjects] lastObject];
    
-   // Clear array controller
-   [[connectionsController content] removeAllObjects];
+   // Clear array
+   [connections removeAllObjects];
    
    // Prepare a task object
    NSTask *task = [[NSTask alloc] init];
    [task setLaunchPath:@"/bin/tcsh"];     // For some reason, using /bin/sh screws up the debug console   
    
    // Prepare the netstat munging line
-   [task setArguments:[NSArray arrayWithObjects: @"-c", @"netstat -d -n -f inet | grep \"ESTABLISHED\" | grep -v 127 | awk '{print $4, $5, $6 }'", nil]];
+   if (self.resolveHostnames == NO)
+      [task setArguments:[NSArray arrayWithObjects: @"-c", @"netstat -d -n -f inet | grep \"tcp\" | grep -v 127 | awk '{print $4, $5, $6 }'", nil]];
+   else
+      [task setArguments:[NSArray arrayWithObjects: @"-c", @"netstat -d -W -f inet | grep \"tcp\" | grep -v 127 | awk '{print $4, $5, $6 }'", nil]];
    
    // Create the pipe to read from
    NSPipe *outPipe = [[NSPipe alloc] init];
@@ -241,64 +251,97 @@ int bitcount (unsigned int n)
    Connection *c = nil;
    NSMutableArray *a = [[NSMutableArray alloc] init];
    
-   for (int i = 0; i < lineLength; i++)
+   if (self.resolveHostnames == NO)
    {
-      // Perl, how I miss thee...
-      NSArray *p = [[line objectAtIndex:i] componentsSeparatedByString:@" "];
-      NSArray *local = [[p objectAtIndex:0] componentsSeparatedByString:@"."];
-      NSArray *remote = [[p objectAtIndex:1] componentsSeparatedByString:@"."];
-      
-      NSString *localIP = [NSString stringWithFormat:@"%@.%@.%@.%@", 
-                           [local objectAtIndex:0], 
-                           [local objectAtIndex:1], 
-                           [local objectAtIndex:2], 
-                           [local objectAtIndex:3]];
-      NSString *localPort = [local objectAtIndex:4];
+      for (int i = 0; i < lineLength; i++)
+      {
+         // Perl, how I miss thee...
+         NSArray *p = [[line objectAtIndex:i] componentsSeparatedByString:@" "];
+         NSArray *local = [[p objectAtIndex:0] componentsSeparatedByString:@"."];
+         NSArray *remote = [[p objectAtIndex:1] componentsSeparatedByString:@"."];
+         
+         NSString *localIP = [NSString stringWithFormat:@"%@.%@.%@.%@", 
+                              [local objectAtIndex:0], 
+                              [local objectAtIndex:1], 
+                              [local objectAtIndex:2], 
+                              [local objectAtIndex:3]];
+         NSString *localPort = [local objectAtIndex:4];
 
-      NSString *remoteIP = [NSString stringWithFormat:@"%@.%@.%@.%@", 
-                           [remote objectAtIndex:0], 
-                           [remote objectAtIndex:1], 
-                           [remote objectAtIndex:2], 
-                            [remote objectAtIndex:3]];
-      NSString *remotePort = [remote objectAtIndex:4];
-      
-      
-      NSString *status = [p objectAtIndex:2];
+         NSString *remoteIP = [NSString stringWithFormat:@"%@.%@.%@.%@", 
+                              [remote objectAtIndex:0], 
+                              [remote objectAtIndex:1], 
+                              [remote objectAtIndex:2], 
+                               [remote objectAtIndex:3]];
+         NSString *remotePort = [remote objectAtIndex:4];
+         
+         
+         NSString *status = [p objectAtIndex:2];
 
-      c = [[Connection alloc] initWithLocalIP:localIP
-                                 andLocalPort:localPort
-                                  andRemoteIP:remoteIP
-                                andRemotePort:remotePort
-                                    andStatus:status];
-      [a addObject:c];
+         c = [[Connection alloc] initWithLocalIP:localIP
+                                    andLocalPort:localPort
+                                     andRemoteIP:remoteIP
+                                   andRemotePort:remotePort
+                                       andStatus:status];
+         [a addObject:c];
+      }
+   }
+   else
+   {
+      for (int i = 0; i < lineLength; i++)
+      {
+         // Perl, how I miss thee...
+         NSArray *p = [[line objectAtIndex:i] componentsSeparatedByString:@" "];
+         NSArray *local = [[p objectAtIndex:0] componentsSeparatedByString:@"."];
+         NSArray *remote = [[p objectAtIndex:1] componentsSeparatedByString:@"."];
+         
+         NSString *localIP = [[p objectAtIndex:0] stringByReplacingOccurrencesOfString:[local lastObject] 
+                                                                            withString:@""];
+         NSString *localPort = [local lastObject];
+         
+         NSString *remoteIP = [[p objectAtIndex:1] stringByReplacingOccurrencesOfString:[remote lastObject] 
+                                                                            withString:@""]; 
+         NSString *remotePort = [remote lastObject];
+         
+         NSString *status = [p objectAtIndex:2];
+         
+         c = [[Connection alloc] initWithLocalIP:localIP
+                                    andLocalPort:localPort
+                                     andRemoteIP:remoteIP
+                                   andRemotePort:remotePort
+                                       andStatus:status];
+         [a addObject:c];
+      }      
    }
      
    [connectionsController addObjects:a];
    
-   if (selectedConnection != nil)
-      [connectionsController setSelectedObjects:[NSArray arrayWithObject:selectedConnection]];
-   else
-      [connectionsController setSelectionIndex:0];
+//   if (selectedConnection != nil)
+//      [connectionsController setSelectedObjects:[NSArray arrayWithObject:selectedConnection]];
+//   else
+//      [connectionsController setSelectionIndex:0];
    
    // Release the string
    [aString release];
       
-}
-
-- (void)autoRefreshConnections
-{
-   // Setup a timer to auto-refresh list
-   timer = [[NSTimer scheduledTimerWithTimeInterval:1
-                                             target:self
-                                           selector:@selector(checkThem:)
-                                           userInfo:nil
-                                            repeats:YES] retain];
+   doneRefresh = YES;
    
+   if (self.autoRefresh == YES)
+      [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:1];
 }
 
-- (void)checkThem:(NSTimer *)aTimer
+- (IBAction)clickAutoRefresh:(id)sender
 {
+   self.resolveHostnames = NO;
+   
+   if ((self.autoRefresh == YES) && (doneRefresh == YES))
+   {
+      [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:0.01];
+   }
+}
+
+- (IBAction)clickResolveHostnames:(id)sender
+{
+   self.autoRefresh = NO;
    [self refreshConnectionsList:self];
 }
-
 @end

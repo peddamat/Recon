@@ -370,7 +370,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 {
    // Invalidate the progess timer
    [resultsTimer invalidate];   
-   
+
    self.isRunning = FALSE;
    [session setStatus:@"Aborted"];
    [session setProgress:[NSNumber numberWithFloat:0]];
