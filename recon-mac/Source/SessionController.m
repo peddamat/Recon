@@ -116,6 +116,9 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    [session setStatus:@"Queued"];         // Store session status
    session.profile = profileCopy;         // Store session profile
       
+   // Send signals to View to update sorting/selections
+   [context processPendingChanges];
+   
    // Check PrefsController for user-specified sessions directory
 //   NSString *nmapBinary = [PrefsController nmapBinary]       
    

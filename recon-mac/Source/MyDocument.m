@@ -64,7 +64,6 @@
    [nmapErrorTimer release];
    
    [mainsubView release];
-   [mainsubView2 release];   
    [super dealloc];
 }
 
@@ -103,7 +102,7 @@
    [self addQueuedSessions];
    
    // Beauty up the profiles drawer
-   NSSize mySize = {145, 90};
+   NSSize mySize = {155, 90};
    [profilesDrawer setContentSize:mySize];
    [profilesDrawer setTrailingOffset:25];
    
@@ -144,18 +143,13 @@
    [self createHostsMenu];
    
    [mainsubView retain];
-   [mainsubView2 retain];
-   
-   nmapErrorTimer = [[NSTimer scheduledTimerWithTimeInterval:0.1
-                                                      target:self
-                                                    selector:@selector(expandProfileView:)
-                                                    userInfo:nil
-                                                     repeats:YES] retain]; 
+
+   // Expand profile view hack
+   [self performSelector:@selector(expandProfileView:) withObject:self afterDelay:0.1];
 }
 
 - (void)expandProfileView:(NSTimer *)aTimer
 {
-   [nmapErrorTimer invalidate];
    [profilesOutlineView expandItem:nil expandChildren:YES];   
    [profileController setSelectionIndexPath:[NSIndexPath indexPathWithIndex:0]];
 }
@@ -246,7 +240,8 @@
 
 
 // -------------------------------------------------------------------------------
-//	queueSession: Use current state of the selected Profile and queue a session.              
+//	queueSession: Use current state of the selected Profile and queue a session.       
+//
 //   http://arstechnica.com/apple/guides/2009/04/cocoa-dev-the-joy-of-nspredicates-and-matching-strings.ars
 // -------------------------------------------------------------------------------
 - (IBAction)queueSession:(id)sender 
@@ -403,33 +398,40 @@
 // -------------------------------------------------------------------------------
 - (IBAction)handleHostsMenuClick:(id)sender
 {
-   NSLog(@"handleHostsMenuClick: %@", [sender title]);
+   NSLog(@"MyDocument: handleHostsMenuClick: %@", [sender title]);
    
    // If we want to queue selected hosts...
    if ([sender tag] == 10)
    {
-      // Grab the selected hosts from the hostsController
-      NSArray *a = [hostsInSessionController selectedObjects];
-      
-      // Create a Target string based on the hosts ip's
-      NSString *ip = [[a lastObject] ipv4Address];
-      
       // Grab the desired profile...
       NSArray *s = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:
-       @"(name LIKE[c] %@)", [sender title]]; 
+                    @"(name LIKE[c] %@)", [sender title]]; 
       Profile *p = [s lastObject];
       
-      // Hand-craft a Session...
-      Session *session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" 
-                                                       inManagedObjectContext:[self managedObjectContext]];             
-      [session setProfile:p];
-      [session setTarget:ip];
-      [session setStatus:@"Queued"];
-      [session setDate:[NSDate date]];
-      [session setUUID:[SessionController stringWithUUID]];
+      // Grab the selected hosts from the hostsController
+      NSArray *selectedHosts = [hostsInSessionController selectedObjects];
       
-      // Queue session in Session Manager
-      [sessionManager queueExistingSession:session];
+      NSString *hostsIpCSV = [[NSString alloc] init];
+      
+      // Create a comma-seperated string of target ip's
+      if ([selectedHosts count] > 1)
+      {
+         Host *lastHost = [selectedHosts lastObject];
+         
+         for (Host *host in selectedHosts)
+         {
+            if (host == lastHost)
+               break;
+            hostsIpCSV = [hostsIpCSV stringByAppendingFormat:@"%@ ", [host ipv4Address]];
+         }
+      }
+      
+      hostsIpCSV = [hostsIpCSV stringByAppendingString:[[selectedHosts lastObject] ipv4Address]];
+            
+//      // Create a Target string based on the hosts ip's
+//      NSString *ip = [[a lastObject] ipv4Address];
+            
+      [sessionManager queueSessionWithProfile:p withTarget:hostsIpCSV];
    }
 }
 
@@ -574,30 +576,22 @@
 // -------------------------------------------------------------------------------
 - (IBAction)addProfile:(id)sender
 {
-   NSManagedObjectContext *context = [self managedObjectContext];
-   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
-   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile"
-                                             inManagedObjectContext:[self managedObjectContext]];
-   
-   [request setEntity:entity];
-   
-   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = 'User Profiles'"];
-   [request setPredicate:predicate];
-   
-   NSError *error = nil;
-   NSArray *array = [context executeFetchRequest:request error:&error];   
+   NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile"
+                                                             withPredicate:@"name = 'User Profile'"];
    Profile *profileParent = [array lastObject];
    
    if (profileParent == nil)
    {
-      profileParent = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+      profileParent = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
+                                                    inManagedObjectContext:[self managedObjectContext]]; 
       [profileParent setName:@"User Profiles"];
    }
    
    Profile *profile = nil; 
    
    // Add a few defaults
-   profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+   profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
+                                           inManagedObjectContext:[self managedObjectContext]]; 
    [profile setValue: @"New Profile" forKey: @"name"]; 
    [profile setValue:profileParent forKey:@"parent"];
    
@@ -639,9 +633,6 @@
 
    [sessionsDrawer open];
    [profilesDrawer open];   
-   
-//   [self swapView:mainsubView2 withSubView:mainsubView inContaningView:mainView];   
-   
 }
 
 // -------------------------------------------------------------------------------
@@ -657,8 +648,6 @@
    
    [sessionsDrawer close];
    [profilesDrawer close];
-   
-//   [self swapView:mainsubView withSubView:mainsubView2 inContaningView:mainView];
 }
 
 // -------------------------------------------------------------------------------
@@ -719,21 +708,16 @@
 - (IBAction)sessionDrawerRun:(id)sender
 {
    NSLog(@"MyDocument: launching session");
-   int numberOfSelectedRows = [sessionsTableView numberOfSelectedRows];
+   NSArray *selectedSessions = [sessionsController selectedObjects];
    
-   if (numberOfSelectedRows > 1)
-   {
-      NSIndexSet *selectedRows = [sessionsTableView selectedRowIndexes];
-      NSArray *selectedSessions = [[sessionsController arrangedObjects] objectsAtIndexes:selectedRows];   
-            
+   if ([selectedSessions count] > 1)
+   {            
       for (id session in selectedSessions)
          [sessionManager launchSession:session];         
    }
    else 
    {
-      NSInteger clickedRow = [sessionsTableView clickedRow];
-      // Get selected object from sessionsController 
-      [sessionManager launchSession:[[sessionsController arrangedObjects] objectAtIndex:clickedRow]];      
+      [sessionManager launchSession:[selectedSessions lastObject]];
    }
 }
 - (IBAction)sessionDrawerRunCopy:(id)sender
@@ -744,42 +728,32 @@
 {
    NSLog(@"MyDocument: Aborting session");
    
-   int numberOfSelectedRows = [sessionsTableView numberOfSelectedRows];
+   NSArray *selectedSessions = [sessionsController selectedObjects];
    
-   if (numberOfSelectedRows > 1)
-   {
-      NSIndexSet *selectedRows = [sessionsTableView selectedRowIndexes];
-      NSArray *selectedSessions = [[sessionsController arrangedObjects] objectsAtIndexes:selectedRows];   
-      
+   if ([selectedSessions count] > 1)
+   {      
       for (id session in selectedSessions)
          [sessionManager abortSession:session];         
    }
    else 
    {
-      NSInteger clickedRow = [sessionsTableView clickedRow];
-      // Get selected object from sessionsController 
-      [sessionManager abortSession:[[sessionsController arrangedObjects] objectAtIndex:clickedRow]];      
+      [sessionManager abortSession:[selectedSessions lastObject]];      
    }
 }
 - (IBAction) sessionDrawerRemove:(id)sender
 {
    NSLog(@"MyDocument: Removing session");
    
-   int numberOfSelectedRows = [sessionsTableView numberOfSelectedRows];
+   NSArray *selectedSessions = [sessionsController selectedObjects];
    
-   if (numberOfSelectedRows > 1)
+   if ([selectedSessions count] > 1)
    {
-      NSIndexSet *selectedRows = [sessionsTableView selectedRowIndexes];
-      NSArray *selectedSessions = [[sessionsController arrangedObjects] objectsAtIndexes:selectedRows];   
-      
       for (id session in selectedSessions)
          [sessionManager deleteSession:session];         
    }
    else 
    {
-      NSInteger clickedRow = [sessionsTableView clickedRow];
-      // Get selected object from sessionsController 
-      [sessionManager deleteSession:[[sessionsController arrangedObjects] objectAtIndex:clickedRow]];      
+      [sessionManager deleteSession:[selectedSessions lastObject]];      
    }
 }
 - (IBAction) sessionDrawerShowInFinder:(id)sender
@@ -908,8 +882,9 @@
     ([menuItem action] == @selector(sessionDrawerShowInFinder:))       
     )
    {
-      NSInteger clickedRow = [sessionsTableView clickedRow];
-      if (clickedRow == -1) {
+//      NSInteger clickedRow = [sessionsTableView clickedRow];
+//      if (clickedRow == -1) {
+      if ([[sessionsController selectionIndexes] count] == 0) {
          enabled = NO;
       }
       else 
@@ -933,13 +908,13 @@
 //         {
 //
 //            enabled = NO;
-//         }
+//         }         
       }
    } 
    else if ([menuItem action] == @selector(handleHostsMenuClick:))
    {
-//      if ([[hostsInSessionController selectedObjects] count] == 0)
-      if ([hostsTableView clickedRow] == -1)
+      if ([[hostsInSessionController selectedObjects] count] == 0)
+//      if ([hostsTableView clickedRow] == -1)
          enabled = NO;
       else
          enabled = YES;
@@ -1195,20 +1170,7 @@
 - (IBAction)peanut:(id)sender
 {
    
-   //   NSManagedObjectContext *context = [self managedObjectContext];
-   //   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
-   //   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Host"
-   //                                             inManagedObjectContext:[self managedObjectContext]];
-   //   
-   //   [request setEntity:entity];
-   //   
-   //   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY ports.number == 23"];
-   //   [request setPredicate:predicate];
-   //   
-   //   NSError *error = nil;
-   //   NSArray *array = [context executeFetchRequest:request error:&error];   
-   //   
-   //   NSLog(@"MyDoc: Array: %i", [array count]);
+
    NSLog(@"HIHIHIH");
 }
 

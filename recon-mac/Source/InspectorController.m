@@ -1,12 +1,12 @@
 //
-//  NetstatController.m
+//  InspectorController.m
 //  Recon
 //
 //  Created by Sumanth Peddamatham on 7/14/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "NetstatController.h"
+#import "InspectorController.h"
 
 #import "MyDocument.h"
 #import "SessionController.h"
@@ -25,7 +25,7 @@
 #include <stdio.h>
 
 
-@implementation NetstatController
+@implementation InspectorController
 
 @synthesize connections;
 @synthesize testy;
@@ -35,6 +35,7 @@
    if (self = [super init])
    {
       connections = [[NSMutableArray alloc] init];             
+      [taskSelectionPopUp selectItemAtIndex:0];
    }
    
    return self;
@@ -48,62 +49,42 @@
    [super dealloc];
 }
 
-
+// -------------------------------------------------------------------------------
+//	changeInspectorTask: 
+// -------------------------------------------------------------------------------
 - (IBAction)changeInspectorTask:(id)sender
 {
-   NSLog(@"NetstatController: changeInspectorTask: %d", [sender tag]);
+   NSLog(@"InspectorController: changeInspectorTask: %d", [sender tag]);
    
-   if ([[sender title] hasPrefix:@"See"])
+   if ([[sender title] hasPrefix:@"See the machines connected"])
    {
       [self refreshConnectionsList:self];
+      [alwaysRefresh setEnabled:TRUE];
       [regularHostsScrollView setHidden:TRUE];
       [netstatHostsScrollView setHidden:FALSE];
    }
    else
    {
+      [alwaysRefresh setEnabled:FALSE];      
       [regularHostsScrollView setHidden:FALSE];
       [netstatHostsScrollView setHidden:TRUE];      
    }
    
    if ([[sender title] hasPrefix:@"Find computers"])
    {
-      [self searchLocalNetwork:self];
-   }
-}
-
-// -------------------------------------------------------------------------------
-//	chooseTask: State-machine handler for first tab of Network Assistant
-// -------------------------------------------------------------------------------
-- (IBAction)chooseTask:(id)sender
-{
-   // Determine which button is selected
-   int row = [mainSelector selectedRow];
-   NSLog(@"Selected: %i", row);
-   
-   switch (row) {
-      // Find computers on local network
-      case 0:
-         NSLog(@"CIDR: %d", [self cidrForInterface:@"en1"]);
-         break;
-      // Find Bonjour-compatible
-      case 1:
-         break;
-      // See connected machines
-      case 2:
-         [self refreshConnectionsList:self];
-//         [self autoRefreshConnections];
-         break;
-      // Check for services on machine
-      case 3:
-         break;
-      // Check if a machine is online
-      case 4:
-         break;
-      default:
-         break;
+//      [self searchLocalNetwork:self];
    }
    
-   [mainTabView selectTabViewItemAtIndex:row+1];
+   if ([[sender title] hasPrefix:@"Check what services"])
+   {
+      [hostsTextField setEnabled:TRUE];
+      [hostsTextFieldLabel setEnabled:TRUE];
+   }
+   else
+   {
+      [hostsTextField setEnabled:FALSE];
+      [hostsTextFieldLabel setEnabled:FALSE];
+   }
 }
 
 // -------------------------------------------------------------------------------
@@ -114,44 +95,33 @@
    // Grab the Session Manager object
    SessionManager *sessionManager = [SessionManager sharedSessionManager];
 
-   // Create a session for the scan
-   Session *session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" 
-                                                    inManagedObjectContext:[sessionManager context]];
-   
-   [session setUUID:@"generated"];
-   [session setDate:[NSDate date]];
-   [session setTarget:[NSString stringWithFormat:@"192.168.0.1/%d",[self cidrForInterface:@"en0"]]];
-
    // Create a profile and populate it for basic ping-scanning
    Profile *profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
                                                     inManagedObjectContext:[sessionManager context]];
    
    [profile setFastScan:[NSNumber numberWithBool:TRUE]];
-//   [profile setTraceRoute:[NSNumber numberWithBool:TRUE]];
-//   [profile setEnableAggressive:[NSNumber numberWithBool:TRUE]];
    
-   // Link the session to the profile
-   [session setProfile:profile];
-
    // Queue and launch the session
-   [sessionManager queueExistingSession:session];
-//   [sessionManager launchSession:session];
+   [sessionManager queueSessionWithProfile:profile 
+                                withTarget:[NSString stringWithFormat:@"192.168.0.1/%d",[self cidrForInterface:@"en0"]]];
 
-   // The interface needs the new session to be selected
-   [sessionsController setSelectedObjects:[NSArray arrayWithObject:session]];
 }
 
 - (IBAction)launchScan:(id)sender
 {
-   // Grab the Session Manager object
-   SessionManager *sessionManager = [SessionManager sharedSessionManager];
-   
-   [sessionManager processQueue];   
+   if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Find computers"])
+   {
+      [self searchLocalNetwork:self];
+      // Grab the Session Manager object
+      SessionManager *sessionManager = [SessionManager sharedSessionManager];
+      
+      [sessionManager processQueue];   
+   }
 }
 
 - (NSPredicate *)testy
 {
-   NSLog(@"NetstatController: testy");
+   NSLog(@"InspectorController: testy");
    if (testy == nil) {
       //testy = [NSPredicate predicateWithFormat: @"UUID == 'generate'"];   
       testy = nil;
@@ -210,7 +180,6 @@ int bitcount (unsigned int n)
    return count;
 }
 
-
 // -------------------------------------------------------------------------------
 //	setConnections: 
 // -------------------------------------------------------------------------------
@@ -231,7 +200,7 @@ int bitcount (unsigned int n)
 // -------------------------------------------------------------------------------
 - (IBAction)refreshConnectionsList:(id)sender
 {      
-   NSLog(@"NetstatController: refreshConnectionsList");
+   NSLog(@"InspectorController: refreshConnectionsList");
       
    selectedConnection = [[connectionsController selectedObjects] lastObject];
    

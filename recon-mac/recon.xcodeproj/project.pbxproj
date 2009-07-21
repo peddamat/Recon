@@ -32,7 +32,7 @@
 		8C79F78A1004908600A4648B /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F7891004908600A4648B /* MyDocument.xib */; };
 		8CAA1231100A078B0084C6D5 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAA1230100A078B0084C6D5 /* Profile.m */; };
 		8CC32789100CDCA700483939 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC32788100CDCA700483939 /* Security.framework */; };
-		8CC3278F100CDCF000483939 /* NetstatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3278E100CDCF000483939 /* NetstatController.m */; };
+		8CC3278F100CDCF000483939 /* InspectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3278E100CDCF000483939 /* InspectorController.m */; };
 		8CC32794100CDFE400483939 /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC32793100CDFE400483939 /* Connection.m */; };
 		8CC329D1100DF9D700483939 /* ClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC329D0100DF9D700483939 /* ClientController.m */; };
 		8CC32EAE100FBBA600483939 /* nmap-icon-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CC32EAD100FBBA600483939 /* nmap-icon-button.png */; };
@@ -114,15 +114,15 @@
 		8CAA122F100A078B0084C6D5 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Profile.h; path = "Source/Managed Objects/Profile.h"; sourceTree = "<group>"; };
 		8CAA1230100A078B0084C6D5 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Profile.m; path = "Source/Managed Objects/Profile.m"; sourceTree = "<group>"; };
 		8CC32788100CDCA700483939 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
-		8CC3278D100CDCF000483939 /* NetstatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetstatController.h; path = Source/NetstatController.h; sourceTree = "<group>"; };
-		8CC3278E100CDCF000483939 /* NetstatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetstatController.m; path = Source/NetstatController.m; sourceTree = "<group>"; };
+		8CC3278D100CDCF000483939 /* InspectorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorController.h; path = Source/InspectorController.h; sourceTree = "<group>"; };
+		8CC3278E100CDCF000483939 /* InspectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorController.m; path = Source/InspectorController.m; sourceTree = "<group>"; };
 		8CC32792100CDFE400483939 /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Connection.h; path = Source/Connection.h; sourceTree = "<group>"; };
 		8CC32793100CDFE400483939 /* Connection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Connection.m; path = Source/Connection.m; sourceTree = "<group>"; };
 		8CC329CF100DF9D700483939 /* ClientController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientController.h; path = Source/ClientController.h; sourceTree = "<group>"; };
 		8CC329D0100DF9D700483939 /* ClientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientController.m; path = Source/ClientController.m; sourceTree = "<group>"; };
 		8CC32EAD100FBBA600483939 /* nmap-icon-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nmap-icon-button.png"; path = "Resources/nmap-icon-button.png"; sourceTree = "<group>"; };
 		8CC32EC6100FC57700483939 /* nmap-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "nmap-icon.icns"; path = "Resources/nmap-icon.icns"; sourceTree = "<group>"; };
-		8D15AC370486D014006FF6A4 /* recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* Recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +164,7 @@
 		19C28FB0FE9D524F11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D15AC370486D014006FF6A4 /* recon.app */,
+				8D15AC370486D014006FF6A4 /* Recon.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -269,8 +269,8 @@
 				8CC329D0100DF9D700483939 /* ClientController.m */,
 				8CC32792100CDFE400483939 /* Connection.h */,
 				8CC32793100CDFE400483939 /* Connection.m */,
-				8CC3278D100CDCF000483939 /* NetstatController.h */,
-				8CC3278E100CDCF000483939 /* NetstatController.m */,
+				8CC3278D100CDCF000483939 /* InspectorController.h */,
+				8CC3278E100CDCF000483939 /* InspectorController.m */,
 			);
 			name = "Network Assistant";
 			sourceTree = "<group>";
@@ -303,7 +303,7 @@
 			name = Recon;
 			productInstallPath = "$(HOME)/Applications";
 			productName = "nmapX-coredata";
-			productReference = 8D15AC370486D014006FF6A4 /* recon.app */;
+			productReference = 8D15AC370486D014006FF6A4 /* Recon.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -363,7 +363,7 @@
 				8CAA1231100A078B0084C6D5 /* Profile.m in Sources */,
 				8C2A17A7100B29D10060D931 /* OperatingSystem.m in Sources */,
 				8C2A17B5100B2A6E0060D931 /* Host.m in Sources */,
-				8CC3278F100CDCF000483939 /* NetstatController.m in Sources */,
+				8CC3278F100CDCF000483939 /* InspectorController.m in Sources */,
 				8CC32794100CDFE400483939 /* Connection.m in Sources */,
 				8CC329D1100DF9D700483939 /* ClientController.m in Sources */,
 			);

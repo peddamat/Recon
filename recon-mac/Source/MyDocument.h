@@ -22,12 +22,9 @@ extern NSString * const BAFNmapBinaryLocation;
 extern NSString * const BAFSavedSessionsDirectory;
 
 @interface MyDocument : NSPersistentDocument {
-
-
-   IBOutlet NSView *mainsubView;
-   IBOutlet NSView *mainsubView2;
    
    IBOutlet NSView *mainView;
+   IBOutlet NSView *mainsubView;   
    IBOutlet NSTabView *mainTabView;
 
    PrefsController *prefsController;

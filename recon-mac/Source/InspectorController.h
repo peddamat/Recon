@@ -1,5 +1,5 @@
 //
-//  NetstatController.h
+//  InspectorController.h
 //  Recon
 //
 //  Created by Sumanth Peddamatham on 7/14/09.
@@ -12,24 +12,24 @@
 @class SessionController;
 @class SessionManager;
 
-@interface NetstatController : NSObject {
+@interface InspectorController : NSObject {
 
-   IBOutlet NSTabView *mainTabView;
+   IBOutlet NSPopUpButton *taskSelectionPopUp;
    
-   // Choices Tab
-   IBOutlet NSMatrix *mainSelector;   
-
-
-   // Find computers Tab
+   // Find computers mode
    SessionManager *SessionManager;
    IBOutlet NSArrayController *sessionsController;
    NSPredicate *testy;   
    
-   // Netstat Tab
+   // See connected computers mode
    NSMutableArray *connections;
    IBOutlet NSArrayController *connectionsController;
    Connection *selectedConnection;
    NSTimer *timer;
+   IBOutlet NSButton *alwaysRefresh;
+   
+   IBOutlet NSTextField *hostsTextField;
+   IBOutlet NSTextField *hostsTextFieldLabel;   
    
    IBOutlet NSScrollView *regularHostsScrollView;
    IBOutlet NSScrollView *netstatHostsScrollView;
@@ -40,9 +40,6 @@
 
 - (IBAction)changeInspectorTask:(id)sender;
 - (IBAction)launchScan:(id)sender;
-
-// Choices Tab
-- (IBAction)chooseTask:(id)sender;
 
 // Find computers Tab
 int bitcount (unsigned int n);

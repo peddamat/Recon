@@ -43,6 +43,8 @@
    {
       task = [[NSTask alloc] init];
 
+      NSLog(@"NmapController: %@", nmapArgs);
+      
       [task setLaunchPath:nmapBinary];      
       [task setArguments:nmapArgs];
       [task setStandardOutput:[NSPipe pipe]];
