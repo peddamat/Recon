@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="424"/>
+			<integer value="331"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -694,18 +694,18 @@
 							<string key="NSTitle">View</string>
 							<object class="NSMutableArray" key="NSMenuItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSMenuItem" id="1071079495">
+								<object class="NSMenuItem" id="458637655">
 									<reference key="NSMenu" ref="200699227"/>
-									<string key="NSTitle">Show Scanner</string>
+									<string key="NSTitle">Show Inspector</string>
 									<string key="NSKeyEquiv">1</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="385016679"/>
 									<reference key="NSMixedImage" ref="150129030"/>
 								</object>
-								<object class="NSMenuItem" id="458637655">
+								<object class="NSMenuItem" id="1071079495">
 									<reference key="NSMenu" ref="200699227"/>
-									<string key="NSTitle">Show Inspector</string>
+									<string key="NSTitle">Show Scanner</string>
 									<string key="NSKeyEquiv">2</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -726,7 +726,7 @@
 									<reference key="NSMenu" ref="200699227"/>
 									<string key="NSTitle">Show Settings</string>
 									<string type="base64-UTF8" key="NSKeyEquiv">75yCA</string>
-									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSKeyEquivModMask">1179648</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="385016679"/>
 									<reference key="NSMixedImage" ref="150129030"/>
@@ -735,7 +735,7 @@
 									<reference key="NSMenu" ref="200699227"/>
 									<string key="NSTitle">Show Results</string>
 									<string type="base64-UTF8" key="NSKeyEquiv">75yDA</string>
-									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSKeyEquivModMask">1179648</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="385016679"/>
 									<reference key="NSMixedImage" ref="150129030"/>
@@ -1876,9 +1876,9 @@
 							<reference ref="859583672"/>
 							<reference ref="134612992"/>
 							<reference ref="1071079495"/>
-							<reference ref="458637655"/>
 							<reference ref="443477960"/>
 							<reference ref="622763339"/>
+							<reference ref="458637655"/>
 						</object>
 						<reference key="parent" ref="1064923849"/>
 					</object>
@@ -2438,7 +2438,9 @@
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addProfile:</string>
+							<string>deleteProfile:</string>
 							<string>dequeueSession:</string>
+							<string>modeSwitch:</string>
 							<string>peanut:</string>
 							<string>processQueue:</string>
 							<string>queueSession:</string>
@@ -2486,12 +2488,15 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>hostsContextMenu</string>
 							<string>hostsInSessionController</string>
 							<string>hostsTableView</string>
 							<string>interfacesPopUp</string>
@@ -2499,9 +2504,9 @@
 							<string>mainToolbar</string>
 							<string>mainView</string>
 							<string>mainsubView</string>
-							<string>mainsubView2</string>
 							<string>menuResults</string>
 							<string>menuSettings</string>
+							<string>modeSwitchButton</string>
 							<string>nmapCommandTextField</string>
 							<string>nonTcpScanPopUp</string>
 							<string>osesInSessionController</string>
@@ -2531,10 +2536,12 @@
 							<string>settingsToolbarItem</string>
 							<string>showInFinderMenuItem</string>
 							<string>tcpScanPopUp</string>
+							<string>testWindow</string>
 							<string>timingTemplatePopUp</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSMenu</string>
 							<string>NSArrayController</string>
 							<string>NSTableView</string>
 							<string>NSPopUpButton</string>
@@ -2542,9 +2549,9 @@
 							<string>NSToolbar</string>
 							<string>NSView</string>
 							<string>NSView</string>
-							<string>NSView</string>
 							<string>NSMenuItem</string>
 							<string>NSMenuItem</string>
+							<string>NSSegmentedControl</string>
 							<string>NSTextField</string>
 							<string>NSPopUpButton</string>
 							<string>NSArrayController</string>
@@ -2566,7 +2573,7 @@
 							<string>NSToolbarItem</string>
 							<string>NSMenuItem</string>
 							<string>NSMenuItem</string>
-							<string>NSTextField</string>
+							<string>NSComboBox</string>
 							<string>NSMenu</string>
 							<string>NSArrayController</string>
 							<string>NSDrawer</string>
@@ -2574,12 +2581,20 @@
 							<string>NSToolbarItem</string>
 							<string>NSMenuItem</string>
 							<string>NSPopUpButton</string>
+							<string>NSWindow</string>
 							<string>NSPopUpButton</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Source/MyDocument.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSManagedObjectContext</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Source/NSManagedObjectContext-helper.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
