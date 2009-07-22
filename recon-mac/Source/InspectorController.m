@@ -25,11 +25,26 @@
 #include <stdio.h>
 
 
+@interface InspectorController ()
+
+@property (readwrite, retain) NSTask *task;   
+
+@property (readwrite, retain) NSMutableData *standardOutput;
+@property (readwrite, retain) NSMutableData *standardError;
+
+@end
+
 @implementation InspectorController
 
 @synthesize connections;
 @synthesize autoRefresh;
 @synthesize resolveHostnames;
+@synthesize doneRefresh;
+
+@synthesize task;
+@synthesize standardOutput;
+@synthesize standardError;
+
 
 - (id)init 
 {
@@ -149,25 +164,25 @@
    NSAssert(nil != ifName, @"Interface name cannot be nil");
    
    // Prepare a task object
-   NSTask *task = [[NSTask alloc] init];
-   [task setLaunchPath:@"/bin/tcsh"];     // For some reason, using /bin/sh screws up the debug console   
-   [task setArguments:[NSArray arrayWithObjects: @"-c", @"ifconfig | grep netmask | grep 192 | awk '{print $4}'", nil]];
+   NSTask *localTask = [[NSTask alloc] init];
+   [localTask setLaunchPath:@"/bin/tcsh"];     // For some reason, using /bin/sh screws up the debug console   
+   [localTask setArguments:[NSArray arrayWithObjects: @"-c", @"ifconfig | grep netmask | grep 192 | awk '{print $4}'", nil]];
    
    // Create the pipe to read from
    NSPipe *outPipe = [[NSPipe alloc] init];
-   [task setStandardOutput:outPipe];
+   [localTask setStandardOutput:outPipe];
    [outPipe release];
    
    // Start the process
-   [task launch];
+   [localTask launch];
    
    // Read the output
    NSData *data = [[outPipe fileHandleForReading]
                    readDataToEndOfFile];
    
-   // Make sure the task terminates normally
-   [task waitUntilExit];
-   [task release];
+   // Make sure the localTask terminates normally
+   [localTask waitUntilExit];
+   [localTask release];
 
    // Convert to a string
    NSString *aString = [[NSString alloc] initWithData:data
@@ -207,53 +222,114 @@ int bitcount (unsigned int n)
    connections = a;
 }
 
+- (IBAction)clickAutoRefresh:(id)sender
+{   
+   if ((self.autoRefresh == YES) && (self.doneRefresh == YES))
+      [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:0.01];
+}
+
+- (IBAction)clickResolveHostnames:(id)sender
+{
+   if ((self.autoRefresh == NO) && (self.doneRefresh == YES))
+      [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:0.01];
+}
+
 // -------------------------------------------------------------------------------
 //	refreshConnectionsList: TODO: This ain't thread-safe.  Fix this.
 // -------------------------------------------------------------------------------
 - (IBAction)refreshConnectionsList:(id)sender
-{    
-   doneRefresh = NO;
-   
-   NSLog(@"InspectorController: refreshConnectionsList");
+{
+   self.doneRefresh = NO;
       
-//   selectedConnection = [[connectionsController selectedObjects] lastObject];
+   self.task = [[[NSTask alloc] init] autorelease];
    
-   // Clear array
-   [connections removeAllObjects];
+   NSLog(@"InspectorController: launchNetstat");
    
-   // Prepare a task object
-   NSTask *task = [[NSTask alloc] init];
-   [task setLaunchPath:@"/bin/tcsh"];     // For some reason, using /bin/sh screws up the debug console   
-   
-   // Prepare the netstat munging line
+   [task setLaunchPath:@"/bin/tcsh"];      
    if (self.resolveHostnames == NO)
       [task setArguments:[NSArray arrayWithObjects: @"-c", @"netstat -d -n -f inet | grep \"tcp\" | grep -v 127 | awk '{print $4, $5, $6 }'", nil]];
    else
       [task setArguments:[NSArray arrayWithObjects: @"-c", @"netstat -d -W -f inet | grep \"tcp\" | grep -v 127 | awk '{print $4, $5, $6 }'", nil]];
+   [task setStandardOutput:[NSPipe pipe]];
+   [task setStandardError:[NSPipe pipe]];   
    
-   // Create the pipe to read from
-   NSPipe *outPipe = [[NSPipe alloc] init];
-   [task setStandardOutput:outPipe];
-   [outPipe release];
+   self.standardOutput = [[[NSMutableData alloc] init] autorelease];
+   self.standardError = [[[NSMutableData alloc] init] autorelease];
    
-   // Start the process
+   NSFileHandle *standardOutputFile = [[task standardOutput] fileHandleForReading];
+   NSFileHandle *standardErrorFile = [[task standardError] fileHandleForReading];
+   
+   [[NSNotificationCenter defaultCenter]
+    addObserver:self
+    selector:@selector(standardOutNotification:)
+    name:NSFileHandleDataAvailableNotification
+    object:standardOutputFile];
+   [[NSNotificationCenter defaultCenter]
+    addObserver:self
+    selector:@selector(standardErrorNotification:)
+    name:NSFileHandleDataAvailableNotification
+    object:standardErrorFile];
+   [[NSNotificationCenter defaultCenter]
+    addObserver:self
+    selector:@selector(terminatedNotification:)
+    name:NSTaskDidTerminateNotification
+    object:task];
+   
+   [standardOutputFile waitForDataInBackgroundAndNotify];
+   [standardErrorFile waitForDataInBackgroundAndNotify]; 
+   
    [task launch];
+}
+
+// Accessor for the data object
+- (NSData *)standardOutputData
+{
+	return self.standardOutput;
+}
+
+// Accessor for the data object
+- (NSData *)standardErrorData
+{
+	return self.standardError;
+}
+
+// Reads standard out into the standardOutput data object.
+-(void)standardOutNotification: (NSNotification *) notification
+{
+   NSFileHandle *standardOutFile = (NSFileHandle *)[notification object];
+   [standardOutput appendData:[standardOutFile availableData]];
+   [standardOutFile waitForDataInBackgroundAndNotify];
+}
+
+// Reads standard error into the standardError data object.
+-(void)standardErrorNotification: (NSNotification *) notification
+{
+   NSFileHandle *standardErrorFile = (NSFileHandle *)[notification object];
+   [standardError appendData:[standardErrorFile availableData]];
+   [standardErrorFile waitForDataInBackgroundAndNotify];
+}
+
+// -------------------------------------------------------------------------------
+//	terminatedNotification: Called by NTask when Nmap has returned.
+// -------------------------------------------------------------------------------
+- (void)terminatedNotification:(NSNotification *)notification
+{
+   NSLog(@"InspectorController: terminated");
    
-   // Read the output
-   NSData *data = [[outPipe fileHandleForReading]
-                   readDataToEndOfFile];
+   // Clear array
+   [connections removeAllObjects];   
    
-   // Make sure the task terminates normally
-   [task waitUntilExit];
-//   int status = [task terminationStatus];
-   [task release];
-         
-   // Convert to a string
-   NSString *aString = [[NSString alloc] initWithData:data
-                                             encoding:NSUTF8StringEncoding];
-   
+   // Write the Nmap stdout and stderr buffers out to disk
+   NSString *aString =
+   [[[NSString alloc]
+     initWithData:[self standardOutputData]
+     encoding:NSUTF8StringEncoding]
+    autorelease];
+      
    NSArray *line = [aString componentsSeparatedByString:@"\n"];
    int lineLength = [line count] - 1;
+   
+   NSLog(@"%@", line);
    
    Connection *c = nil;
    NSMutableArray *a = [[NSMutableArray alloc] init];
@@ -273,17 +349,17 @@ int bitcount (unsigned int n)
                               [local objectAtIndex:2], 
                               [local objectAtIndex:3]];
          NSString *localPort = [local objectAtIndex:4];
-
+         
          NSString *remoteIP = [NSString stringWithFormat:@"%@.%@.%@.%@", 
-                              [remote objectAtIndex:0], 
-                              [remote objectAtIndex:1], 
-                              [remote objectAtIndex:2], 
+                               [remote objectAtIndex:0], 
+                               [remote objectAtIndex:1], 
+                               [remote objectAtIndex:2], 
                                [remote objectAtIndex:3]];
          NSString *remotePort = [remote objectAtIndex:4];
          
          
          NSString *status = [p objectAtIndex:2];
-
+         
          c = [[Connection alloc] initWithLocalIP:localIP
                                     andLocalPort:localPort
                                      andRemoteIP:remoteIP
@@ -306,7 +382,7 @@ int bitcount (unsigned int n)
          NSString *localPort = [local lastObject];
          
          NSString *remoteIP = [[p objectAtIndex:1] stringByReplacingOccurrencesOfString:[remote lastObject] 
-                                                                            withString:@""]; 
+                                                                             withString:@""]; 
          NSString *remotePort = [remote lastObject];
          
          NSString *status = [p objectAtIndex:2];
@@ -319,36 +395,17 @@ int bitcount (unsigned int n)
          [a addObject:c];
       }      
    }
-     
+   
    [connectionsController addObjects:a];
+
+   self.doneRefresh = YES;
+
+   [[NSNotificationCenter defaultCenter] removeObserver:self];
+//   [task release];
    
-//   if (selectedConnection != nil)
-//      [connectionsController setSelectedObjects:[NSArray arrayWithObject:selectedConnection]];
-//   else
-//      [connectionsController setSelectionIndex:0];
-   
-   // Release the string
-   [aString release];
-      
-   doneRefresh = YES;
    
    if (self.autoRefresh == YES)
       [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:1];
-}
+}   
 
-- (IBAction)clickAutoRefresh:(id)sender
-{
-   self.resolveHostnames = NO;
-   
-   if ((self.autoRefresh == YES) && (doneRefresh == YES))
-   {
-      [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:0.01];
-   }
-}
-
-- (IBAction)clickResolveHostnames:(id)sender
-{
-   self.autoRefresh = NO;
-   [self refreshConnectionsList:self];
-}
 @end
