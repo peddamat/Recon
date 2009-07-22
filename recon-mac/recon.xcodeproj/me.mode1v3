@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>8C7EA0F910165E0900762319</string>
+						<string>8C7EA149101685C800762319</string>
 						<key>history</key>
 						<array>
-							<string>8C7EA01A10162D8500762319</string>
+							<string>8C7EA0F910165E0900762319</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -256,10 +256,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>8C7EA0FA10165E0900762319</string>
+						<string>8C7EA14A101685C800762319</string>
 						<key>history</key>
 						<array>
-							<string>8C7EA01B10162D8500762319</string>
+							<string>8C7EA0FA10165E0900762319</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -422,7 +422,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>8C7EA0F810165E0900762319</string>
+										<string>8C7EA146101685C800762319</string>
 										<key>history</key>
 										<array>
 											<string>8C79EDAC10028F6300A4648B</string>
@@ -471,7 +471,7 @@
 											<string>8C7EA0681016326400762319</string>
 											<string>8C7EA0761016508A00762319</string>
 											<string>8C7EA0E510165D6900762319</string>
-											<string>8C7EA0E010165D2600762319</string>
+											<string>8C7EA0F810165E0900762319</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -523,43 +523,6 @@
 											<string>8C7E9C521014D08900762319</string>
 											<string>8C7E9C561014D0E500762319</string>
 											<string>8C7E9C7F1014D37200762319</string>
-											<string>8C7EA06A1016326400762319</string>
-											<string>8C7EA06B1016326400762319</string>
-											<string>8C7EA0791016508A00762319</string>
-											<string>8C7EA07A1016508A00762319</string>
-											<string>8C7EA07B1016508A00762319</string>
-											<string>8C7EA07C1016508A00762319</string>
-											<string>8C7EA07D1016508A00762319</string>
-											<string>8C7EA0871016519100762319</string>
-											<string>8C7EA0881016519100762319</string>
-											<string>8C7EA0891016519100762319</string>
-											<string>8C7EA08A1016519100762319</string>
-											<string>8C7EA08B1016519100762319</string>
-											<string>8C7EA08C1016519100762319</string>
-											<string>8C7EA08D1016519100762319</string>
-											<string>8C7EA092101651B500762319</string>
-											<string>8C7EA0A41016570800762319</string>
-											<string>8C7EA0A51016570800762319</string>
-											<string>8C7EA0A61016570800762319</string>
-											<string>8C7EA0A71016570800762319</string>
-											<string>8C7EA0A81016570800762319</string>
-											<string>8C7EA0A91016570800762319</string>
-											<string>8C7EA0B31016585900762319</string>
-											<string>8C7EA0B41016585900762319</string>
-											<string>8C7EA0BA1016596400762319</string>
-											<string>8C7EA0BB1016596400762319</string>
-											<string>8C7EA0BC1016596400762319</string>
-											<string>8C7EA0BD1016596400762319</string>
-											<string>8C7EA0BE1016596400762319</string>
-											<string>8C7EA0BF1016596400762319</string>
-											<string>8C7EA0C01016596400762319</string>
-											<string>8C7EA0C6101659AD00762319</string>
-											<string>8C7EA0D110165C4300762319</string>
-											<string>8C7EA0D210165C4300762319</string>
-											<string>8C7EA0D310165C4300762319</string>
-											<string>8C7EA0D910165CAA00762319</string>
-											<string>8C7EA0E110165D2600762319</string>
-											<string>8C7EA0E610165D6900762319</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -617,9 +580,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>8C7EA05B1016319900762319</string>
+				<string>8C7EA147101685C800762319</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>8C7EA05C1016319900762319</string>
+				<string>8C7EA148101685C800762319</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -753,13 +716,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>8C79E12C0FFBB30500A4648B</string>
 		<string>8C7E9ADD10142C7900762319</string>
 		<string>8C7E9F061016060A00762319</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/me/Source/Obj-C/recon-mac/recon.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>281 55 1160 823 0 0 1440 878 </string>
@@ -839,7 +801,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>8C79E12C0FFBB30500A4648B</string>
-				<string>8C7EA05F1016319900762319</string>
+				<string>8C7EA14B101685C800762319</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -959,13 +921,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>8C7EA0601016319900762319</string>
+				<string>8C7EA14C101685C800762319</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>8C7EA0611016319900762319</string>
-				<string>8C7EA0621016319900762319</string>
-				<string>8C7EA0631016319900762319</string>
-				<string>8C7EA0641016319900762319</string>
-				<string>8C7EA0651016319900762319</string>
+				<string>8C7EA14D101685C800762319</string>
+				<string>8C7EA14E101685C800762319</string>
+				<string>8C7EA14F101685C800762319</string>
+				<string>8C7EA150101685C800762319</string>
+				<string>8C7EA151101685C800762319</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -1121,7 +1083,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>8C7EA0661016319900762319</string>
+				<string>8C7EA152101685C800762319</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
