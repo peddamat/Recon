@@ -72,8 +72,10 @@ static PrefsController *sharedPrefsController = nil;
    [defaultValues setObject:[NSNumber numberWithBool:NO]
                      forKey:BAFAutoSetuid];
 
-   [defaultValues setObject:nmapBinaryLocation forKey:BAFNmapBinaryLocation];
-   [defaultValues setObject:savedSessionsDirectory forKey:BAFSavedSessionDirectory];
+   [defaultValues setObject:nmapBinaryLocation 
+                     forKey:BAFNmapBinaryLocation];
+   [defaultValues setObject:savedSessionsDirectory
+                     forKey:BAFSavedSessionDirectory];
    
    // Register the dictionary of defaults
    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
@@ -93,6 +95,67 @@ static PrefsController *sharedPrefsController = nil;
    self.sessionDirectory = (NSString *)[defaults objectForKey:BAFSavedSessionDirectory];   
 }
 
+// -------------------------------------------------------------------------------
+//	checkPermsOnNmap: The checkbox in the UI is bound to the setuidNmap instance
+//                   variable.  Update the checkbox to reflect the perms of Nmap.
+// -------------------------------------------------------------------------------
+- (void)checkPermsOnNmap
+{
+   // Check file permissions
+   NSFileManager *fm = [NSFileManager defaultManager];
+   NSError *error = nil;
+   NSDictionary *d = [fm attributesOfItemAtPath:nmapBinary error:&error];
+   
+   NSNumber *s = [d valueForKey:NSFilePosixPermissions];
+   NSNumber *p = [d valueForKey:NSFileOwnerAccountID];
+   
+   // If the file doesn't have the right permissions, unset the checkbox
+   if (([s unsignedLongValue] != 2559) || ([p unsignedLongValue] != 0))
+   {
+      self.setuidNmap = NO;
+   }
+   else
+   {
+      self.setuidNmap = YES;
+   }   
+}
+
+// -------------------------------------------------------------------------------
+//	checkDirectories: 
+// -------------------------------------------------------------------------------
+- (void)checkDirectories
+{   
+   // Create application support directory, if needed
+   NSFileManager *fileManager = [NSFileManager defaultManager];
+   NSString *applicationSupportFolder = [self reconSupportFolder];   
+   
+   if ( ![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL] ) {
+      [fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
+   }
+   
+   // Create sessions folder, if needed
+   NSString *applicationSessionsFolder = nil;
+   
+   applicationSessionsFolder = [self reconSessionFolder];      
+   if ( ![fileManager fileExistsAtPath:applicationSessionsFolder isDirectory:NULL] ) {
+      [fileManager createDirectoryAtPath:applicationSessionsFolder attributes:nil];
+   }
+   
+   NSLog(@"PrefsController: checkDirectories!");   
+}
+
+// -------------------------------------------------------------------------------
+//	displayOnFirstRun: Displays the preference window the first time Recon is executed.
+// -------------------------------------------------------------------------------
+- (void)displayOnFirstRun
+{
+   if ([self hasRun] == NO) {
+      // Hack to prevent detached sheet
+      //  See: http://www.cocoadev.com/index.pl?HowToPutASheetOnADocumentJustAfterOpeningIt
+      [self performSelector:@selector(showPrefWindow:) withObject:self afterDelay:0.5];
+   }      
+   
+}
 
 // -------------------------------------------------------------------------------
 //	Preference Window key-handlers
@@ -128,38 +191,10 @@ static PrefsController *sharedPrefsController = nil;
 }
 
 // -------------------------------------------------------------------------------
-//	checkDirectories: 
-// -------------------------------------------------------------------------------
-- (void)checkDirectories
-{   
-   // Verify nmap binary location points to valid nmap binary
-   
-   // Create application support directory, if needed
-   NSFileManager *fileManager = [NSFileManager defaultManager];
-   NSString *applicationSupportFolder = [self reconSupportFolder];   
-
-   if ( ![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL] ) {
-      [fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
-   }
-
-   // Create sessions folder, if needed
-   NSString *applicationSessionsFolder = nil;
-   
-   applicationSessionsFolder = [self reconSessionFolder];      
-   if ( ![fileManager fileExistsAtPath:applicationSessionsFolder isDirectory:NULL] ) {
-      [fileManager createDirectoryAtPath:applicationSessionsFolder attributes:nil];
-   }
-   
-   NSLog(@"PrefsController: checkDirectories!");   
-}
-
-// -------------------------------------------------------------------------------
 //	browseNmapBinary: TODO: refactor these functions!
 // -------------------------------------------------------------------------------
 - (IBAction)browseNmapBinary:(id)sender
-{
-   int i; // Loop counter.
-   
+{   
    // Create the File Open Dialog class.
    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
    
@@ -178,15 +213,13 @@ static PrefsController *sharedPrefsController = nil;
       NSArray* files = [openDlg filenames];
       
       // Loop through all the files and process them.
-      for( i = 0; i < [files count]; i++ )
+      for(int i = 0; i < [files count]; i++ )
       {
          NSString* fileName = [files objectAtIndex:i];
 
-//         [self willChangeValueForKey:@"nmapBinary"];
-         self.nmapBinary = fileName;
-//         [self didChangeValueForKey:@"nmapBinary"];
-         
+         self.nmapBinary = fileName;         
          [nmapBinaryTextField selectText:self];         
+         
          // Check file permissions
          [self checkPermsOnNmap];
       }
@@ -198,8 +231,6 @@ static PrefsController *sharedPrefsController = nil;
 // -------------------------------------------------------------------------------
 - (IBAction)browseSessionDirectory:(id)sender
 {
-   int i; // Loop counter.
-   
    // Create the File Open Dialog class.
    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
    
@@ -218,7 +249,7 @@ static PrefsController *sharedPrefsController = nil;
       NSArray* files = [openDlg filenames];
       
       // Loop through all the files and process them.
-      for( i = 0; i < [files count]; i++ )
+      for(int i = 0; i < [files count]; i++ )
       {
          NSString* fileName = [files objectAtIndex:i];
          
@@ -229,43 +260,11 @@ static PrefsController *sharedPrefsController = nil;
    }
 }
 
-- (void)checkPermsOnNmap
-{
-   // Check file permissions
-   NSFileManager *fm = [NSFileManager defaultManager];
-   NSError *error = nil;
-   NSDictionary *d = [fm attributesOfItemAtPath:nmapBinary error:&error];
-   
-   NSNumber *s = [d valueForKey:NSFilePosixPermissions];
-   NSNumber *p = [d valueForKey:NSFileOwnerAccountID];
-      
-   // If the file doesn't have the right permissions, unset the checkbox
-   if (([s unsignedLongValue] != 2559) || ([p unsignedLongValue] != 0))
-   {
-      self.setuidNmap = NO;
-   }
-   else
-   {
-      self.setuidNmap = YES;
-   }   
-}
-
-- (void)displayOnFirstRun
-{
-   if ([self hasRun] == NO) {
-      // Hack to prevent detached sheet
-      //  See: http://www.cocoadev.com/index.pl?HowToPutASheetOnADocumentJustAfterOpeningIt
-      [self performSelector:@selector(showPrefWindow:) withObject:self afterDelay:0.5];
-   }      
-   
-}
-
 // -------------------------------------------------------------------------------
 //	toggleNmapPerms:
 // -------------------------------------------------------------------------------
 - (IBAction)toggleNmapPerms:(id)sender
 {
-   
    // If the binary doesn't have root...
    if (self.setuidNmap == YES)
    {
