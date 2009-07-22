@@ -14,8 +14,6 @@
 
 @property (readwrite, retain) NSMutableData *standardOutput;
 @property (readwrite, retain) NSMutableData *standardError;
-@property (readwrite, retain) NSString *outputString;
-@property (readwrite, retain) NSString *errorString; 
 @property (readwrite, retain) NSString *outputFilePath;
 @property (readwrite, assign) BOOL hasRun;
 
@@ -27,8 +25,6 @@
 @synthesize task;
 @synthesize standardOutput;
 @synthesize standardError;
-@synthesize outputString;
-@synthesize errorString;
 @synthesize outputFilePath;
 @synthesize hasRun;
 
@@ -42,8 +38,6 @@
    if (self = [super init]) 
    {
       task = [[NSTask alloc] init];
-
-      NSLog(@"NmapController: %@", nmapArgs);
       
       [task setLaunchPath:nmapBinary];      
       [task setArguments:nmapArgs];
@@ -86,10 +80,8 @@
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc removeObserver:self];
       
-   [standardOutput release];
-   [standardError release];
-   [outputString release];
-   [errorString release];
+//   [standardOutput release];
+//   [standardError release];
    [outputFilePath release];   
    [task release];
    
@@ -127,8 +119,8 @@
 
 
 // -------------------------------------------------------------------------------
-//	abortScan: If task running, abort and send successfulAbort.
-//            If task not running, assume it completed already and fake the notification.
+//	abortScan: If task running, abort and send a successfulAbort notification.
+//            If task not running, assume its already completed and fake the notification.
 // -------------------------------------------------------------------------------
 - (void)abortScan
 {
@@ -181,12 +173,12 @@
 - (BOOL)writeNmapOutputToFile
 {
    // Write the Nmap stdout and stderr buffers out to disk
-   self.outputString =
+   NSString *outputString =
    [[[NSString alloc]
      initWithData:[self standardOutputData]
      encoding:NSUTF8StringEncoding]
     autorelease];
-   self.errorString =
+   NSString *errorString =   
    [[[NSString alloc]
      initWithData:[self standardErrorData]
      encoding:NSUTF8StringEncoding]

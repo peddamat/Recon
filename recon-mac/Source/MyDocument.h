@@ -26,6 +26,8 @@ extern NSString * const BAFSavedSessionsDirectory;
    IBOutlet NSView *mainView;
    IBOutlet NSView *mainsubView;   
    IBOutlet NSTabView *mainTabView;
+   
+   IBOutlet NSSegmentedControl *modeSwitchButton;
 
    PrefsController *prefsController;
    SessionManager *sessionManager;
@@ -123,6 +125,7 @@ extern NSString * const BAFSavedSessionsDirectory;
 
 //- (void)controlTextDidEndEditing:(NSNotification *)obj;
 
+- (IBAction)modeSwitch:(id)sender;
 - (IBAction) switchToScanView:(id)sender;
 - (IBAction) switchToInspectorView:(id)sender;
 - (void)swapView:(NSView *)oldSubview withSubView:(NSView *)newSubview inContaningView:(NSView *)containerView;
@@ -173,5 +176,7 @@ extern NSString * const BAFSavedSessionsDirectory;
 - (IBAction)showPrefWindow:(id)sender;
 
 - (void)createHostsMenu;
+
+- (void)updateSupportFolder:(NSNotification *)notification;
 
 @end

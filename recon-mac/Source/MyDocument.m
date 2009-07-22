@@ -54,6 +54,9 @@
 
 - (void)dealloc
 {
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+   [nc removeObserver:self];   
+   
    [sessionManager release];
    [interfacesDictionary release];
    
@@ -88,27 +91,51 @@
    // Grab a copy of the Prefs Controller
    prefsController = [PrefsController sharedPrefsController];
    
-   NSError *error;
-   NSURL *url = [NSURL fileURLWithPath: [[prefsController reconSupportFolder]
-                                  stringByAppendingPathComponent: @"Library.sessions"]];       
+   // Listen to session directory updates from Prefs Controller
+   [[NSNotificationCenter defaultCenter]
+    addObserver:self
+    selector:@selector(updateSupportFolder:)
+    name:@"BAFupdateSupportFolder"
+    object:prefsController];   
    
-   // Set a custom Persistent Store location
-   [self configurePersistentStoreCoordinatorForURL:url ofType:NSSQLiteStoreType error:&error];              
+   if ([prefsController hasRun] == NO)
+   {
+      [[NSNotificationCenter defaultCenter]
+       addObserver:self
+       selector:@selector(finishFirstRun:)
+       name:@"BAFfinishFirstRun"
+       object:prefsController];   
+      
+      [prefsController displayOnFirstRun];      
+   }
+   else
+   {
+      // Perform initial update of Persistent Store
+      NSError *error;
+      NSURL *url = [NSURL fileURLWithPath: [[prefsController reconSupportFolder]
+                                     stringByAppendingPathComponent: @"Library.sessions"]];       
+      
+      // Set a custom Persistent Store location
+      [self configurePersistentStoreCoordinatorForURL:url ofType:NSSQLiteStoreType error:&error];              
+      
+      // Add some default profiles   
+      [self addProfileDefaults];   
+      
+      // Load queued sessions in the persistent store into session manager
+      [self addQueuedSessions];
    
-   // Add some default profiles   
-   [self addProfileDefaults];   
-   
-   // Load queued sessions in the persistent store into session manager
-   [self addQueuedSessions];
-   
-   // Beauty up the profiles drawer
-   NSSize mySize = {155, 90};
-   [profilesDrawer setContentSize:mySize];
-   [profilesDrawer setTrailingOffset:25];
-   
-   // Open sessions drawer
-   [sessionsDrawer toggle:self];      
-   [profilesDrawer openOnEdge:NSMinXEdge];
+      // Beauty up the profiles drawer
+      NSSize mySize = {155, 90};
+      [profilesDrawer setContentSize:mySize];
+      [profilesDrawer setTrailingOffset:25];
+      
+      // Open sessions drawer
+      [sessionsDrawer toggle:self];      
+      [profilesDrawer openOnEdge:NSMinXEdge];
+      // Expand profile view hack
+
+      [self performSelector:@selector(expandProfileView:) withObject:self afterDelay:0.1];      
+   }
    
    // Set up click-handlers for the Sessions Drawer
    [sessionsTableView setTarget:self];
@@ -143,9 +170,40 @@
    [self createHostsMenu];
    
    [mainsubView retain];
+}
 
-   // Expand profile view hack
-   [self performSelector:@selector(expandProfileView:) withObject:self afterDelay:0.1];
+- (void)updateSupportFolder:(NSNotification *)notification
+{
+   NSLog(@"MyDocument: updateSupportFolder");
+   
+   NSError *error;
+   NSURL *url = [NSURL fileURLWithPath: [[prefsController reconSupportFolder]
+                                         stringByAppendingPathComponent: @"Library.sessions"]];       
+   
+   // Set a custom Persistent Store location
+   [self configurePersistentStoreCoordinatorForURL:url ofType:NSSQLiteStoreType error:&error];              
+   
+   // Add some default profiles   
+   [self addProfileDefaults];   
+   
+   // Load queued sessions in the persistent store into session manager
+   [self addQueuedSessions];   
+   
+   [self setManagedObjectContext:[self managedObjectContext]];
+}
+
+- (void)finishFirstRun:(NSNotification *)notification
+{
+   // Beauty up the profiles drawer
+   NSSize mySize = {155, 90};
+   [profilesDrawer setContentSize:mySize];
+   [profilesDrawer setTrailingOffset:25];
+
+   // Open sessions drawer
+   [sessionsDrawer toggle:self];      
+   [profilesDrawer openOnEdge:NSMinXEdge];
+   
+   [self performSelector:@selector(expandProfileView:) withObject:self afterDelay:0.1];   
 }
 
 - (void)expandProfileView:(NSTimer *)aTimer
@@ -577,7 +635,7 @@
 - (IBAction)addProfile:(id)sender
 {
    NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile"
-                                                             withPredicate:@"name = 'User Profile'"];
+                                                             withPredicate:@"name = 'User Profiles'"];
    Profile *profileParent = [array lastObject];
    
    if (profileParent == nil)
@@ -596,7 +654,9 @@
    [profile setValue:profileParent forKey:@"parent"];
    
    // Expand the profiles window
-   [profilesOutlineView expandItem:nil expandChildren:YES];   
+//   [profilesOutlineView expandItem:nil expandChildren:YES];   
+   [profileController rearrangeObjects];
+   [[self managedObjectContext] processPendingChanges];
 }
 
 // -------------------------------------------------------------------------------
@@ -623,11 +683,20 @@
 //	View togglers
 // -------------------------------------------------------------------------------
 
+- (IBAction)modeSwitch:(id)sender
+{
+   if ([sender selectedSegment] == 0)
+      [self switchToInspectorView:self];
+   if ([sender selectedSegment] == 1)
+      [self switchToScanView:self];
+}
+
 // -------------------------------------------------------------------------------
 //	switchToScanView: Replace Inspector view with Scan view
 // -------------------------------------------------------------------------------
 - (IBAction)switchToScanView:(id)sender
 {   
+   [modeSwitchButton setSelectedSegment:1];
    [NSApp endSheet:testWindow];
    [testWindow orderOut:sender];
 
@@ -640,6 +709,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)switchToInspectorView:(id)sender
 {
+   [modeSwitchButton setSelectedSegment:0];   
    [NSApp beginSheet:testWindow
       modalForWindow:[mainView window]
        modalDelegate:self
@@ -969,11 +1039,11 @@
 
 - (IBAction)setuidNmap:(id)sender
 {
-   [PrefsController rootNmap];
+   [prefsController rootNmap];
 }
 - (IBAction)unsetuidNmap:(id)sender
 {
-   [PrefsController unrootNmap];
+   [prefsController unrootNmap];
 }
 - (IBAction)showPrefWindow:(id)sender
 {

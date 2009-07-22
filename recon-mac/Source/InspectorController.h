@@ -33,9 +33,11 @@
    BOOL autoRefresh;
    BOOL resolveHostnames;
    BOOL doneRefresh;
+   BOOL showSpinner;
    IBOutlet NSButton *autoRefreshButton;
    IBOutlet NSButton *resolveHostnamesButton;
 
+   IBOutlet NSProgressIndicator *refreshIndicator;
    
    IBOutlet NSArrayController *connectionsController;
    
@@ -45,11 +47,19 @@
    
    IBOutlet NSScrollView *regularHostsScrollView;
    IBOutlet NSScrollView *netstatHostsScrollView;
+   
+	NSTask *task;   
+   
+	NSMutableData *standardOutput;
+	NSMutableData *standardError;
+   
 }
 
 @property (readwrite, retain)NSMutableArray *connections;
 @property (readwrite, assign)BOOL autoRefresh;
 @property (readwrite, assign)BOOL resolveHostnames;
+@property (readwrite, assign)BOOL doneRefresh;
+@property (readwrite, assign)BOOL showSpinner;
 
 - (IBAction)changeInspectorTask:(id)sender;
 - (IBAction)launchScan:(id)sender;
@@ -58,7 +68,8 @@
 int bitcount (unsigned int n);
 - (int)cidrForInterface:(NSString *)ifName;
 - (IBAction)searchLocalNetwork:(id)sender;
-   
+- (IBAction)checkForServices:(id)sender;
+
 // See connected computers mode
 - (IBAction)refreshConnectionsList:(id)sender;
 - (void)setConnections:(NSMutableArray *)a;

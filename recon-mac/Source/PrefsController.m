@@ -10,7 +10,7 @@
 
 NSString * const BAFReconHasRun = @"ReconHasRun";
 NSString * const BAFNmapBinaryLocation = @"NmapBinaryLocation";
-NSString * const BAFSavedSessionDirectory = @"SavedSessionsDirectory";
+NSString * const BAFReconSupportDirectory = @"ReconSupportDirectory";
 
 NSString * const BAFAutoSetuid = @"AutoSetuid";
 
@@ -18,7 +18,7 @@ NSString * const BAFAutoSetuid = @"AutoSetuid";
 @interface PrefsController ()
 
 @property (readwrite, retain) NSString *nmapBinary;
-@property (readwrite, retain) NSString *sessionDirectory;
+@property (readwrite, retain) NSString *supportDirectory;
 @property (readwrite, assign) BOOL setuidNmap;
 @property (readwrite, assign) BOOL autoSetuid;
 
@@ -33,7 +33,7 @@ NSString * const BAFAutoSetuid = @"AutoSetuid";
 static PrefsController *sharedPrefsController = nil;
 
 @synthesize nmapBinary;
-@synthesize sessionDirectory;
+@synthesize supportDirectory;
 @synthesize setuidNmap;
 @synthesize autoSetuid;
 
@@ -41,12 +41,12 @@ static PrefsController *sharedPrefsController = nil;
 {
    if (self = [super init])
    {
-      // The order that these occur matter...
+      // The order that these occur matters...
       [self registerDefaults];
       [self readUserDefaults];
       [self checkPermsOnNmap];
       [self checkDirectories];
-      [self displayOnFirstRun];      
+//      [self displayOnFirstRun];      
    }
    
    return self;
@@ -75,7 +75,7 @@ static PrefsController *sharedPrefsController = nil;
    [defaultValues setObject:nmapBinaryLocation 
                      forKey:BAFNmapBinaryLocation];
    [defaultValues setObject:savedSessionsDirectory
-                     forKey:BAFSavedSessionDirectory];
+                     forKey:BAFReconSupportDirectory];
    
    // Register the dictionary of defaults
    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
@@ -92,7 +92,7 @@ static PrefsController *sharedPrefsController = nil;
    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
    self.autoSetuid = [defaults boolForKey:BAFAutoSetuid]; 
    self.nmapBinary = (NSString *)[defaults objectForKey:BAFNmapBinaryLocation]; 
-   self.sessionDirectory = (NSString *)[defaults objectForKey:BAFSavedSessionDirectory];   
+   self.supportDirectory = (NSString *)[defaults objectForKey:BAFReconSupportDirectory];   
 }
 
 // -------------------------------------------------------------------------------
@@ -152,9 +152,18 @@ static PrefsController *sharedPrefsController = nil;
    if ([self hasRun] == NO) {
       // Hack to prevent detached sheet
       //  See: http://www.cocoadev.com/index.pl?HowToPutASheetOnADocumentJustAfterOpeningIt
-      [self performSelector:@selector(showPrefWindow:) withObject:self afterDelay:0.5];
+      [self performSelector:@selector(showFirstRunWindow:) withObject:self afterDelay:0.5];
    }      
+}
+
+- (IBAction)showFirstRunWindow:(id)sender {   
    
+   // Then display as sheet
+   [NSApp beginSheet:firstRunWindow
+      modalForWindow:mainWindow
+       modalDelegate:self
+      didEndSelector:NULL
+         contextInfo:NULL];   
 }
 
 // -------------------------------------------------------------------------------
@@ -170,6 +179,7 @@ static PrefsController *sharedPrefsController = nil;
       didEndSelector:NULL
          contextInfo:NULL];   
 }
+
 - (IBAction)endPrefWindow:(id)sender {
    
    // Verify user-specified settings are valid
@@ -179,7 +189,7 @@ static PrefsController *sharedPrefsController = nil;
    
    [defaults setBool:autoSetuid forKey:BAFAutoSetuid];
    [defaults setObject:nmapBinary forKey:BAFNmapBinaryLocation];
-   [defaults setObject:sessionDirectory forKey:BAFSavedSessionDirectory];
+   [defaults setObject:supportDirectory forKey:BAFReconSupportDirectory];
    
    [self setRun];
    
@@ -188,6 +198,35 @@ static PrefsController *sharedPrefsController = nil;
    
    // Hide the sheet
    [prefWindow orderOut:sender];
+   
+   // Notify everyone that the Prefs have been updated
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];      
+   [nc postNotificationName:@"BAFupdateSupportFolder" object:self];  
+}
+
+- (IBAction)endFirstRunWindow:(id)sender {
+   
+   // Verify user-specified settings are valid
+   
+   // Then store them to User Defaults 
+   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+   
+   [defaults setBool:autoSetuid forKey:BAFAutoSetuid];
+   [defaults setObject:nmapBinary forKey:BAFNmapBinaryLocation];
+   [defaults setObject:supportDirectory forKey:BAFReconSupportDirectory];
+   
+   [self setRun];
+   
+   // Return to normal event handling
+   [NSApp endSheet:firstRunWindow];
+   
+   // Hide the sheet
+   [firstRunWindow orderOut:sender];
+   
+   // Notify everyone that the Prefs have been updated
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];      
+   [nc postNotificationName:@"BAFupdateSupportFolder" object:self];  
+   [nc postNotificationName:@"BAFfinishFirstRun" object:self];
 }
 
 // -------------------------------------------------------------------------------
@@ -217,19 +256,17 @@ static PrefsController *sharedPrefsController = nil;
       {
          NSString* fileName = [files objectAtIndex:i];
 
-         self.nmapBinary = fileName;         
-         [nmapBinaryTextField selectText:self];         
-         
-         // Check file permissions
-         [self checkPermsOnNmap];
+         self.nmapBinary = fileName;            // Save new binary location
+         [self checkPermsOnNmap];               // Check file permissions
+         [nmapBinaryTextField selectText:self]; // Friendlify GUI
       }
    }
 }
 
 // -------------------------------------------------------------------------------
-//	browseSessionDirectory: TODO: refactor these functions!
+//	browseSupportDirectory: TODO: refactor these functions!
 // -------------------------------------------------------------------------------
-- (IBAction)browseSessionDirectory:(id)sender
+- (IBAction)browseSupportDirectory:(id)sender
 {
    // Create the File Open Dialog class.
    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
@@ -253,9 +290,9 @@ static PrefsController *sharedPrefsController = nil;
       {
          NSString* fileName = [files objectAtIndex:i];
          
-         self.sessionDirectory = fileName;
-         
-         [sessionDirectoryTextField selectText:self];
+         self.supportDirectory = fileName;            // Save the new directory
+         [self checkDirectories];                     // Create subdirectories
+         [supportDirectoryTextField selectText:self]; // Friendlify GUI
       }
    }
 }
@@ -269,13 +306,13 @@ static PrefsController *sharedPrefsController = nil;
    if (self.setuidNmap == YES)
    {
       // Root it
-      [PrefsController rootNmap];
+      [self rootNmap];
       [self checkPermsOnNmap];
    }
    // Otherwise, unroot it...
    else
    {
-      [PrefsController unrootNmap];
+      [self unrootNmap];
       [self checkPermsOnNmap];
    }
 }
@@ -283,7 +320,7 @@ static PrefsController *sharedPrefsController = nil;
 // -------------------------------------------------------------------------------
 //	rootNmap:
 // -------------------------------------------------------------------------------
-+ (BOOL)rootNmap
+- (BOOL)rootNmap
 {
    // Paraphrased from http://developer.apple.com/documentation/Security/Conceptual/authorization_concepts/03authtasks/chapter_3_section_4.html
    OSStatus myStatus;
@@ -306,14 +343,16 @@ static PrefsController *sharedPrefsController = nil;
       return myStatus;
    
    char *myToolPath = {"/bin/chmod"};
-   char *myArguments[] = {"4777", "/usr/local/bin/nmap", NULL};
+   const char *myBinaryPath = [nmapBinary cStringUsingEncoding:NSUTF8StringEncoding];
+   char *myArguments[] = {"4777", myBinaryPath, NULL};   
    FILE *myCommunicationsPipe = NULL;
    
    myFlags = kAuthorizationFlagDefaults;
    myStatus = AuthorizationExecuteWithPrivileges(myAuthorizationRef, myToolPath, myFlags, myArguments, &myCommunicationsPipe);
    
    char *myToolPath2 = {"/usr/sbin/chown"};
-   char *myArguments2[] = {"root", "/usr/local/bin/nmap", NULL};
+   const char *myBinaryPath2 = [nmapBinary cStringUsingEncoding:NSUTF8StringEncoding];   
+   char *myArguments2[] = {"root", myBinaryPath2, NULL};   
    myCommunicationsPipe = NULL;
    
    myFlags = kAuthorizationFlagDefaults;
@@ -326,7 +365,7 @@ static PrefsController *sharedPrefsController = nil;
 // -------------------------------------------------------------------------------
 //	unrootNmap:
 // -------------------------------------------------------------------------------
-+ (BOOL)unrootNmap
+- (BOOL)unrootNmap
 {
    // Paraphrased from http://developer.apple.com/documentation/Security/Conceptual/authorization_concepts/03authtasks/chapter_3_section_4.html
    OSStatus myStatus;
@@ -349,14 +388,16 @@ static PrefsController *sharedPrefsController = nil;
       return myStatus;
    
    char *myToolPath = {"/bin/chmod"};
-   char *myArguments[] = {"770", "/usr/local/bin/nmap", NULL};
+   const char *myBinaryPath = [nmapBinary cStringUsingEncoding:NSUTF8StringEncoding];      
+   char *myArguments[] = {"770", myBinaryPath, NULL};
    FILE *myCommunicationsPipe = NULL;
    
    myFlags = kAuthorizationFlagDefaults;
    myStatus = AuthorizationExecuteWithPrivileges(myAuthorizationRef, myToolPath, myFlags, myArguments, &myCommunicationsPipe);
    
    char *myToolPath2 = {"/usr/sbin/chown"};
-   char *myArguments2[] = {"me:staff", "/usr/local/bin/nmap", NULL};
+   const char *myBinaryPath2 = [nmapBinary cStringUsingEncoding:NSUTF8StringEncoding];   
+   char *myArguments2[] = {"me:staff", myBinaryPath2, NULL};   
    myCommunicationsPipe = NULL;
    
    myFlags = kAuthorizationFlagDefaults;
@@ -386,11 +427,11 @@ static PrefsController *sharedPrefsController = nil;
 }
 
 - (NSString *)reconSupportFolder {
-   return self.sessionDirectory;
+   return self.supportDirectory;
 }
 
 - (NSString *)reconSessionFolder {
-   return [sessionDirectory stringByAppendingPathComponent:@"Sessions"];
+   return [supportDirectory stringByAppendingPathComponent:@"Sessions"];
 }
 
 // -------------------------------------------------------------------------------

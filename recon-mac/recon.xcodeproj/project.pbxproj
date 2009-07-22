@@ -205,7 +205,7 @@
 				8C79F30910033EF200A4648B /* SPGrowlController.h */,
 				8C79F30A10033EF200A4648B /* SPGrowlController.m */,
 				8C7E9C731014D34E00762319 /* NSManagedObjectContext-helper.h */,
-				8CC3297F100DEE3E00483939 /* Network Assistant */,
+				8CC3297F100DEE3E00483939 /* Inspector */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -262,7 +262,7 @@
 			name = "Managed Objects";
 			sourceTree = "<group>";
 		};
-		8CC3297F100DEE3E00483939 /* Network Assistant */ = {
+		8CC3297F100DEE3E00483939 /* Inspector */ = {
 			isa = PBXGroup;
 			children = (
 				8CC329CF100DF9D700483939 /* ClientController.h */,
@@ -272,7 +272,7 @@
 				8CC3278D100CDCF000483939 /* InspectorController.h */,
 				8CC3278E100CDCF000483939 /* InspectorController.m */,
 			);
-			name = "Network Assistant";
+			name = Inspector;
 			sourceTree = "<group>";
 		};
 		E1B74B1A0667B4A90069E3BA /* Models */ = {

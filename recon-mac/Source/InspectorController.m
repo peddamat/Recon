@@ -8,13 +8,15 @@
 
 #import "InspectorController.h"
 
-#import "MyDocument.h"
+//#import "MyDocument.h"
 #import "SessionController.h"
 #import "SessionManager.h"
 
 #import "Connection.h"
 #import "Profile.h"
 #import "Session.h"
+
+//#import "NSManagedObjectContext-helper.h"
 
 #include <arpa/inet.h>
 #include <net/if.h>
@@ -40,6 +42,7 @@
 @synthesize autoRefresh;
 @synthesize resolveHostnames;
 @synthesize doneRefresh;
+@synthesize showSpinner;
 
 @synthesize task;
 @synthesize standardOutput;
@@ -51,8 +54,9 @@
    if (self = [super init])
    {
       connections = [[NSMutableArray alloc] init];             
-      self.autoRefresh = TRUE;
-      self.resolveHostnames = FALSE;
+      self.autoRefresh = NO;
+      self.resolveHostnames = NO;
+      self.showSpinner = NO;
    }
    
    return self;
@@ -83,6 +87,7 @@
    // I overlayed the Hosts Tableviews for 
    if ([[sender title] hasPrefix:@"See the machines connected"])
    {
+      self.autoRefresh = YES;
       [scanButton setTitle:@"Refresh"];
       [self refreshConnectionsList:self];
       [autoRefreshButton setEnabled:TRUE];
@@ -92,6 +97,7 @@
    }
    else
    {
+      self.autoRefresh = NO;
       [scanButton setTitle:@"Scan"];      
       [autoRefreshButton setEnabled:FALSE];      
       [resolveHostnamesButton setEnabled:FALSE];      
@@ -104,10 +110,11 @@
 //      [self searchLocalNetwork:self];
    }
    
-   if ([[sender title] hasPrefix:@"Check what services"])
+   if ([[sender title] hasPrefix:@"Check"])
    {
       [hostsTextField setEnabled:TRUE];
       [hostsTextFieldLabel setEnabled:TRUE];
+      [hostsTextField selectText:self];
    }
    else
    {
@@ -134,6 +141,10 @@
    {
       [self refreshConnectionsList:self];
    }
+   else if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Check what services"])
+   {
+      [self checkForServices:self];
+   }
 }
 
 // -------------------------------------------------------------------------------
@@ -144,16 +155,33 @@
    // Grab the Session Manager object
    SessionManager *sessionManager = [SessionManager sharedSessionManager];
 
-   // Create a profile and populate it for basic ping-scanning
-   Profile *profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
-                                                    inManagedObjectContext:[sessionManager context]];
-   
-   [profile setFastScan:[NSNumber numberWithBool:TRUE]];
+   // Grab an existing profile
+   NSArray *array = [[sessionManager context] fetchObjectsForEntityName:@"Profile"
+                                                             withPredicate:@"name = 'Quick Scan'"];
+   Profile *profile = [array lastObject];
    
    // Queue and launch the session
    [sessionManager queueSessionWithProfile:profile 
                                 withTarget:[NSString stringWithFormat:@"192.168.0.1/%d",[self cidrForInterface:@"en0"]]];
 
+}
+
+- (IBAction)checkForServices:(id)sender
+{
+   // Grab the Session Manager object
+   SessionManager *sessionManager = [SessionManager sharedSessionManager];
+   
+   // Grab an existing profile
+   NSArray *array = [[sessionManager context] fetchObjectsForEntityName:@"Profile"
+                                                          withPredicate:@"name = 'Quick Scan'"];
+   Profile *profile = [array lastObject];
+   
+   // Queue and launch the session
+   [sessionManager queueSessionWithProfile:profile 
+                                withTarget:[hostsTextField stringValue]];
+   
+   [sessionManager processQueue];
+   
 }
 
 // -------------------------------------------------------------------------------
@@ -278,6 +306,7 @@ int bitcount (unsigned int n)
    [standardOutputFile waitForDataInBackgroundAndNotify];
    [standardErrorFile waitForDataInBackgroundAndNotify]; 
    
+//   [self performSelector:@selector(showSpinnerr) withObject:self afterDelay:1];
    [task launch];
 }
 
@@ -309,12 +338,23 @@ int bitcount (unsigned int n)
    [standardErrorFile waitForDataInBackgroundAndNotify];
 }
 
+- (void)showSpinnerr
+{
+   if (doneRefresh == NO) {
+//      [refreshIndicator startAnimation:self];
+      self.showSpinner = YES;
+   }
+}
+
 // -------------------------------------------------------------------------------
 //	terminatedNotification: Called by NTask when Nmap has returned.
 // -------------------------------------------------------------------------------
 - (void)terminatedNotification:(NSNotification *)notification
 {
    NSLog(@"InspectorController: terminated");
+   
+   self.showSpinner = NO;
+//   [refreshIndicator stopAnimation:self];
    
    // Clear array
    [connections removeAllObjects];   
@@ -328,8 +368,6 @@ int bitcount (unsigned int n)
       
    NSArray *line = [aString componentsSeparatedByString:@"\n"];
    int lineLength = [line count] - 1;
-   
-   NSLog(@"%@", line);
    
    Connection *c = nil;
    NSMutableArray *a = [[NSMutableArray alloc] init];
@@ -396,16 +434,16 @@ int bitcount (unsigned int n)
       }      
    }
    
-   [connectionsController addObjects:a];
-
    self.doneRefresh = YES;
+   
+   [connectionsController addObjects:a];
 
    [[NSNotificationCenter defaultCenter] removeObserver:self];
 //   [task release];
    
    
    if (self.autoRefresh == YES)
-      [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:1];
+      [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:2];
 }   
 
 @end

@@ -16,8 +16,6 @@
    
 	NSMutableData *standardOutput;
 	NSMutableData *standardError;
-	NSString *outputString;
-	NSString *errorString; 
    
    NSString *outputFilePath;
    
