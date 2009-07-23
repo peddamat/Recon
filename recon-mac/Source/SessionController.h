@@ -34,7 +34,7 @@
    NSString *sessionDirectory;
    NSString *sessionOutputFile;   
    
-   BOOL hasRun;   
+   BOOL hasReconRunBefore;   
    BOOL isRunning;
    BOOL deleteAfterAbort;
    
@@ -45,7 +45,7 @@
    XMLController *xmlController;
 }
 
-@property (readonly, assign) BOOL hasRun;
+@property (readonly, assign) BOOL hasReconRunBefore;
 @property (readonly, assign) BOOL isRunning;
 @property (readwrite, retain) Session *session;
 @property (readonly, retain) NSString *sessionUUID;

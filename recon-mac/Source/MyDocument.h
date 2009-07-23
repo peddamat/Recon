@@ -108,8 +108,6 @@ extern NSString * const BAFSavedSessionsDirectory;
    float nmapErrorCount;   
    NSTimer *nmapErrorTimer;
    
-   NSPredicate *testy;   
-   
    IBOutlet NSWindow *testWindow;
 }
 
@@ -118,8 +116,6 @@ extern NSString * const BAFSavedSessionsDirectory;
 @property (readonly) NSArray *portSortDescriptor;
 @property (readonly) NSArray *profileSortDescriptor;
 @property (readonly) NSArray *sessionSortDescriptor;
-
-@property (readonly) NSPredicate *testy;
 
 - (IBAction)peanut:(id)sender;
 
@@ -163,7 +159,7 @@ extern NSString * const BAFSavedSessionsDirectory;
 
 - (void)addQueuedSessions;
 
-- (void)addProfileDefaults;
+- (void)addDefaultProfiles;
 //- (void)readUserDefaults;
 - (IBAction)addProfile:(id)sender;
 - (IBAction)deleteProfile:(id)sender;
@@ -171,7 +167,7 @@ extern NSString * const BAFSavedSessionsDirectory;
 - (IBAction)setuidNmap:(id)sender;
 - (IBAction)unsetuidNmap:(id)sender;
 
-- (void)expandProfileView:(NSTimer *)aTimer;
+- (void)expandProfileView;
 
 - (IBAction)showPrefWindow:(id)sender;
 

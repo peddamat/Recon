@@ -34,7 +34,7 @@
 
 + (PrefsController *)sharedPrefsController;
 
-- (void)displayOnFirstRun;
+- (void)displayWelcomeWindow;
 
 + (NSString *)applicationSupportFolder;
 + (NSString *)applicationSessionsFolder;
@@ -57,7 +57,7 @@
 - (BOOL)unrootNmap;
 - (IBAction)toggleNmapPerms:(id)sender;
 
-- (BOOL)hasRun;
+- (BOOL)hasReconRunBefore;
 - (void)setRun;
 
 - (IBAction)browseNmapBinary:(id)sender;

@@ -21,20 +21,20 @@
 
 @interface SessionController ()
 
-//@property (readwrite, retain) Session *session; 
-@property (readwrite, retain) NSString *sessionUUID;   
-@property (readwrite, retain) NSString *sessionDirectory;
-@property (readwrite, retain) NSString *sessionOutputFile;   
+   //@property (readwrite, retain) Session *session; 
+   @property (readwrite, retain) NSString *sessionUUID;   
+   @property (readwrite, retain) NSString *sessionDirectory;
+   @property (readwrite, retain) NSString *sessionOutputFile;   
 
-@property (readwrite, assign) BOOL hasRun;   
-@property (readwrite, assign) BOOL isRunning;
-@property (readwrite, assign) BOOL deleteAfterAbort;
+   @property (readwrite, assign) BOOL hasReconRunBefore;   
+   @property (readwrite, assign) BOOL isRunning;
+   @property (readwrite, assign) BOOL deleteAfterAbort;
 
-@property (readwrite, retain) NSArray *nmapArguments;   
-@property (readwrite, assign) NmapController *nmapController;
+   @property (readwrite, retain) NSArray *nmapArguments;   
+   @property (readwrite, assign) NmapController *nmapController;
 
-@property (readwrite, retain) NSTimer *resultsTimer;
-@property (readwrite, retain) XMLController *xmlController;
+   @property (readwrite, retain) NSTimer *resultsTimer;
+   @property (readwrite, retain) XMLController *xmlController;
 
 @end
 
@@ -46,7 +46,7 @@
 @synthesize sessionDirectory;
 @synthesize sessionOutputFile;
 
-@synthesize hasRun;
+@synthesize hasReconRunBefore;
 @synthesize isRunning;
 @synthesize deleteAfterAbort;
 
@@ -64,7 +64,7 @@
    // Generate a unique identifier for this controller
    self.sessionUUID = [SessionController stringWithUUID];
       
-   self.hasRun = FALSE;
+   self.hasReconRunBefore = FALSE;
    self.isRunning = FALSE;
    self.deleteAfterAbort = FALSE;   
    
@@ -118,18 +118,15 @@ inManagedObjectContext:(NSManagedObjectContext *)context
       
    // Send signals to View to update sorting/selections
    [context processPendingChanges];
-   
-   // Check PrefsController for user-specified sessions directory
-//   NSString *nmapBinary = [PrefsController nmapBinary]       
-   
+      
    [self createSessionDirectory:sessionUUID];
          
    ArgumentListGenerator *a = [[ArgumentListGenerator alloc] init];
+   
    // Convert selected profile to nmap arguments
    self.nmapArguments = [a convertProfileToArgs:profile withTarget:sessionTarget withOutputFile:sessionOutputFile];   
    
-   [self initNmapController];
-   
+   [self initNmapController];   
 }
 
 // -------------------------------------------------------------------------------
@@ -151,8 +148,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 
    [self createSessionDirectory:[s UUID]];
 
-   ArgumentListGenerator *a = [[ArgumentListGenerator alloc] init];
-   // Convert selected profile to nmap arguments
+   // Convert selected profile to nmap arguments   
+   ArgumentListGenerator *a = [[[ArgumentListGenerator alloc] init] autorelease];
    self.nmapArguments = [a convertProfileToArgs:profile withTarget:[s target] withOutputFile:sessionOutputFile];   
    
    [self initNmapController];   
@@ -173,6 +170,9 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 
    NSError *error = nil;   
    NSArray *array = [[profile managedObjectContext] executeFetchRequest:request error:&error];   
+   
+//   NSArray *array = [[profile managedObjectContext] fetchObjectsForEntityName:@"Profile" 
+//                                                             withPredicate:@"name == 'Saved Sessions'"];
    
    // Saved Sessions Folder
    Profile *savedSessions = [array lastObject];
@@ -246,10 +246,10 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 - (void)startScan
 {      
    // Reinitialize controller if previously run/aborted
-   if ([nmapController hasRun])
+   if ([nmapController hasReconRunBefore])
       [self initNmapController];
    
-   self.hasRun = TRUE;   
+   self.hasReconRunBefore = TRUE;   
    self.isRunning = TRUE;
    [session setStatus:@"Running"];
    
@@ -262,7 +262,6 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    
    [nmapController startScan];
 }
-
 
 // -------------------------------------------------------------------------------
 //	readProgress: Called by the resultsTimer.  Parses nmap-output.xml for 'taskprogress'
@@ -328,7 +327,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)abortScan
 {
-   self.hasRun = TRUE;
+   self.hasReconRunBefore = TRUE;
    [nmapController abortScan];  
 }
 
@@ -338,7 +337,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)deleteSession
 {
-   self.hasRun = TRUE;
+   self.hasReconRunBefore = TRUE;
    self.deleteAfterAbort = TRUE;   
    [nmapController abortScan];
 }

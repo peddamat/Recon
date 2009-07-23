@@ -65,8 +65,6 @@
 - (void)dealloc
 {
    [connections release];
-   [timer invalidate];
-   [timer release];
    [super dealloc];
 }
 

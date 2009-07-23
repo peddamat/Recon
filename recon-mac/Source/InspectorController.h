@@ -15,30 +15,24 @@
 @interface InspectorController : NSObject {
 
    
-   // Main PopUpButton at top
+   // Global outlets
    IBOutlet NSPopUpButton *taskSelectionPopUp;
-
    IBOutlet NSButton *scanButton;
+   IBOutlet NSProgressIndicator *refreshIndicator;
    
-   // Find computers mode
-   NSPredicate *testy;      
+   // Find computers mode  
    SessionManager *SessionManager;
    IBOutlet NSArrayController *sessionsController;
    
    // See connected computers mode
-   NSTimer *timer;   
    NSMutableArray *connections;
 
-   Connection *selectedConnection;
    BOOL autoRefresh;
    BOOL resolveHostnames;
    BOOL doneRefresh;
    BOOL showSpinner;
    IBOutlet NSButton *autoRefreshButton;
-   IBOutlet NSButton *resolveHostnamesButton;
-
-   IBOutlet NSProgressIndicator *refreshIndicator;
-   
+   IBOutlet NSButton *resolveHostnamesButton;   
    IBOutlet NSArrayController *connectionsController;
    
    // Text Fields for host entry
@@ -48,8 +42,7 @@
    IBOutlet NSScrollView *regularHostsScrollView;
    IBOutlet NSScrollView *netstatHostsScrollView;
    
-	NSTask *task;   
-   
+	NSTask *task;      
 	NSMutableData *standardOutput;
 	NSMutableData *standardError;
    

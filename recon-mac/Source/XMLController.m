@@ -24,7 +24,7 @@
    @property (readwrite, retain) Port *currentPort;
    @property (readwrite, retain) OperatingSystem *currentOperatingSystem;   
 
-// State-machine helper flag
+// State-machine helper flags
    @property (readwrite, assign) BOOL inRunstats;   
    @property (readwrite, assign) BOOL inOsclass;   
    @property (readwrite, assign) BOOL inOsmatch;   

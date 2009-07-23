@@ -35,8 +35,6 @@
 @synthesize profileSortDescriptor;
 @synthesize sessionSortDescriptor;
 
-@synthesize testy;
-
 
 - (id)init 
 {
@@ -91,26 +89,26 @@
    // Grab a copy of the Prefs Controller
    prefsController = [PrefsController sharedPrefsController];
    
-   // Listen to session directory updates from Prefs Controller
+   // Listen for user defaults updates from Prefs Controller
    [[NSNotificationCenter defaultCenter]
     addObserver:self
     selector:@selector(updateSupportFolder:)
     name:@"BAFupdateSupportFolder"
     object:prefsController];   
    
-   if ([prefsController hasRun] == NO)
-   {
+   if ([prefsController hasReconRunBefore] == NO)
+   {      
       [[NSNotificationCenter defaultCenter]
        addObserver:self
        selector:@selector(finishFirstRun:)
        name:@"BAFfinishFirstRun"
        object:prefsController];   
       
-      [prefsController displayOnFirstRun];      
+      [prefsController displayWelcomeWindow];      
    }
    else
    {
-      // Perform initial update of Persistent Store
+      // Load up Persistent Store
       NSError *error;
       NSURL *url = [NSURL fileURLWithPath: [[prefsController reconSupportFolder]
                                      stringByAppendingPathComponent: @"Library.sessions"]];       
@@ -118,12 +116,12 @@
       // Set a custom Persistent Store location
       [self configurePersistentStoreCoordinatorForURL:url ofType:NSSQLiteStoreType error:&error];              
       
-      // Add some default profiles   
-      [self addProfileDefaults];   
-      
+      // Add some default scanning profiles   
+      [self addDefaultProfiles];   
+
       // Load queued sessions in the persistent store into session manager
       [self addQueuedSessions];
-   
+
       // Beauty up the profiles drawer
       NSSize mySize = {155, 90};
       [profilesDrawer setContentSize:mySize];
@@ -132,11 +130,11 @@
       // Open sessions drawer
       [sessionsDrawer toggle:self];      
       [profilesDrawer openOnEdge:NSMinXEdge];
-      // Expand profile view hack
 
-      [self performSelector:@selector(expandProfileView:) withObject:self afterDelay:0.1];      
+      // Expand profile view hack
+      [self performSelector:@selector(expandProfileView) withObject:self afterDelay:0.1];      
    }
-   
+
    // Set up click-handlers for the Sessions Drawer
    [sessionsTableView setTarget:self];
    [sessionsTableView setDoubleAction:@selector(sessionsTableDoubleClick)];
@@ -157,8 +155,8 @@
    // ... and the Ports TableView in the Results Tab
    [resultsPortsTableView setTarget:self];
    [resultsPortsTableView setDoubleAction:@selector(resultsPortsTableDoubleClick)];   
-   
-   // Setup up interfaces Popup Button
+
+   // Populate network interfaces Popup Button
    [self getNetworkInterfaces];
    [self populateInterfacePopUp];   
    
@@ -166,12 +164,16 @@
    [queueSegmentedControl setTarget:self];   
    [queueSegmentedControl setAction:@selector(segControlClicked:)];   
    
-   // Generate the Hosts Context Menu items
+   // Generate the Hosts TableView Context Menu items
    [self createHostsMenu];
    
    [mainsubView retain];
 }
 
+// -------------------------------------------------------------------------------
+//	updateSupportFolder: If the user updates the output folder in the Prefs Controller
+//                      we've gotta relocate the Persistent Store.
+// -------------------------------------------------------------------------------
 - (void)updateSupportFolder:(NSNotification *)notification
 {
    NSLog(@"MyDocument: updateSupportFolder");
@@ -184,7 +186,7 @@
    [self configurePersistentStoreCoordinatorForURL:url ofType:NSSQLiteStoreType error:&error];              
    
    // Add some default profiles   
-   [self addProfileDefaults];   
+   [self addDefaultProfiles];   
    
    // Load queued sessions in the persistent store into session manager
    [self addQueuedSessions];   
@@ -192,6 +194,11 @@
    [self setManagedObjectContext:[self managedObjectContext]];
 }
 
+// -------------------------------------------------------------------------------
+//	finishFirstRun: BEAUTIFIER FUNCTION.  The Welcome window looks better when the
+//                 drawers are closed, so we open them after the user dismisses the
+//                 window.
+// -------------------------------------------------------------------------------
 - (void)finishFirstRun:(NSNotification *)notification
 {
    // Beauty up the profiles drawer
@@ -203,10 +210,13 @@
    [sessionsDrawer toggle:self];      
    [profilesDrawer openOnEdge:NSMinXEdge];
    
-   [self performSelector:@selector(expandProfileView:) withObject:self afterDelay:0.1];   
+   [self performSelector:@selector(expandProfileView) withObject:self afterDelay:0.1];   
 }
 
-- (void)expandProfileView:(NSTimer *)aTimer
+// -------------------------------------------------------------------------------
+//	expandProfileView: BEAUTIFIER FUNCTION.  Expand the folders in the Profiles Drawer.
+// -------------------------------------------------------------------------------
+- (void)expandProfileView
 {
    [profilesOutlineView expandItem:nil expandChildren:YES];   
    [profileController setSelectionIndexPath:[NSIndexPath indexPathWithIndex:0]];
@@ -298,7 +308,7 @@
 
 
 // -------------------------------------------------------------------------------
-//	queueSession: Use current state of the selected Profile and queue a session.       
+//	queueSession: Queue up a session using the currently selected Profile.
 //
 //   http://arstechnica.com/apple/guides/2009/04/cocoa-dev-the-joy-of-nspredicates-and-matching-strings.ars
 // -------------------------------------------------------------------------------
@@ -418,7 +428,7 @@
 }
 
 // -------------------------------------------------------------------------------
-//	createHostsMenu: The hosts context menu displays a list of Profile.  
+//	createHostsMenu: The hosts context menu displays a list of Profiles.  
 // -------------------------------------------------------------------------------
 - (void)createHostsMenu
 {
@@ -494,18 +504,21 @@
 }
 
 // -------------------------------------------------------------------------------
-//	addProfileDefaults: TODO: This should be moved to the PrefsController.
+//	addDefaultProfiles: 
 // -------------------------------------------------------------------------------
-- (void)addProfileDefaults
+- (void)addDefaultProfiles
 {
-   NSManagedObjectContext *context = [self managedObjectContext];
-   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
-   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile"
-                                             inManagedObjectContext:[self managedObjectContext]];
-   [request setEntity:entity];
+//   NSManagedObjectContext *context = [self managedObjectContext];
+//   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
+//   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile"
+//                                             inManagedObjectContext:[self managedObjectContext]];
+//   [request setEntity:entity];
+//   
+//   NSError *error = nil;
+//   NSArray *array = [context executeFetchRequest:request error:&error];
    
-   NSError *error = nil;
-   NSArray *array = [context executeFetchRequest:request error:&error];
+   NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:nil]; 
+   
    
    if (array != nil) {
       
@@ -870,7 +883,6 @@
    [self toggleResults:self];
 }
 
-
 - (void)resultsPortsTableDoubleClick
 {
    // Find clicked row from sessionsTableView
@@ -1219,19 +1231,6 @@
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
 {
    return TRUE;
-}
-
-// -------------------------------------------------------------------------------
-//	testy: Test function for playing around with predicates
-// -------------------------------------------------------------------------------
-- (NSPredicate *)testy
-{
-   NSLog(@"MyDocument: testy");
-   Session *session = [self selectedSessionInDrawer];
-   if (testy == nil) {
-      testy = [NSPredicate predicateWithFormat: @"ANY session == %@", session];   
-   }
-   return testy;
 }
 
 // -------------------------------------------------------------------------------

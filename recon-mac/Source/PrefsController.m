@@ -46,7 +46,7 @@ static PrefsController *sharedPrefsController = nil;
       [self readUserDefaults];
       [self checkPermsOnNmap];
       [self checkDirectories];
-//      [self displayOnFirstRun];      
+//      [self displayWelcomeWindow];      
    }
    
    return self;
@@ -145,11 +145,11 @@ static PrefsController *sharedPrefsController = nil;
 }
 
 // -------------------------------------------------------------------------------
-//	displayOnFirstRun: Displays the preference window the first time Recon is executed.
+//	displayWelcomeWindow: Displays the preference window the first time Recon is executed.
 // -------------------------------------------------------------------------------
-- (void)displayOnFirstRun
+- (void)displayWelcomeWindow
 {
-   if ([self hasRun] == NO) {
+   if ([self hasReconRunBefore] == NO) {
       // Hack to prevent detached sheet
       //  See: http://www.cocoadev.com/index.pl?HowToPutASheetOnADocumentJustAfterOpeningIt
       [self performSelector:@selector(showFirstRunWindow:) withObject:self afterDelay:0.5];
@@ -164,6 +164,31 @@ static PrefsController *sharedPrefsController = nil;
        modalDelegate:self
       didEndSelector:NULL
          contextInfo:NULL];   
+}
+
+- (IBAction)endFirstRunWindow:(id)sender {
+   
+   // Verify user-specified settings are valid
+   
+   // Then store them to User Defaults 
+   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+   
+   [defaults setBool:autoSetuid forKey:BAFAutoSetuid];
+   [defaults setObject:nmapBinary forKey:BAFNmapBinaryLocation];
+   [defaults setObject:supportDirectory forKey:BAFReconSupportDirectory];
+   
+   [self setRun];
+   
+   // Return to normal event handling
+   [NSApp endSheet:firstRunWindow];
+   
+   // Hide the sheet
+   [firstRunWindow orderOut:sender];
+   
+   // Notify everyone that the Prefs have been updated
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];      
+   [nc postNotificationName:@"BAFupdateSupportFolder" object:self];  
+   [nc postNotificationName:@"BAFfinishFirstRun" object:self];
 }
 
 // -------------------------------------------------------------------------------
@@ -202,31 +227,6 @@ static PrefsController *sharedPrefsController = nil;
    // Notify everyone that the Prefs have been updated
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];      
    [nc postNotificationName:@"BAFupdateSupportFolder" object:self];  
-}
-
-- (IBAction)endFirstRunWindow:(id)sender {
-   
-   // Verify user-specified settings are valid
-   
-   // Then store them to User Defaults 
-   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-   
-   [defaults setBool:autoSetuid forKey:BAFAutoSetuid];
-   [defaults setObject:nmapBinary forKey:BAFNmapBinaryLocation];
-   [defaults setObject:supportDirectory forKey:BAFReconSupportDirectory];
-   
-   [self setRun];
-   
-   // Return to normal event handling
-   [NSApp endSheet:firstRunWindow];
-   
-   // Hide the sheet
-   [firstRunWindow orderOut:sender];
-   
-   // Notify everyone that the Prefs have been updated
-   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];      
-   [nc postNotificationName:@"BAFupdateSupportFolder" object:self];  
-   [nc postNotificationName:@"BAFfinishFirstRun" object:self];
 }
 
 // -------------------------------------------------------------------------------
@@ -407,9 +407,8 @@ static PrefsController *sharedPrefsController = nil;
    return myStatus;
 }
 
-
 // -------------------------------------------------------------------------------
-//	applicationSupportFolder: 
+//	applicationSupportFolder: Return the system-wide application support folder
 // -------------------------------------------------------------------------------
 + (NSString *)applicationSupportFolder {
    
@@ -419,7 +418,7 @@ static PrefsController *sharedPrefsController = nil;
 }
 
 // -------------------------------------------------------------------------------
-//	applicationSessionsFolder: 
+//	applicationSessionsFolder: Sessions are stored in a sub-folder of the main support folder
 // -------------------------------------------------------------------------------
 + (NSString *)applicationSessionsFolder {
    
@@ -435,15 +434,15 @@ static PrefsController *sharedPrefsController = nil;
 }
 
 // -------------------------------------------------------------------------------
-//	hasRun:
+//	hasReconRunBefore: Has Recon executed on this machine?
 // -------------------------------------------------------------------------------
-- (BOOL)hasRun {
+- (BOOL)hasReconRunBefore {
    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
    return [defaults boolForKey:BAFReconHasRun];      
 }
 
 // -------------------------------------------------------------------------------
-//	setRun:
+//	setRun: Dirty has run flag
 // -------------------------------------------------------------------------------
 - (void)setRun {
    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
