@@ -96,6 +96,15 @@
     name:@"BAFupdateSupportFolder"
     object:prefsController];   
    
+ //  // Listen for clicks in the Profiles Drawer
+//   [[NSNotificationCenter defaultCenter]
+//    addObserver:self
+//    selector:@selector(updateSupportFolder:)
+//    name:@"NSOutlineViewSelectionDidChangeNotification"
+//    object:prefsController];   
+//   
+//   .
+   
    if ([prefsController hasReconRunBefore] == NO)
    {      
       [[NSNotificationCenter defaultCenter]
@@ -193,6 +202,16 @@
    
    [self setManagedObjectContext:[self managedObjectContext]];
 }
+
+// -------------------------------------------------------------------------------
+//	outlineViewSelectionDidChange: BEAUTIFIER FUNCTION.  When the user clicks a 
+//                        profile, assume they're done viewing host info.
+// -------------------------------------------------------------------------------
+- (void)outlineViewSelectionDidChange:(NSNotification *)notification
+{
+   [self toggleSettings:self];
+}
+
 
 // -------------------------------------------------------------------------------
 //	finishFirstRun: BEAUTIFIER FUNCTION.  The Welcome window looks better when the

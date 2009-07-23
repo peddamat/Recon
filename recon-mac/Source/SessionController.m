@@ -149,7 +149,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    [self createSessionDirectory:[s UUID]];
 
    // Convert selected profile to nmap arguments   
-   ArgumentListGenerator *a = [[[ArgumentListGenerator alloc] init] autorelease];
+   ArgumentListGenerator *a = [[ArgumentListGenerator alloc] init];
    self.nmapArguments = [a convertProfileToArgs:profile withTarget:[s target] withOutputFile:sessionOutputFile];   
    
    [self initNmapController];   
