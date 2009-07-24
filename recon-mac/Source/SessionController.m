@@ -357,6 +357,16 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    [session setStatus:@"Done"];
    [session setProgress:[NSNumber numberWithFloat:100]];   
    
+   // Set up "Console" pointers
+   NSString *nmapOutputStdout = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
+                                                                             withString:@"nmap-stdout.txt"];
+   NSString *nmapOutputStderr = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
+                                                                             withString:@"nmap-stderr.txt"];
+
+   [session setNmapOutputXml:sessionOutputFile];
+   [session setNmapOutputStdout:nmapOutputStdout];
+   [session setNmapOutputStderr:nmapOutputStderr];
+   
    // Send notification to SessionManager that session is complete
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc postNotificationName:@"SCsuccessfulRun" object:self];
@@ -396,6 +406,16 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    self.isRunning = FALSE;
    [session setStatus:@"Error"];   
    [session setProgress:[NSNumber numberWithFloat:0]];   
+   
+   // Set up "Console" pointers
+   NSString *nmapOutputStdout = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
+                                                                             withString:@"nmap-stdout.txt"];
+   NSString *nmapOutputStderr = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
+                                                                             withString:@"nmap-stderr.txt"];
+   
+   [session setNmapOutputXml:sessionOutputFile];
+   [session setNmapOutputStdout:nmapOutputStdout];
+   [session setNmapOutputStderr:nmapOutputStderr];   
    
    // Send notification to SessionManager that session is complete
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];

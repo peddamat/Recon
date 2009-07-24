@@ -1,30 +1,33 @@
 //
 //  Session.h
-//  Recon
+//  recon
 //
-//  Created by Sumanth Peddamatham on 7/16/09.
+//  Created by Sumanth Peddamatham on 7/24/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
 
-@class Profile;
 @class Host;
+@class Profile;
 
 @interface Session :  NSManagedObject  
 {
 }
 
-@property (nonatomic, retain) NSNumber * hostsUp;
+@property (nonatomic, retain) NSString * nmapOutputStdout;
 @property (nonatomic, retain) NSString * target;
-@property (nonatomic, retain) NSString * UUID;
+@property (nonatomic, retain) NSString * nmapOutputXml;
 @property (nonatomic, retain) NSString * status;
+@property (nonatomic, retain) NSString * nmapOutputStderr;
 @property (nonatomic, retain) NSNumber * hostsDown;
+@property (nonatomic, retain) NSNumber * hostsUp;
+@property (nonatomic, retain) NSString * UUID;
 @property (nonatomic, retain) NSNumber * progress;
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSNumber * hostsTotal;
-@property (nonatomic, retain) Profile * profile;
 @property (nonatomic, retain) NSSet* hosts;
+@property (nonatomic, retain) Profile * profile;
 
 @end
 

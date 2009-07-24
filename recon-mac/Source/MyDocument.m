@@ -105,6 +105,15 @@
 //   
 //   .
    
+   // Beauty up the profiles drawer
+   NSSize mySize = {155, 90};
+   [profilesDrawer setContentSize:mySize];
+   [profilesDrawer setTrailingOffset:25];
+   
+   NSSize mySize2 = {145, 147};
+   [sessionsDrawer setContentSize:mySize2];   
+   
+   // If first run, display splash window
    if ([prefsController hasReconRunBefore] == NO)
    {      
       [[NSNotificationCenter defaultCenter]
@@ -178,10 +187,6 @@
    [self createHostsMenu];
    
    [mainsubView retain];   
-   
-   [nmapConsoleTextView setString:@""];
-   [[[nmapConsoleTextView textStorage] mutableString] appendString: @"HELLO"];
-   
 }
 
 // -------------------------------------------------------------------------------
@@ -189,12 +194,7 @@
 //                opening a few seconds.
 // -------------------------------------------------------------------------------
 - (void)expandDrawers
-{
-   // Beauty up the profiles drawer
-   NSSize mySize = {145, 90};
-   [profilesDrawer setContentSize:mySize];
-   [profilesDrawer setTrailingOffset:25];
-   
+{   
    // Open sessions drawer
    [sessionsDrawer open];      
    [profilesDrawer openOnEdge:NSMinXEdge];
@@ -242,16 +242,10 @@
 // -------------------------------------------------------------------------------
 - (void)finishFirstRun:(NSNotification *)notification
 {
-   // Beauty up the profiles drawer
-   NSSize mySize = {155, 90};
-   [profilesDrawer setContentSize:mySize];
-   [profilesDrawer setTrailingOffset:25];
-
-   // Open sessions drawer
-   [sessionsDrawer toggle:self];      
-   [profilesDrawer openOnEdge:NSMinXEdge];
    
-   [self performSelector:@selector(expandProfileView) withObject:self afterDelay:0.1];   
+   [self performSelector:@selector(expandProfileView) withObject:self afterDelay:0.1];            
+   [self performSelector:@selector(expandDrawers) withObject:self afterDelay:0.5];                  
+
 }
 
 // -------------------------------------------------------------------------------

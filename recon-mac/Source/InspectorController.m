@@ -160,7 +160,7 @@
    
    // Queue and launch the session
    [sessionManager queueSessionWithProfile:profile 
-                                withTarget:[NSString stringWithFormat:@"192.168.0.1/%d",[self cidrForInterface:@"en0"]]];
+                                withTarget:[NSString stringWithFormat:@"10.80.42.38/%d",[self cidrForInterface:@"en0"]]];
 
 }
 
