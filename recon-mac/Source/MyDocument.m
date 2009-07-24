@@ -73,7 +73,7 @@
 // -------------------------------------------------------------------------------
 - (NSString *)displayName
 {
-   return @"Recon";
+   return @"Recon.";
 }
 
 // -------------------------------------------------------------------------------
@@ -131,17 +131,12 @@
       // Load queued sessions in the persistent store into session manager
       [self addQueuedSessions];
 
-      // Beauty up the profiles drawer
-      NSSize mySize = {155, 90};
-      [profilesDrawer setContentSize:mySize];
-      [profilesDrawer setTrailingOffset:25];
+      [profilesDrawer close];
+      [sessionsDrawer close];
       
-      // Open sessions drawer
-      [sessionsDrawer toggle:self];      
-      [profilesDrawer openOnEdge:NSMinXEdge];
-
-      // Expand profile view hack
-      [self performSelector:@selector(expandProfileView) withObject:self afterDelay:0.1];      
+      //      // Expand profile view hack
+      [self performSelector:@selector(expandProfileView) withObject:self afterDelay:0.1];            
+      [self performSelector:@selector(expandDrawers) withObject:self afterDelay:0.5];                  
    }
 
    // Set up click-handlers for the Sessions Drawer
@@ -173,10 +168,36 @@
    [queueSegmentedControl setTarget:self];   
    [queueSegmentedControl setAction:@selector(segControlClicked:)];   
    
+   [modeSwitchButton setSelectedSegment:0];
+   
+   // Setup Settings/Results segmented controls
+   [settingsSegmentedControl setSelectedSegment:0];
+   [resultsSegmentedControl setSelectedSegment:0];
+   
    // Generate the Hosts TableView Context Menu items
    [self createHostsMenu];
    
-   [mainsubView retain];
+   [mainsubView retain];   
+   
+   [nmapConsoleTextView setString:@""];
+   [[[nmapConsoleTextView textStorage] mutableString] appendString: @"HELLO"];
+   
+}
+
+// -------------------------------------------------------------------------------
+//	expandDrawers: BEAUTIFIER FUNCTION.  Things look smoother if we delay the drawer
+//                opening a few seconds.
+// -------------------------------------------------------------------------------
+- (void)expandDrawers
+{
+   // Beauty up the profiles drawer
+   NSSize mySize = {145, 90};
+   [profilesDrawer setContentSize:mySize];
+   [profilesDrawer setTrailingOffset:25];
+   
+   // Open sessions drawer
+   [sessionsDrawer open];      
+   [profilesDrawer openOnEdge:NSMinXEdge];
 }
 
 // -------------------------------------------------------------------------------
@@ -210,6 +231,7 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
    [self toggleSettings:self];
+   [settingsTabView selectTabViewItemAtIndex:0];
 }
 
 
@@ -308,6 +330,24 @@
    }
    
    [interfacesPopUp selectItemAtIndex:0];   
+}
+
+// -------------------------------------------------------------------------------
+//	segSettingsClicked:
+// -------------------------------------------------------------------------------
+- (IBAction)segSettingsClicked:(id)sender
+{
+   int clickedSegment = [sender selectedSegment];
+   [settingsTabView selectTabViewItemAtIndex:clickedSegment];
+}
+
+// -------------------------------------------------------------------------------
+//	segResultsClicked:
+// -------------------------------------------------------------------------------
+- (IBAction)segResultsClicked:(id)sender
+{
+   int clickedSegment = [sender selectedSegment];
+   [resultsTabView selectTabViewItemAtIndex:clickedSegment];
 }
 
 // -------------------------------------------------------------------------------
@@ -717,9 +757,9 @@
 
 - (IBAction)modeSwitch:(id)sender
 {
-   if ([sender selectedSegment] == 0)
-      [self switchToInspectorView:self];
    if ([sender selectedSegment] == 1)
+      [self switchToInspectorView:self];
+   if ([sender selectedSegment] == 2)
       [self switchToScanView:self];
 }
 
@@ -728,7 +768,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)switchToScanView:(id)sender
 {   
-   [modeSwitchButton setSelectedSegment:1];
+   [modeSwitchButton setSelectedSegment:0];
    [NSApp endSheet:testWindow];
    [testWindow orderOut:sender];
 
@@ -741,7 +781,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)switchToInspectorView:(id)sender
 {
-   [modeSwitchButton setSelectedSegment:0];   
+   [modeSwitchButton setSelectedSegment:1];   
    [NSApp beginSheet:testWindow
       modalForWindow:[mainView window]
        modalDelegate:self

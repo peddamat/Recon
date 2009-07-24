@@ -122,7 +122,7 @@
 		8CC329D0100DF9D700483939 /* ClientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientController.m; path = Source/ClientController.m; sourceTree = "<group>"; };
 		8CC32EAD100FBBA600483939 /* nmap-icon-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nmap-icon-button.png"; path = "Resources/nmap-icon-button.png"; sourceTree = "<group>"; };
 		8CC32EC6100FC57700483939 /* nmap-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "nmap-icon.icns"; path = "Resources/nmap-icon.icns"; sourceTree = "<group>"; };
-		8D15AC370486D014006FF6A4 /* recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* Recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +164,7 @@
 		19C28FB0FE9D524F11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D15AC370486D014006FF6A4 /* recon.app */,
+				8D15AC370486D014006FF6A4 /* Recon.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -303,7 +303,7 @@
 			name = Recon;
 			productInstallPath = "$(HOME)/Applications";
 			productName = "nmapX-coredata";
-			productReference = 8D15AC370486D014006FF6A4 /* recon.app */;
+			productReference = 8D15AC370486D014006FF6A4 /* Recon.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

@@ -27,8 +27,13 @@ extern NSString * const BAFSavedSessionsDirectory;
    IBOutlet NSView *mainsubView;   
    IBOutlet NSTabView *mainTabView;
    
+   IBOutlet NSTabView *settingsTabView;
+   IBOutlet NSTabView *resultsTabView;
+   
+   IBOutlet NSSegmentedControl *settingsSegmentedControl;
+   IBOutlet NSSegmentedControl *resultsSegmentedControl;
    IBOutlet NSSegmentedControl *modeSwitchButton;
-
+   
    PrefsController *prefsController;
    SessionManager *sessionManager;
    
@@ -109,6 +114,8 @@ extern NSString * const BAFSavedSessionsDirectory;
    NSTimer *nmapErrorTimer;
    
    IBOutlet NSWindow *testWindow;
+   
+   IBOutlet NSTextView *nmapConsoleTextView;   
 }
 
 @property (readonly) NSArray *osSortDescriptor;
@@ -130,6 +137,8 @@ extern NSString * const BAFSavedSessionsDirectory;
 - (IBAction)saveDocumentTo:(id)sender;
 - (IBAction)saveDocumentAs:(id)sender;
 
+- (IBAction)segSettingsClicked:(id)sender;
+- (IBAction)segResultsClicked:(id)sender;
 - (IBAction)segControlClicked:(id)sender;
 
 // Network Interface PopUp
