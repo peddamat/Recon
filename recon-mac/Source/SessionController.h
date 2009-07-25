@@ -34,7 +34,7 @@
    NSString *sessionDirectory;
    NSString *sessionOutputFile;   
    
-   BOOL hasReconRunBefore;   
+   BOOL hasRun;   
    BOOL isRunning;
    BOOL deleteAfterAbort;
    
@@ -43,18 +43,21 @@
    
    NSTimer *resultsTimer;
    XMLController *xmlController;
+   
+   // The lock is used to synchronize session aborts
+   NSString *lock;
 }
 
-@property (readonly, assign) BOOL hasReconRunBefore;
+@property (readonly, assign) BOOL hasRun;
 @property (readonly, assign) BOOL isRunning;
 @property (readwrite, retain) Session *session;
 @property (readonly, retain) NSString *sessionUUID;
 
-- (void) initWithProfile:(Profile *)profile 
-                     withTarget:(NSString *)sessionTarget   
-         inManagedObjectContext:(NSManagedObjectContext *)context;
+- (Session *)initWithProfile:(Profile *)profile 
+                   withTarget:(NSString *)sessionTarget     
+       inManagedObjectContext:(NSManagedObjectContext *)context;
 
-- (void)initWithSession:(Session *)s;
+- (Session *)initWithSession:(Session *)s;
 
 - (Profile *)copyProfile:(Profile *)profile;
 - (BOOL)createSessionDirectory:(NSString *)uuid;
@@ -63,9 +66,8 @@
 - (void)startScan;
 - (void)abortScan;
 - (void)deleteSession;
+- (void)readProgress:(NSTimer *)aTimer;
 
 + (NSString *) stringWithUUID;
-
-- (void)readProgress:(NSTimer *)aTimer;
 
 @end

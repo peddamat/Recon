@@ -82,8 +82,10 @@
 // -------------------------------------------------------------------------------
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController 
 {
-    [super windowControllerDidLoadNib:windowController];
+   [super windowControllerDidLoadNib:windowController];
 
+   NSLog(@"windowControllerDidLoadNib");
+   
    [NSApp setServicesProvider:self];
 
    // Grab a copy of the Prefs Controller
@@ -95,17 +97,8 @@
     selector:@selector(updateSupportFolder:)
     name:@"BAFupdateSupportFolder"
     object:prefsController];   
-   
- //  // Listen for clicks in the Profiles Drawer
-//   [[NSNotificationCenter defaultCenter]
-//    addObserver:self
-//    selector:@selector(updateSupportFolder:)
-//    name:@"NSOutlineViewSelectionDidChangeNotification"
-//    object:prefsController];   
-//   
-//   .
-   
-   // Beauty up the profiles drawer
+      
+   // Pretty up the profiles drawer
    NSSize mySize = {155, 90};
    [profilesDrawer setContentSize:mySize];
    [profilesDrawer setTrailingOffset:25];
@@ -187,6 +180,9 @@
    [self createHostsMenu];
    
    [mainsubView retain];   
+   
+   [sessionsTableView registerForDraggedTypes:
+    [NSArray arrayWithObjects:NSStringPboardType,NSFilenamesPboardType,nil]];
 }
 
 // -------------------------------------------------------------------------------
@@ -203,6 +199,8 @@
 // -------------------------------------------------------------------------------
 //	updateSupportFolder: If the user updates the output folder in the Prefs Controller
 //                      we've gotta relocate the Persistent Store.
+//
+//                      TODO: ManagedObjectContext isn't being updated properly...
 // -------------------------------------------------------------------------------
 - (void)updateSupportFolder:(NSNotification *)notification
 {
@@ -233,7 +231,6 @@
    [self toggleSettings:self];
    [settingsTabView selectTabViewItemAtIndex:0];
 }
-
 
 // -------------------------------------------------------------------------------
 //	finishFirstRun: BEAUTIFIER FUNCTION.  The Welcome window looks better when the
@@ -327,7 +324,7 @@
 }
 
 // -------------------------------------------------------------------------------
-//	segSettingsClicked:
+//	segSettingsClicked: Switches between tabs in Settings mode
 // -------------------------------------------------------------------------------
 - (IBAction)segSettingsClicked:(id)sender
 {
@@ -336,7 +333,7 @@
 }
 
 // -------------------------------------------------------------------------------
-//	segResultsClicked:
+//	segResultsClicked: Switches between tabs in Results mode
 // -------------------------------------------------------------------------------
 - (IBAction)segResultsClicked:(id)sender
 {
@@ -345,7 +342,7 @@
 }
 
 // -------------------------------------------------------------------------------
-//	segControlClicked: Segment control is used to manipulate Sessions Queue.
+//	segControlClicked: Delete/Play/Add segmented control in the lower-right
 // -------------------------------------------------------------------------------
 - (IBAction)segControlClicked:(id)sender
 {
@@ -416,6 +413,8 @@
                                                  userInfo:nil
                                                   repeats:YES] retain]; 
       }
+      
+      [a release];
    }
 }
 
@@ -481,7 +480,7 @@
 }
 
 // -------------------------------------------------------------------------------
-//	createHostsMenu: The hosts context menu displays a list of Profiles.  
+//	createHostsMenu: Create a right-click menu for the hosts Table View.
 // -------------------------------------------------------------------------------
 - (void)createHostsMenu
 {
@@ -521,7 +520,7 @@
 {
    NSLog(@"MyDocument: handleHostsMenuClick: %@", [sender title]);
    
-   // If we want to queue selected hosts...
+   // If we want to queue selected hosts... (10 is a magic number specified in IB)
    if ([sender tag] == 10)
    {
       // Grab the desired profile...
@@ -561,17 +560,7 @@
 // -------------------------------------------------------------------------------
 - (void)addDefaultProfiles
 {
-//   NSManagedObjectContext *context = [self managedObjectContext];
-//   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
-//   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile"
-//                                             inManagedObjectContext:[self managedObjectContext]];
-//   [request setEntity:entity];
-//   
-//   NSError *error = nil;
-//   NSArray *array = [context executeFetchRequest:request error:&error];
-   
-   NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:nil]; 
-   
+   NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:nil];    
    
    if (array != nil) {
       
@@ -696,14 +685,17 @@
 }
 
 // -------------------------------------------------------------------------------
-//	addProfile: Add a new profile to the Persistent Store
+//	addProfile: Add a new profile to the Persistent Store.  User-created profiles
+//             are all stored in an NSTreeController-branch titled "User Profiles".
 // -------------------------------------------------------------------------------
 - (IBAction)addProfile:(id)sender
 {
+   // Search for a branch titled "User Profiles"
    NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile"
                                                              withPredicate:@"name = 'User Profiles'"];
    Profile *profileParent = [array lastObject];
    
+   // If the branch doesn't exist, create it
    if (profileParent == nil)
    {
       profileParent = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
@@ -713,7 +705,7 @@
    
    Profile *profile = nil; 
    
-   // Add a few defaults
+   // Insert a new, uninitialized profile into the Persistent Store
    profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
                                            inManagedObjectContext:[self managedObjectContext]]; 
    [profile setValue: @"New Profile" forKey: @"name"]; 
@@ -735,11 +727,11 @@
    
    // Make sure it's not a Default
    if ((selectedProfile.parent.name == @"Defaults") || (selectedProfile.name == @"Defaults")) {
-      NSLog(@"FUCKO");
+      NSLog(@"FLUNKO");
       return;
    }
    else {
-      NSLog(@"SHIT");
+      NSLog(@"SHITE");
       // Delete profile
       [[self managedObjectContext] deleteObject:selectedProfile];
    }
@@ -787,7 +779,7 @@
 }
 
 // -------------------------------------------------------------------------------
-//	swapView: Swaps view with animated resize
+//	swapView: Swaps view with animated resize (don't think I'm using this anywhere)
 // -------------------------------------------------------------------------------
 - (void)swapView:(NSView *)oldSubview 
      withSubView:(NSView *)newSubview 
@@ -1295,5 +1287,96 @@
 
    NSLog(@"HIHIHIH");
 }
+
+#pragma mark Dragging Destination
+
+- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
+{
+   NSLog(@"draggingEntered:");
+   if ([sender draggingSource] == self) {
+      return NSDragOperationNone;
+   }
+   
+//   highlighted = YES;
+//   [self setNeedsDisplay:YES];
+   return NSDragOperationCopy;
+}
+- (void)draggingExited:(id <NSDraggingInfo>)sender
+{
+   NSLog(@"draggingExited:");
+//   highlighted = NO;
+//   [self setNeedsDisplay:YES];
+}
+
+- (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
+{
+   return YES;
+}
+
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
+{
+   NSPasteboard *pb = [sender draggingPasteboard];
+   if(![self readFromPasteboard:pb]) {
+      NSLog(@"Error: Could not read from dragging pasteboard");
+      return NO;
+   }
+   return YES;
+}
+
+- (void)concludeDragOperation:(id <NSDraggingInfo>)sender
+{
+   NSLog(@"concludeDragOperation:");
+//   highlighted = NO;
+//   [self setNeedsDisplay:YES];
+}
+
+- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard
+
+{
+   
+   // Copy the row numbers to the pasteboard.
+   
+   NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
+   
+   [pboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
+   
+   [pboard setData:data forType:NSStringPboardType];
+   
+   return YES;
+   
+}
+
+- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)op
+
+{
+   
+   // Add code here to validate the drop
+   
+   NSLog(@"validate Drop");
+   
+   return NSDragOperationEvery;
+   
+}
+
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info
+
+              row:(int)row dropOperation:(NSTableViewDropOperation)operation
+
+{
+   
+   NSPasteboard* pboard = [info draggingPasteboard];
+   
+   NSData* rowData = [pboard dataForType:NSStringPboardType];
+   
+   NSIndexSet* rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
+   
+   int dragRow = [rowIndexes firstIndex];
+   
+   return TRUE;
+   
+   // Move the specified row to its new location...
+   
+}
+
 
 @end

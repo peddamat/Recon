@@ -15,6 +15,7 @@
 		8C4163891010D6340066A4F8 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C4163851010D6310066A4F8 /* BWToolkitFramework.framework */; };
 		8C55E41F100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C55E41E100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m */; };
 		8C55E43810052E72002F5013 /* SessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C55E43710052E72002F5013 /* SessionManager.m */; };
+		8C5FF41F101B6F5B00856055 /* reconwithwall-darker-zoom.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8C5FF41E101B6F5B00856055 /* reconwithwall-darker-zoom.icns */; };
 		8C79E1960FFBC09600A4648B /* XMLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E1920FFBC09600A4648B /* XMLController.m */; };
 		8C79E1970FFBC09600A4648B /* ArgumentListGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E1950FFBC09600A4648B /* ArgumentListGenerator.m */; };
 		8C79E2300FFC23D800A4648B /* SessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E22F0FFC23D800A4648B /* SessionController.m */; };
@@ -35,8 +36,6 @@
 		8CC3278F100CDCF000483939 /* InspectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3278E100CDCF000483939 /* InspectorController.m */; };
 		8CC32794100CDFE400483939 /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC32793100CDFE400483939 /* Connection.m */; };
 		8CC329D1100DF9D700483939 /* ClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC329D0100DF9D700483939 /* ClientController.m */; };
-		8CC32EAE100FBBA600483939 /* nmap-icon-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CC32EAD100FBBA600483939 /* nmap-icon-button.png */; };
-		8CC32EC7100FC57700483939 /* nmap-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8CC32EC6100FC57700483939 /* nmap-icon.icns */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */; settings = {ATTRIBUTES = (); }; };
@@ -86,6 +85,7 @@
 		8C55E41E100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTask+OneLineTasksWithOutput.m"; path = "Source/NSTask+OneLineTasksWithOutput.m"; sourceTree = "<group>"; };
 		8C55E43610052E72002F5013 /* SessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionManager.h; path = Source/SessionManager.h; sourceTree = "<group>"; };
 		8C55E43710052E72002F5013 /* SessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionManager.m; path = Source/SessionManager.m; sourceTree = "<group>"; };
+		8C5FF41E101B6F5B00856055 /* reconwithwall-darker-zoom.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "reconwithwall-darker-zoom.icns"; path = "Resources/reconwithwall-darker-zoom.icns"; sourceTree = "<group>"; };
 		8C79E1920FFBC09600A4648B /* XMLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLController.m; path = Source/XMLController.m; sourceTree = "<group>"; };
 		8C79E1930FFBC09600A4648B /* XMLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLController.h; path = Source/XMLController.h; sourceTree = "<group>"; };
 		8C79E1940FFBC09600A4648B /* ArgumentListGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArgumentListGenerator.h; path = Source/ArgumentListGenerator.h; sourceTree = "<group>"; };
@@ -120,8 +120,6 @@
 		8CC32793100CDFE400483939 /* Connection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Connection.m; path = Source/Connection.m; sourceTree = "<group>"; };
 		8CC329CF100DF9D700483939 /* ClientController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientController.h; path = Source/ClientController.h; sourceTree = "<group>"; };
 		8CC329D0100DF9D700483939 /* ClientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientController.m; path = Source/ClientController.m; sourceTree = "<group>"; };
-		8CC32EAD100FBBA600483939 /* nmap-icon-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nmap-icon-button.png"; path = "Resources/nmap-icon-button.png"; sourceTree = "<group>"; };
-		8CC32EC6100FC57700483939 /* nmap-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "nmap-icon.icns"; path = "Resources/nmap-icon.icns"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -222,10 +220,9 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C5FF41E101B6F5B00856055 /* reconwithwall-darker-zoom.icns */,
 				8C79F4C41003E3BA00A4648B /* MainMenu.xib */,
 				8C79F7891004908600A4648B /* MyDocument.xib */,
-				8CC32EC6100FC57700483939 /* nmap-icon.icns */,
-				8CC32EAD100FBBA600483939 /* nmap-icon-button.png */,
 				8C79F67E1004235900A4648B /* button_pane_show_icon.tif */,
 				8C79F67F1004235900A4648B /* button_pane_hide_icon.tif */,
 				8C79F4C31003E3BA00A4648B /* Info.plist */,
@@ -335,8 +332,7 @@
 				8C79F6801004235900A4648B /* button_pane_show_icon.tif in Resources */,
 				8C79F6811004235900A4648B /* button_pane_hide_icon.tif in Resources */,
 				8C79F78A1004908600A4648B /* MyDocument.xib in Resources */,
-				8CC32EAE100FBBA600483939 /* nmap-icon-button.png in Resources */,
-				8CC32EC7100FC57700483939 /* nmap-icon.icns in Resources */,
+				8C5FF41F101B6F5B00856055 /* reconwithwall-darker-zoom.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -130,10 +130,6 @@
    if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Find computers"])
    {
       [self searchLocalNetwork:self];
-      // Grab the Session Manager object
-      SessionManager *sessionManager = [SessionManager sharedSessionManager];
-      
-      [sessionManager processQueue];   
    }
    else if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"See the machines"])
    {
@@ -159,8 +155,11 @@
    Profile *profile = [array lastObject];
    
    // Queue and launch the session
+   Session *newSession =
    [sessionManager queueSessionWithProfile:profile 
-                                withTarget:[NSString stringWithFormat:@"10.80.42.38/%d",[self cidrForInterface:@"en0"]]];
+                                withTarget:[NSString stringWithFormat:@"192.168.0.1/%d",[self cidrForInterface:@"en0"]]];
+   
+   [sessionManager launchSession:newSession];      
 
 }
 
@@ -175,10 +174,11 @@
    Profile *profile = [array lastObject];
    
    // Queue and launch the session
+   Session *newSession =   
    [sessionManager queueSessionWithProfile:profile 
                                 withTarget:[hostsTextField stringValue]];
    
-   [sessionManager processQueue];
+   [sessionManager launchSession:newSession];
    
 }
 

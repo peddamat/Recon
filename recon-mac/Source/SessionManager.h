@@ -24,8 +24,8 @@
 
 - (void)setContext:(NSManagedObjectContext *)c;
 
-- (void)queueSessionWithProfile:(Profile *)profile withTarget:(NSString *)target;
-- (void)queueExistingSession:(Session *)session;
+- (Session *)queueSessionWithProfile:(Profile *)profile withTarget:(NSString *)target;
+- (Session *)queueExistingSession:(Session *)session;
 
 - (void)deleteSession:(Session *)session;
 - (void)abortSession:(Session *)session;

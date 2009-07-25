@@ -19,10 +19,10 @@
    
    NSString *outputFilePath;
    
-   BOOL hasReconRunBefore;
+   BOOL hasRun;
 }
 
-@property(readonly) BOOL hasReconRunBefore;
+@property(readonly) BOOL hasRun;
 
 - (id) initWithNmapBinary:(NSString *)nmapBinary 
                  withArgs:(NSArray *)nmapArgs 

@@ -15,7 +15,7 @@
 @property (readwrite, retain) NSMutableData *standardOutput;
 @property (readwrite, retain) NSMutableData *standardError;
 @property (readwrite, retain) NSString *outputFilePath;
-@property (readwrite, assign) BOOL hasReconRunBefore;
+@property (readwrite, assign) BOOL hasRun;
 
 @end
 
@@ -26,7 +26,7 @@
 @synthesize standardOutput;
 @synthesize standardError;
 @synthesize outputFilePath;
-@synthesize hasReconRunBefore;
+@synthesize hasRun;
 
 // -------------------------------------------------------------------------------
 //	initWithNmapBinary
@@ -102,7 +102,7 @@
 - (void) startScan
 {
    // Mark this session as run
-   self.hasReconRunBefore = TRUE;
+   self.hasRun = TRUE;
    
    // TODO: Check for error on task launch   
    @try
@@ -131,7 +131,7 @@
    else
    {
       NSLog(@"NmapController: Abort: Task already stopped, faking it!");      
-      self.hasReconRunBefore = TRUE;
+      self.hasRun = TRUE;
       NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];      
       [nc postNotificationName:@"NCabortedRun" object:self]; 
    }

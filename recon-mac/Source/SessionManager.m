@@ -59,11 +59,12 @@ static SessionManager *sharedSessionManager = nil;
 //            and adds it to a dictionary for queuing.  This allows removal of 
 //            queued Session Controllers by session UUID.
 // -------------------------------------------------------------------------------
-- (void)queueSessionWithProfile:(Profile *)profile withTarget:(NSString *)target
+- (Session *)queueSessionWithProfile:(Profile *)profile withTarget:(NSString *)target
 {
    SessionController *newSessionController = [[[SessionController alloc] init] autorelease];
    
    // Initiate a new session
+   Session *newSession =
    [newSessionController initWithProfile:profile 
                               withTarget:target 
                   inManagedObjectContext:[profile managedObjectContext]];     
@@ -80,6 +81,8 @@ static SessionManager *sharedSessionManager = nil;
     notifyWithTitle:@"Queued Nmap Session" 
     description:[NSString stringWithFormat: @"Target: %@", target] 
     notificationName:@"Connected"];  
+   
+   return newSession;
 }
 
 // -------------------------------------------------------------------------------
@@ -87,13 +90,14 @@ static SessionManager *sharedSessionManager = nil;
 //                       Sessions exist that haven't passed through the new Session
 //                       Manager.
 // -------------------------------------------------------------------------------
-- (void)queueExistingSession:(Session *)session
+- (Session *)queueExistingSession:(Session *)session
 {
    SessionController *newSessionController = [[[SessionController alloc] init] autorelease];
 
     NSLog(@"SessionManager: queueExistingSession: %@", [newSessionController sessionUUID]);  
    
    // Initiate a new session
+   Session *newSession =   
    [newSessionController initWithSession:session];
 
    // Register to receive notifications from the new Session Controller
@@ -108,6 +112,8 @@ static SessionManager *sharedSessionManager = nil;
     notifyWithTitle:@"Queued Nmap Session" 
     description:[NSString stringWithFormat: @"Target: %@", [session target]] 
     notificationName:@"Connected"];      
+   
+   return newSession;
 }
 
 // -------------------------------------------------------------------------------

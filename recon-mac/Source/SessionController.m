@@ -26,7 +26,7 @@
    @property (readwrite, retain) NSString *sessionDirectory;
    @property (readwrite, retain) NSString *sessionOutputFile;   
 
-   @property (readwrite, assign) BOOL hasReconRunBefore;   
+   @property (readwrite, assign) BOOL hasRun;   
    @property (readwrite, assign) BOOL isRunning;
    @property (readwrite, assign) BOOL deleteAfterAbort;
 
@@ -46,7 +46,7 @@
 @synthesize sessionDirectory;
 @synthesize sessionOutputFile;
 
-@synthesize hasReconRunBefore;
+@synthesize hasRun;
 @synthesize isRunning;
 @synthesize deleteAfterAbort;
 
@@ -64,7 +64,7 @@
    // Generate a unique identifier for this controller
    self.sessionUUID = [SessionController stringWithUUID];
       
-   self.hasReconRunBefore = FALSE;
+   self.hasRun = FALSE;
    self.isRunning = FALSE;
    self.deleteAfterAbort = FALSE;   
    
@@ -97,7 +97,7 @@
 // -------------------------------------------------------------------------------
 //	initWithProfile
 // -------------------------------------------------------------------------------
-- (void)initWithProfile:(Profile *)profile                           
+- (Session *)initWithProfile:(Profile *)profile                           
             withTarget:(NSString *)sessionTarget               
 inManagedObjectContext:(NSManagedObjectContext *)context
 {
@@ -127,12 +127,15 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    self.nmapArguments = [a convertProfileToArgs:profile withTarget:sessionTarget withOutputFile:sessionOutputFile];   
    
    [self initNmapController];   
+   
+//   [session retain];
+   return session;
 }
 
 // -------------------------------------------------------------------------------
 //	initWithSession: 
 // -------------------------------------------------------------------------------
-- (void)initWithSession:(Session *)s
+- (Session *)initWithSession:(Session *)s
 {
    Profile *profile = [s profile];
    
@@ -153,6 +156,9 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    self.nmapArguments = [a convertProfileToArgs:profile withTarget:[s target] withOutputFile:sessionOutputFile];   
    
    [self initNmapController];   
+   
+//   [session retain];
+   return session;  
 }
 
 // -------------------------------------------------------------------------------
@@ -246,10 +252,10 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 - (void)startScan
 {      
    // Reinitialize controller if previously run/aborted
-   if ([nmapController hasReconRunBefore])
+   if ([nmapController hasRun])
       [self initNmapController];
    
-   self.hasReconRunBefore = TRUE;   
+   self.hasRun = TRUE;   
    self.isRunning = TRUE;
    [session setStatus:@"Running"];
    
@@ -266,47 +272,54 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 //	readProgress: Called by the resultsTimer.  Parses nmap-output.xml for 'taskprogress'
 //               to update the status bar in the Sessions Drawer.
+//
+//               TODO: Need to add synchronization to this function.  Sometimes it
+//                     gets called after the completion notification from NmapController
+//                     is received.
 // -------------------------------------------------------------------------------
 - (void)readProgress:(NSTimer *)aTimer
 {
-   NSTask *task = [[NSTask alloc] init];
-   [task setLaunchPath:@"/bin/tcsh"];     // For some reason, using /bin/sh screws up the debug console   
-   NSString *p = [NSString stringWithFormat:@"cat '%@' | grep taskprogress | tail -1 | awk -F '\"' '{print $2 \",\" $6}'", sessionOutputFile];
-   [task setArguments:[NSArray arrayWithObjects: @"-c", p, nil]];
-   
-   // Create the pipe to read from
-   NSPipe *outPipe = [[NSPipe alloc] init];
-   [task setStandardOutput:outPipe];
-   [outPipe release];
-   
-   // Start the process
-   [task launch];
-   
-   // Read the output
-   NSData *data = [[outPipe fileHandleForReading]
-                   readDataToEndOfFile];
-   
-   // Make sure the task terminates normally
-   [task waitUntilExit];
-   [task release];
-   
-   // Convert to a string
-   NSString *aString = [[NSString alloc] initWithData:data
-                                             encoding:NSUTF8StringEncoding];
-   
-   NSArray *a = [aString componentsSeparatedByString:@","];
-   
-   if ([a count] == 2)
+   @synchronized(lock)
    {
-      NSString *a1 = [a objectAtIndex:0];
-      NSString *a2 = [a objectAtIndex:1];
+      NSTask *task = [[NSTask alloc] init];
+      [task setLaunchPath:@"/bin/tcsh"];     // For some reason, using /bin/sh screws up the debug console   
+      NSString *p = [NSString stringWithFormat:@"cat '%@' | grep taskprogress | tail -1 | awk -F '\"' '{print $2 \",\" $6}'", sessionOutputFile];
+      [task setArguments:[NSArray arrayWithObjects: @"-c", p, nil]];
       
-      if ((a1 != nil) && (a2 != nil))
+      // Create the pipe to read from
+      NSPipe *outPipe = [[NSPipe alloc] init];
+      [task setStandardOutput:outPipe];
+      [outPipe release];
+      
+      // Start the process
+      [task launch];
+      
+      // Read the output
+      NSData *data = [[outPipe fileHandleForReading]
+                      readDataToEndOfFile];
+      
+      // Make sure the task terminates normally
+      [task waitUntilExit];
+      [task release];
+      
+      // Convert to a string
+      NSString *aString = [[NSString alloc] initWithData:data
+                                                encoding:NSUTF8StringEncoding];
+      
+      NSArray *a = [aString componentsSeparatedByString:@","];
+      
+      if ([a count] == 2)
       {
-         [session setStatus:[a objectAtIndex:0]];
-         [session setProgress:[NSNumber numberWithFloat:[[a objectAtIndex:1] floatValue]]];
+         NSString *a1 = [a objectAtIndex:0];
+         NSString *a2 = [a objectAtIndex:1];
+         
+         if ((a1 != nil) && (a2 != nil))
+         {
+            [session setStatus:[a objectAtIndex:0]];
+            [session setProgress:[NSNumber numberWithFloat:[[a objectAtIndex:1] floatValue]]];
+         }
+   //      NSLog(@"%@ \\ %@", [a objectAtIndex:0], [a objectAtIndex:1]);      
       }
-//      NSLog(@"%@ \\ %@", [a objectAtIndex:0], [a objectAtIndex:1]);      
    }
 }
 
@@ -327,7 +340,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)abortScan
 {
-   self.hasReconRunBefore = TRUE;
+   NSLog(@"Received abort for %@", sessionUUID);
+   self.hasRun = TRUE;
    [nmapController abortScan];  
 }
 
@@ -337,7 +351,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)deleteSession
 {
-   self.hasReconRunBefore = TRUE;
+   self.hasRun = TRUE;
    self.deleteAfterAbort = TRUE;   
    [nmapController abortScan];
 }
@@ -347,29 +361,32 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)successfulRunNotification: (NSNotification *)notification
 {
-   // Invalidate the progess timer
-   [resultsTimer invalidate];
-   
-   // Call XMLController with session directory and managedObjectContext
-   [xmlController parseXMLFile:sessionOutputFile inSession:session onlyReadProgress:FALSE];      
-    
-   self.isRunning = FALSE;
-   [session setStatus:@"Done"];
-   [session setProgress:[NSNumber numberWithFloat:100]];   
-   
-   // Set up "Console" pointers
-   NSString *nmapOutputStdout = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
-                                                                             withString:@"nmap-stdout.txt"];
-   NSString *nmapOutputStderr = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
-                                                                             withString:@"nmap-stderr.txt"];
+   @synchronized(lock)
+   {
+      // Invalidate the progess timer
+      [resultsTimer invalidate];
+      
+      // Call XMLController with session directory and managedObjectContext
+      [xmlController parseXMLFile:sessionOutputFile inSession:session onlyReadProgress:FALSE];      
+       
+      self.isRunning = FALSE;
+      [session setStatus:@"Done"];
+      [session setProgress:[NSNumber numberWithFloat:100]];   
+      
+      // Set up "Console" pointers
+      NSString *nmapOutputStdout = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
+                                                                                withString:@"nmap-stdout.txt"];
+      NSString *nmapOutputStderr = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
+                                                                                withString:@"nmap-stderr.txt"];
 
-   [session setNmapOutputXml:sessionOutputFile];
-   [session setNmapOutputStdout:nmapOutputStdout];
-   [session setNmapOutputStderr:nmapOutputStderr];
-   
-   // Send notification to SessionManager that session is complete
-   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc postNotificationName:@"SCsuccessfulRun" object:self];
+      [session setNmapOutputXml:sessionOutputFile];
+      [session setNmapOutputStdout:nmapOutputStdout];
+      [session setNmapOutputStderr:nmapOutputStderr];
+      
+      // Send notification to SessionManager that session is complete
+      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+      [nc postNotificationName:@"SCsuccessfulRun" object:self];
+   }
 }
 
 // -------------------------------------------------------------------------------
@@ -377,22 +394,26 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)abortedRunNotification: (NSNotification *)notification
 {
-   // Invalidate the progess timer
-   [resultsTimer invalidate];   
+   @synchronized(lock)
+   {
+      NSLog(@"Aborting %@", sessionUUID);      
+      // Invalidate the progess timer
+      [resultsTimer invalidate];   
 
-   self.isRunning = FALSE;
-   [session setStatus:@"Aborted"];
-   [session setProgress:[NSNumber numberWithFloat:0]];
+      self.isRunning = FALSE;
+      [session setStatus:@"Aborted"];
+      [session setProgress:[NSNumber numberWithFloat:0]];
+         
+      if (deleteAfterAbort == TRUE)
+      {            
+         NSManagedObjectContext *context = [session managedObjectContext];
+         [context deleteObject:session];
+      }   
       
-   if (deleteAfterAbort == TRUE)
-   {            
-      NSManagedObjectContext *context = [session managedObjectContext];
-      [context deleteObject:session];
-   }   
-   
-   // Send notification to SessionManager that session is complete
-   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc postNotificationName:@"SCabortedRun" object:self];         
+      // Send notification to SessionManager that session is complete
+      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+      [nc postNotificationName:@"SCabortedRun" object:self];         
+   }
 }
 
 // -------------------------------------------------------------------------------
@@ -400,26 +421,29 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)unsuccessfulRunNotification:(NSNotification *)notification
 {
-   // Invalidate the progess timer
-   [resultsTimer invalidate];   
-   
-   self.isRunning = FALSE;
-   [session setStatus:@"Error"];   
-   [session setProgress:[NSNumber numberWithFloat:0]];   
-   
-   // Set up "Console" pointers
-   NSString *nmapOutputStdout = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
-                                                                             withString:@"nmap-stdout.txt"];
-   NSString *nmapOutputStderr = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
-                                                                             withString:@"nmap-stderr.txt"];
-   
-   [session setNmapOutputXml:sessionOutputFile];
-   [session setNmapOutputStdout:nmapOutputStdout];
-   [session setNmapOutputStderr:nmapOutputStderr];   
-   
-   // Send notification to SessionManager that session is complete
-   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc postNotificationName:@"SCunsuccessfulRun" object:self];   
+   @synchronized(lock)
+   {
+      // Invalidate the progess timer
+      [resultsTimer invalidate];   
+      
+      self.isRunning = FALSE;
+      [session setStatus:@"Error"];   
+      [session setProgress:[NSNumber numberWithFloat:0]];   
+      
+      // Set up "Console" pointers
+      NSString *nmapOutputStdout = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
+                                                                                withString:@"nmap-stdout.txt"];
+      NSString *nmapOutputStderr = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
+                                                                                withString:@"nmap-stderr.txt"];
+      
+      [session setNmapOutputXml:sessionOutputFile];
+      [session setNmapOutputStdout:nmapOutputStdout];
+      [session setNmapOutputStderr:nmapOutputStderr];   
+      
+      // Send notification to SessionManager that session is complete
+      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+      [nc postNotificationName:@"SCunsuccessfulRun" object:self]; 
+   }
 }   
 
 // -------------------------------------------------------------------------------
