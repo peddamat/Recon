@@ -24,9 +24,7 @@ extern NSString * const BAFSavedSessionsDirectory;
 @interface MyDocument : NSPersistentDocument {
    
    IBOutlet NSView *mainView;
-   IBOutlet NSView *mainsubView;   
    IBOutlet NSTabView *mainTabView;
-   
    IBOutlet NSTabView *settingsTabView;
    IBOutlet NSTabView *resultsTabView;
    
@@ -39,8 +37,6 @@ extern NSString * const BAFSavedSessionsDirectory;
    
    // Toolbar Outlets
    IBOutlet NSToolbar *mainToolbar;
-   IBOutlet NSToolbarItem *settingsToolbarItem;
-   IBOutlet NSToolbarItem *resultsToolbarItem;  
    
    // Queue Controls
    IBOutlet NSSegmentedControl *queueSegmentedControl;
@@ -68,19 +64,13 @@ extern NSString * const BAFSavedSessionsDirectory;
 
    // Profiles Drawer
    IBOutlet NSDrawer *profilesDrawer;
-   IBOutlet NSTableView *profilesTableView;
    IBOutlet NSMenu *profilesContextMenu;
-   IBOutlet NSArrayController *profilesController;  
-   
+   IBOutlet NSTreeController *profileController;
    IBOutlet NSOutlineView *profilesOutlineView;   
-   NSTimer *profileTimer; // Shitty hack to hook outlineview expansion
+   IBOutlet BWAnchoredButton *profileButton;
    
-   IBOutlet NSTreeController *profileController;   
 //   IBOutlet NSTextField *sessionTarget;
    IBOutlet NSComboBox *sessionTarget;   
-   
-   IBOutlet BWSplitView *profileView;
-   IBOutlet BWAnchoredButton *profileButton;
 
    // Various Results Outlets
    IBOutlet NSTableView *hostsTableView;
@@ -113,7 +103,7 @@ extern NSString * const BAFSavedSessionsDirectory;
    float nmapErrorCount;   
    NSTimer *nmapErrorTimer;
    
-   IBOutlet NSWindow *testWindow;
+   IBOutlet NSWindow *inspectorWindow;
    
    IBOutlet NSTextView *nmapConsoleTextView;   
 }
@@ -123,8 +113,6 @@ extern NSString * const BAFSavedSessionsDirectory;
 @property (readonly) NSArray *portSortDescriptor;
 @property (readonly) NSArray *profileSortDescriptor;
 @property (readonly) NSArray *sessionSortDescriptor;
-
-- (IBAction)peanut:(id)sender;
 
 //- (void)controlTextDidEndEditing:(NSNotification *)obj;
 

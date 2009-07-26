@@ -46,8 +46,8 @@ static SessionManager *sharedSessionManager = nil;
 
 - (void)dealloc
 {
-   NSLog(@"");
-   NSLog(@"SessionManager: deallocating");   
+   //ANSLog(@"");
+   //ANSLog(@"SessionManager: deallocating");   
    [[NSNotificationCenter defaultCenter] removeObserver:self];   
    
    [sessionControllers release];
@@ -90,11 +90,11 @@ static SessionManager *sharedSessionManager = nil;
 //                       Sessions exist that haven't passed through the new Session
 //                       Manager.
 // -------------------------------------------------------------------------------
-- (Session *)queueExistingSession:(Session *)session
+- (Session *)queueExistingSession:(Session *)session withGrowl:(BOOL)notify
 {
    SessionController *newSessionController = [[[SessionController alloc] init] autorelease];
 
-    NSLog(@"SessionManager: queueExistingSession: %@", [newSessionController sessionUUID]);  
+    //ANSLog(@"SessionManager: queueExistingSession: %@", [newSessionController sessionUUID]);  
    
    // Initiate a new session
    Session *newSession =   
@@ -108,12 +108,30 @@ static SessionManager *sharedSessionManager = nil;
                           forKey:[newSessionController sessionUUID]];   
    
    // Fire off a Growl notification
-	[[SPGrowlController sharedGrowlController] 
-    notifyWithTitle:@"Queued Nmap Session" 
-    description:[NSString stringWithFormat: @"Target: %@", [session target]] 
-    notificationName:@"Connected"];      
-   
+   if (notify == YES)
+   {
+      [[SPGrowlController sharedGrowlController] 
+       notifyWithTitle:@"Queued Nmap Session" 
+       description:[NSString stringWithFormat: @"Target: %@", [session target]] 
+       notificationName:@"Connected"];      
+   }   
    return newSession;
+}
+
+// -------------------------------------------------------------------------------
+//	queueExistingSessions:
+// -------------------------------------------------------------------------------
+- (void)queueExistingSessions:(NSArray *)sessions
+{
+   for (Session *session in sessions)
+   {
+      [self queueExistingSession:session withGrowl:NO];
+   }   
+   
+   [[SPGrowlController sharedGrowlController] 
+    notifyWithTitle:@"Queued Nmap Sessions" 
+    description:[NSString stringWithFormat: @"Total Sessions: %d", [sessions count]] 
+    notificationName:@"Connected"];         
 }
 
 // -------------------------------------------------------------------------------
@@ -142,11 +160,11 @@ static SessionManager *sharedSessionManager = nil;
    // ... otherwise, create a session controller and launch it
    else
    {
-      [self queueExistingSession:session];
+      [self queueExistingSession:session withGrowl:YES];
       [self launchSession:session];
    }
    
-   NSLog(@"SessionManager: launchSession");
+   //ANSLog(@"SessionManager: launchSession");
 }
 
 // -------------------------------------------------------------------------------
@@ -184,7 +202,8 @@ static SessionManager *sharedSessionManager = nil;
       [self launchNextSession];
    }
    else
-      NSLog(@"SessionManager: Queue empty!");
+      ;
+      //ANSLog(@"SessionManager: Queue empty!");
 }
 
 // -------------------------------------------------------------------------------
@@ -206,7 +225,7 @@ static SessionManager *sharedSessionManager = nil;
       [session setStatus:@"Aborted"];
    }      
    
-   NSLog(@"SessionManager: Aborting session: %@", sessionUUID);    
+   //ANSLog(@"SessionManager: Aborting session: %@", sessionUUID);    
 }
 
 // -------------------------------------------------------------------------------
@@ -228,7 +247,7 @@ static SessionManager *sharedSessionManager = nil;
       [context deleteObject:session];
    }
    
-   NSLog(@"SessionManager: Removing session: %@", sessionUUID);    
+   //ANSLog(@"SessionManager: Removing session: %@", sessionUUID);    
    
    // Fire off a Growl notification
 //	[[SPGrowlController sharedGrowlController] 
@@ -245,7 +264,7 @@ static SessionManager *sharedSessionManager = nil;
    if ([sessionControllers count] == 0) 
    {
       self.processingQueue = FALSE;
-      NSLog(@"SessionManager: No more sessions!");
+      //ANSLog(@"SessionManager: No more sessions!");
       
       // Fire off a Growl notification
       [[SPGrowlController sharedGrowlController] 
@@ -275,7 +294,7 @@ static SessionManager *sharedSessionManager = nil;
               name:@"SCunsuccessfulRun"
             object:sc];   
    
-   NSLog(@"SessionManager: Registered with notification center");        
+   //ANSLog(@"SessionManager: Registered with notification center");        
 }
 
 // -------------------------------------------------------------------------------
@@ -291,7 +310,7 @@ static SessionManager *sharedSessionManager = nil;
     description:[NSString stringWithFormat: @"Target: %@", [[sc session] target]]     
     notificationName:@"Connected"];     
    
-   NSLog(@"SessionManager: Completed: %@\n\n", sessionUUID);   
+   //ANSLog(@"SessionManager: Completed: %@\n\n", sessionUUID);   
    
    [sessionControllers removeObjectForKey:sessionUUID];
    [self updateQueueFlag];
@@ -313,7 +332,7 @@ static SessionManager *sharedSessionManager = nil;
     description:[NSString stringWithFormat: @"Target: %@", [[sc session] target]]     
     notificationName:@"Connected"];    
    
-   NSLog(@"SessionManager: Aborted run: %@\n\n", sessionUUID);
+   //ANSLog(@"SessionManager: Aborted run: %@\n\n", sessionUUID);
    
    [sessionControllers removeObjectForKey:sessionUUID];
    [self updateQueueFlag];
@@ -335,7 +354,7 @@ static SessionManager *sharedSessionManager = nil;
     description:[NSString stringWithFormat: @"Target: %@", [[sc session] target]]     
     notificationName:@"Connected"];            
    
-   NSLog(@"SessionManager: Unsuccessfully run: %@\n\n", sessionUUID);
+   //ANSLog(@"SessionManager: Unsuccessfully run: %@\n\n", sessionUUID);
    
    [sessionControllers removeObjectForKey:sessionUUID];
    [self updateQueueFlag];

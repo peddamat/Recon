@@ -1,29 +1,41 @@
 // 
 //  Host.m
-//  Recon
+//  recon
 //
-//  Created by Sumanth Peddamatham on 7/16/09.
+//  Created by Sumanth Peddamatham on 7/26/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import "Host.h"
 
-#import "OperatingSystem.h"
+#import "TcpSeqValue.h"
+#import "OsMatch.h"
 #import "Port.h"
+#import "TcpTsSeqValue.h"
 #import "Session.h"
+#import "OsClass.h"
+#import "IpIdSeqValue.h"
 
 @implementation Host 
 
-@dynamic ipv4Address;
 @dynamic macAddress;
-@dynamic uptimeLastBoot;
 @dynamic status;
-@dynamic hostname;
-@dynamic statusReason;
+@dynamic ipIdSequenceClass;
 @dynamic distance;
+@dynamic statusReason;
+@dynamic tcpSequenceIndex;
+@dynamic tcpTsSequenceClass;
 @dynamic uptimeSeconds;
-@dynamic operatingsystems;
+@dynamic ipv4Address;
+@dynamic uptimeLastBoot;
+@dynamic tcpSequenceDifficulty;
+@dynamic hostname;
+@dynamic tcpsequencevalues;
+@dynamic osmatches;
 @dynamic ports;
+@dynamic tcptssequencevalues;
 @dynamic session;
+@dynamic osclasses;
+@dynamic ipidsequencevalues;
 
 @end

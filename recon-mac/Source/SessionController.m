@@ -74,8 +74,8 @@
 
 - (void)dealloc
 {
-   NSLog(@"");
-   NSLog(@"SessionController: deallocating");      
+   //ANSLog(@"");
+   //ANSLog(@"SessionController: deallocating");      
    
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc removeObserver:self];
@@ -101,7 +101,7 @@
             withTarget:(NSString *)sessionTarget               
 inManagedObjectContext:(NSManagedObjectContext *)context
 {
-   NSLog(@"SessionController: initWithProfile!");
+   //ANSLog(@"SessionController: initWithProfile!");
       
    // Make a copy of the selected profile
    Profile *profileCopy = [[self copyProfile:profile] autorelease];
@@ -208,7 +208,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    self.sessionOutputFile = [sessionDirectory stringByAppendingPathComponent:@"nmap-output.xml"];
    
    if ([NSFm createDirectoryAtPath:sessionDirectory attributes: nil] == NO) {
-      NSLog (@"Couldn't create directory!\n");
+      //ANSLog (@"Couldn't create directory!\n");
       // TODO: Notify SessionManager of file creation error
       return NO;
    }
@@ -243,7 +243,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
               name:@"NCunsuccessfulRun"
             object:nmapController];
    
-   NSLog(@"SessionController: Registered with notification center");      
+   //ANSLog(@"SessionController: Registered with notification center");      
 }
 
 // -------------------------------------------------------------------------------
@@ -318,7 +318,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
             [session setStatus:[a objectAtIndex:0]];
             [session setProgress:[NSNumber numberWithFloat:[[a objectAtIndex:1] floatValue]]];
          }
-   //      NSLog(@"%@ \\ %@", [a objectAtIndex:0], [a objectAtIndex:1]);      
+   //      //ANSLog(@"%@ \\ %@", [a objectAtIndex:0], [a objectAtIndex:1]);      
       }
    }
 }
@@ -331,7 +331,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    // Call XMLController with session directory and managedObjectContext
 //   [xmlController parseXMLFile:sessionOutputFile inSession:session onlyReadProgress:TRUE];      
    
-//   NSLog(@"SessionController: Percent: %@", [session progress]);
+//   //ANSLog(@"SessionController: Percent: %@", [session progress]);
 }
 
 
@@ -340,7 +340,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 // -------------------------------------------------------------------------------
 - (void)abortScan
 {
-   NSLog(@"Received abort for %@", sessionUUID);
+   //ANSLog(@"Received abort for %@", sessionUUID);
    self.hasRun = TRUE;
    [nmapController abortScan];  
 }
@@ -396,7 +396,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 {
    @synchronized(lock)
    {
-      NSLog(@"Aborting %@", sessionUUID);      
+      //ANSLog(@"Aborting %@", sessionUUID);      
       // Invalidate the progess timer
       [resultsTimer invalidate];   
 

@@ -80,7 +80,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)changeInspectorTask:(id)sender
 {
-   NSLog(@"InspectorController: changeInspectorTask: %d", [sender tag]);
+   //ANSLog(@"InspectorController: changeInspectorTask: %d", [sender tag]);
    
    // I overlayed the Hosts Tableviews for 
    if ([[sender title] hasPrefix:@"See the machines connected"])
@@ -269,7 +269,7 @@ int bitcount (unsigned int n)
       
    self.task = [[[NSTask alloc] init] autorelease];
    
-   NSLog(@"InspectorController: launchNetstat");
+   //ANSLog(@"InspectorController: launchNetstat");
    
    [task setLaunchPath:@"/bin/tcsh"];      
    if (self.resolveHostnames == NO)
@@ -349,7 +349,7 @@ int bitcount (unsigned int n)
 // -------------------------------------------------------------------------------
 - (void)terminatedNotification:(NSNotification *)notification
 {
-   NSLog(@"InspectorController: terminated");
+   //ANSLog(@"InspectorController: terminated");
    
    self.showSpinner = NO;
 //   [refreshIndicator stopAnimation:self];

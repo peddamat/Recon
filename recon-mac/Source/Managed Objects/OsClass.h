@@ -1,8 +1,8 @@
 //
-//  OperatingSystem.h
-//  Recon
+//  OsClass.h
+//  recon
 //
-//  Created by Sumanth Peddamatham on 7/13/09.
+//  Created by Sumanth Peddamatham on 7/26/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,11 +10,10 @@
 
 @class Host;
 
-@interface OperatingSystem :  NSManagedObject  
+@interface OsClass :  NSManagedObject  
 {
 }
 
-@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * accuracy;
 @property (nonatomic, retain) NSString * family;
 @property (nonatomic, retain) NSString * vendor;

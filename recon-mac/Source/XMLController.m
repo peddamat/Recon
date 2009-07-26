@@ -11,7 +11,8 @@
 #import "Host.h"
 #import "Port.h"
 #import "Session.h"
-#import "OperatingSystem.h"
+#import "OsClass.h"
+#import "OsMatch.h"
 
 @interface XMLController ()
 
@@ -22,12 +23,11 @@
    @property (readwrite, retain) Session *currentSession;
    @property (readwrite, retain) Host *currentHost;
    @property (readwrite, retain) Port *currentPort;
-   @property (readwrite, retain) OperatingSystem *currentOperatingSystem;   
+   @property (readwrite, retain) OsClass *currentOsClass;
+   @property (readwrite, retain) OsMatch *currentOsMatch;   
 
 // State-machine helper flags
    @property (readwrite, assign) BOOL inRunstats;   
-   @property (readwrite, assign) BOOL inOsclass;   
-   @property (readwrite, assign) BOOL inOsmatch;   
 
    @property (readwrite, assign) BOOL onlyReadProgress;
 
@@ -41,10 +41,9 @@
 @synthesize currentSession;
 @synthesize currentHost;
 @synthesize currentPort;
-@synthesize currentOperatingSystem;
+@synthesize currentOsClass;
+@synthesize currentOsMatch;
 @synthesize inRunstats;
-@synthesize inOsclass;
-@synthesize inOsmatch;
 @synthesize onlyReadProgress;
 
 - (void)dealloc
@@ -54,7 +53,8 @@
    [currentSession release];
    [currentHost release];
    [currentPort release];
-   [currentOperatingSystem release];
+   [currentOsClass release];
+   [currentOsMatch release];
    [super dealloc];
 }
 
@@ -91,7 +91,7 @@
       NSString *progress = [attributeDict objectForKey:@"percent"];
       [currentSession setProgress:[NSNumber numberWithFloat:[progress floatValue]]];
       [currentSession setStatus:[attributeDict objectForKey:@"task"]];
-//      NSLog(@"XMLController: Progress: %@", progress);
+//      //ANSLog(@"XMLController: Progress: %@", progress);
    }
    
    if ( onlyReadProgress == TRUE )
@@ -245,47 +245,105 @@
    /// HOST - OSCLASS
    if ( [elementName isEqualToString:@"osclass"] ) {
 
-      if (!currentOperatingSystem) {
+      if (!currentOsClass) {
          
          // Create new port object in managedObjectContext
          NSManagedObjectContext * context = [currentSession managedObjectContext]; 
-         self.currentOperatingSystem = [NSEntityDescription insertNewObjectForEntityForName: @"OperatingSystem" inManagedObjectContext: context];                   
+         self.currentOsClass = [NSEntityDescription insertNewObjectForEntityForName: @"OsClass" inManagedObjectContext: context];                   
 
          // Point back to current session
-         [currentOperatingSystem setHost:currentHost];
+         [currentOsClass setHost:currentHost];
       }
       
-      inOsclass = TRUE;
-      
-      [currentOperatingSystem setType:[attributeDict objectForKey:@"type"]];
-      [currentOperatingSystem setVendor:[attributeDict objectForKey:@"vendor"]];
-      [currentOperatingSystem setFamily:[attributeDict objectForKey:@"osfamily"]];               
-      [currentOperatingSystem setGen:[attributeDict objectForKey:@"osgen"]];                     
-      [currentOperatingSystem setAccuracy:[attributeDict objectForKey:@"accuracy"]];  
-
+      [currentOsClass setType:[attributeDict objectForKey:@"type"]];
+      [currentOsClass setVendor:[attributeDict objectForKey:@"vendor"]];
+      [currentOsClass setFamily:[attributeDict objectForKey:@"osfamily"]];               
+      [currentOsClass setGen:[attributeDict objectForKey:@"osgen"]];                     
+      [currentOsClass setAccuracy:[attributeDict objectForKey:@"accuracy"]];  
       
       return;
    }
    
+   /// HOST - OSMATCH   
    if ( [elementName isEqualToString:@"osmatch"] ) {
 
-      if (!currentOperatingSystem) {
+      if (!currentOsMatch) {
          
          // Create new port object in managedObjectContext
          NSManagedObjectContext * context = [currentSession managedObjectContext]; 
-         self.currentOperatingSystem = [NSEntityDescription insertNewObjectForEntityForName: @"OperatingSystem" inManagedObjectContext: context];                   
+         self.currentOsMatch = [NSEntityDescription insertNewObjectForEntityForName: @"OsMatch" inManagedObjectContext: context];                   
          
          // Point back to current session
-         [currentOperatingSystem setHost:currentHost];
+         [currentOsMatch setHost:currentHost];
       }
       
-      inOsmatch = TRUE;
-      
-      [currentOperatingSystem setName:[attributeDict objectForKey:@"name"]];      
+      [currentOsMatch setName:[attributeDict objectForKey:@"name"]];      
+      [currentOsMatch setAccuracy:[attributeDict objectForKey:@"accuracy"]];    
+      [currentOsMatch setLine:[attributeDict objectForKey:@"line"]];    
       
       return;
    }
    
+   /// HOST - IPIDSEQUENCE   
+   if ( [elementName isEqualToString:@"ipidsequence"] ) {
+      
+      [currentHost setIpIdSequenceClass:[attributeDict objectForKey:@"class"]];      
+      
+      NSString *valuesString = [attributeDict objectForKey:@"values"];
+      NSArray *valuesArray = [valuesString componentsSeparatedByString:@","];
+      
+      for (NSString *object in valuesArray)
+      {
+         // Create new port object in managedObjectContext
+         NSManagedObjectContext *context = [currentSession managedObjectContext]; 
+         IpIdSeqValue *value = [NSEntityDescription insertNewObjectForEntityForName: @"IpIdSeqValue" inManagedObjectContext: context];                   
+         [value setHost:currentHost];
+         [value setValue:object];
+      }      
+      
+      return;
+   }   
+   
+   /// HOST - TCPSEQUENCE   
+   if ( [elementName isEqualToString:@"tcpsequence"] ) {
+            
+      [currentHost setTcpSequenceIndex:[attributeDict objectForKey:@"index"]];      
+      [currentHost setTcpSequenceDifficulty:[attributeDict objectForKey:@"difficulty"]];    
+
+      NSString *valuesString = [attributeDict objectForKey:@"values"];
+      NSArray *valuesArray = [valuesString componentsSeparatedByString:@","];
+
+      for (NSString *object in valuesArray)
+      {
+         // Create new port object in managedObjectContext
+         NSManagedObjectContext *context = [currentSession managedObjectContext]; 
+         TcpSeqValue *value = [NSEntityDescription insertNewObjectForEntityForName: @"TcpSeqValue" inManagedObjectContext: context];                   
+         [value setHost:currentHost];
+         [value setValue:object];
+      }
+
+      return;
+   }   
+   
+   /// HOST - TCPTSSEQUENCE   
+   if ( [elementName isEqualToString:@"tcptssequence"] ) {
+      
+      [currentHost setTcpTsSequenceClass:[attributeDict objectForKey:@"class"]]; 
+      
+      NSString *valuesString = [attributeDict objectForKey:@"values"];
+      NSArray *valuesArray = [valuesString componentsSeparatedByString:@","];
+      
+      for (NSString *object in valuesArray)
+      {
+         // Create new port object in managedObjectContext
+         NSManagedObjectContext *context = [currentSession managedObjectContext]; 
+         TcpTsSeqValue *value = [NSEntityDescription insertNewObjectForEntityForName: @"TcpTsSeqValue" inManagedObjectContext: context];                   
+         [value setHost:currentHost];
+         [value setValue:object];
+      }
+      
+      return;
+   }     
 }
 
 // -------------------------------------------------------------------------------
@@ -307,7 +365,7 @@
 // -------------------------------------------------------------------------------
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName 
 {
-//   NSLog(@"XMLParser: endElement: %@", elementName);
+//   //ANSLog(@"XMLParser: endElement: %@", elementName);
    
    if ( [elementName isEqualToString:@"host"] ) {
       self.currentHost = nil;
@@ -322,20 +380,15 @@
    }
    
    if ( [elementName isEqualToString:@"osclass"] ) {
-      inOsclass = FALSE;
-      
-      if (inOsmatch == FALSE)
-         self.currentOperatingSystem = nil;
+      self.currentOsClass = nil;
       
       return;
    }
    
    if ( [elementName isEqualToString:@"osmatch"] ) {
-      inOsmatch = FALSE;
+      self.currentOsMatch = nil;
       
-      if (inOsclass == FALSE)
-         self.currentOperatingSystem = nil;
-      
+      return;
    }
 }
 

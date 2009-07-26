@@ -81,7 +81,7 @@ static PrefsController *sharedPrefsController = nil;
    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
    [[NSUserDefaults standardUserDefaults] synchronize];
    
-   NSLog(@"PrefsController: Registered defaults");
+   //ANSLog(@"PrefsController: Registered defaults");
 }
 
 // -------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ static PrefsController *sharedPrefsController = nil;
       [fileManager createDirectoryAtPath:applicationSessionsFolder attributes:nil];
    }
    
-   NSLog(@"PrefsController: checkDirectories!");   
+   //ANSLog(@"PrefsController: checkDirectories!");   
 }
 
 // -------------------------------------------------------------------------------
@@ -358,7 +358,7 @@ static PrefsController *sharedPrefsController = nil;
    myFlags = kAuthorizationFlagDefaults;
    myStatus = AuthorizationExecuteWithPrivileges(myAuthorizationRef, myToolPath2, myFlags, myArguments2, &myCommunicationsPipe);
    
-   NSLog(@"AuthHelperTool called AEWP");   
+   //ANSLog(@"AuthHelperTool called AEWP");   
    return myStatus;
 }
 
@@ -403,7 +403,7 @@ static PrefsController *sharedPrefsController = nil;
    myFlags = kAuthorizationFlagDefaults;
    myStatus = AuthorizationExecuteWithPrivileges(myAuthorizationRef, myToolPath2, myFlags, myArguments2, &myCommunicationsPipe);
    
-   NSLog(@"AuthHelperTool called AEWP");   
+   //ANSLog(@"AuthHelperTool called AEWP");   
    return myStatus;
 }
 
@@ -452,7 +452,7 @@ static PrefsController *sharedPrefsController = nil;
 // Delegate method to handle saving user preferences on window close
 //- (void)windowWillClose:(NSNotification *)notification
 //{
-//   NSLog(@"Window closing");
+//   //ANSLog(@"Window closing");
 //}
 
 // -------------------------------------------------------------------------------

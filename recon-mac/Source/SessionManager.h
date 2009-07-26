@@ -25,7 +25,8 @@
 - (void)setContext:(NSManagedObjectContext *)c;
 
 - (Session *)queueSessionWithProfile:(Profile *)profile withTarget:(NSString *)target;
-- (Session *)queueExistingSession:(Session *)session;
+- (Session *)queueExistingSession:(Session *)session withGrowl:(BOOL)notify;
+- (void)queueExistingSessions:(NSArray *)sessions;
 
 - (void)deleteSession:(Session *)session;
 - (void)abortSession:(Session *)session;

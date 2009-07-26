@@ -13,7 +13,11 @@
 @class Session;
 @class Host;
 @class Port;
-@class OperatingSystem;
+@class OsMatch;
+@class OsClass;
+@class IpIdSeqValue;
+@class TcpSeqValue;
+@class TcpTsSeqValue;
 
 @interface XMLController : NSObject 
 {
@@ -24,12 +28,11 @@
    Session *currentSession;
    Host *currentHost;
    Port *currentPort;
-   OperatingSystem *currentOperatingSystem;   
+   OsMatch *currentOsMatch;
+   OsClass *currentOsClass;
 
    // State-machine helper flag
    BOOL inRunstats;   
-   BOOL inOsclass;
-   BOOL inOsmatch;
    BOOL onlyReadProgress;
    
    float tempProgress;

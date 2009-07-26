@@ -61,7 +61,7 @@
 -(void)netServiceDidResolveAddress:(NSNetService *)service {
    NSData *txtdata = [service TXTRecordData];
    NSDictionary *txtdict = [NSNetService dictionaryFromTXTRecordData:txtdata];
-   NSLog(@"TEST: %@", [txtdict allKeys]);
+   //ANSLog(@"TEST: %@", [txtdict allKeys]);
    
    id dictKey;
    NSArray *allKeys = [txtdict allKeys];   
@@ -72,7 +72,7 @@
       
       NSData *dictValue = [txtdict valueForKey:dictKey];
       NSString *aStr = [[NSString alloc] initWithData:dictValue encoding:NSASCIIStringEncoding]; 
-      NSLog(@"%@", aStr);
+      //ANSLog(@"%@", aStr);
    }
    
     self.isConnected = YES;
@@ -80,7 +80,7 @@
 }
 
 -(void)netService:(NSNetService *)service didNotResolve:(NSDictionary *)errorDict {
-    NSLog(@"Could not resolve: %@", errorDict);
+    //ANSLog(@"Could not resolve: %@", errorDict);
 }
 
 @end

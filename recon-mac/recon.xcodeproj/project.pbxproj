@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		775BDEF1067A8BF0009058FE /* MyDocument.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 775BDEF0067A8BF0009058FE /* MyDocument.xcdatamodel */; };
 		775DFF38067A968500C5B868 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
-		8C2A17A7100B29D10060D931 /* OperatingSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A17A6100B29D10060D931 /* OperatingSystem.m */; };
 		8C2A17B5100B2A6E0060D931 /* Host.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A17B4100B2A6E0060D931 /* Host.m */; };
 		8C4163861010D6310066A4F8 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4163851010D6310066A4F8 /* BWToolkitFramework.framework */; };
 		8C4163891010D6340066A4F8 /* BWToolkitFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C4163851010D6310066A4F8 /* BWToolkitFramework.framework */; };
@@ -32,6 +31,11 @@
 		8C79F6811004235900A4648B /* button_pane_hide_icon.tif in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F67F1004235900A4648B /* button_pane_hide_icon.tif */; };
 		8C79F78A1004908600A4648B /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C79F7891004908600A4648B /* MyDocument.xib */; };
 		8CAA1231100A078B0084C6D5 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAA1230100A078B0084C6D5 /* Profile.m */; };
+		8CAA7CB6101CD00700EF43A3 /* OsClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAA7CB3101CD00700EF43A3 /* OsClass.m */; };
+		8CAA7CB7101CD00700EF43A3 /* OsMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAA7CB5101CD00700EF43A3 /* OsMatch.m */; };
+		8CAA7D88101CF83E00EF43A3 /* TcpSeqValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAA7D83101CF83E00EF43A3 /* TcpSeqValue.m */; };
+		8CAA7D89101CF83E00EF43A3 /* TcpTsSeqValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAA7D85101CF83E00EF43A3 /* TcpTsSeqValue.m */; };
+		8CAA7D8A101CF83E00EF43A3 /* IpIdSeqValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAA7D87101CF83E00EF43A3 /* IpIdSeqValue.m */; };
 		8CC32789100CDCA700483939 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC32788100CDCA700483939 /* Security.framework */; };
 		8CC3278F100CDCF000483939 /* InspectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3278E100CDCF000483939 /* InspectorController.m */; };
 		8CC32794100CDFE400483939 /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC32793100CDFE400483939 /* Connection.m */; };
@@ -77,8 +81,6 @@
 		32DBCF750370BD2300C91783 /* recon_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = recon_Prefix.pch; path = Source/recon_Prefix.pch; sourceTree = "<group>"; };
 		775BDEF0067A8BF0009058FE /* MyDocument.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; name = MyDocument.xcdatamodel; path = Models/MyDocument.xcdatamodel; sourceTree = "<group>"; };
 		7788DA0506752A1600599AAD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		8C2A17A5100B29D10060D931 /* OperatingSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OperatingSystem.h; path = "Source/Managed Objects/OperatingSystem.h"; sourceTree = "<group>"; };
-		8C2A17A6100B29D10060D931 /* OperatingSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OperatingSystem.m; path = "Source/Managed Objects/OperatingSystem.m"; sourceTree = "<group>"; };
 		8C2A17B3100B2A6E0060D931 /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Host.h; path = "Source/Managed Objects/Host.h"; sourceTree = "<group>"; };
 		8C2A17B4100B2A6E0060D931 /* Host.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Host.m; path = "Source/Managed Objects/Host.m"; sourceTree = "<group>"; };
 		8C4163851010D6310066A4F8 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = ../../../Library/Frameworks/BWToolkitFramework.framework; sourceTree = SOURCE_ROOT; };
@@ -113,6 +115,16 @@
 		8C7E9C731014D34E00762319 /* NSManagedObjectContext-helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext-helper.h"; path = "Source/NSManagedObjectContext-helper.h"; sourceTree = "<group>"; };
 		8CAA122F100A078B0084C6D5 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Profile.h; path = "Source/Managed Objects/Profile.h"; sourceTree = "<group>"; };
 		8CAA1230100A078B0084C6D5 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Profile.m; path = "Source/Managed Objects/Profile.m"; sourceTree = "<group>"; };
+		8CAA7CB2101CD00700EF43A3 /* OsClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OsClass.h; path = "Source/Managed Objects/OsClass.h"; sourceTree = "<group>"; };
+		8CAA7CB3101CD00700EF43A3 /* OsClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OsClass.m; path = "Source/Managed Objects/OsClass.m"; sourceTree = "<group>"; };
+		8CAA7CB4101CD00700EF43A3 /* OsMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OsMatch.h; path = "Source/Managed Objects/OsMatch.h"; sourceTree = "<group>"; };
+		8CAA7CB5101CD00700EF43A3 /* OsMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OsMatch.m; path = "Source/Managed Objects/OsMatch.m"; sourceTree = "<group>"; };
+		8CAA7D82101CF83E00EF43A3 /* TcpSeqValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TcpSeqValue.h; path = "Source/Managed Objects/TcpSeqValue.h"; sourceTree = "<group>"; };
+		8CAA7D83101CF83E00EF43A3 /* TcpSeqValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TcpSeqValue.m; path = "Source/Managed Objects/TcpSeqValue.m"; sourceTree = "<group>"; };
+		8CAA7D84101CF83E00EF43A3 /* TcpTsSeqValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TcpTsSeqValue.h; path = "Source/Managed Objects/TcpTsSeqValue.h"; sourceTree = "<group>"; };
+		8CAA7D85101CF83E00EF43A3 /* TcpTsSeqValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TcpTsSeqValue.m; path = "Source/Managed Objects/TcpTsSeqValue.m"; sourceTree = "<group>"; };
+		8CAA7D86101CF83E00EF43A3 /* IpIdSeqValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IpIdSeqValue.h; path = "Source/Managed Objects/IpIdSeqValue.h"; sourceTree = "<group>"; };
+		8CAA7D87101CF83E00EF43A3 /* IpIdSeqValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IpIdSeqValue.m; path = "Source/Managed Objects/IpIdSeqValue.m"; sourceTree = "<group>"; };
 		8CC32788100CDCA700483939 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		8CC3278D100CDCF000483939 /* InspectorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InspectorController.h; path = Source/InspectorController.h; sourceTree = "<group>"; };
 		8CC3278E100CDCF000483939 /* InspectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorController.m; path = Source/InspectorController.m; sourceTree = "<group>"; };
@@ -220,7 +232,6 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8C5FF41E101B6F5B00856055 /* reconwithwall-darker-zoom.icns */,
 				8C79F4C41003E3BA00A4648B /* MainMenu.xib */,
 				8C79F7891004908600A4648B /* MyDocument.xib */,
 				8C79F67E1004235900A4648B /* button_pane_show_icon.tif */,
@@ -229,6 +240,7 @@
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				8C79F4C51003E3BA00A4648B /* Growl Registration Ticket.growlRegDict */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
+				8C5FF41E101B6F5B00856055 /* reconwithwall-darker-zoom.icns */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -253,8 +265,16 @@
 				8C79E884100117BF00A4648B /* Port.m */,
 				8C79E885100117BF00A4648B /* Session.h */,
 				8C79E886100117BF00A4648B /* Session.m */,
-				8C2A17A5100B29D10060D931 /* OperatingSystem.h */,
-				8C2A17A6100B29D10060D931 /* OperatingSystem.m */,
+				8CAA7CB2101CD00700EF43A3 /* OsClass.h */,
+				8CAA7CB3101CD00700EF43A3 /* OsClass.m */,
+				8CAA7CB4101CD00700EF43A3 /* OsMatch.h */,
+				8CAA7CB5101CD00700EF43A3 /* OsMatch.m */,
+				8CAA7D86101CF83E00EF43A3 /* IpIdSeqValue.h */,
+				8CAA7D87101CF83E00EF43A3 /* IpIdSeqValue.m */,
+				8CAA7D82101CF83E00EF43A3 /* TcpSeqValue.h */,
+				8CAA7D83101CF83E00EF43A3 /* TcpSeqValue.m */,
+				8CAA7D84101CF83E00EF43A3 /* TcpTsSeqValue.h */,
+				8CAA7D85101CF83E00EF43A3 /* TcpTsSeqValue.m */,
 			);
 			name = "Managed Objects";
 			sourceTree = "<group>";
@@ -357,11 +377,15 @@
 				8C55E41F100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m in Sources */,
 				8C55E43810052E72002F5013 /* SessionManager.m in Sources */,
 				8CAA1231100A078B0084C6D5 /* Profile.m in Sources */,
-				8C2A17A7100B29D10060D931 /* OperatingSystem.m in Sources */,
 				8C2A17B5100B2A6E0060D931 /* Host.m in Sources */,
 				8CC3278F100CDCF000483939 /* InspectorController.m in Sources */,
 				8CC32794100CDFE400483939 /* Connection.m in Sources */,
 				8CC329D1100DF9D700483939 /* ClientController.m in Sources */,
+				8CAA7CB6101CD00700EF43A3 /* OsClass.m in Sources */,
+				8CAA7CB7101CD00700EF43A3 /* OsMatch.m in Sources */,
+				8CAA7D88101CF83E00EF43A3 /* TcpSeqValue.m in Sources */,
+				8CAA7D89101CF83E00EF43A3 /* TcpTsSeqValue.m in Sources */,
+				8CAA7D8A101CF83E00EF43A3 /* IpIdSeqValue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

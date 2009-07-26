@@ -1,18 +1,17 @@
 // 
-//  OperatingSystem.m
-//  Recon
+//  OsClass.m
+//  recon
 //
-//  Created by Sumanth Peddamatham on 7/13/09.
+//  Created by Sumanth Peddamatham on 7/26/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "OperatingSystem.h"
+#import "OsClass.h"
 
 #import "Host.h"
 
-@implementation OperatingSystem 
+@implementation OsClass 
 
-@dynamic name;
 @dynamic accuracy;
 @dynamic family;
 @dynamic vendor;

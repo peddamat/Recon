@@ -125,12 +125,12 @@
 {
    if ([task isRunning])
    {  
-      NSLog(@"NmapController: Abort: Terminating Task!");      
+      //ANSLog(@"NmapController: Abort: Terminating Task!");      
       [task terminate];      
    }
    else
    {
-      NSLog(@"NmapController: Abort: Task already stopped, faking it!");      
+      //ANSLog(@"NmapController: Abort: Task already stopped, faking it!");      
       self.hasRun = TRUE;
       NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];      
       [nc postNotificationName:@"NCabortedRun" object:self]; 
@@ -188,8 +188,8 @@
    //  - unsuccessfulTermination
    
    // TODO: Parse errorString and notify if errors occurred.
-   //   NSLog(@"%@", outputString);
-   //   NSLog(@"%@", errorString);
+   //   //ANSLog(@"%@", outputString);
+   //   //ANSLog(@"%@", errorString);
    
    NSError *error;
    NSString *standardOutPath = [outputFilePath stringByAppendingPathComponent:@"nmap-stdout.txt"];
@@ -210,13 +210,13 @@
 // -------------------------------------------------------------------------------
 - (void)terminatedNotification:(NSNotification *)notification
 {
-   NSLog(@"NmapController: Received task termination!");
+   //ANSLog(@"NmapController: Received task termination!");
  
    // Write stdout and stderr to file
    BOOL writeOK = [self writeNmapOutputToFile];
 
    int taskReturnValue = [[notification object] terminationStatus];   
-   NSLog(@"NmapController: Return value: %i", taskReturnValue);
+   //ANSLog(@"NmapController: Return value: %i", taskReturnValue);
 
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 

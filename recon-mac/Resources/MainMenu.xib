@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="331"/>
+			<integer value="421"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -780,7 +780,7 @@
 								</object>
 								<object class="NSMenuItem" id="698799749">
 									<reference key="NSMenu" ref="200699227"/>
-									<string key="NSTitle">Toggle Profiles Drawer</string>
+									<string key="NSTitle">Toggle Profiles</string>
 									<string key="NSKeyEquiv">r</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -789,7 +789,7 @@
 								</object>
 								<object class="NSMenuItem" id="622763339">
 									<reference key="NSMenu" ref="200699227"/>
-									<string key="NSTitle">Toggle Sessions Drawer</string>
+									<string key="NSTitle">Toggle Dossier</string>
 									<string key="NSKeyEquiv">d</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -2336,7 +2336,7 @@
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
-					<string>{{705, 593}, {259, 243}}</string>
+					<string>{{705, 593}, {240, 243}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2512,6 +2512,7 @@
 							<string>menuSettings</string>
 							<string>modeSwitchButton</string>
 							<string>nmapCommandTextField</string>
+							<string>nmapConsoleTextView</string>
 							<string>nonTcpScanPopUp</string>
 							<string>osesInSessionController</string>
 							<string>osesTableView</string>
@@ -2561,6 +2562,7 @@
 							<string>NSMenuItem</string>
 							<string>NSSegmentedControl</string>
 							<string>NSTextField</string>
+							<string>NSTextView</string>
 							<string>NSPopUpButton</string>
 							<string>NSArrayController</string>
 							<string>NSTableView</string>

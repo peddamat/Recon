@@ -17,7 +17,7 @@
 #import "Port.h"
 #import "Profile.h"
 #import "Session.h"
-#import "OperatingSystem.h"
+#import "OsMatch.h"
 
 #import "Connection.h"
 
@@ -64,7 +64,6 @@
    [nmapErrorTimer invalidate];
    [nmapErrorTimer release];
    
-   [mainsubView release];
    [super dealloc];
 }
 
@@ -84,7 +83,7 @@
 {
    [super windowControllerDidLoadNib:windowController];
 
-   NSLog(@"windowControllerDidLoadNib");
+   //ANSLog(@"windowControllerDidLoadNib");
    
    [NSApp setServicesProvider:self];
 
@@ -179,8 +178,6 @@
    // Generate the Hosts TableView Context Menu items
    [self createHostsMenu];
    
-   [mainsubView retain];   
-   
    [sessionsTableView registerForDraggedTypes:
     [NSArray arrayWithObjects:NSStringPboardType,NSFilenamesPboardType,nil]];
 }
@@ -204,7 +201,7 @@
 // -------------------------------------------------------------------------------
 - (void)updateSupportFolder:(NSNotification *)notification
 {
-   NSLog(@"MyDocument: updateSupportFolder");
+   //ANSLog(@"MyDocument: updateSupportFolder");
    
    NSError *error;
    NSURL *url = [NSURL fileURLWithPath: [[prefsController reconSupportFolder]
@@ -256,7 +253,7 @@
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {
-//   NSLog(@"TOOLBAR");
+//   //ANSLog(@"TOOLBAR");
    
    return YES;
 }
@@ -267,7 +264,7 @@
 // -------------------------------------------------------------------------------
 - (void)awakeFromNib
 {
-   NSLog(@"MyDocument: awakeFromNib!");
+   //ANSLog(@"MyDocument: awakeFromNib!");
 }
 
 // -------------------------------------------------------------------------------
@@ -323,40 +320,8 @@
    [interfacesPopUp selectItemAtIndex:0];   
 }
 
-// -------------------------------------------------------------------------------
-//	segSettingsClicked: Switches between tabs in Settings mode
-// -------------------------------------------------------------------------------
-- (IBAction)segSettingsClicked:(id)sender
-{
-   int clickedSegment = [sender selectedSegment];
-   [settingsTabView selectTabViewItemAtIndex:clickedSegment];
-}
-
-// -------------------------------------------------------------------------------
-//	segResultsClicked: Switches between tabs in Results mode
-// -------------------------------------------------------------------------------
-- (IBAction)segResultsClicked:(id)sender
-{
-   int clickedSegment = [sender selectedSegment];
-   [resultsTabView selectTabViewItemAtIndex:clickedSegment];
-}
-
-// -------------------------------------------------------------------------------
-//	segControlClicked: Delete/Play/Add segmented control in the lower-right
-// -------------------------------------------------------------------------------
-- (IBAction)segControlClicked:(id)sender
-{
-   int clickedSegment = [sender selectedSegment];
-   
-   if (clickedSegment == 0)
-      [self dequeueSession:self];
-   if (clickedSegment == 1)
-      [self processQueue:self];
-   if (clickedSegment == 2)
-      [self queueSession:self];
-}
-
-
+#pragma mark -
+#pragma mark SessionManager methods
 // -------------------------------------------------------------------------------
 //	queueSession: Queue up a session using the currently selected Profile.
 //
@@ -364,7 +329,7 @@
 // -------------------------------------------------------------------------------
 - (IBAction)queueSession:(id)sender 
 {   
-   NSLog(@"MyDocument: queueSession");
+   //ANSLog(@"MyDocument: queueSession");
    
    // Read the manual entry textfield, tokenize the string, and pull out
    //  arguments that start with '-', ie. nmap commands
@@ -413,8 +378,9 @@
                                                  userInfo:nil
                                                   repeats:YES] retain]; 
       }
-      
-      [a release];
+
+      // TODO: Why for thou crasheth?
+//      [a release];
    }
 }
 
@@ -460,101 +426,27 @@
 {   
    NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Session" withPredicate:
                      @"(status LIKE[c] 'Queued')"];   
-
-   for (id object in array)
-   {
-      [sessionManager queueExistingSession:object];
-   }      
+   
+   if ([array count] > 0)
+      [sessionManager queueExistingSessions:array];
    
    // This should probably be moved to it's own method, buuuuut...
    array = [[self managedObjectContext] fetchObjectsForEntityName:@"Session" withPredicate:
                      @"(status != 'Queued') AND (status != 'Done')"];   
    
    // Set incomplete scans to 'Aborted'
-   for (id object in array)
+   if ([array count] > 0)
    {
-      [object setStatus:@"Aborted"];
-      [object setProgress:[NSNumber numberWithFloat:0.0]];
-   }
-   
-}
-
-// -------------------------------------------------------------------------------
-//	createHostsMenu: Create a right-click menu for the hosts Table View.
-// -------------------------------------------------------------------------------
-- (void)createHostsMenu
-{
-   NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:
-                 @"(parent.name LIKE[c] 'Defaults') OR (parent.name LIKE[c] 'User Profiles')"];   
-
-   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                       initWithKey:@"name" ascending:YES];
-
-   NSMutableArray *sa = [NSMutableArray arrayWithArray:array];
-   [sa sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];    
-   [sortDescriptor release];
-
-   NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:@"Queue with"
-                                               action:@selector(handleHostsMenuClick:)
-                                        keyEquivalent:@""];   
-   NSMenu *submenu = [[NSMenu alloc] initWithTitle:@"Profile"];
-   [mi setSubmenu:submenu];
-   
-   for (id obj in sa)
-   {
-      NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:[obj name]
-                                                  action:@selector(handleHostsMenuClick:)
-                                           keyEquivalent:@""];
-      [mi setTag:10];
-      [submenu addItem:mi];
-      [mi release];      
-      
-   }
-   [hostsContextMenu addItem:mi];
-}
-
-// -------------------------------------------------------------------------------
-//	handleHostsMenuClick: 
-// -------------------------------------------------------------------------------
-- (IBAction)handleHostsMenuClick:(id)sender
-{
-   NSLog(@"MyDocument: handleHostsMenuClick: %@", [sender title]);
-   
-   // If we want to queue selected hosts... (10 is a magic number specified in IB)
-   if ([sender tag] == 10)
-   {
-      // Grab the desired profile...
-      NSArray *s = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:
-                    @"(name LIKE[c] %@)", [sender title]]; 
-      Profile *p = [s lastObject];
-      
-      // Grab the selected hosts from the hostsController
-      NSArray *selectedHosts = [hostsInSessionController selectedObjects];
-      
-      NSString *hostsIpCSV = [[NSString alloc] init];
-      
-      // Create a comma-seperated string of target ip's
-      if ([selectedHosts count] > 1)
+      for (id object in array)
       {
-         Host *lastHost = [selectedHosts lastObject];
-         
-         for (Host *host in selectedHosts)
-         {
-            if (host == lastHost)
-               break;
-            hostsIpCSV = [hostsIpCSV stringByAppendingFormat:@"%@ ", [host ipv4Address]];
-         }
+         [object setStatus:@"Aborted"];
+         [object setProgress:[NSNumber numberWithFloat:0.0]];
       }
-      
-      hostsIpCSV = [hostsIpCSV stringByAppendingString:[[selectedHosts lastObject] ipv4Address]];
-            
-//      // Create a Target string based on the hosts ip's
-//      NSString *ip = [[a lastObject] ipv4Address];
-            
-      [sessionManager queueSessionWithProfile:p withTarget:hostsIpCSV];
-   }
+   }   
 }
 
+#pragma mark -
+#pragma mark Profiles drawer methods
 // -------------------------------------------------------------------------------
 //	addDefaultProfiles: 
 // -------------------------------------------------------------------------------
@@ -727,20 +619,18 @@
    
    // Make sure it's not a Default
    if ((selectedProfile.parent.name == @"Defaults") || (selectedProfile.name == @"Defaults")) {
-      NSLog(@"FLUNKO");
+      //ANSLog(@"FLUNKO");
       return;
    }
    else {
-      NSLog(@"SHITE");
+      //ANSLog(@"SHITE");
       // Delete profile
       [[self managedObjectContext] deleteObject:selectedProfile];
    }
 }
 
-// -------------------------------------------------------------------------------
-//	View togglers
-// -------------------------------------------------------------------------------
-
+#pragma mark -
+#pragma mark View Togglers
 - (IBAction)modeSwitch:(id)sender
 {
    if ([sender selectedSegment] == 1)
@@ -755,8 +645,8 @@
 - (IBAction)switchToScanView:(id)sender
 {   
    [modeSwitchButton setSelectedSegment:0];
-   [NSApp endSheet:testWindow];
-   [testWindow orderOut:sender];
+   [NSApp endSheet:inspectorWindow];
+   [inspectorWindow orderOut:sender];
 
    [sessionsDrawer open];
    [profilesDrawer open];   
@@ -768,7 +658,7 @@
 - (IBAction)switchToInspectorView:(id)sender
 {
    [modeSwitchButton setSelectedSegment:1];   
-   [NSApp beginSheet:testWindow
+   [NSApp beginSheet:inspectorWindow
       modalForWindow:[mainView window]
        modalDelegate:self
       didEndSelector:NULL
@@ -814,9 +704,49 @@
 
 
 // -------------------------------------------------------------------------------
-//	Session Drawer Menu key-handlers
+//	Segmented Control click-handlers
 // -------------------------------------------------------------------------------
+#pragma mark -
+#pragma mark Segmented Control click-handlers
 
+// -------------------------------------------------------------------------------
+//	segSettingsClicked: Switches between tabs in Settings mode
+// -------------------------------------------------------------------------------
+- (IBAction)segSettingsClicked:(id)sender
+{
+   int clickedSegment = [sender selectedSegment];
+   [settingsTabView selectTabViewItemAtIndex:clickedSegment];
+}
+
+// -------------------------------------------------------------------------------
+//	segResultsClicked: Switches between tabs in Results mode
+// -------------------------------------------------------------------------------
+- (IBAction)segResultsClicked:(id)sender
+{
+   int clickedSegment = [sender selectedSegment];
+   [resultsTabView selectTabViewItemAtIndex:clickedSegment];
+}
+
+// -------------------------------------------------------------------------------
+//	segControlClicked: Delete/Play/Add segmented control in the lower-right
+// -------------------------------------------------------------------------------
+- (IBAction)segControlClicked:(id)sender
+{
+   int clickedSegment = [sender selectedSegment];
+   
+   if (clickedSegment == 0)
+      [self dequeueSession:self];
+   if (clickedSegment == 1)
+      [self processQueue:self];
+   if (clickedSegment == 2)
+      [self queueSession:self];
+}
+
+
+// -------------------------------------------------------------------------------
+//	Session Drawer Menu click-handlers
+// -------------------------------------------------------------------------------
+#pragma mark Session Drawer Menu click-handlers
 - (Session *)clickedSessionInDrawer
 {
    // Find clicked row from sessionsTableView
@@ -835,7 +765,7 @@
 
 - (IBAction)sessionDrawerRun:(id)sender
 {
-   NSLog(@"MyDocument: launching session");
+   //ANSLog(@"MyDocument: launching session");
    NSArray *selectedSessions = [sessionsController selectedObjects];
    
    if ([selectedSessions count] > 1)
@@ -850,11 +780,11 @@
 }
 - (IBAction)sessionDrawerRunCopy:(id)sender
 {
-   NSLog(@"MyDocument: sessionDrawerRunCopy - NOT IMPLEMENTED!");
+   //ANSLog(@"MyDocument: sessionDrawerRunCopy - NOT IMPLEMENTED!");
 }
 - (IBAction) sessionDrawerAbort:(id)sender
 {
-   NSLog(@"MyDocument: Aborting session");
+   //ANSLog(@"MyDocument: Aborting session");
    
    NSArray *selectedSessions = [sessionsController selectedObjects];
    
@@ -870,7 +800,7 @@
 }
 - (IBAction) sessionDrawerRemove:(id)sender
 {
-   NSLog(@"MyDocument: Removing session");
+   //ANSLog(@"MyDocument: Removing session");
    
    NSArray *selectedSessions = [sessionsController selectedObjects];
    
@@ -893,18 +823,100 @@
 
 }
 
+#pragma mark Table click handlers
+// -------------------------------------------------------------------------------
+//	createHostsMenu: Create a right-click menu for the hosts Table View.
+// -------------------------------------------------------------------------------
+- (void)createHostsMenu
+{
+   NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:
+                     @"(parent.name LIKE[c] 'Defaults') OR (parent.name LIKE[c] 'User Profiles')"];   
+   
+   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                       initWithKey:@"name" ascending:YES];
+   
+   NSMutableArray *sa = [NSMutableArray arrayWithArray:array];
+   [sa sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];    
+   [sortDescriptor release];
+   
+   NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:@"Queue with"
+                                               action:@selector(handleHostsMenuClick:)
+                                        keyEquivalent:@""];   
+   NSMenu *submenu = [[NSMenu alloc] initWithTitle:@"Profile"];
+   [mi setSubmenu:submenu];
+   
+   for (id obj in sa)
+   {
+      NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:[obj name]
+                                                  action:@selector(handleHostsMenuClick:)
+                                           keyEquivalent:@""];
+      [mi setTag:10];
+      [submenu addItem:mi];
+      [mi release];      
+      
+   }
+   [hostsContextMenu addItem:mi];
+}
+
+// -------------------------------------------------------------------------------
+//	handleHostsMenuClick: 
+// -------------------------------------------------------------------------------
+- (IBAction)handleHostsMenuClick:(id)sender
+{
+   //ANSLog(@"MyDocument: handleHostsMenuClick: %@", [sender title]);
+   
+   // If we want to queue selected hosts... (10 is a magic number specified in IB)
+   if ([sender tag] == 10)
+   {
+      // Grab the desired profile...
+      NSArray *s = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:
+                    @"(name LIKE[c] %@)", [sender title]]; 
+      Profile *p = [s lastObject];
+      
+      // Grab the selected hosts from the hostsController
+      NSArray *selectedHosts = [hostsInSessionController selectedObjects];
+      
+      NSString *hostsIpCSV = [[NSString alloc] init];
+      
+      // Create a comma-seperated string of target ip's
+      if ([selectedHosts count] > 1)
+      {
+         Host *lastHost = [selectedHosts lastObject];
+         
+         for (Host *host in selectedHosts)
+         {
+            if (host == lastHost)
+               break;
+            hostsIpCSV = [hostsIpCSV stringByAppendingFormat:@"%@ ", [host ipv4Address]];
+         }
+      }
+      
+      hostsIpCSV = [hostsIpCSV stringByAppendingString:[[selectedHosts lastObject] ipv4Address]];
+      
+      //      // Create a Target string based on the hosts ip's
+      //      NSString *ip = [[a lastObject] ipv4Address];
+
+      // BEAUTIFIER: When queueing up a new host, keep the selection on the current Session
+      Session *currentSession = [[sessionsController selectedObjects] lastObject];      
+      
+      [sessionManager queueSessionWithProfile:p withTarget:hostsIpCSV];
+      
+      // BEAUTIFIER
+      [sessionsController setSelectedObjects:[NSArray arrayWithObject:currentSession]];
+   }
+}
 
 // -------------------------------------------------------------------------------
 //	Table click handlers
 // -------------------------------------------------------------------------------
-
+#pragma mark Table double-click handlers
 - (void)hostsTableDoubleClick
 {
    // If user double-clicks on a Host menu item, switch to results view
    [self toggleResults:self];
 }
 
-- (void)portsTableDoubleClick
+- (void)portsTableDoubleClick 
 {
    // Get selected port
    Port *selectedPort = [[portsInSessionController selectedObjects] lastObject];
@@ -919,7 +931,7 @@
 - (void)osesTableDoubleClick
 {
    // Get selected port
-   OperatingSystem *selectedOs = [[osesInSessionController selectedObjects] lastObject];
+   OsMatch *selectedOs = [[osesInSessionController selectedObjects] lastObject];
    // Get host for selected port
    Host *selectedHost = selectedOs.host;
    
@@ -958,7 +970,7 @@
 // Sessions Drawer click-handlers
 - (void)sessionsTableDoubleClick
 {
-   NSLog(@"MyDocument: doubleClick!");
+   //ANSLog(@"MyDocument: doubleClick!");
    
    // Retrieve currently selected session
    Session *selectedSession = [[sessionsController selectedObjects] lastObject]; 
@@ -976,7 +988,7 @@
 // -------------------------------------------------------------------------------
 //	Main Menu key-handlers
 // -------------------------------------------------------------------------------
-
+#pragma mark Main Menu click-handlers
 - (IBAction) toggleSettings:(id)sender {
    [mainTabView selectTabViewItemAtIndex:0];
    [self switchToScanView:self];
@@ -990,6 +1002,23 @@
 }
 - (IBAction) toggleProfilesDrawer:(id)sender {
    [profilesDrawer toggle:self];    
+}
+
+// -------------------------------------------------------------------------------
+//	Hands this functionality off to the PrefsController
+// -------------------------------------------------------------------------------
+
+- (IBAction)setuidNmap:(id)sender
+{
+   [prefsController rootNmap];
+}
+- (IBAction)unsetuidNmap:(id)sender
+{
+   [prefsController unrootNmap];
+}
+- (IBAction)showPrefWindow:(id)sender
+{
+   [prefsController showPrefWindow:self];
 }
 
 // -------------------------------------------------------------------------------
@@ -1025,7 +1054,7 @@
 //             ([s status] != @"Queued")
 //            )         
 //         {
-//            NSLog(@"1");
+//            //ANSLog(@"1");
 //            enabled = NO;
 //         }
 //         
@@ -1075,7 +1104,7 @@
    }
    else
    {
-      NSLog(@"MyDocument: fart!");      
+      //ANSLog(@"MyDocument: fart!");      
    
    // TODO: If Hosts Context Menu
    
@@ -1089,24 +1118,8 @@
    }
 }
 
-
-// -------------------------------------------------------------------------------
-//	Hands this functionality off to the PrefsController
-// -------------------------------------------------------------------------------
-
-- (IBAction)setuidNmap:(id)sender
-{
-   [prefsController rootNmap];
-}
-- (IBAction)unsetuidNmap:(id)sender
-{
-   [prefsController unrootNmap];
-}
-- (IBAction)showPrefWindow:(id)sender
-{
-   [prefsController showPrefWindow:self];
-}
-
+#pragma mark -
+#pragma mark Sort Descriptors
 
 // -------------------------------------------------------------------------------
 //	Sort Descriptors for the various table views
@@ -1184,6 +1197,9 @@
 }
 
 
+#pragma mark -
+#pragma mark NSWindow hooks
+
 - (NSString *)windowNibName 
 {
    return @"MyDocument";
@@ -1195,22 +1211,22 @@
 
 - (IBAction)saveDocument:(id)sender
 {
-   NSLog(@"SAVY?");
+   //ANSLog(@"SAVY?");
 }
 - (IBAction)saveDocumentTo:(id)sender
 {
-   NSLog(@"SAVY?");
+   //ANSLog(@"SAVY?");
 }
 - (IBAction)saveDocumentAs:(id)sender
 {
-   NSLog(@"SAVY?");
+   //ANSLog(@"SAVY?");
 }
 
 // Overriding this allows us to create the illusion of Autosave
 - (BOOL)isDocumentEdited
 {
    return NO;
-//   NSLog(@"EDIT!");
+//   //ANSLog(@"EDIT!");
 }
 
 //- (void)canCloseDocumentWithDelegate:(id)delegate shouldCloseSelector:(SEL)shouldCloseSelector contextInfo:(void *)contextInfo
@@ -1226,7 +1242,7 @@
 // -------------------------------------------------------------------------------
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
    
-   NSLog(@"MyDocument: Closing main window");
+   //ANSLog(@"MyDocument: Closing main window");
    
    NSError *error;
    int reply = NSTerminateNow;
@@ -1278,21 +1294,11 @@
    return TRUE;
 }
 
-// -------------------------------------------------------------------------------
-//	peanut: Test function for playing around with predicates
-// -------------------------------------------------------------------------------
-- (IBAction)peanut:(id)sender
-{
-   
-
-   NSLog(@"HIHIHIH");
-}
-
 #pragma mark Dragging Destination
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
-   NSLog(@"draggingEntered:");
+   //ANSLog(@"draggingEntered:");
    if ([sender draggingSource] == self) {
       return NSDragOperationNone;
    }
@@ -1303,7 +1309,7 @@
 }
 - (void)draggingExited:(id <NSDraggingInfo>)sender
 {
-   NSLog(@"draggingExited:");
+   //ANSLog(@"draggingExited:");
 //   highlighted = NO;
 //   [self setNeedsDisplay:YES];
 }
@@ -1317,7 +1323,7 @@
 {
    NSPasteboard *pb = [sender draggingPasteboard];
    if(![self readFromPasteboard:pb]) {
-      NSLog(@"Error: Could not read from dragging pasteboard");
+      //ANSLog(@"Error: Could not read from dragging pasteboard");
       return NO;
    }
    return YES;
@@ -1325,7 +1331,7 @@
 
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender
 {
-   NSLog(@"concludeDragOperation:");
+   //ANSLog(@"concludeDragOperation:");
 //   highlighted = NO;
 //   [self setNeedsDisplay:YES];
 }
@@ -1352,7 +1358,7 @@
    
    // Add code here to validate the drop
    
-   NSLog(@"validate Drop");
+   //ANSLog(@"validate Drop");
    
    return NSDragOperationEvery;
    
