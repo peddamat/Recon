@@ -18,6 +18,7 @@
 @class IpIdSeqValue;
 @class TcpSeqValue;
 @class TcpTsSeqValue;
+@class Port_Script;
 
 @interface XMLController : NSObject 
 {

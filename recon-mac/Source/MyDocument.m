@@ -19,7 +19,7 @@
 #import "Session.h"
 #import "OsMatch.h"
 
-#import "Connection.h"
+#import "NetstatConnection.h"
 
 // For reading interface addresses
 #include <sys/types.h>
@@ -34,6 +34,9 @@
 @synthesize portSortDescriptor;
 @synthesize profileSortDescriptor;
 @synthesize sessionSortDescriptor;
+
+@synthesize selectedSetting;
+@synthesize selectedResult;
 
 
 - (id)init 
@@ -82,6 +85,9 @@
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController 
 {
    [super windowControllerDidLoadNib:windowController];
+   
+   self.selectedSetting = 0;
+   self.selectedResult = 0;
 
    //ANSLog(@"windowControllerDidLoadNib");
    
@@ -177,9 +183,10 @@
    
    // Generate the Hosts TableView Context Menu items
    [self createHostsMenu];
+   [self createNetstatMenu];
    
    [sessionsTableView registerForDraggedTypes:
-    [NSArray arrayWithObjects:NSStringPboardType,NSFilenamesPboardType,nil]];
+   [NSArray arrayWithObjects:NSStringPboardType,NSFilenamesPboardType,nil]];
 }
 
 // -------------------------------------------------------------------------------
@@ -226,6 +233,7 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
    [self toggleSettings:self];
+   self.selectedSetting = 0;
    [settingsTabView selectTabViewItemAtIndex:0];
 }
 
@@ -714,8 +722,8 @@
 // -------------------------------------------------------------------------------
 - (IBAction)segSettingsClicked:(id)sender
 {
-   int clickedSegment = [sender selectedSegment];
-   [settingsTabView selectTabViewItemAtIndex:clickedSegment];
+   self.selectedSetting = [sender selectedSegment];
+   [settingsTabView selectTabViewItemAtIndex:self.selectedSetting];
 }
 
 // -------------------------------------------------------------------------------
@@ -723,8 +731,8 @@
 // -------------------------------------------------------------------------------
 - (IBAction)segResultsClicked:(id)sender
 {
-   int clickedSegment = [sender selectedSegment];
-   [resultsTabView selectTabViewItemAtIndex:clickedSegment];
+   self.selectedResult = [sender selectedSegment];
+   [resultsTabView selectTabViewItemAtIndex:self.selectedResult];
 }
 
 // -------------------------------------------------------------------------------
@@ -826,6 +834,7 @@
 #pragma mark Table click handlers
 // -------------------------------------------------------------------------------
 //	createHostsMenu: Create a right-click menu for the hosts Table View.
+//                  TODO: This function is replicated in InspectorController. :(
 // -------------------------------------------------------------------------------
 - (void)createHostsMenu
 {
@@ -896,6 +905,88 @@
       //      // Create a Target string based on the hosts ip's
       //      NSString *ip = [[a lastObject] ipv4Address];
 
+      // BEAUTIFIER: When queueing up a new host, keep the selection on the current Session
+      Session *currentSession = [[sessionsController selectedObjects] lastObject];      
+      
+      [sessionManager queueSessionWithProfile:p withTarget:hostsIpCSV];
+      
+      // BEAUTIFIER
+      [sessionsController setSelectedObjects:[NSArray arrayWithObject:currentSession]];
+   }
+}
+
+// -------------------------------------------------------------------------------
+//	createNetstatMenu: 
+// -------------------------------------------------------------------------------
+- (void)createNetstatMenu
+{
+   NSArray *array = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:
+                     @"(parent.name LIKE[c] 'Defaults') OR (parent.name LIKE[c] 'User Profiles')"];   
+   
+   NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                       initWithKey:@"name" ascending:YES];
+   
+   NSMutableArray *sa = [NSMutableArray arrayWithArray:array];
+   [sa sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];    
+   [sortDescriptor release];
+   
+   NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:@"Queue with"
+                                               action:@selector(handleNetstatMenuClick:)
+                                        keyEquivalent:@""];   
+   NSMenu *submenu = [[NSMenu alloc] initWithTitle:@"Profile"];
+   [mi setSubmenu:submenu];
+   
+   for (id obj in sa)
+   {
+      NSMenuItem *mi = [[NSMenuItem alloc] initWithTitle:[obj name]
+                                                  action:@selector(handleNetstatMenuClick:)
+                                           keyEquivalent:@""];
+      [mi setTag:10];
+      [submenu addItem:mi];
+      [mi release];      
+      
+   }
+   [netstatContextMenu addItem:mi];
+}
+
+// -------------------------------------------------------------------------------
+//	handleNetstatMenuClick: 
+// -------------------------------------------------------------------------------
+- (IBAction)handleNetstatMenuClick:(id)sender
+{
+   //ANSLog(@"MyDocument: handleHostsMenuClick: %@", [sender title]);
+   
+   // If we want to queue selected hosts... (10 is a magic number specified in IB)
+   if ([sender tag] == 10)
+   {
+      // Grab the desired profile...
+      NSArray *s = [[self managedObjectContext] fetchObjectsForEntityName:@"Profile" withPredicate:
+                    @"(name LIKE[c] %@)", [sender title]]; 
+      Profile *p = [s lastObject];
+      
+      // Grab the selected hosts from the hostsController
+      NSArray *selectedHosts = [connectionsController selectedObjects];
+      
+      NSString *hostsIpCSV = [[NSString alloc] init];
+      
+      // Create a comma-seperated string of target ip's
+      if ([selectedHosts count] > 1)
+      {
+         NetstatConnection *lastHost = [selectedHosts lastObject];
+         
+         for (NetstatConnection *host in selectedHosts)
+         {
+            if (host == lastHost)
+               break;
+            hostsIpCSV = [hostsIpCSV stringByAppendingFormat:@"%@ ", [host remoteIP]];
+         }
+      }
+      
+      hostsIpCSV = [hostsIpCSV stringByAppendingString:[[selectedHosts lastObject] remoteIP]];
+      
+      //      // Create a Target string based on the hosts ip's
+      //      NSString *ip = [[a lastObject] ipv4Address];
+      
       // BEAUTIFIER: When queueing up a new host, keep the selection on the current Session
       Session *currentSession = [[sessionsController selectedObjects] lastObject];      
       

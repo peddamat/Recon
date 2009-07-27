@@ -12,7 +12,7 @@
 #import "SessionController.h"
 #import "SessionManager.h"
 
-#import "Connection.h"
+#import "NetstatConnection.h"
 #import "Profile.h"
 #import "Session.h"
 
@@ -367,7 +367,7 @@ int bitcount (unsigned int n)
    NSArray *line = [aString componentsSeparatedByString:@"\n"];
    int lineLength = [line count] - 1;
    
-   Connection *c = nil;
+   NetstatConnection *c = nil;
    NSMutableArray *a = [[NSMutableArray alloc] init];
    
    if (self.resolveHostnames == NO)
@@ -396,7 +396,7 @@ int bitcount (unsigned int n)
          
          NSString *status = [p objectAtIndex:2];
          
-         c = [[Connection alloc] initWithLocalIP:localIP
+         c = [[NetstatConnection alloc] initWithLocalIP:localIP
                                     andLocalPort:localPort
                                      andRemoteIP:remoteIP
                                    andRemotePort:remotePort
@@ -413,17 +413,23 @@ int bitcount (unsigned int n)
          NSArray *local = [[p objectAtIndex:0] componentsSeparatedByString:@"."];
          NSArray *remote = [[p objectAtIndex:1] componentsSeparatedByString:@"."];
          
+         // TODO: This is buggy.  ie. if the protocol is 'aol', and the address is 'www.aol.com.aol'
+         //       both 'aol's are stripped.  We need to just remove the trailing instance.
          NSString *localIP = [[p objectAtIndex:0] stringByReplacingOccurrencesOfString:[local lastObject] 
                                                                             withString:@""];
+         localIP = [localIP stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"."]];
+         
          NSString *localPort = [local lastObject];
          
          NSString *remoteIP = [[p objectAtIndex:1] stringByReplacingOccurrencesOfString:[remote lastObject] 
                                                                              withString:@""]; 
+         remoteIP = [remoteIP stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"."]];
+                     
          NSString *remotePort = [remote lastObject];
          
          NSString *status = [p objectAtIndex:2];
          
-         c = [[Connection alloc] initWithLocalIP:localIP
+         c = [[NetstatConnection alloc] initWithLocalIP:localIP
                                     andLocalPort:localPort
                                      andRemoteIP:remoteIP
                                    andRemotePort:remotePort
@@ -443,5 +449,6 @@ int bitcount (unsigned int n)
    if (self.autoRefresh == YES)
       [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:2];
 }   
+
 
 @end

@@ -13,6 +13,7 @@
 #import "Session.h"
 #import "OsClass.h"
 #import "OsMatch.h"
+#import "Port_Script.h"
 
 @interface XMLController ()
 
@@ -210,8 +211,16 @@
    /// PORT - SCRIPT
    if ( [elementName isEqualToString:@"script"] ) {
       
-      [currentPort setScriptID:[attributeDict objectForKey:@"id"]];
-      [currentPort setScriptOutput:[attributeDict objectForKey:@"output"]];
+      NSManagedObjectContext * context = [currentSession managedObjectContext]; 
+      Port_Script *script = [NSEntityDescription insertNewObjectForEntityForName: @"Port_Script" inManagedObjectContext: context];                   
+      
+      [script setId:[attributeDict objectForKey:@"id"]];
+      NSString *output = [attributeDict objectForKey:@"output"];
+      output = [output stringByReplacingOccurrencesOfString:@"\n" withString:@": "];
+      [script setOutput:output];
+      [script setPort:currentPort];
+      
+      script = nil;
       
       return;
    }

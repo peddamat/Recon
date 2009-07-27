@@ -1,15 +1,15 @@
 //
-//  Connection.m
+//  NetstatConnection.m
 //  Recon
 //
 //  Created by Sumanth Peddamatham on 7/14/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "Connection.h"
+#import "NetstatConnection.h"
 
 
-@implementation Connection
+@implementation NetstatConnection
 
 - (id)init
 {

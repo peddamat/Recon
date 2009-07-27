@@ -1,14 +1,15 @@
 // 
 //  Port.m
-//  Recon
+//  recon
 //
-//  Created by Sumanth Peddamatham on 7/15/09.
+//  Created by Sumanth Peddamatham on 7/26/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import "Port.h"
 
 #import "Host.h"
+#import "Port_Script.h"
 
 @implementation Port 
 
@@ -23,9 +24,8 @@
 @dynamic protocol;
 @dynamic serviceName;
 @dynamic serviceConf;
-@dynamic scriptOutput;
-@dynamic scriptID;
 @dynamic serviceVersion;
 @dynamic host;
+@dynamic scripts;
 
 @end

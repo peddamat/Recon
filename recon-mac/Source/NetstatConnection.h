@@ -1,5 +1,5 @@
 //
-//  Connection.h
+//  NetstatConnection.h
 //  Recon
 //
 //  Created by Sumanth Peddamatham on 7/14/09.
@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface Connection : NSObject {
+@interface NetstatConnection : NSObject {
    NSString *localIP;
    NSString *localPort;   
    NSString *remoteIP;

@@ -8,13 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class Connection;
+@class NetstatConnection;
 @class SessionController;
 @class SessionManager;
 
 @interface InspectorController : NSObject {
 
-   
    // Global outlets
    IBOutlet NSPopUpButton *taskSelectionPopUp;
    IBOutlet NSButton *scanButton;
@@ -45,7 +44,6 @@
 	NSTask *task;      
 	NSMutableData *standardOutput;
 	NSMutableData *standardError;
-   
 }
 
 @property (readwrite, retain)NSMutableArray *connections;

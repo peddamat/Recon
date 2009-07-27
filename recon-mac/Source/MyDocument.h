@@ -32,6 +32,9 @@ extern NSString * const BAFSavedSessionsDirectory;
    IBOutlet NSSegmentedControl *resultsSegmentedControl;
    IBOutlet NSSegmentedControl *modeSwitchButton;
    
+   int selectedSetting;
+   int selectedResult;
+   
    PrefsController *prefsController;
    SessionManager *sessionManager;
    
@@ -106,6 +109,10 @@ extern NSString * const BAFSavedSessionsDirectory;
    IBOutlet NSWindow *inspectorWindow;
    
    IBOutlet NSTextView *nmapConsoleTextView;   
+   
+   // Inspector Controller
+   IBOutlet NSMenu *netstatContextMenu;   
+   IBOutlet NSArrayController *connectionsController;
 }
 
 @property (readonly) NSArray *osSortDescriptor;
@@ -113,6 +120,8 @@ extern NSString * const BAFSavedSessionsDirectory;
 @property (readonly) NSArray *portSortDescriptor;
 @property (readonly) NSArray *profileSortDescriptor;
 @property (readonly) NSArray *sessionSortDescriptor;
+@property (readwrite, assign) int selectedSetting;
+@property (readwrite, assign) int selectedResult;
 
 //- (void)controlTextDidEndEditing:(NSNotification *)obj;
 
@@ -144,15 +153,15 @@ extern NSString * const BAFSavedSessionsDirectory;
 - (Session *)selectedSessionInDrawer;
 
 // Session Manager click-handlers
-- (IBAction) queueSession:(id)sender;
-- (IBAction) dequeueSession:(id)sender;
-- (IBAction) processQueue:(id)sender;
+- (IBAction)queueSession:(id)sender;
+- (IBAction)dequeueSession:(id)sender;
+- (IBAction)processQueue:(id)sender;
 
-- (IBAction) toggleSettings:(id)sender;
-- (IBAction) toggleResults:(id)sender;
+- (IBAction)toggleSettings:(id)sender;
+- (IBAction)toggleResults:(id)sender;
 
-- (IBAction) toggleSessionsDrawer:(id)sender;
-- (IBAction) toggleProfilesDrawer:(id)sender;
+- (IBAction)toggleSessionsDrawer:(id)sender;
+- (IBAction)toggleProfilesDrawer:(id)sender;
 
 - (void)addQueuedSessions;
 
@@ -169,6 +178,7 @@ extern NSString * const BAFSavedSessionsDirectory;
 - (IBAction)showPrefWindow:(id)sender;
 
 - (void)createHostsMenu;
+- (void)createNetstatMenu;
 
 - (void)updateSupportFolder:(NSNotification *)notification;
 
