@@ -281,7 +281,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>39</integer>
+									<integer>35</integer>
 									<integer>33</integer>
 									<integer>1</integer>
 									<integer>0</integer>
@@ -327,7 +327,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BonjourListener.m</string>
+								<string>InspectorController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -335,11 +335,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>BonjourListener.m</string>
+										<string>InspectorController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>8CC290101020F15600688F0C</string>
+										<string>8CC290471020F88000688F0C</string>
 										<key>history</key>
 										<array>
 											<string>8C79EDAC10028F6300A4648B</string>
@@ -393,9 +393,9 @@
 											<string>8CD1348E101F97F800E7E515</string>
 											<string>8CC28F181020018100688F0C</string>
 											<string>8CC28FE810204AD800688F0C</string>
-											<string>8CC290081020F15600688F0C</string>
 											<string>8CC290091020F15600688F0C</string>
-											<string>8CC2900A1020F15600688F0C</string>
+											<string>8CC290111020F1B500688F0C</string>
+											<string>8CC290121020F1B500688F0C</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -508,6 +508,7 @@
 											<string>8CC2900D1020F15600688F0C</string>
 											<string>8CC2900E1020F15600688F0C</string>
 											<string>8CC2900F1020F15600688F0C</string>
+											<string>8CC290131020F1B500688F0C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -706,8 +707,8 @@
 		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>8C79E12C0FFBB30500A4648B</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/me/Source/Obj-C/recon-mac/recon.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>360 55 1150 823 0 0 1440 878 </string>
@@ -1046,7 +1047,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {905, 420}}</string>
 								<key>RubberWindowFrame</key>
-								<string>392 149 905 461 0 0 1440 878 </string>
+								<string>741 131 905 461 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugCLIModule</string>
@@ -1075,7 +1076,7 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.consoleV3</string>
 			<key>WindowString</key>
-			<string>392 149 905 461 0 0 1440 878 </string>
+			<string>741 131 905 461 0 0 1440 878 </string>
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>

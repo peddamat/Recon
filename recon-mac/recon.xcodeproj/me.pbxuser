@@ -795,6 +795,14 @@
 			8CC2900E1020F15600688F0C /* PBXTextBookmark */ = 8CC2900E1020F15600688F0C /* PBXTextBookmark */;
 			8CC2900F1020F15600688F0C /* PBXTextBookmark */ = 8CC2900F1020F15600688F0C /* PBXTextBookmark */;
 			8CC290101020F15600688F0C /* PBXTextBookmark */ = 8CC290101020F15600688F0C /* PBXTextBookmark */;
+			8CC290111020F1B500688F0C /* PBXTextBookmark */ = 8CC290111020F1B500688F0C /* PBXTextBookmark */;
+			8CC290121020F1B500688F0C /* PBXTextBookmark */ = 8CC290121020F1B500688F0C /* PBXTextBookmark */;
+			8CC290131020F1B500688F0C /* PBXTextBookmark */ = 8CC290131020F1B500688F0C /* PBXTextBookmark */;
+			8CC290141020F1B500688F0C /* PBXTextBookmark */ = 8CC290141020F1B500688F0C /* PBXTextBookmark */;
+			8CC290411020F6F700688F0C /* PBXTextBookmark */ = 8CC290411020F6F700688F0C /* PBXTextBookmark */;
+			8CC290431020F73200688F0C /* PBXTextBookmark */ = 8CC290431020F73200688F0C /* PBXTextBookmark */;
+			8CC290451020F75F00688F0C /* PBXTextBookmark */ = 8CC290451020F75F00688F0C /* PBXTextBookmark */;
+			8CC290471020F88000688F0C /* PBXTextBookmark */ = 8CC290471020F88000688F0C /* PBXTextBookmark */;
 			8CC32180100B339400483939 = 8CC32180100B339400483939 /* PBXTextBookmark */;
 			8CC32665100C961D00483939 = 8CC32665100C961D00483939 /* PBXTextBookmark */;
 			8CC3273B100CD7B900483939 = 8CC3273B100CD7B900483939 /* PBXTextBookmark */;
@@ -6126,7 +6134,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 484";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 2011;
 		vrLoc = 14175;
@@ -6146,7 +6154,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 479";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1804;
 		vrLoc = 14387;
@@ -6156,7 +6164,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 479";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1804;
 		vrLoc = 14387;
@@ -6186,7 +6194,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 474";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1814;
 		vrLoc = 14413;
@@ -6216,7 +6224,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 484";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1753;
 		vrLoc = 14570;
@@ -6226,7 +6234,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 78";
 		rLen = 0;
-		rLoc = 1868;
+		rLoc = 1817;
 		rType = 0;
 		vrLen = 1407;
 		vrLoc = 981;
@@ -6256,7 +6264,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 484";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1753;
 		vrLoc = 14570;
@@ -6276,7 +6284,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 468";
 		rLen = 0;
-		rLoc = 18178;
+		rLoc = 18080;
 		rType = 0;
 		vrLen = 1814;
 		vrLoc = 14509;
@@ -6286,7 +6294,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 63";
 		rLen = 0;
-		rLoc = 1438;
+		rLoc = 1387;
 		rType = 0;
 		vrLen = 1217;
 		vrLoc = 761;
@@ -6296,7 +6304,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 476";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1819;
 		vrLoc = 14560;
@@ -6306,7 +6314,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 476";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1815;
 		vrLoc = 14560;
@@ -6316,7 +6324,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 476";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1825;
 		vrLoc = 14550;
@@ -6326,7 +6334,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 476";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1825;
 		vrLoc = 14550;
@@ -6410,7 +6418,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 476";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1764;
 		vrLoc = 14611;
@@ -6450,7 +6458,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 115";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1844;
 		vrLoc = 1841;
@@ -6460,7 +6468,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 109";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 1841;
@@ -6470,7 +6478,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 490";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1975;
 		vrLoc = 15124;
@@ -6480,7 +6488,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 490";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 2025;
 		vrLoc = 15124;
@@ -6489,7 +6497,7 @@
 		isa = PBXTextBookmark;
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		rLen = 0;
-		rLoc = 6581;
+		rLoc = 6483;
 		rType = 0;
 	};
 	8CC28E50101FBD4700688F0C /* PBXTextBookmark */ = {
@@ -6497,7 +6505,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 167";
 		rLen = 0;
-		rLoc = 6581;
+		rLoc = 6483;
 		rType = 0;
 		vrLen = 1045;
 		vrLoc = 4131;
@@ -6507,7 +6515,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 167";
 		rLen = 0;
-		rLoc = 6581;
+		rLoc = 6483;
 		rType = 0;
 		vrLen = 1706;
 		vrLoc = 15427;
@@ -6527,7 +6535,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 167";
 		rLen = 0;
-		rLoc = 6581;
+		rLoc = 6483;
 		rType = 0;
 		vrLen = 1706;
 		vrLoc = 15427;
@@ -6587,7 +6595,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 483";
 		rLen = 0;
-		rLoc = 18288;
+		rLoc = 18221;
 		rType = 0;
 		vrLen = 1827;
 		vrLoc = 15306;
@@ -6607,7 +6615,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 483";
 		rLen = 0;
-		rLoc = 18288;
+		rLoc = 18221;
 		rType = 0;
 		vrLen = 1827;
 		vrLoc = 15306;
@@ -6627,7 +6635,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 76";
 		rLen = 0;
-		rLoc = 1749;
+		rLoc = 1698;
 		rType = 0;
 		vrLen = 1546;
 		vrLoc = 981;
@@ -6637,7 +6645,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 496";
 		rLen = 631;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1814;
 		vrLoc = 16272;
@@ -6647,7 +6655,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 495";
 		rLen = 0;
-		rLoc = 18910;
+		rLoc = 18852;
 		rType = 0;
 		vrLen = 1885;
 		vrLoc = 16272;
@@ -6657,7 +6665,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 495";
 		rLen = 0;
-		rLoc = 18910;
+		rLoc = 18852;
 		rType = 0;
 		vrLen = 1885;
 		vrLoc = 16272;
@@ -6677,7 +6685,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 495";
 		rLen = 0;
-		rLoc = 18910;
+		rLoc = 18852;
 		rType = 0;
 		vrLen = 1885;
 		vrLoc = 16272;
@@ -6727,7 +6735,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 496";
 		rLen = 0;
-		rLoc = 18910;
+		rLoc = 18852;
 		rType = 0;
 		vrLen = 1999;
 		vrLoc = 15869;
@@ -6747,7 +6755,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 496";
 		rLen = 0;
-		rLoc = 18910;
+		rLoc = 18852;
 		rType = 0;
 		vrLen = 1999;
 		vrLoc = 15869;
@@ -6757,7 +6765,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 496";
 		rLen = 0;
-		rLoc = 18910;
+		rLoc = 18852;
 		rType = 0;
 		vrLen = 1999;
 		vrLoc = 15869;
@@ -6777,7 +6785,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 496";
 		rLen = 0;
-		rLoc = 18855;
+		rLoc = 18797;
 		rType = 0;
 		vrLen = 2026;
 		vrLoc = 16109;
@@ -6797,7 +6805,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 496";
 		rLen = 0;
-		rLoc = 18855;
+		rLoc = 18797;
 		rType = 0;
 		vrLen = 2026;
 		vrLoc = 16109;
@@ -6817,7 +6825,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 496";
 		rLen = 0;
-		rLoc = 18855;
+		rLoc = 18797;
 		rType = 0;
 		vrLen = 2026;
 		vrLoc = 16109;
@@ -6837,7 +6845,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 496";
 		rLen = 0;
-		rLoc = 18855;
+		rLoc = 18797;
 		rType = 0;
 		vrLen = 2026;
 		vrLoc = 16109;
@@ -6857,7 +6865,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 496";
 		rLen = 0;
-		rLoc = 18855;
+		rLoc = 18797;
 		rType = 0;
 		vrLen = 2026;
 		vrLoc = 16109;
@@ -6877,7 +6885,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 69";
 		rLen = 0;
-		rLoc = 1673;
+		rLoc = 1622;
 		rType = 0;
 		vrLen = 1494;
 		vrLoc = 829;
@@ -6907,7 +6915,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 69";
 		rLen = 0;
-		rLoc = 1673;
+		rLoc = 1622;
 		rType = 0;
 		vrLen = 1494;
 		vrLoc = 829;
@@ -6937,7 +6945,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 497";
 		rLen = 0;
-		rLoc = 18814;
+		rLoc = 18747;
 		rType = 0;
 		vrLen = 2130;
 		vrLoc = 15980;
@@ -6957,7 +6965,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 497";
 		rLen = 0;
-		rLoc = 18814;
+		rLoc = 18747;
 		rType = 0;
 		vrLen = 2130;
 		vrLoc = 15980;
@@ -6977,7 +6985,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 498";
 		rLen = 0;
-		rLoc = 18866;
+		rLoc = 18808;
 		rType = 0;
 		vrLen = 1833;
 		vrLoc = 15980;
@@ -6997,7 +7005,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 498";
 		rLen = 0;
-		rLoc = 18866;
+		rLoc = 18808;
 		rType = 0;
 		vrLen = 1833;
 		vrLoc = 15980;
@@ -7007,7 +7015,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 498";
 		rLen = 0;
-		rLoc = 18866;
+		rLoc = 18808;
 		rType = 0;
 		vrLen = 1833;
 		vrLoc = 15980;
@@ -7027,7 +7035,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 499";
 		rLen = 0;
-		rLoc = 18790;
+		rLoc = 18723;
 		rType = 0;
 		vrLen = 2028;
 		vrLoc = 15980;
@@ -7037,7 +7045,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 113";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1792;
 		vrLoc = 1948;
@@ -7047,7 +7055,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 113";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1816;
 		vrLoc = 1948;
@@ -7057,7 +7065,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 113";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1816;
 		vrLoc = 1948;
@@ -7077,7 +7085,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 113";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1816;
 		vrLoc = 1948;
@@ -7151,7 +7159,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 115";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 2034;
 		vrLoc = 1948;
@@ -7181,7 +7189,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 115";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 2034;
 		vrLoc = 1948;
@@ -7201,7 +7209,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 114";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1908;
 		vrLoc = 1948;
@@ -7211,7 +7219,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 124";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1934;
 		vrLoc = 1948;
@@ -7221,7 +7229,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 124";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1979;
 		vrLoc = 1948;
@@ -7231,7 +7239,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 124";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1979;
 		vrLoc = 1948;
@@ -7271,7 +7279,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 143";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1989;
 		vrLoc = 2124;
@@ -7281,7 +7289,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 143";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1991;
 		vrLoc = 2124;
@@ -7291,7 +7299,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 97";
 		rLen = 0;
-		rLoc = 2294;
+		rLoc = 2243;
 		rType = 0;
 		vrLen = 1990;
 		vrLoc = 2124;
@@ -7301,7 +7309,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 144";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1950;
 		vrLoc = 2470;
@@ -7311,7 +7319,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 125";
 		rLen = 0;
-		rLoc = 5538;
+		rLoc = 5460;
 		rType = 0;
 		vrLen = 1980;
 		vrLoc = 1948;
@@ -7321,7 +7329,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 141";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1580;
 		vrLoc = 3102;
@@ -7331,7 +7339,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 118";
 		rLen = 0;
-		rLoc = 5538;
+		rLoc = 5460;
 		rType = 0;
 		vrLen = 1859;
 		vrLoc = 2508;
@@ -7341,7 +7349,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 101";
 		rLen = 0;
-		rLoc = 2420;
+		rLoc = 2369;
 		rType = 0;
 		vrLen = 1957;
 		vrLoc = 2124;
@@ -7351,7 +7359,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 143";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1638;
 		vrLoc = 2941;
@@ -7361,7 +7369,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 143";
 		rLen = 0;
-		rLoc = 5544;
+		rLoc = 5466;
 		rType = 0;
 		vrLen = 1652;
 		vrLoc = 2941;
@@ -7371,7 +7379,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 127";
 		rLen = 0;
-		rLoc = 5541;
+		rLoc = 5463;
 		rType = 0;
 		vrLen = 2021;
 		vrLoc = 2124;
@@ -7381,7 +7389,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 121";
 		rLen = 0;
-		rLoc = 5538;
+		rLoc = 5460;
 		rType = 0;
 		vrLen = 1936;
 		vrLoc = 2352;
@@ -7391,7 +7399,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 101";
 		rLen = 0;
-		rLoc = 2420;
+		rLoc = 2369;
 		rType = 0;
 		vrLen = 2001;
 		vrLoc = 1948;
@@ -7401,7 +7409,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 133";
 		rLen = 0;
-		rLoc = 3922;
+		rLoc = 3875;
 		rType = 0;
 		vrLen = 1665;
 		vrLoc = 2920;
@@ -7411,7 +7419,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 145";
 		rLen = 0;
-		rLoc = 5538;
+		rLoc = 5460;
 		rType = 0;
 		vrLen = 1667;
 		vrLoc = 2920;
@@ -7421,7 +7429,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 100";
 		rLen = 0;
-		rLoc = 2420;
+		rLoc = 2369;
 		rType = 0;
 		vrLen = 1560;
 		vrLoc = 3447;
@@ -7431,7 +7439,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 116";
 		rLen = 0;
-		rLoc = 3212;
+		rLoc = 3161;
 		rType = 0;
 		vrLen = 1703;
 		vrLoc = 2352;
@@ -7441,7 +7449,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 140";
 		rLen = 0;
-		rLoc = 3922;
+		rLoc = 3875;
 		rType = 0;
 		vrLen = 1855;
 		vrLoc = 2352;
@@ -7451,7 +7459,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 142";
 		rLen = 0;
-		rLoc = 3922;
+		rLoc = 3875;
 		rType = 0;
 		vrLen = 2027;
 		vrLoc = 2124;
@@ -7461,7 +7469,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 158";
 		rLen = 0;
-		rLoc = 5538;
+		rLoc = 5460;
 		rType = 0;
 		vrLen = 1815;
 		vrLoc = 3702;
@@ -7471,7 +7479,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 154";
 		rLen = 2;
-		rLoc = 4765;
+		rLoc = 4718;
 		rType = 0;
 		vrLen = 2085;
 		vrLoc = 2876;
@@ -7481,7 +7489,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 170";
 		rLen = 0;
-		rLoc = 5522;
+		rLoc = 5444;
 		rType = 0;
 		vrLen = 1990;
 		vrLoc = 4156;
@@ -7491,7 +7499,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 170";
 		rLen = 0;
-		rLoc = 5448;
+		rLoc = 5231;
 		rType = 0;
 		vrLen = 2262;
 		vrLoc = 3220;
@@ -7501,7 +7509,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 165";
 		rLen = 0;
-		rLoc = 5168;
+		rLoc = 5000;
 		rType = 0;
 		vrLen = 2262;
 		vrLoc = 3220;
@@ -7511,7 +7519,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 166";
 		rLen = 0;
-		rLoc = 5229;
+		rLoc = 5151;
 		rType = 0;
 		vrLen = 1947;
 		vrLoc = 3865;
@@ -7521,7 +7529,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 170";
 		rLen = 0;
-		rLoc = 5519;
+		rLoc = 5441;
 		rType = 0;
 		vrLen = 2045;
 		vrLoc = 3702;
@@ -7531,7 +7539,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 168";
 		rLen = 0;
-		rLoc = 5371;
+		rLoc = 5231;
 		rType = 0;
 		vrLen = 2239;
 		vrLoc = 3260;
@@ -7551,7 +7559,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 355";
 		rLen = 0;
-		rLoc = 11954;
+		rLoc = 11856;
 		rType = 0;
 		vrLen = 2142;
 		vrLoc = 17845;
@@ -7561,7 +7569,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 355";
 		rLen = 0;
-		rLoc = 11954;
+		rLoc = 11856;
 		rType = 0;
 		vrLen = 2142;
 		vrLoc = 17845;
@@ -7581,7 +7589,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 115";
 		rLen = 0;
-		rLoc = 3140;
+		rLoc = 3089;
 		rType = 0;
 		vrLen = 2092;
 		vrLoc = 2124;
@@ -7591,7 +7599,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2420;
+		rLoc = 2369;
 		rType = 0;
 		vrLen = 2089;
 		vrLoc = 2124;
@@ -7601,7 +7609,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 101";
 		rLen = 0;
-		rLoc = 2420;
+		rLoc = 2369;
 		rType = 0;
 		vrLen = 2068;
 		vrLoc = 2124;
@@ -7611,7 +7619,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 187";
 		rLen = 0;
-		rLoc = 5873;
+		rLoc = 5776;
 		rType = 0;
 		vrLen = 1946;
 		vrLoc = 4421;
@@ -7621,7 +7629,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 158";
 		rLen = 0;
-		rLoc = 4857;
+		rLoc = 4810;
 		rType = 0;
 		vrLen = 2185;
 		vrLoc = 3509;
@@ -7631,7 +7639,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 101";
 		rLen = 0;
-		rLoc = 2420;
+		rLoc = 2369;
 		rType = 0;
 		vrLen = 2127;
 		vrLoc = 2275;
@@ -7641,7 +7649,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 100";
 		rLen = 721;
-		rLoc = 2420;
+		rLoc = 2369;
 		rType = 0;
 		vrLen = 2157;
 		vrLoc = 2275;
@@ -7651,7 +7659,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 100";
 		rLen = 102;
-		rLoc = 2420;
+		rLoc = 2369;
 		rType = 0;
 		vrLen = 2151;
 		vrLoc = 2275;
@@ -7661,7 +7669,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 103";
 		rLen = 172;
-		rLoc = 2522;
+		rLoc = 2471;
 		rType = 0;
 		vrLen = 2143;
 		vrLoc = 2275;
@@ -7671,7 +7679,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 107";
 		rLen = 159;
-		rLoc = 2694;
+		rLoc = 2643;
 		rType = 0;
 		vrLen = 2135;
 		vrLoc = 2275;
@@ -7681,7 +7689,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 75";
 		rLen = 0;
-		rLoc = 1743;
+		rLoc = 1692;
 		rType = 0;
 		vrLen = 1496;
 		vrLoc = 1038;
@@ -7691,7 +7699,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 108";
 		rLen = 152;
-		rLoc = 2701;
+		rLoc = 2650;
 		rType = 0;
 		vrLen = 2090;
 		vrLoc = 2001;
@@ -7711,7 +7719,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 108";
 		rLen = 152;
-		rLoc = 2701;
+		rLoc = 2650;
 		rType = 0;
 		vrLen = 1567;
 		vrLoc = 12742;
@@ -7721,7 +7729,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 108";
 		rLen = 152;
-		rLoc = 2701;
+		rLoc = 2650;
 		rType = 0;
 		vrLen = 1567;
 		vrLoc = 12742;
@@ -7741,7 +7749,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 108";
 		rLen = 152;
-		rLoc = 2701;
+		rLoc = 2650;
 		rType = 0;
 		vrLen = 2161;
 		vrLoc = 2052;
@@ -7751,7 +7759,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 108";
 		rLen = 152;
-		rLoc = 2701;
+		rLoc = 2650;
 		rType = 0;
 		vrLen = 2141;
 		vrLoc = 2287;
@@ -7761,7 +7769,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 110";
 		rLen = 51;
-		rLoc = 2801;
+		rLoc = 2750;
 		rType = 0;
 		vrLen = 2139;
 		vrLoc = 2287;
@@ -7771,7 +7779,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 101";
 		rLen = 74;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2143;
 		vrLoc = 2287;
@@ -7781,7 +7789,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 101";
 		rLen = 74;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2143;
 		vrLoc = 2287;
@@ -7791,7 +7799,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 111";
 		rLen = 288;
-		rLoc = 2853;
+		rLoc = 2802;
 		rType = 0;
 		vrLen = 2125;
 		vrLoc = 2287;
@@ -7801,7 +7809,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 207";
 		rLen = 0;
-		rLoc = 6581;
+		rLoc = 6483;
 		rType = 0;
 		vrLen = 1106;
 		vrLoc = 1892;
@@ -7811,7 +7819,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2103;
 		vrLoc = 2287;
@@ -7821,7 +7829,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2103;
 		vrLoc = 2287;
@@ -7850,7 +7858,7 @@
 		isa = PBXTextBookmark;
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		rLen = 13;
-		rLoc = 21372;
+		rLoc = 21385;
 		rType = 0;
 	};
 	8CC28FAF1020271700688F0C /* PBXTextBookmark */ = {
@@ -7858,7 +7866,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 209";
 		rLen = 0;
-		rLoc = 6581;
+		rLoc = 6483;
 		rType = 0;
 		vrLen = 1005;
 		vrLoc = 1892;
@@ -7888,7 +7896,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 602";
 		rLen = 0;
-		rLoc = 21114;
+		rLoc = 21127;
 		rType = 0;
 		vrLen = 993;
 		vrLoc = 20863;
@@ -7898,7 +7906,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2103;
 		vrLoc = 2287;
@@ -7908,7 +7916,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2103;
 		vrLoc = 2287;
@@ -7918,7 +7926,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2103;
 		vrLoc = 2287;
@@ -7928,7 +7936,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2103;
 		vrLoc = 2287;
@@ -7937,7 +7945,7 @@
 		isa = PBXTextBookmark;
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		rLen = 13;
-		rLoc = 22704;
+		rLoc = 22717;
 		rType = 0;
 	};
 	8CC28FBC102031A100688F0C /* PBXTextBookmark */ = {
@@ -7945,7 +7953,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 643";
 		rLen = 71;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 1157;
 		vrLoc = 22091;
@@ -7955,7 +7963,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 101";
 		rLen = 0;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2158;
 		vrLoc = 2136;
@@ -7965,7 +7973,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 641";
 		rLen = 13;
-		rLoc = 22704;
+		rLoc = 22717;
 		rType = 0;
 		vrLen = 1101;
 		vrLoc = 22137;
@@ -7985,7 +7993,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2507;
+		rLoc = 2456;
 		rType = 0;
 		vrLen = 2158;
 		vrLoc = 2136;
@@ -7995,7 +8003,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2507;
+		rLoc = 2456;
 		rType = 0;
 		vrLen = 2158;
 		vrLoc = 2136;
@@ -8015,7 +8023,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2507;
+		rLoc = 2456;
 		rType = 0;
 		vrLen = 2027;
 		vrLoc = 1892;
@@ -8025,7 +8033,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 641";
 		rLen = 13;
-		rLoc = 22704;
+		rLoc = 22717;
 		rType = 0;
 		vrLen = 2127;
 		vrLoc = 21401;
@@ -8035,7 +8043,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2507;
+		rLoc = 2456;
 		rType = 0;
 		vrLen = 2027;
 		vrLoc = 1892;
@@ -8045,7 +8053,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 640";
 		rLen = 0;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2137;
 		vrLoc = 21401;
@@ -8055,7 +8063,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2507;
+		rLoc = 2456;
 		rType = 0;
 		vrLen = 2027;
 		vrLoc = 1892;
@@ -8065,7 +8073,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 642";
 		rLen = 0;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2215;
 		vrLoc = 21401;
@@ -8075,7 +8083,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2507;
+		rLoc = 2456;
 		rType = 0;
 		vrLen = 2027;
 		vrLoc = 1892;
@@ -8085,7 +8093,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 640";
 		rLen = 0;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2223;
 		vrLoc = 21401;
@@ -8095,7 +8103,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 0;
-		rLoc = 2507;
+		rLoc = 2456;
 		rType = 0;
 		vrLen = 2027;
 		vrLoc = 1892;
@@ -8105,7 +8113,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 641";
 		rLen = 0;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2194;
 		vrLoc = 21401;
@@ -8115,7 +8123,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 101";
 		rLen = 0;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2025;
 		vrLoc = 1892;
@@ -8125,7 +8133,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 641";
 		rLen = 0;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2194;
 		vrLoc = 21399;
@@ -8135,7 +8143,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 104";
 		rLen = 0;
-		rLoc = 2521;
+		rLoc = 2470;
 		rType = 0;
 		vrLen = 2045;
 		vrLoc = 1892;
@@ -8145,7 +8153,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 643";
 		rLen = 0;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2194;
 		vrLoc = 21432;
@@ -8155,7 +8163,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 104";
 		rLen = 0;
-		rLoc = 2521;
+		rLoc = 2470;
 		rType = 0;
 		vrLen = 2049;
 		vrLoc = 1892;
@@ -8165,7 +8173,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 643";
 		rLen = 0;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2194;
 		vrLoc = 21436;
@@ -8175,7 +8183,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 104";
 		rLen = 0;
-		rLoc = 2521;
+		rLoc = 2470;
 		rType = 0;
 		vrLen = 2049;
 		vrLoc = 1892;
@@ -8185,7 +8193,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 643";
 		rLen = 0;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2124;
 		vrLoc = 21436;
@@ -8195,7 +8203,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 104";
 		rLen = 0;
-		rLoc = 2521;
+		rLoc = 2470;
 		rType = 0;
 		vrLen = 2049;
 		vrLoc = 1892;
@@ -8205,7 +8213,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 641";
 		rLen = 0;
-		rLoc = 22649;
+		rLoc = 22662;
 		rType = 0;
 		vrLen = 2107;
 		vrLoc = 21436;
@@ -8215,7 +8223,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 104";
 		rLen = 0;
-		rLoc = 2521;
+		rLoc = 2470;
 		rType = 0;
 		vrLen = 2049;
 		vrLoc = 1892;
@@ -8225,7 +8233,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 642";
 		rLen = 71;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2105;
 		vrLoc = 21436;
@@ -8255,7 +8263,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 641";
 		rLen = 13;
-		rLoc = 22704;
+		rLoc = 22717;
 		rType = 0;
 		vrLen = 2055;
 		vrLoc = 21218;
@@ -8265,7 +8273,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 98";
 		rLen = 0;
-		rLoc = 2364;
+		rLoc = 2313;
 		rType = 0;
 		vrLen = 2067;
 		vrLoc = 4026;
@@ -8285,7 +8293,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 641";
 		rLen = 13;
-		rLoc = 22704;
+		rLoc = 22717;
 		rType = 0;
 		vrLen = 2055;
 		vrLoc = 21218;
@@ -8305,7 +8313,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 530";
 		rLen = 0;
-		rLoc = 18619;
+		rLoc = 18552;
 		rType = 0;
 		vrLen = 2203;
 		vrLoc = 18048;
@@ -8315,7 +8323,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 641";
 		rLen = 13;
-		rLoc = 22704;
+		rLoc = 22717;
 		rType = 0;
 		vrLen = 2105;
 		vrLoc = 21413;
@@ -8325,7 +8333,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 534";
 		rLen = 0;
-		rLoc = 18855;
+		rLoc = 18797;
 		rType = 0;
 		vrLen = 2203;
 		vrLoc = 18048;
@@ -8335,7 +8343,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 641";
 		rLen = 13;
-		rLoc = 22704;
+		rLoc = 22717;
 		rType = 0;
 		vrLen = 2198;
 		vrLoc = 20836;
@@ -8345,7 +8353,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 612";
 		rLen = 13;
-		rLoc = 21372;
+		rLoc = 21385;
 		rType = 0;
 		vrLen = 1045;
 		vrLoc = 20918;
@@ -8355,7 +8363,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 102";
 		rLen = 30;
-		rLoc = 2448;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 2070;
 		vrLoc = 2136;
@@ -8365,7 +8373,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 641";
 		rLen = 71;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2107;
 		vrLoc = 21175;
@@ -8375,7 +8383,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 612";
 		rLen = 13;
-		rLoc = 21372;
+		rLoc = 21385;
 		rType = 0;
 		vrLen = 1045;
 		vrLoc = 20916;
@@ -8385,7 +8393,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 104";
 		rLen = 0;
-		rLoc = 2521;
+		rLoc = 2470;
 		rType = 0;
 		vrLen = 1801;
 		vrLoc = 1777;
@@ -8395,7 +8403,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 642";
 		rLen = 71;
-		rLoc = 22650;
+		rLoc = 22663;
 		rType = 0;
 		vrLen = 2050;
 		vrLoc = 21241;
@@ -8405,7 +8413,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 642";
 		rLen = 0;
-		rLoc = 22721;
+		rLoc = 22734;
 		rType = 0;
 		vrLen = 2103;
 		vrLoc = 21503;
@@ -8415,7 +8423,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 642";
 		rLen = 0;
-		rLoc = 22721;
+		rLoc = 22734;
 		rType = 0;
 		vrLen = 2048;
 		vrLoc = 21241;
@@ -8425,7 +8433,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 628";
 		rLen = 0;
-		rLoc = 22039;
+		rLoc = 22052;
 		rType = 0;
 		vrLen = 1635;
 		vrLoc = 19274;
@@ -8434,8 +8442,8 @@
 		isa = PBXTextBookmark;
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 534";
-		rLen = 53;
-		rLoc = 18815;
+		rLen = 62;
+		rLoc = 18748;
 		rType = 0;
 		vrLen = 2089;
 		vrLoc = 17466;
@@ -8445,7 +8453,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 534";
 		rLen = 0;
-		rLoc = 18856;
+		rLoc = 18798;
 		rType = 0;
 		vrLen = 2069;
 		vrLoc = 17466;
@@ -8455,7 +8463,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 643";
 		rLen = 13;
-		rLoc = 22730;
+		rLoc = 22714;
 		rType = 0;
 		vrLen = 994;
 		vrLoc = 22453;
@@ -8465,7 +8473,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 553";
 		rLen = 0;
-		rLoc = 19572;
+		rLoc = 19556;
 		rType = 0;
 		vrLen = 2120;
 		vrLoc = 18029;
@@ -8495,7 +8503,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 553";
 		rLen = 0;
-		rLoc = 19572;
+		rLoc = 19556;
 		rType = 0;
 		vrLen = 2120;
 		vrLoc = 18029;
@@ -8549,6 +8557,86 @@
 		rType = 0;
 		vrLen = 2101;
 		vrLoc = 3187;
+	};
+	8CC290111020F1B500688F0C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8CC329D0100DF9D700483939 /* BonjourListener.m */;
+		name = "BonjourListener.m: 127";
+		rLen = 0;
+		rLoc = 4332;
+		rType = 0;
+		vrLen = 2242;
+		vrLoc = 2926;
+	};
+	8CC290121020F1B500688F0C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
+		name = "InspectorController.m: 553";
+		rLen = 0;
+		rLoc = 19556;
+		rType = 0;
+		vrLen = 2120;
+		vrLoc = 18029;
+	};
+	8CC290131020F1B500688F0C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8CC329D0100DF9D700483939 /* BonjourListener.m */;
+		name = "BonjourListener.m: 127";
+		rLen = 0;
+		rLoc = 4332;
+		rType = 0;
+		vrLen = 2242;
+		vrLoc = 2926;
+	};
+	8CC290141020F1B500688F0C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
+		name = "InspectorController.m: 523";
+		rLen = 0;
+		rLoc = 18112;
+		rType = 0;
+		vrLen = 2150;
+		vrLoc = 17905;
+	};
+	8CC290411020F6F700688F0C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
+		name = "InspectorController.m: 186";
+		rLen = 0;
+		rLoc = 5776;
+		rType = 0;
+		vrLen = 2036;
+		vrLoc = 4201;
+	};
+	8CC290431020F73200688F0C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
+		name = "InspectorController.m: 167";
+		rLen = 0;
+		rLoc = 5145;
+		rType = 0;
+		vrLen = 2200;
+		vrLoc = 3346;
+	};
+	8CC290451020F75F00688F0C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
+		name = "InspectorController.m: 165";
+		rLen = 0;
+		rLoc = 5000;
+		rType = 0;
+		vrLen = 2200;
+		vrLoc = 3346;
+	};
+	8CC290471020F88000688F0C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
+		name = "InspectorController.m: 164";
+		rLen = 0;
+		rLoc = 5085;
+		rType = 0;
+		vrLen = 2206;
+		vrLoc = 3448;
 	};
 	8CC32180100B339400483939 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -8607,9 +8695,9 @@
 	};
 	8CC3278E100CDCF000483939 /* InspectorController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {821, 9086}}";
-			sepNavSelRange = "{19572, 0}";
-			sepNavVisRange = "{18029, 2120}";
+			sepNavIntBoundsRect = "{{0, 0}, {900, 9576}}";
+			sepNavSelRange = "{5085, 0}";
+			sepNavVisRange = "{3448, 2206}";
 			sepNavWindowFrame = "{{253, 14}, {872, 864}}";
 		};
 	};
@@ -8650,7 +8738,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {821, 2128}}";
 			sepNavSelRange = "{4332, 0}";
-			sepNavVisRange = "{3187, 2101}";
+			sepNavVisRange = "{2926, 2242}";
 		};
 	};
 	8CC329D6100DFA2200483939 /* PBXTextBookmark */ = {
@@ -9567,7 +9655,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 456";
 		rLen = 0;
-		rLoc = 23526;
+		rLoc = 23539;
 		rType = 0;
 		vrLen = 2010;
 		vrLoc = 14181;
@@ -9637,7 +9725,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 483";
 		rLen = 0;
-		rLoc = 23526;
+		rLoc = 23539;
 		rType = 0;
 		vrLen = 1826;
 		vrLoc = 14365;
@@ -9657,7 +9745,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 456";
 		rLen = 0;
-		rLoc = 23526;
+		rLoc = 23539;
 		rType = 0;
 		vrLen = 2010;
 		vrLoc = 14181;
@@ -9677,7 +9765,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 484";
 		rLen = 0;
-		rLoc = 23526;
+		rLoc = 23539;
 		rType = 0;
 		vrLen = 1708;
 		vrLoc = 14483;
@@ -9707,7 +9795,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 451";
 		rLen = 0;
-		rLoc = 23526;
+		rLoc = 23539;
 		rType = 0;
 		vrLen = 2134;
 		vrLoc = 12701;
@@ -9737,7 +9825,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 456";
 		rLen = 0;
-		rLoc = 23526;
+		rLoc = 23539;
 		rType = 0;
 		vrLen = 1659;
 		vrLoc = 14532;
@@ -9777,7 +9865,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 458";
 		rLen = 0;
-		rLoc = 23526;
+		rLoc = 23539;
 		rType = 0;
 		vrLen = 1663;
 		vrLoc = 14528;
@@ -9797,7 +9885,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 458";
 		rLen = 0;
-		rLoc = 23526;
+		rLoc = 23539;
 		rType = 0;
 		vrLen = 1663;
 		vrLoc = 14528;
@@ -9847,7 +9935,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 451";
 		rLen = 0;
-		rLoc = 23526;
+		rLoc = 23539;
 		rType = 0;
 		vrLen = 2134;
 		vrLoc = 12701;
@@ -10137,7 +10225,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 430";
 		rLen = 0;
-		rLoc = 17567;
+		rLoc = 17469;
 		rType = 0;
 		vrLen = 1998;
 		vrLoc = 8115;
@@ -10157,7 +10245,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 430";
 		rLen = 0;
-		rLoc = 17567;
+		rLoc = 17469;
 		rType = 0;
 		vrLen = 1998;
 		vrLoc = 8115;
@@ -10297,7 +10385,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 243";
 		rLen = 11;
-		rLoc = 10227;
+		rLoc = 10129;
 		rType = 0;
 		vrLen = 1513;
 		vrLoc = 6410;
@@ -10357,7 +10445,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 243";
 		rLen = 11;
-		rLoc = 10227;
+		rLoc = 10129;
 		rType = 0;
 		vrLen = 1565;
 		vrLoc = 6410;
@@ -10497,7 +10585,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 417";
 		rLen = 0;
-		rLoc = 16675;
+		rLoc = 16577;
 		rType = 0;
 		vrLen = 2793;
 		vrLoc = 11852;
@@ -10507,7 +10595,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 417";
 		rLen = 0;
-		rLoc = 16675;
+		rLoc = 16577;
 		rType = 0;
 		vrLen = 1800;
 		vrLoc = 11852;
@@ -10559,7 +10647,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 417";
 		rLen = 0;
-		rLoc = 16675;
+		rLoc = 16577;
 		rType = 0;
 		vrLen = 1800;
 		vrLoc = 11852;
@@ -10777,7 +10865,7 @@
 		isa = PBXTextBookmark;
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		rLen = 6;
-		rLoc = 9182;
+		rLoc = 9084;
 		rType = 0;
 	};
 	8CD133F8101F8A7800E7E515 /* PBXTextBookmark */ = {
@@ -10805,7 +10893,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 206";
 		rLen = 6;
-		rLoc = 9182;
+		rLoc = 9084;
 		rType = 0;
 		vrLen = 815;
 		vrLoc = 5828;
@@ -10855,7 +10943,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 206";
 		rLen = 6;
-		rLoc = 9182;
+		rLoc = 9084;
 		rType = 0;
 		vrLen = 815;
 		vrLoc = 5828;
@@ -10865,7 +10953,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 206";
 		rLen = 6;
-		rLoc = 9182;
+		rLoc = 9084;
 		rType = 0;
 		vrLen = 815;
 		vrLoc = 5828;
@@ -10882,7 +10970,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 206";
 		rLen = 6;
-		rLoc = 9182;
+		rLoc = 9084;
 		rType = 0;
 		vrLen = 815;
 		vrLoc = 5828;
@@ -11139,7 +11227,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 156";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 991;
 		vrLoc = 3612;
@@ -11157,7 +11245,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 156";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 991;
 		vrLoc = 3612;
@@ -11225,7 +11313,7 @@
 		comments = "warning: 'NSManagedObjectContext' may not respond to '-fetchObjectsForEntityName:withPredicate:'";
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		rLen = 1;
-		rLoc = 223;
+		rLoc = 220;
 		rType = 1;
 	};
 	8CD13433101F8E8100E7E515 /* PBXTextBookmark */ = {
@@ -11243,7 +11331,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 156";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 991;
 		vrLoc = 3612;
@@ -11293,7 +11381,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 156";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 1883;
 		vrLoc = 3209;
@@ -11353,7 +11441,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 156";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 1957;
 		vrLoc = 3209;
@@ -11413,7 +11501,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 140";
 		rLen = 268;
-		rLoc = 6360;
+		rLoc = 6262;
 		rType = 0;
 		vrLen = 1805;
 		vrLoc = 2700;
@@ -11423,7 +11511,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 146";
 		rLen = 0;
-		rLoc = 6618;
+		rLoc = 6520;
 		rType = 0;
 		vrLen = 1654;
 		vrLoc = 2700;
@@ -11433,7 +11521,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 146";
 		rLen = 0;
-		rLoc = 6581;
+		rLoc = 6483;
 		rType = 0;
 		vrLen = 1676;
 		vrLoc = 2700;
@@ -11443,7 +11531,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 146";
 		rLen = 0;
-		rLoc = 6581;
+		rLoc = 6483;
 		rType = 0;
 		vrLen = 1676;
 		vrLoc = 2700;
@@ -11463,7 +11551,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 146";
 		rLen = 0;
-		rLoc = 6581;
+		rLoc = 6483;
 		rType = 0;
 		vrLen = 1676;
 		vrLoc = 2700;
@@ -11513,7 +11601,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 162";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 814;
 		vrLoc = 3604;
@@ -11540,7 +11628,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 162";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 814;
 		vrLoc = 3604;
@@ -11590,7 +11678,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 146";
 		rLen = 0;
-		rLoc = 6581;
+		rLoc = 6483;
 		rType = 0;
 		vrLen = 1036;
 		vrLoc = 340;
@@ -11680,7 +11768,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 162";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 818;
 		vrLoc = 3604;
@@ -11710,7 +11798,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 162";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 814;
 		vrLoc = 3604;
@@ -11757,7 +11845,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 169";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 868;
 		vrLoc = 3549;
@@ -11787,7 +11875,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 469";
 		rLen = 0;
-		rLoc = 18431;
+		rLoc = 18364;
 		rType = 0;
 		vrLen = 2174;
 		vrLoc = 13519;
@@ -11825,7 +11913,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 67";
 		rLen = 0;
-		rLoc = 1673;
+		rLoc = 1622;
 		rType = 0;
 		vrLen = 1390;
 		vrLoc = 1008;
@@ -11845,7 +11933,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 469";
 		rLen = 0;
-		rLoc = 18431;
+		rLoc = 18364;
 		rType = 0;
 		vrLen = 2174;
 		vrLoc = 13519;
@@ -11865,7 +11953,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 169";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 900;
 		vrLoc = 3549;
@@ -11875,7 +11963,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 169";
 		rLen = 100;
-		rLoc = 7140;
+		rLoc = 7042;
 		rType = 0;
 		vrLen = 900;
 		vrLoc = 3549;
@@ -11972,7 +12060,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 472";
 		rLen = 0;
-		rLoc = 19541;
+		rLoc = 19483;
 		rType = 0;
 		vrLen = 2228;
 		vrLoc = 13519;
@@ -11992,7 +12080,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 472";
 		rLen = 0;
-		rLoc = 19541;
+		rLoc = 19483;
 		rType = 0;
 		vrLen = 2228;
 		vrLoc = 13519;
@@ -12012,7 +12100,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 477";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1825;
 		vrLoc = 14268;
@@ -12022,7 +12110,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 472";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1820;
 		vrLoc = 14268;
@@ -12032,7 +12120,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 472";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1820;
 		vrLoc = 14268;
@@ -12062,7 +12150,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 472";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1820;
 		vrLoc = 14268;
@@ -12122,7 +12210,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 472";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1913;
 		vrLoc = 14175;
@@ -12142,7 +12230,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 481";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1919;
 		vrLoc = 14175;
@@ -12162,7 +12250,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 481";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1919;
 		vrLoc = 14175;
@@ -12172,7 +12260,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 481";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1919;
 		vrLoc = 14175;
@@ -12192,7 +12280,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 481";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1919;
 		vrLoc = 14175;
@@ -12202,7 +12290,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 484";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1915;
 		vrLoc = 14268;
@@ -12212,7 +12300,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 484";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1917;
 		vrLoc = 14268;
@@ -12222,7 +12310,7 @@
 		fRef = 8CC3278E100CDCF000483939 /* InspectorController.m */;
 		name = "InspectorController.m: 484";
 		rLen = 0;
-		rLoc = 18911;
+		rLoc = 18853;
 		rType = 0;
 		vrLen = 1917;
 		vrLoc = 14268;

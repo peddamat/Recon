@@ -123,9 +123,9 @@
       [autoRefreshButton setEnabled:TRUE];
       [resolveHostnamesButton setEnabled:TRUE];
       
-      [bonjourHostsScrollView setHidden:TRUE];      
       [regularHostsScrollView setHidden:TRUE];
-      [netstatHostsScrollView setHidden:FALSE];
+      [netstatHostsScrollView setHidden:FALSE];      
+      [bonjourHostsScrollView setHidden:TRUE];    
       
       smallFramePosition = NSMakeRect(20.0f, 426.0f, 743.0f, 228.0f);
       [[bonjourHostsScrollView animator] setFrame:smallFramePosition];      
@@ -155,20 +155,19 @@
 ////      [[netstatHostsScrollView animator] setFrame:smallFramePosition];
 
       NSLog(@"ELSE");
-      [root removeAllObjects];
       self.autoRefresh = NO;
       [scanButton setTitle:@"Scan"];      
       [autoRefreshButton setEnabled:FALSE];      
       [resolveHostnamesButton setEnabled:FALSE]; 
       
+      [regularHostsScrollView setHidden:FALSE];
       [netstatHostsScrollView setHidden:TRUE];      
       [bonjourHostsScrollView setHidden:TRUE];    
-      [regularHostsScrollView setHidden:FALSE];
       
       smallFramePosition = NSMakeRect(20.0f, 426.0f, 743.0f, 228.0f); 
+      [[bonjourHostsScrollView animator] setFrame:smallFramePosition];      
+      [[regularHostsScrollView animator] setFrame:smallFramePosition];
       [[netstatHostsScrollView animator] setFrame:smallFramePosition];      
-      [[bonjourHostsScrollView animator] setFrame:smallFramePosition];
-      [[regularHostsScrollView animator] setFrame:smallFramePosition];      
    }
       
          
@@ -183,7 +182,6 @@
 //      [hostsTextField setEnabled:FALSE];
 //      [hostsTextFieldLabel setEnabled:FALSE];
 //   }
-   NSLog(@"SHAKA");
 }
 
 // -------------------------------------------------------------------------------
@@ -519,6 +517,8 @@ int bitcount (unsigned int n)
       [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:2];
 }   
 
+
+#pragma mark Bonjour Listener
 // -------------------------------------------------------------------------------
 //	foundBonjourServices: 
 // -------------------------------------------------------------------------------
