@@ -33,8 +33,6 @@
       self.primaryBrowser.delegate = self;
       self.secondaryBrowser = [[NSNetServiceBrowser new] autorelease];
       self.secondaryBrowser.delegate = self;
-      
-      servicesCount = 0;
    }   
    
    return self;
@@ -62,9 +60,7 @@
 #pragma mark Net Service Browser Delegate Methods
 -(void)netServiceBrowser:(NSNetServiceBrowser *)aBrowser didFindService:(NSNetService *)aService moreComing:(BOOL)more {
    if (aBrowser == self.primaryBrowser)
-   {
-      servicesCount++;
-      
+   {      
       [services addObject:aService];
       NSLog(@"Name: %@", [aService name]);
       NSLog(@"Type: %@", [aService type]);
@@ -84,7 +80,6 @@
    
    if (aBrowser == self.secondaryBrowser)
    {
-      NSLog(@"\nSecond");
       [aService retain];
       aService.delegate = self;
       [aService resolveWithTimeout:0];      
@@ -130,7 +125,6 @@
       
    for (id dictKey in [txtdict allKeys])
    {
-      
       NSData *dictValue = [txtdict valueForKey:dictKey];
       NSString *aStr = [[NSString alloc] initWithData:dictValue encoding:NSASCIIStringEncoding]; 
       // To use Bindings, we have to replace spaces and '-' with underscores
@@ -142,11 +136,6 @@
    
    [foundServices addObject:newService];
    
-//   if ([foundServices count] == 3)
-//   {
-//      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];      
-//      [nc postNotificationName:@"BAFfoundBonjourServices" object:self];  
-//   }   
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];      
    [nc postNotificationName:@"BAFfoundBonjourServices" object:newService];  
 }

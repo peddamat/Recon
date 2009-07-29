@@ -4,13 +4,8 @@
 @interface BonjourListener : NSObject {
    NSNetServiceBrowser *primaryBrowser;
    NSNetServiceBrowser *secondaryBrowser;
-   NSMutableArray *services;
-//   IBOutlet NSArrayController *servicesController;
-   
+   NSMutableArray *services;   
    NSMutableArray *foundServices;
-   IBOutlet NSArrayController *foundServicesController;   
-   
-   int servicesCount;
 }
 
 @property (readonly, retain) NSMutableArray *services;

@@ -53,6 +53,9 @@
    IBOutlet NSArrayController *foundServicesController;
    NSMutableDictionary *root;   
    IBOutlet NSOutlineView *foundServicesOutlineView;
+	NSRect bigFramePosition;
+	NSRect smallFramePosition;
+   IBOutlet NSView *hider;
 }
 
 @property (readwrite, retain)NSMutableArray *connections;

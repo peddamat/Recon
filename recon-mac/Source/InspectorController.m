@@ -59,8 +59,7 @@
       self.resolveHostnames = NO;
       self.showSpinner = NO;
       self.bonjourListener = [[BonjourListener alloc] init];
-//      self.foundServices = [[NSMutableArray alloc] init];
-      self.foundServices = [NSMutableArray new];
+      self.foundServices = [[NSMutableArray alloc] init];
       
       NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
       [nc addObserver:self
@@ -68,7 +67,7 @@
                  name:@"BAFfoundBonjourServices"
                object:nil];
       
-      root = [[NSMutableDictionary new] retain];      
+      root = [[NSMutableDictionary new] retain];                  
    }
    
    return self;
@@ -94,59 +93,97 @@
 // -------------------------------------------------------------------------------
 - (IBAction)changeInspectorTask:(id)sender
 {
-   //ANSLog(@"InspectorController: changeInspectorTask: %d", [sender tag]);
-   
-   // I overlayed the Hosts Tableviews for 
-   if ([[sender title] hasPrefix:@"See the machines connected"])
+   //NSLog(@"InspectorController: changeInspectorTask: %d", [sender tag]);
+   if ([[sender title] hasPrefix:@"Find Bonjour"])
    {
+      NSLog(@"BONJOUR");
+
+//      [root removeAllObjects];
+//      [root setObject:@"p" forKey:@"d"];
+      self.autoRefresh = NO;
+      [scanButton setTitle:@"Scan"];      
+      [autoRefreshButton setEnabled:FALSE];      
+      [resolveHostnamesButton setEnabled:FALSE]; 
+      
+      [regularHostsScrollView setHidden:TRUE];
+      [netstatHostsScrollView setHidden:TRUE];      
+      [bonjourHostsScrollView setHidden:FALSE];    
+      
+      bigFramePosition = NSMakeRect(20.0f, 193.0f, 743.0f, 461.0f);      
+      [[bonjourHostsScrollView animator] setFrame:bigFramePosition];
+      [[regularHostsScrollView animator] setFrame:bigFramePosition];
+      [[netstatHostsScrollView animator] setFrame:bigFramePosition];
+   }
+   else if ([[sender title] hasPrefix:@"See the machines connected"])
+   {
+      NSLog(@"SEE");
       self.autoRefresh = YES;
       [scanButton setTitle:@"Refresh"];
       [self refreshConnectionsList:self];
       [autoRefreshButton setEnabled:TRUE];
       [resolveHostnamesButton setEnabled:TRUE];
+      
+      [bonjourHostsScrollView setHidden:TRUE];      
       [regularHostsScrollView setHidden:TRUE];
       [netstatHostsScrollView setHidden:FALSE];
-      [bonjourHostsScrollView setHidden:TRUE];
-   }
-   else if ([[sender title] hasPrefix:@"Find Bonjour"])
+      
+      smallFramePosition = NSMakeRect(20.0f, 426.0f, 743.0f, 228.0f);
+      [[bonjourHostsScrollView animator] setFrame:smallFramePosition];      
+      [[regularHostsScrollView animator] setFrame:smallFramePosition];
+      [[netstatHostsScrollView animator] setFrame:smallFramePosition];      
+   }  
+   else
    {
+//      NSLog(@"ELSE");
+////      self.autoRefresh = NO;
+////      [scanButton setTitle:@"Scan"];      
+////      [autoRefreshButton setEnabled:FALSE];      
+////      [resolveHostnamesButton setEnabled:FALSE]; 
+//      self.autoRefresh = YES;
+//      [scanButton setTitle:@"Refresh"];
+//      [self refreshConnectionsList:self];
+//      [autoRefreshButton setEnabled:TRUE];
+//      [resolveHostnamesButton setEnabled:TRUE];      
+//      
+//      [bonjourHostsScrollView setHidden:TRUE];      
+//      [regularHostsScrollView setHidden:FALSE];
+//      [netstatHostsScrollView setHidden:TRUE];            
+//      
+//      smallFramePosition = NSMakeRect(20.0f, 426.0f, 743.0f, 228.0f);
+////      [[bonjourHostsScrollView animator] setFrame:smallFramePosition];      
+//      [[regularHostsScrollView animator] setFrame:smallFramePosition];
+////      [[netstatHostsScrollView animator] setFrame:smallFramePosition];
+
+      NSLog(@"ELSE");
       [root removeAllObjects];
       self.autoRefresh = NO;
       [scanButton setTitle:@"Scan"];      
       [autoRefreshButton setEnabled:FALSE];      
-      [resolveHostnamesButton setEnabled:FALSE];      
-      [regularHostsScrollView setHidden:TRUE];
+      [resolveHostnamesButton setEnabled:FALSE]; 
+      
       [netstatHostsScrollView setHidden:TRUE];      
-      [bonjourHostsScrollView setHidden:FALSE];            
-   }
-   else
-   {
-      self.autoRefresh = NO;
-      [scanButton setTitle:@"Scan"];      
-      [autoRefreshButton setEnabled:FALSE];      
-      [resolveHostnamesButton setEnabled:FALSE];      
+      [bonjourHostsScrollView setHidden:TRUE];    
       [regularHostsScrollView setHidden:FALSE];
-      [netstatHostsScrollView setHidden:TRUE];      
-      [bonjourHostsScrollView setHidden:TRUE];      
+      
+      smallFramePosition = NSMakeRect(20.0f, 426.0f, 743.0f, 228.0f); 
+      [[netstatHostsScrollView animator] setFrame:smallFramePosition];      
+      [[bonjourHostsScrollView animator] setFrame:smallFramePosition];
+      [[regularHostsScrollView animator] setFrame:smallFramePosition];      
    }
-   
-   if ([[sender title] hasPrefix:@"Find computers"])
-   {
-//      [self searchLocalNetwork:self];
-   }
-   
-   if ([[sender title] hasPrefix:@"Check"])
-   {
-      [hostsTextField setEnabled:TRUE];
-      [hostsTextFieldLabel setEnabled:TRUE];
-      [hostsTextField selectText:self];
-   }
-   else
-   {
-      [hostsTextField setEnabled:FALSE];
-      [hostsTextFieldLabel setEnabled:FALSE];
-   }
-   
+      
+         
+//   if ([[sender title] hasPrefix:@"Check"])
+//   {
+//      [hostsTextField setEnabled:TRUE];
+//      [hostsTextFieldLabel setEnabled:TRUE];
+//      [hostsTextField selectText:self];
+//   }
+//   else
+//   {
+//      [hostsTextField setEnabled:FALSE];
+//      [hostsTextFieldLabel setEnabled:FALSE];
+//   }
+   NSLog(@"SHAKA");
 }
 
 // -------------------------------------------------------------------------------
@@ -493,7 +530,7 @@ int bitcount (unsigned int n)
    NSString *key = [NSString stringWithFormat:@"%@: %@", 
                     [newService objectForKey:@"_ipaddr"], 
                     [newService objectForKey:@"_type"]];                    
-   [root setObject:[notification object] forKey:key];
+   [root setObject:[[notification object] retain] forKey:key];
    [foundServicesOutlineView reloadData];
 //   [foundServicesController removeObjects:[foundServicesController arrangedObjects]];
 //   [foundServicesController addObjects:[[notification object] foundServices]];
@@ -511,6 +548,9 @@ int bitcount (unsigned int n)
 //      NSLog(@"---------------------------\n");      
 //   }
 }
+
+#pragma mark -
+#pragma mark Bonjour Listener OutlineView Delegates   
 
 - (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
@@ -560,7 +600,6 @@ int bitcount (unsigned int n)
    // NSOutlineView will iterate over every child of every item, recursively asking
    // for the entry at each index. We return the item at a given array index,
    // or at the given dictionary key index.
-   
    if (item == nil)
    {
       item = root;
@@ -601,7 +640,6 @@ int bitcount (unsigned int n)
       {
          // Dictionaries have keys, so we can return the key name. We'll assume
          // here that keys/objects have a one to one relationship.
-         
          return [[parentObject allKeysForObject:item] objectAtIndex:0];
       }
       else if ([parentObject isKindOfClass:[NSArray class]])

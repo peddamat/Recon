@@ -135,7 +135,7 @@
 		8CC32793100CDFE400483939 /* NetstatConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetstatConnection.m; path = Source/NetstatConnection.m; sourceTree = "<group>"; };
 		8CC329CF100DF9D700483939 /* BonjourListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BonjourListener.h; path = Source/BonjourListener.h; sourceTree = "<group>"; };
 		8CC329D0100DF9D700483939 /* BonjourListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BonjourListener.m; path = Source/BonjourListener.m; sourceTree = "<group>"; };
-		8D15AC370486D014006FF6A4 /* Recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,7 +177,7 @@
 		19C28FB0FE9D524F11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D15AC370486D014006FF6A4 /* Recon.app */,
+				8D15AC370486D014006FF6A4 /* recon.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -341,7 +341,7 @@
 			name = Recon;
 			productInstallPath = "$(HOME)/Applications";
 			productName = "nmapX-coredata";
-			productReference = 8D15AC370486D014006FF6A4 /* Recon.app */;
+			productReference = 8D15AC370486D014006FF6A4 /* recon.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
