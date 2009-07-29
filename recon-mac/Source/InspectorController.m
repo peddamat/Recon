@@ -7,16 +7,13 @@
 //
 
 #import "InspectorController.h"
-
-//#import "MyDocument.h"
 #import "SessionController.h"
 #import "SessionManager.h"
-
 #import "NetstatConnection.h"
 #import "Profile.h"
 #import "Session.h"
 
-//#import "NSManagedObjectContext-helper.h"
+#import "BonjourListener.h"
 
 #include <arpa/inet.h>
 #include <net/if.h>
@@ -34,6 +31,8 @@
 @property (readwrite, retain) NSMutableData *standardOutput;
 @property (readwrite, retain) NSMutableData *standardError;
 
+@property (readwrite, retain)BonjourListener *bonjourListener;
+
 @end
 
 @implementation InspectorController
@@ -48,6 +47,8 @@
 @synthesize standardOutput;
 @synthesize standardError;
 
+@synthesize bonjourListener;
+@synthesize foundServices;
 
 - (id)init 
 {
@@ -57,6 +58,17 @@
       self.autoRefresh = NO;
       self.resolveHostnames = NO;
       self.showSpinner = NO;
+      self.bonjourListener = [[BonjourListener alloc] init];
+//      self.foundServices = [[NSMutableArray alloc] init];
+      self.foundServices = [NSMutableArray new];
+      
+      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+      [nc addObserver:self
+             selector:@selector(foundBonjourServices:)
+                 name:@"BAFfoundBonjourServices"
+               object:nil];
+      
+      root = [[NSMutableDictionary new] retain];      
    }
    
    return self;
@@ -65,6 +77,8 @@
 - (void)dealloc
 {
    [connections release];
+   [foundServices release];
+   [root release];
    [super dealloc];
 }
 
@@ -92,6 +106,18 @@
       [resolveHostnamesButton setEnabled:TRUE];
       [regularHostsScrollView setHidden:TRUE];
       [netstatHostsScrollView setHidden:FALSE];
+      [bonjourHostsScrollView setHidden:TRUE];
+   }
+   else if ([[sender title] hasPrefix:@"Find Bonjour"])
+   {
+      [root removeAllObjects];
+      self.autoRefresh = NO;
+      [scanButton setTitle:@"Scan"];      
+      [autoRefreshButton setEnabled:FALSE];      
+      [resolveHostnamesButton setEnabled:FALSE];      
+      [regularHostsScrollView setHidden:TRUE];
+      [netstatHostsScrollView setHidden:TRUE];      
+      [bonjourHostsScrollView setHidden:FALSE];            
    }
    else
    {
@@ -101,6 +127,7 @@
       [resolveHostnamesButton setEnabled:FALSE];      
       [regularHostsScrollView setHidden:FALSE];
       [netstatHostsScrollView setHidden:TRUE];      
+      [bonjourHostsScrollView setHidden:TRUE];      
    }
    
    if ([[sender title] hasPrefix:@"Find computers"])
@@ -139,6 +166,11 @@
    {
       [self checkForServices:self];
    }
+   else if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Find Bonjour"])
+   {
+      [bonjourListener search:self];
+   }
+   
 }
 
 // -------------------------------------------------------------------------------
@@ -450,5 +482,155 @@ int bitcount (unsigned int n)
       [self performSelector:@selector(refreshConnectionsList:) withObject:self afterDelay:2];
 }   
 
+// -------------------------------------------------------------------------------
+//	foundBonjourServices: 
+// -------------------------------------------------------------------------------
+- (void)foundBonjourServices:(NSNotification *)notification
+{
+   NSLog(@"InspectorController: found services");
+//   [root setObject:[[notification object] foundServices] forKey:@"Hosts"];
+   NSMutableDictionary *newService = [notification object];
+   NSString *key = [NSString stringWithFormat:@"%@: %@", 
+                    [newService objectForKey:@"_ipaddr"], 
+                    [newService objectForKey:@"_type"]];                    
+   [root setObject:[notification object] forKey:key];
+   [foundServicesOutlineView reloadData];
+//   [foundServicesController removeObjects:[foundServicesController arrangedObjects]];
+//   [foundServicesController addObjects:[[notification object] foundServices]];
+//   
+//   for (NSDictionary *dict in self.foundServices)
+//   {
+//      NSLog(@"---------------------------");
+//      for (id dictKey in [dict allKeys])
+//      {
+//         
+//         NSData *dictValue = [dict valueForKey:dictKey];
+////         NSString *aStr = [[NSString alloc] initWithData:dictValue encoding:NSASCIIStringEncoding]; 
+//         NSLog(@"%@: %@", dictKey, dictValue);
+//      }
+//      NSLog(@"---------------------------\n");      
+//   }
+}
+
+- (int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
+{
+   // The NSOutlineView calls this when it needs to know how many children
+   // a particular item has. Because we are using a standard tree of NSDictionary,
+   // NSArray, NSString etc objects, we can just return the count.
+   
+   // The root node is special; if the NSOutline view asks for the children of nil,
+   // we give it the count of the root dictionary.
+   
+   if (item == nil)
+   {
+      return [root count];
+   }
+   
+   // If it's an NSArray or NSDictionary, return the count.
+   
+   if ([item isKindOfClass:[NSDictionary class]] || [item isKindOfClass:[NSArray class]])
+   {
+      return [item count];
+   }
+   
+   // It can't have children if it's not an NSDictionary or NSArray.
+   
+   return 0;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+{
+   // NSOutlineView calls this when it needs to know if an item can be expanded.
+   // In our case, if an item is an NSArray or NSDictionary AND their count is > 0
+   // then they are expandable.
+   
+   if ([item isKindOfClass:[NSArray class]] || [item isKindOfClass:[NSDictionary class]])
+   {
+      if ([item count] > 0)
+         return YES;
+   }
+   
+   // Return NO in all other cases.
+   
+   return NO;
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
+{
+   // NSOutlineView will iterate over every child of every item, recursively asking
+   // for the entry at each index. We return the item at a given array index,
+   // or at the given dictionary key index.
+   
+   if (item == nil)
+   {
+      item = root;
+   }
+   
+   if ([item isKindOfClass:[NSArray class]])
+   {
+      return [item objectAtIndex:index];
+   }
+   else if ([item isKindOfClass:[NSDictionary class]])
+   {
+      return [item objectForKey:[[item allKeys] objectAtIndex:index]];
+   }
+   
+   return nil;
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+{
+   // NSOutlineView calls this for each column in your NSOutlineView, for each item.
+   // You need to work out what you want displayed in each column; in our case we
+   // create in Interface Builder two columns, one called "Key" and the other "Value".
+   //
+   // If the NSOutlineView is after the key for an item, we use either the NSDictionary
+   // key for that item, or we count from 0 for NSArrays.
+   //
+   // Note that you can find the parent of a given item using [outlineView parentForItem:item];
+   
+   if ([[[tableColumn headerCell] stringValue] compare:@"Key"] == NSOrderedSame)
+   {
+      // Return the key for this item. First, get the parent array or dictionary.
+      // If the parent is nil, then that must be root, so we'll get the root
+      // dictionary.
+      
+      id parentObject = [outlineView parentForItem:item] ? [outlineView parentForItem:item] : root;
+      
+      if ([parentObject isKindOfClass:[NSDictionary class]])
+      {
+         // Dictionaries have keys, so we can return the key name. We'll assume
+         // here that keys/objects have a one to one relationship.
+         
+         return [[parentObject allKeysForObject:item] objectAtIndex:0];
+      }
+      else if ([parentObject isKindOfClass:[NSArray class]])
+      {
+         // Arrays don't have keys (usually), so we have to use a name
+         // based on the index of the object.
+         
+         return [NSString stringWithFormat:@"Item %d", [parentObject indexOfObject:item]];
+      }
+   }
+   else
+   {
+      // Return the value for the key. If this is a string, just return that.
+      
+      if ([item isKindOfClass:[NSString class]])
+      {
+         return item;
+      }
+      else if ([item isKindOfClass:[NSDictionary class]])
+      {
+         return [NSString stringWithFormat:@"%d items", [item count]];
+      }
+      else if ([item isKindOfClass:[NSArray class]])
+      {
+         return [NSString stringWithFormat:@"%d items", [item count]];
+      }
+   }
+   
+   return nil;
+}
 
 @end

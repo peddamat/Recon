@@ -40,7 +40,7 @@
 		8CC32789100CDCA700483939 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC32788100CDCA700483939 /* Security.framework */; };
 		8CC3278F100CDCF000483939 /* InspectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3278E100CDCF000483939 /* InspectorController.m */; };
 		8CC32794100CDFE400483939 /* NetstatConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC32793100CDFE400483939 /* NetstatConnection.m */; };
-		8CC329D1100DF9D700483939 /* ClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC329D0100DF9D700483939 /* ClientController.m */; };
+		8CC329D1100DF9D700483939 /* BonjourListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC329D0100DF9D700483939 /* BonjourListener.m */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */; settings = {ATTRIBUTES = (); }; };
@@ -133,8 +133,8 @@
 		8CC3278E100CDCF000483939 /* InspectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InspectorController.m; path = Source/InspectorController.m; sourceTree = "<group>"; };
 		8CC32792100CDFE400483939 /* NetstatConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetstatConnection.h; path = Source/NetstatConnection.h; sourceTree = "<group>"; };
 		8CC32793100CDFE400483939 /* NetstatConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetstatConnection.m; path = Source/NetstatConnection.m; sourceTree = "<group>"; };
-		8CC329CF100DF9D700483939 /* ClientController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientController.h; path = Source/ClientController.h; sourceTree = "<group>"; };
-		8CC329D0100DF9D700483939 /* ClientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientController.m; path = Source/ClientController.m; sourceTree = "<group>"; };
+		8CC329CF100DF9D700483939 /* BonjourListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BonjourListener.h; path = Source/BonjourListener.h; sourceTree = "<group>"; };
+		8CC329D0100DF9D700483939 /* BonjourListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BonjourListener.m; path = Source/BonjourListener.m; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -281,8 +281,8 @@
 				8CC3278E100CDCF000483939 /* InspectorController.m */,
 				8CC32792100CDFE400483939 /* NetstatConnection.h */,
 				8CC32793100CDFE400483939 /* NetstatConnection.m */,
-				8CC329CF100DF9D700483939 /* ClientController.h */,
-				8CC329D0100DF9D700483939 /* ClientController.m */,
+				8CC329CF100DF9D700483939 /* BonjourListener.h */,
+				8CC329D0100DF9D700483939 /* BonjourListener.m */,
 			);
 			name = Inspector;
 			sourceTree = "<group>";
@@ -401,7 +401,7 @@
 				8C2A17B5100B2A6E0060D931 /* Host.m in Sources */,
 				8CC3278F100CDCF000483939 /* InspectorController.m in Sources */,
 				8CC32794100CDFE400483939 /* NetstatConnection.m in Sources */,
-				8CC329D1100DF9D700483939 /* ClientController.m in Sources */,
+				8CC329D1100DF9D700483939 /* BonjourListener.m in Sources */,
 				8CAA7CB6101CD00700EF43A3 /* OsClass.m in Sources */,
 				8CAA7CB7101CD00700EF43A3 /* OsMatch.m in Sources */,
 				8CAA7D88101CF83E00EF43A3 /* TcpSeqValue.m in Sources */,

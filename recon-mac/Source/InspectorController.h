@@ -12,6 +12,8 @@
 @class SessionController;
 @class SessionManager;
 
+@class BonjourListener;
+
 @interface InspectorController : NSObject {
 
    // Global outlets
@@ -40,17 +42,27 @@
    
    IBOutlet NSScrollView *regularHostsScrollView;
    IBOutlet NSScrollView *netstatHostsScrollView;
+   IBOutlet NSScrollView *bonjourHostsScrollView;
    
 	NSTask *task;      
 	NSMutableData *standardOutput;
 	NSMutableData *standardError;
+   
+   BonjourListener *bonjourListener;
+   NSMutableArray *foundServices;
+   IBOutlet NSArrayController *foundServicesController;
+   NSMutableDictionary *root;   
+   IBOutlet NSOutlineView *foundServicesOutlineView;
 }
 
 @property (readwrite, retain)NSMutableArray *connections;
+@property (readwrite, retain)NSMutableArray *foundServices;
 @property (readwrite, assign)BOOL autoRefresh;
 @property (readwrite, assign)BOOL resolveHostnames;
 @property (readwrite, assign)BOOL doneRefresh;
 @property (readwrite, assign)BOOL showSpinner;
+
+@property (assign,readonly) NSMutableDictionary *root;
 
 - (IBAction)changeInspectorTask:(id)sender;
 - (IBAction)launchScan:(id)sender;
