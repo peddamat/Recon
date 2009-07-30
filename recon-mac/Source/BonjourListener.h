@@ -5,12 +5,12 @@
    NSNetServiceBrowser *primaryBrowser;
    NSNetServiceBrowser *secondaryBrowser;
    NSMutableArray *services;   
-   NSMutableArray *foundServices;
+   NSDictionary *bonjourDict;
 }
 
 @property (readonly, retain) NSMutableArray *services;
-@property (readonly, retain) NSMutableArray *foundServices;
 
+- (void)setBonjourDict;
 -(IBAction)search:(id)sender;
 
 @end

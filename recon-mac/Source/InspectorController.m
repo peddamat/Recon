@@ -14,6 +14,7 @@
 #import "Session.h"
 
 #import "BonjourListener.h"
+#import "SPGrowlController.h"
 
 #include <arpa/inet.h>
 #include <net/if.h>
@@ -96,10 +97,6 @@
    //NSLog(@"InspectorController: changeInspectorTask: %d", [sender tag]);
    if ([[sender title] hasPrefix:@"Find Bonjour"])
    {
-      NSLog(@"BONJOUR");
-
-//      [root removeAllObjects];
-//      [root setObject:@"p" forKey:@"d"];
       self.autoRefresh = NO;
       [scanButton setTitle:@"Scan"];      
       [autoRefreshButton setEnabled:FALSE];      
@@ -107,16 +104,10 @@
       
       [regularHostsScrollView setHidden:TRUE];
       [netstatHostsScrollView setHidden:TRUE];      
-      [bonjourHostsScrollView setHidden:FALSE];    
-      
-      bigFramePosition = NSMakeRect(20.0f, 193.0f, 743.0f, 461.0f);      
-      [[bonjourHostsScrollView animator] setFrame:bigFramePosition];
-      [[regularHostsScrollView animator] setFrame:bigFramePosition];
-      [[netstatHostsScrollView animator] setFrame:bigFramePosition];
+      [bonjourHostsScrollView setHidden:FALSE];          
    }
    else if ([[sender title] hasPrefix:@"See the machines connected"])
    {
-      NSLog(@"SEE");
       self.autoRefresh = YES;
       [scanButton setTitle:@"Refresh"];
       [self refreshConnectionsList:self];
@@ -125,36 +116,10 @@
       
       [regularHostsScrollView setHidden:TRUE];
       [netstatHostsScrollView setHidden:FALSE];      
-      [bonjourHostsScrollView setHidden:TRUE];    
-      
-      smallFramePosition = NSMakeRect(20.0f, 426.0f, 743.0f, 228.0f);
-      [[bonjourHostsScrollView animator] setFrame:smallFramePosition];      
-      [[regularHostsScrollView animator] setFrame:smallFramePosition];
-      [[netstatHostsScrollView animator] setFrame:smallFramePosition];      
+      [bonjourHostsScrollView setHidden:TRUE];          
    }  
    else
    {
-//      NSLog(@"ELSE");
-////      self.autoRefresh = NO;
-////      [scanButton setTitle:@"Scan"];      
-////      [autoRefreshButton setEnabled:FALSE];      
-////      [resolveHostnamesButton setEnabled:FALSE]; 
-//      self.autoRefresh = YES;
-//      [scanButton setTitle:@"Refresh"];
-//      [self refreshConnectionsList:self];
-//      [autoRefreshButton setEnabled:TRUE];
-//      [resolveHostnamesButton setEnabled:TRUE];      
-//      
-//      [bonjourHostsScrollView setHidden:TRUE];      
-//      [regularHostsScrollView setHidden:FALSE];
-//      [netstatHostsScrollView setHidden:TRUE];            
-//      
-//      smallFramePosition = NSMakeRect(20.0f, 426.0f, 743.0f, 228.0f);
-////      [[bonjourHostsScrollView animator] setFrame:smallFramePosition];      
-//      [[regularHostsScrollView animator] setFrame:smallFramePosition];
-////      [[netstatHostsScrollView animator] setFrame:smallFramePosition];
-
-      NSLog(@"ELSE");
       self.autoRefresh = NO;
       [scanButton setTitle:@"Scan"];      
       [autoRefreshButton setEnabled:FALSE];      
@@ -162,26 +127,21 @@
       
       [regularHostsScrollView setHidden:FALSE];
       [netstatHostsScrollView setHidden:TRUE];      
-      [bonjourHostsScrollView setHidden:TRUE];    
-      
-      smallFramePosition = NSMakeRect(20.0f, 426.0f, 743.0f, 228.0f); 
-      [[bonjourHostsScrollView animator] setFrame:smallFramePosition];      
-      [[regularHostsScrollView animator] setFrame:smallFramePosition];
-      [[netstatHostsScrollView animator] setFrame:smallFramePosition];      
+      [bonjourHostsScrollView setHidden:TRUE];          
    }
       
          
-//   if ([[sender title] hasPrefix:@"Check"])
-//   {
-//      [hostsTextField setEnabled:TRUE];
-//      [hostsTextFieldLabel setEnabled:TRUE];
-//      [hostsTextField selectText:self];
-//   }
-//   else
-//   {
-//      [hostsTextField setEnabled:FALSE];
-//      [hostsTextFieldLabel setEnabled:FALSE];
-//   }
+   if ([[sender title] hasPrefix:@"Check"])
+   {
+      [hostsTextField setEnabled:TRUE];
+      [hostsTextFieldLabel setEnabled:TRUE];
+      [hostsTextField selectText:self];
+   }
+   else
+   {
+      [hostsTextField setEnabled:FALSE];
+      [hostsTextFieldLabel setEnabled:FALSE];
+   }
 }
 
 // -------------------------------------------------------------------------------
@@ -332,6 +292,8 @@ int bitcount (unsigned int n)
 // -------------------------------------------------------------------------------
 - (IBAction)refreshConnectionsList:(id)sender
 {
+   NSLog(@"InspectorController: refreshConnectionsList");
+   
    self.doneRefresh = NO;
       
    self.task = [[[NSTask alloc] init] autorelease];
@@ -509,7 +471,12 @@ int bitcount (unsigned int n)
    
    [connectionsController addObjects:a];
 
-   [[NSNotificationCenter defaultCenter] removeObserver:self];
+   [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                   name:NSFileHandleDataAvailableNotification
+                                                 object:nil];
+   [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                   name:NSTaskDidTerminateNotification
+                                                 object:nil];   
 //   [task release];
    
    
@@ -525,13 +492,18 @@ int bitcount (unsigned int n)
 - (void)foundBonjourServices:(NSNotification *)notification
 {
    NSLog(@"InspectorController: found services");
-//   [root setObject:[[notification object] foundServices] forKey:@"Hosts"];
+
    NSMutableDictionary *newService = [notification object];
-   NSString *key = [NSString stringWithFormat:@"%@: %@", 
-                    [newService objectForKey:@"_ipaddr"], 
-                    [newService objectForKey:@"_type"]];                    
+   NSString *key = [NSString stringWithFormat:@"%@", 
+                    [newService objectForKey:@"Long_Type"]];                    
    [root setObject:[[notification object] retain] forKey:key];
    [foundServicesOutlineView reloadData];
+   
+	[[SPGrowlController sharedGrowlController] 
+    notifyWithTitle:@"Found Bonjour Service" 
+    description:[NSString stringWithFormat: @"Type: %@\nIP Address: %@", [newService objectForKey:@"Type"], [newService objectForKey:@"IP_Address"]] 
+    notificationName:@"Connected"];  
+   
 //   [foundServicesController removeObjects:[foundServicesController arrangedObjects]];
 //   [foundServicesController addObjects:[[notification object] foundServices]];
 //   
