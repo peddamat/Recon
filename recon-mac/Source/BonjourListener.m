@@ -86,7 +86,7 @@
          NSString *type = [s type];
          NSArray *a = [type componentsSeparatedByString:@"."];
          NSString *newSearch = [NSString stringWithFormat:@"%@.%@", name, [a objectAtIndex:0]];
-         
+
          [services removeObjectAtIndex:0];
          [self.secondaryBrowser searchForServicesOfType:newSearch inDomain:@""];            
       }      

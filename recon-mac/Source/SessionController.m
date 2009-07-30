@@ -1,5 +1,5 @@
 //
-//  ScanController.m
+//  SessionController.m
 //  Recon
 //
 //  Created by Sumanth Peddamatham on 7/1/09.

@@ -1,5 +1,5 @@
 //
-//  ScanController.h
+//  SessionController.h
 //  Recon
 //
 //  Created by Sumanth Peddamatham on 7/1/09.

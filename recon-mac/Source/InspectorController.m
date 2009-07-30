@@ -495,8 +495,8 @@ int bitcount (unsigned int n)
 
    NSMutableDictionary *newService = [[[notification object] retain] autorelease];
    
-   NSString *key = [NSString stringWithFormat:@"%@", 
-                    [newService objectForKey:@"Long_Type"]];                    
+   NSString *key = [NSString stringWithFormat:@"%@ on %@", 
+                    [newService objectForKey:@"Long_Type"], [newService objectForKey:@"Name"]];                    
 //   [root setObject:[[notification object] retain] forKey:key];
    [root setObject:newService forKey:key];
    [foundServicesOutlineView reloadData];

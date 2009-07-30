@@ -214,7 +214,6 @@
    //	These are hard-coded dictionaries for the popups.  HACKY CODE!  
    // -------------------------------------------------------------------------------
    
-   
    dictValue = [profile valueForKey:@"tcpScanTag"];
    if (dictValue != nil)
       [nmapArgs addObject:[nmapArgsTcpString valueForKey:[dictValue stringValue]]];
@@ -242,7 +241,7 @@
 }
 
 // -------------------------------------------------------------------------------
-//	areFlagsValid
+//	areFlagsValid: 
 // -------------------------------------------------------------------------------
 - (BOOL)areFlagsValid:(NSArray *)argArray
 {

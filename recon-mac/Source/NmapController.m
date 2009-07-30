@@ -10,12 +10,12 @@
 
 @interface NmapController ()
 
-@property (readwrite, retain) NSTask *task;   
+   @property (readwrite, retain) NSTask *task;   
 
-@property (readwrite, retain) NSMutableData *standardOutput;
-@property (readwrite, retain) NSMutableData *standardError;
-@property (readwrite, retain) NSString *outputFilePath;
-@property (readwrite, assign) BOOL hasRun;
+   @property (readwrite, retain) NSMutableData *standardOutput;
+   @property (readwrite, retain) NSMutableData *standardError;
+   @property (readwrite, retain) NSString *outputFilePath;
+   @property (readwrite, assign) BOOL hasRun;
 
 @end
 
@@ -182,15 +182,7 @@
      initWithData:[self standardErrorData]
      encoding:NSUTF8StringEncoding]
     autorelease];
-   
-   // Check for errors, and send SessionController a:
-   //  - successfulTermination
-   //  - unsuccessfulTermination
-   
-   // TODO: Parse errorString and notify if errors occurred.
-   //   //ANSLog(@"%@", outputString);
-   //   //ANSLog(@"%@", errorString);
-   
+      
    NSError *error;
    NSString *standardOutPath = [outputFilePath stringByAppendingPathComponent:@"nmap-stdout.txt"];
    NSString *standardErrPath = [outputFilePath stringByAppendingPathComponent:@"nmap-stderr.txt"];

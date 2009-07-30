@@ -17,10 +17,10 @@ NSString * const BAFAutoSetuid = @"AutoSetuid";
 
 @interface PrefsController ()
 
-@property (readwrite, retain) NSString *nmapBinary;
-@property (readwrite, retain) NSString *supportDirectory;
-@property (readwrite, assign) BOOL setuidNmap;
-@property (readwrite, assign) BOOL autoSetuid;
+   @property (readwrite, retain) NSString *nmapBinary;
+   @property (readwrite, retain) NSString *supportDirectory;
+   @property (readwrite, assign) BOOL setuidNmap;
+   @property (readwrite, assign) BOOL autoSetuid;
 
 @end
 
@@ -454,6 +454,7 @@ static PrefsController *sharedPrefsController = nil;
 //{
 //   //ANSLog(@"Window closing");
 //}
+
 
 // -------------------------------------------------------------------------------
 //	The following methods allow this class to be a Singleton.

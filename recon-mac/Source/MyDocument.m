@@ -143,12 +143,13 @@
       
       //      // Expand profile view hack
       [self performSelector:@selector(expandProfileView) withObject:self afterDelay:0.1];            
-      [self performSelector:@selector(expandDrawers) withObject:self afterDelay:0.5];                  
+      [self performSelector:@selector(expandDrawers) withObject:self afterDelay:0.2];                  
    }
 
    // Set up click-handlers for the Sessions Drawer
    [sessionsTableView setTarget:self];
    [sessionsTableView setDoubleAction:@selector(sessionsTableDoubleClick)];
+   [sessionsTableView setAutosaveTableColumns:YES];   
    [sessionsContextMenu setAutoenablesItems:YES];      
    
    // ... and the Host TableView
@@ -352,9 +353,9 @@
    // ... otherwise, parse the input commands and queue the session
    else
    {
-      // Make sure the user-specified commands are valid
       ArgumentListGenerator *a = [[ArgumentListGenerator alloc] init];   
       
+      // Validate user-specified flags      
       if ([a areFlagsValid:nmapFlags] == YES)
       {
          // Create a brand spankin' profile
@@ -607,6 +608,8 @@
                                            inManagedObjectContext:[self managedObjectContext]]; 
    [profile setValue: @"New Profile" forKey: @"name"]; 
    [profile setValue:profileParent forKey:@"parent"];
+
+//   [profileController editColumn:0 row:1 withEvent:nil select:YES];
    
    // Expand the profiles window
 //   [profilesOutlineView expandItem:nil expandChildren:YES];   
