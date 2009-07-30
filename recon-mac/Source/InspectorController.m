@@ -493,15 +493,17 @@ int bitcount (unsigned int n)
 {
    NSLog(@"InspectorController: found services");
 
-   NSMutableDictionary *newService = [notification object];
+   NSMutableDictionary *newService = [[[notification object] retain] autorelease];
+   
    NSString *key = [NSString stringWithFormat:@"%@", 
                     [newService objectForKey:@"Long_Type"]];                    
-   [root setObject:[[notification object] retain] forKey:key];
+//   [root setObject:[[notification object] retain] forKey:key];
+   [root setObject:newService forKey:key];
    [foundServicesOutlineView reloadData];
    
 	[[SPGrowlController sharedGrowlController] 
     notifyWithTitle:@"Found Bonjour Service" 
-    description:[NSString stringWithFormat: @"Type: %@\nIP Address: %@", [newService objectForKey:@"Type"], [newService objectForKey:@"IP_Address"]] 
+    description:[NSString stringWithFormat: @"Type: %@\nIP Address: %@", [newService objectForKey:@"Long_Type"], [newService objectForKey:@"IP_Address"]] 
     notificationName:@"Connected"];  
    
 //   [foundServicesController removeObjects:[foundServicesController arrangedObjects]];

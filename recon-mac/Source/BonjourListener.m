@@ -154,6 +154,8 @@
    NSLog(@"About to search!\n");
 }
 
+// Bonjour services lookup
+//   Munged from http://www.dns-sd.org/ServiceTypes.html
 - (void)setBonjourDict
 {
    self.bonjourDict = [NSDictionary dictionaryWithObjectsAndKeys:

@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="105501"/>
+			<integer value="103818"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -8514,7 +8514,6 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 											<string key="NSTitle">Find file shares on my local network.</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSMnemonicLoc">2147483647</int>
-											<int key="NSState">1</int>
 											<reference key="NSOnImage" ref="897481626"/>
 											<reference key="NSMixedImage" ref="522472117"/>
 											<string key="NSAction">_popUpItemAction:</string>
@@ -8530,7 +8529,6 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 													<reference key="NSMenu" ref="186427336"/>
 													<string key="NSTitle">Find computers and servers on my local network.</string>
 													<string key="NSKeyEquiv"/>
-													<int key="NSKeyEquivModMask">1048576</int>
 													<int key="NSMnemonicLoc">2147483647</int>
 													<reference key="NSOnImage" ref="897481626"/>
 													<reference key="NSMixedImage" ref="522472117"/>
@@ -8553,7 +8551,6 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 													<reference key="NSMenu" ref="186427336"/>
 													<string key="NSTitle">Find Bonjour-compatible services on my network.</string>
 													<string key="NSKeyEquiv"/>
-													<int key="NSKeyEquivModMask">1048576</int>
 													<int key="NSMnemonicLoc">2147483647</int>
 													<reference key="NSOnImage" ref="897481626"/>
 													<reference key="NSMixedImage" ref="522472117"/>
@@ -8578,7 +8575,6 @@ ARcABAAAAAEAAAACARwAAwAAAAEAAQAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 													<reference key="NSMenu" ref="186427336"/>
 													<string key="NSTitle">See the machines connected to this Mac.</string>
 													<string key="NSKeyEquiv"/>
-													<int key="NSKeyEquivModMask">1048576</int>
 													<int key="NSMnemonicLoc">2147483647</int>
 													<reference key="NSOnImage" ref="897481626"/>
 													<reference key="NSMixedImage" ref="522472117"/>

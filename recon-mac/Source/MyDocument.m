@@ -247,7 +247,6 @@
    
    [self performSelector:@selector(expandProfileView) withObject:self afterDelay:0.1];            
    [self performSelector:@selector(expandDrawers) withObject:self afterDelay:0.5];                  
-
 }
 
 // -------------------------------------------------------------------------------
@@ -261,8 +260,6 @@
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {
-//   //ANSLog(@"TOOLBAR");
-   
    return YES;
 }
 
