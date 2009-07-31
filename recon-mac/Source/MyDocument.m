@@ -624,14 +624,17 @@
 {
    // Get selected profile
    Profile *selectedProfile = [[profileController selectedObjects] lastObject];
-   
+
+   NSString *parentName = [selectedProfile valueForKeyPath:@"parent.name"];
+      
    // Make sure it's not a Default
-   if ((selectedProfile.parent.name == @"Defaults") || (selectedProfile.name == @"Defaults")) {
-      //ANSLog(@"FLUNKO");
+   if ((parentName == nil) || ([parentName compare:@"Defaults"] == NSOrderedSame)) {
+      NSRunAlertPanel(@"Recon", @"Sorry, default profiles and profile folders cannot be deleted.",   
+                      @"OK", nil, nil);
+      
       return;
    }
    else {
-      //ANSLog(@"SHITE");
       // Delete profile
       [[self managedObjectContext] deleteObject:selectedProfile];
    }
