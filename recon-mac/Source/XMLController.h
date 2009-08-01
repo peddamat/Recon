@@ -34,13 +34,13 @@
 
    // State-machine helper flag
    BOOL inRunstats;   
-   BOOL onlyReadProgress;
    
-   float tempProgress;
+   NSManagedObjectContext *temporaryContext;
+   NSEntityDescription *hostEntity;
 }
 
 
-- (void)parseXMLFile:(NSString *)pathToFile inSession:(Session *)session onlyReadProgress:(BOOL)oReadProgress;
+- (void)parseXMLFile:(NSString *)pathToFile inSession:(Session *)session;
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict ;
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string;
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName;

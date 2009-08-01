@@ -94,6 +94,7 @@
 }
 
 -(void)netServiceBrowser:(NSNetServiceBrowser *)aBrowser didRemoveService:(NSNetService *)aService moreComing:(BOOL)more {
+   NSLog(@"BonjourListener: didRemoveService");
 //   [servicesController removeObject:aService];
 //   if ( aService == self.connectedService ) self.isConnected = NO;
 }

@@ -38,7 +38,7 @@
    if (self = [super init]) 
    {
       task = [[NSTask alloc] init];
-      
+
       [task setLaunchPath:nmapBinary];      
       [task setArguments:nmapArgs];
       [task setStandardOutput:[NSPipe pipe]];

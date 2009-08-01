@@ -21,6 +21,11 @@
 @synthesize nmapArgsNonTcpString;
 @synthesize nmapArgsTimingString;
 
+@synthesize nmapArgsTcpStringReverse;
+@synthesize nmapArgsNonTcpStringReverse;
+@synthesize nmapArgsTimingStringReverse;
+
+#pragma mark Add additional nmap flags here
 
 - (id)init
 {
@@ -29,25 +34,37 @@
       NSArray *allKeys;
       NSArray *allValues;
       
-      nmapArgsString = [NSDictionary dictionaryWithObjectsAndKeys:
+      self.nmapArgsString = [NSDictionary dictionaryWithObjectsAndKeys:
                         @"-PA",@"ackPing",
                         @"-d",@"debuggingLevel",
                         @"--excludefile",@"excludeFile",
                         @"--exclude",@"excludeHosts",
                         @"",@"extraOptions",
                         @"-b",@"ftpBounce",                                     
-                        @"--host-timeout",@"hostTimeout",
+//                        @"--host-timeout",@"hostTimeout",
                         @"-sI",@"idleScan",
                         @"-PO",@"ipprotoProbe",
-                        @"--max-rtt-timeout",@"maxRttTimeout",
-                        @"--min-rtt-timeout",@"minRttTimeout",
-                        @"--initial-rtt-timeout",@"initialRttTimeout",
-                        @"--max-hostgroup",@"maxHostgroup",
-                        @"--min-hostgroup",@"minHostgroup",
-                        @"--max-parallelism",@"maxParallelism",
-                        @"--min-parallelism",@"minParallelism",
+                        @"--initial-rtt-timeout",@"initialProbeTimeout",                             
+                        @"--max-hostgroup",@"maxHostsParallel",
+                        @"--max-parallelism",@"maxOutstandingProbes",
+                        @"--max-rtt-timeout",@"maxProbeTimeout",
+                        @"--max-retries",@"maxRetries",
                         @"--max-scan-delay",@"maxScanDelay",
-                        @"--scan-delay",@"scanDelay",
+                        @"--host-timeout",@"maxTimeToScan",
+                        @"--scan-delay",@"minDelayBetweenProbes",
+                        @"--min-hostgroup",@"minHostsParallel",
+                        @"--min-parallelism",@"minOutstandingProbes",
+                        @"--min-rtt-timeout",@"minProbeTimeout",
+                             
+//                        @"--max-rtt-timeout",@"maxRttTimeout",
+//                        @"--min-rtt-timeout",@"minRttTimeout",
+//                        @"--initial-rtt-timeout",@"initialRttTimeout",
+//                        @"--max-hostgroup",@"maxHostgroup",
+//                        @"--min-hostgroup",@"minHostgroup",
+//                        @"--max-parallelism",@"maxParallelism",
+//                        @"--min-parallelism",@"minParallelism",
+//                        @"--max-scan-delay",@"maxScanDelay",
+//                        @"--scan-delay",@"scanDelay",
                         @"-p",@"portsToScan",
                         @"-iR",@"scanRandom",
                         @"--script-args=",@"scriptArgs",
@@ -65,9 +82,9 @@
             
       allKeys = [nmapArgsString allKeys];
       allValues = [nmapArgsString allValues];      
-      nmapArgsStringReverse = [NSDictionary dictionaryWithObjects:allKeys forKeys:allValues];      
+      self.nmapArgsStringReverse = [NSDictionary dictionaryWithObjects:allKeys forKeys:allValues];      
       
-      nmapArgsBool = [NSDictionary dictionaryWithObjectsAndKeys:
+      self.nmapArgsBool = [NSDictionary dictionaryWithObjectsAndKeys:
                         @"-PB",@"defaultPing",
                         @"-r",@"disableRandom",
                         @"-n",@"disableReverseDNS",
@@ -78,18 +95,7 @@
                         @"-PM",@"icmpNetmask",
                         @"-PE",@"icmpPing",
                         @"-PP",@"icmpTimeStamp",
-                        @"--initial-rtt-timeout",@"initialProbeTimeout",
                         @"-6",@"ipv6Support",
-                        @"--max-hostgroup",@"maxHostsParallel",
-                        @"--max-parallelism",@"maxOutstandingProbes",
-                        @"--max-rtt-timeout",@"maxProbeTimeout",
-                        @"--max-retries",@"maxRetries",
-                        @"--max-scan-delay",@"maxScanDelay",
-                        @"--host-timeout",@"maxTimeToScan",
-                        @"--scan-delay",@"minDelayBetweenProbes",
-                        @"--min-hostgroup",@"minHostsParallel",
-                        @"--min-parallelism",@"minOutstandingProbes",
-                        @"--min-rtt-timeout",@"minProbeTimeout",
                         @"-O",@"osDetection",
                         @"--packet-trace",@"packetTrace",
                         @"-sC",@"scriptScan",
@@ -102,7 +108,7 @@
       allValues = [nmapArgsBool allValues];      
       nmapArgsBoolReverse = [NSDictionary dictionaryWithObjects:allKeys forKeys:allValues];
       
-      nmapArgsTcpString = [NSDictionary dictionaryWithObjectsAndKeys:
+      self.nmapArgsTcpString = [NSDictionary dictionaryWithObjectsAndKeys:
                         @"",@"0",                                      
                         @"-sA",@"1",
                         @"-sF",@"2",
@@ -113,16 +119,24 @@
                         @"-sW",@"7",
                         @"-sX",@"8",
                         nil];
+
+      allKeys = [nmapArgsTcpString allKeys];
+      allValues = [nmapArgsTcpString allValues];      
+      nmapArgsTcpStringReverse = [NSDictionary dictionaryWithObjects:allKeys forKeys:allValues];      
       
-      nmapArgsNonTcpString = [NSDictionary dictionaryWithObjectsAndKeys:   
+      self.nmapArgsNonTcpString = [NSDictionary dictionaryWithObjectsAndKeys:   
                         @"",@"0",
                         @"-sU",@"1",
                         @"-sO",@"2",
                         @"-sL",@"3",
                         @"-sP",@"4",
                         nil];
+
+      allKeys = [nmapArgsNonTcpString allKeys];
+      allValues = [nmapArgsNonTcpString allValues];      
+      nmapArgsNonTcpStringReverse = [NSDictionary dictionaryWithObjects:allKeys forKeys:allValues];            
       
-      nmapArgsTimingString = [NSDictionary dictionaryWithObjectsAndKeys:
+      self.nmapArgsTimingString = [NSDictionary dictionaryWithObjectsAndKeys:
                         @"-T0",@"0",
                         @"-T1",@"1",
                         @"-T2",@"2",
@@ -130,6 +144,10 @@
                         @"-T4",@"4",
                         @"-T5",@"5",
                         nil];
+      
+      allKeys = [nmapArgsTimingString allKeys];
+      allValues = [nmapArgsTimingString allValues];      
+      nmapArgsTimingStringReverse = [NSDictionary dictionaryWithObjects:allKeys forKeys:allValues];      
    }
    
    return self;
@@ -164,10 +182,10 @@
    id dictValue;   
 
    NSNumber *numYes = [NSNumber numberWithInt:0];
-   
+
    // Array to store generated argument list
    NSMutableArray *nmapArgs = [[NSMutableArray alloc] init];
-  
+
    // First iterate through boolean arguments
    for (NSString *dictKey in nmapArgsBool)
    {
@@ -177,7 +195,7 @@
          [nmapArgs addObject:dictValue];
       }      
    }
-   
+
    // Next, iterate through arguments with string argument
    for (NSString *dictKey in nmapArgsString)
    {
@@ -236,7 +254,7 @@
    [nmapArgs addObject:@"-oX"];
    [nmapArgs addObject:nmapOutput];
    [nmapArgs addObject:target];
-   
+
    return nmapArgs;
 }
 
@@ -251,7 +269,11 @@
    for (NSString *argString in argArray)
    {            
       if (([nmapArgsBoolReverse objectForKey:argString] == nil) &&
-          ([nmapArgsStringReverse objectForKey:argString] == nil) )
+          ([nmapArgsStringReverse objectForKey:argString] == nil) &&
+          ([nmapArgsTcpStringReverse objectForKey:argString] == nil) &&
+          ([nmapArgsNonTcpStringReverse objectForKey:argString] == nil) &&
+          ([nmapArgsTimingStringReverse objectForKey:argString] == nil)
+         )
       {
          ok = FALSE;
       }         

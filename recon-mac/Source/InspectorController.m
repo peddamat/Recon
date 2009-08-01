@@ -24,6 +24,7 @@
 #include <ifaddrs.h>
 #include <stdio.h>
 
+#include "NSManagedObjectContext-helper.h"
 
 @interface InspectorController ()
 
@@ -50,6 +51,8 @@
 
 @synthesize bonjourListener;
 @synthesize foundServices;
+
+@synthesize root;
 
 - (id)init 
 {

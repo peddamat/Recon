@@ -34,7 +34,7 @@
    @property (readwrite, assign) NmapController *nmapController;
 
    @property (readwrite, retain) NSTimer *resultsTimer;
-   @property (readwrite, retain) XMLController *xmlController;
+   @property (readwrite, assign) XMLController *xmlController;
 
 @end
 
@@ -75,19 +75,17 @@
 - (void)dealloc
 {
    //ANSLog(@"");
-   //ANSLog(@"SessionController: deallocating");      
+   NSLog(@"SessionController: deallocating");      
    
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc removeObserver:self];
-   
+
    [session release];
    [sessionUUID release];   
    [sessionDirectory release];   
    [sessionOutputFile release];
-   
-   [nmapArguments release];   
+   [nmapArguments release];       
    [nmapController release];
-   
    [xmlController release];
    [resultsTimer invalidate];   
    [resultsTimer release];
@@ -101,7 +99,7 @@
             withTarget:(NSString *)sessionTarget               
 inManagedObjectContext:(NSManagedObjectContext *)context
 {
-   //ANSLog(@"SessionController: initWithProfile!");
+//   NSLog(@"SessionController: initWithProfile!");
       
    // Make a copy of the selected profile
    Profile *profileCopy = [[self copyProfile:profile] autorelease];
@@ -122,12 +120,12 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    [self createSessionDirectory:sessionUUID];
          
    ArgumentListGenerator *a = [[ArgumentListGenerator alloc] init];
-   
+
    // Convert selected profile to nmap arguments
    self.nmapArguments = [a convertProfileToArgs:profile withTarget:sessionTarget withOutputFile:sessionOutputFile];   
-   
+ 
    [self initNmapController];   
-   
+
 //   [session retain];
    return session;
 }
@@ -157,7 +155,6 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    
    [self initNmapController];   
    
-//   [session retain];
    return session;  
 }
 
@@ -227,7 +224,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    self.nmapController = [[NmapController alloc] initWithNmapBinary:[prefs nmapBinary]                                                   
                                                            withArgs:nmapArguments 
                                                  withOutputFilePath:sessionDirectory];   
-   
+
    // Register to receive notifications from NmapController
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc addObserver:self
@@ -259,6 +256,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    self.isRunning = TRUE;
    [session setStatus:@"Running"];
    
+   // TODO: WORK IN PROGRESS
    // Setup a timer to read the progress
    resultsTimer = [[NSTimer scheduledTimerWithTimeInterval:0.8
                                              target:self
@@ -267,6 +265,9 @@ inManagedObjectContext:(NSManagedObjectContext *)context
                                             repeats:YES] retain];   
    
    [nmapController startScan];
+
+//   // Call XMLController with session directory and managedObjectContext
+//   [xmlController parseXMLFile:sessionOutputFile inSession:session];
 }
 
 // -------------------------------------------------------------------------------
@@ -324,18 +325,6 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 }
 
 // -------------------------------------------------------------------------------
-//	DEPRECATED: checkProgress: Called by the resultsTimer
-// -------------------------------------------------------------------------------
-- (void)checkProgress:(NSTimer *)aTimer
-{
-   // Call XMLController with session directory and managedObjectContext
-//   [xmlController parseXMLFile:sessionOutputFile inSession:session onlyReadProgress:TRUE];      
-   
-//   //ANSLog(@"SessionController: Percent: %@", [session progress]);
-}
-
-
-// -------------------------------------------------------------------------------
 //	abortScan
 // -------------------------------------------------------------------------------
 - (void)abortScan
@@ -367,8 +356,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
       [resultsTimer invalidate];
       
       // Call XMLController with session directory and managedObjectContext
-      [xmlController parseXMLFile:sessionOutputFile inSession:session onlyReadProgress:FALSE];      
-       
+      [xmlController parseXMLFile:sessionOutputFile inSession:session];      
+      NSLog(@"Done");
       self.isRunning = FALSE;
       [session setStatus:@"Done"];
       [session setProgress:[NSNumber numberWithFloat:100]];   

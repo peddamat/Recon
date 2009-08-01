@@ -29,6 +29,10 @@
    NSDictionary *nmapArgsTcpString;
    NSDictionary *nmapArgsNonTcpString;
    NSDictionary *nmapArgsTimingString;
+
+   NSDictionary *nmapArgsTcpStringReverse;
+   NSDictionary *nmapArgsNonTcpStringReverse;
+   NSDictionary *nmapArgsTimingStringReverse;   
 }
 
 @property (readwrite, assign) NSDictionary *nmapArgsBool;
@@ -40,6 +44,10 @@
 @property (readwrite, assign) NSDictionary *nmapArgsTcpString;
 @property (readwrite, assign) NSDictionary *nmapArgsNonTcpString;
 @property (readwrite, assign) NSDictionary *nmapArgsTimingString;
+
+@property (readwrite, assign) NSDictionary *nmapArgsTcpStringReverse;
+@property (readwrite, assign) NSDictionary *nmapArgsNonTcpStringReverse;
+@property (readwrite, assign) NSDictionary *nmapArgsTimingStringReverse;
 
 - (NSArray *) convertProfileToArgs:(Profile *)profile 
                         withTarget:(NSString *)target 

@@ -20,6 +20,9 @@
    @property (readwrite, retain) NSXMLParser *addressParser;
    @property (readwrite, retain) NSMutableString *currentStringValue;
 
+// Temporary MOC
+   @property (readwrite,assign) NSManagedObjectContext *temporaryContext;
+
 // Managed objects that we populate
    @property (readwrite, retain) Session *currentSession;
    @property (readwrite, retain) Host *currentHost;
@@ -30,8 +33,6 @@
 // State-machine helper flags
    @property (readwrite, assign) BOOL inRunstats;   
 
-   @property (readwrite, assign) BOOL onlyReadProgress;
-
 @end
 
 
@@ -39,18 +40,27 @@
 
 @synthesize addressParser;
 @synthesize currentStringValue;
+@synthesize temporaryContext;
 @synthesize currentSession;
 @synthesize currentHost;
 @synthesize currentPort;
 @synthesize currentOsClass;
 @synthesize currentOsMatch;
 @synthesize inRunstats;
-@synthesize onlyReadProgress;
+
+- (id)init
+{
+   if (self = [super init])
+      self.inRunstats = FALSE;
+   
+   return self;
+}
 
 - (void)dealloc
 {
    [addressParser release];
    [currentStringValue release];
+   [temporaryContext release];
    [currentSession release];
    [currentHost release];
    [currentPort release];
@@ -60,53 +70,64 @@
 }
 
 // -------------------------------------------------------------------------------
-//	parseXMLFile: 
+//	parseXMLFile: Parse Nmap output into a temporary managed object context.  If
+//               no errors occur, merge new context with persistent store.
 // -------------------------------------------------------------------------------
-- (void)parseXMLFile:(NSString *)pathToFile inSession:(Session *)session onlyReadProgress:(BOOL)oReadProgress
-{   
-   BOOL success;
+- (void)parseXMLFile:(NSString *)pathToFile inSession:(Session *)session
+{     
+   // Load the Nmap xml output
    NSURL *xmlURL = [NSURL fileURLWithPath:pathToFile];
    
-   self.inRunstats = FALSE;
-   self.onlyReadProgress = oReadProgress;
-   
-   // Save current session
-   self.currentSession = session;
-      
+   // Allocate an event-based parser
    self.addressParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
    [addressParser setDelegate:self];
    [addressParser setShouldResolveExternalEntities:YES];
-   success = [addressParser parse]; // return value not used
-   // if not successful, delegate is informed of error
+   
+   // Create new scratchpad context
+   self.temporaryContext = [[NSManagedObjectContext alloc] init];   
+   [temporaryContext setUndoManager:nil];      
+   [temporaryContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];   
+   
+   // Grab the main Persistent Store Coordinator
+   NSPersistentStoreCoordinator *coordinator = [[session managedObjectContext] persistentStoreCoordinator];   
+   [temporaryContext setPersistentStoreCoordinator:coordinator];   
+   
+   // Save the main Managed Object Context to ensure the new Session has been persisted
+   NSError *error = nil;     
+   [[session managedObjectContext] save:&error]; 
+   
+   // The scratch pad MOC needs a reference to the new Session from the main MOC
+   NSManagedObjectID *objectID = [session objectID];
+   self.currentSession = (Session *)[temporaryContext objectWithID:objectID];
+      
+   // Cache the Host entity to optimize for looong scan outputs
+   hostEntity = [[NSEntityDescription entityForName:@"Host"                 
+                            inManagedObjectContext:temporaryContext] retain];
+   
+   BOOL success = [addressParser parse]; 
+   
+   // Only save changes if parser is a success
+   if (success == YES) 
+   {
+      [temporaryContext save:&error];
+      [[session managedObjectContext] refreshObject:session mergeChanges:NO];
+   }
 }
-
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName 
   namespaceURI:(NSString *)namespaceURI 
  qualifiedName:(NSString *)qName 
     attributes:(NSDictionary *)attributeDict 
-{
+{      
+//   NSLog(@"P: %@", elementName);
    
-   /// TASKPROGRESS 
-   if ( [elementName isEqualToString:@"taskprogress"] ) {
-      NSString *progress = [attributeDict objectForKey:@"percent"];
-      [currentSession setProgress:[NSNumber numberWithFloat:[progress floatValue]]];
-      [currentSession setStatus:[attributeDict objectForKey:@"task"]];
-//      //ANSLog(@"XMLController: Progress: %@", progress);
-   }
-   
-   if ( onlyReadProgress == TRUE )
-      return;
-   
-
    /// HOST
    if ( [elementName isEqualToString:@"host"] ) {
       
       if (!currentHost) {
          
-         // Create new host object in managedObjectContext
-         NSManagedObjectContext *context = [currentSession managedObjectContext]; 
-         self.currentHost = [NSEntityDescription insertNewObjectForEntityForName: @"Host" inManagedObjectContext:context];          
+         // Create new host object in managedObjectContext 
+         self.currentHost = [[NSManagedObject alloc] initWithEntity:hostEntity insertIntoManagedObjectContext:temporaryContext];         
          
          // Point back to current session
          [currentHost setSession:currentSession];
@@ -171,12 +192,10 @@
       if (!currentPort) {
          
          // Create new port object in managedObjectContext
-         NSManagedObjectContext * context = [currentSession managedObjectContext]; 
-         self.currentPort = [NSEntityDescription insertNewObjectForEntityForName: @"Port" inManagedObjectContext: context];          
+         self.currentPort = [NSEntityDescription insertNewObjectForEntityForName: @"Port" inManagedObjectContext: temporaryContext];          
          
-         // Point back to current session
+         // Point back to current host
          [currentPort setHost:currentHost];
-//         [currentHost setSession:currentSession];
          [currentPort setNumber:[NSNumber numberWithInt:[[attributeDict objectForKey:@"portid"] intValue]]];
          [currentPort setProtocol:[attributeDict objectForKey:@"protocol"]];
       }
@@ -210,9 +229,8 @@
       
    /// PORT - SCRIPT
    if ( [elementName isEqualToString:@"script"] ) {
-      
-      NSManagedObjectContext * context = [currentSession managedObjectContext]; 
-      Port_Script *script = [NSEntityDescription insertNewObjectForEntityForName: @"Port_Script" inManagedObjectContext: context];                   
+       
+      Port_Script *script = [NSEntityDescription insertNewObjectForEntityForName: @"Port_Script" inManagedObjectContext: temporaryContext];                   
       
       [script setId:[attributeDict objectForKey:@"id"]];
       NSString *output = [attributeDict objectForKey:@"output"];
@@ -257,8 +275,7 @@
       if (!currentOsClass) {
          
          // Create new port object in managedObjectContext
-         NSManagedObjectContext * context = [currentSession managedObjectContext]; 
-         self.currentOsClass = [NSEntityDescription insertNewObjectForEntityForName: @"OsClass" inManagedObjectContext: context];                   
+         self.currentOsClass = [NSEntityDescription insertNewObjectForEntityForName: @"OsClass" inManagedObjectContext: temporaryContext];                   
 
          // Point back to current session
          [currentOsClass setHost:currentHost];
@@ -279,8 +296,7 @@
       if (!currentOsMatch) {
          
          // Create new port object in managedObjectContext
-         NSManagedObjectContext * context = [currentSession managedObjectContext]; 
-         self.currentOsMatch = [NSEntityDescription insertNewObjectForEntityForName: @"OsMatch" inManagedObjectContext: context];                   
+         self.currentOsMatch = [NSEntityDescription insertNewObjectForEntityForName: @"OsMatch" inManagedObjectContext: temporaryContext];                   
          
          // Point back to current session
          [currentOsMatch setHost:currentHost];
@@ -304,8 +320,7 @@
       for (NSString *object in valuesArray)
       {
          // Create new port object in managedObjectContext
-         NSManagedObjectContext *context = [currentSession managedObjectContext]; 
-         IpIdSeqValue *value = [NSEntityDescription insertNewObjectForEntityForName: @"IpIdSeqValue" inManagedObjectContext: context];                   
+         IpIdSeqValue *value = [NSEntityDescription insertNewObjectForEntityForName: @"IpIdSeqValue" inManagedObjectContext: temporaryContext];                   
          [value setHost:currentHost];
          [value setValue:object];
       }      
@@ -325,8 +340,7 @@
       for (NSString *object in valuesArray)
       {
          // Create new port object in managedObjectContext
-         NSManagedObjectContext *context = [currentSession managedObjectContext]; 
-         TcpSeqValue *value = [NSEntityDescription insertNewObjectForEntityForName: @"TcpSeqValue" inManagedObjectContext: context];                   
+         TcpSeqValue *value = [NSEntityDescription insertNewObjectForEntityForName: @"TcpSeqValue" inManagedObjectContext: temporaryContext];                   
          [value setHost:currentHost];
          [value setValue:object];
       }
@@ -345,8 +359,7 @@
       for (NSString *object in valuesArray)
       {
          // Create new port object in managedObjectContext
-         NSManagedObjectContext *context = [currentSession managedObjectContext]; 
-         TcpTsSeqValue *value = [NSEntityDescription insertNewObjectForEntityForName: @"TcpTsSeqValue" inManagedObjectContext: context];                   
+         TcpTsSeqValue *value = [NSEntityDescription insertNewObjectForEntityForName: @"TcpTsSeqValue" inManagedObjectContext: temporaryContext];                   
          [value setHost:currentHost];
          [value setValue:object];
       }
@@ -377,6 +390,7 @@
 //   //ANSLog(@"XMLParser: endElement: %@", elementName);
    
    if ( [elementName isEqualToString:@"host"] ) {
+      [self.currentHost release];
       self.currentHost = nil;
       
       return;

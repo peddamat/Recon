@@ -188,6 +188,8 @@
    
    [sessionsTableView registerForDraggedTypes:
    [NSArray arrayWithObjects:NSStringPboardType,NSFilenamesPboardType,nil]];
+   
+   [[self managedObjectContext] setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
 }
 
 // -------------------------------------------------------------------------------

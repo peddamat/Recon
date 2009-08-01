@@ -75,7 +75,7 @@ static SessionManager *sharedSessionManager = nil;
    // Store a reference to the Session Controller
    [sessionControllers setObject:newSessionController 
                           forKey:[newSessionController sessionUUID]];   
-   
+      
    // Fire off a Growl notification
 	[[SPGrowlController sharedGrowlController] 
     notifyWithTitle:@"Queued Nmap Session" 
