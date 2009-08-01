@@ -111,7 +111,7 @@
    NSSize mySize2 = {145, 147};
    [sessionsDrawer setContentSize:mySize2];   
    
-   // If first run, display splash window
+   // If first run, display welcome screen
    if ([prefsController hasReconRunBefore] == NO)
    {      
       [[NSNotificationCenter defaultCenter]
@@ -211,9 +211,7 @@
 // -------------------------------------------------------------------------------
 - (void)updateSupportFolder:(NSNotification *)notification
 {
-   //ANSLog(@"MyDocument: updateSupportFolder");
-   
-   NSError *error;
+   NSError *error;   
    NSURL *url = [NSURL fileURLWithPath: [[prefsController reconSupportFolder]
                                          stringByAppendingPathComponent: @"Library.sessions"]];       
    
@@ -225,8 +223,6 @@
    
    // Load queued sessions in the persistent store into session manager
    [self addQueuedSessions];   
-   
-   [self setManagedObjectContext:[self managedObjectContext]];
 }
 
 // -------------------------------------------------------------------------------
@@ -387,8 +383,7 @@
                                                   repeats:YES] retain]; 
       }
 
-      // TODO: Why for thou crasheth?
-//      [a release];
+      [a release];
    }
 }
 
@@ -620,7 +615,8 @@
 }
 
 // -------------------------------------------------------------------------------
-//	deleteProfile: TODO: This is teh b0rk.
+//	deleteProfile: Delete the currently selected profile from the MOC.
+//                Prevent the user from deleting folders or default profiles.
 // -------------------------------------------------------------------------------
 - (IBAction)deleteProfile:(id)sender
 {
@@ -630,7 +626,8 @@
    NSString *parentName = [selectedProfile valueForKeyPath:@"parent.name"];
       
    // Make sure it's not a Default
-   if ((parentName == nil) || ([parentName compare:@"Defaults"] == NSOrderedSame)) {
+//   if ((parentName == nil) || ([parentName compare:@"Defaults"] == NSOrderedSame)) {
+   if ((parentName == nil) || ([parentName isEqualToString:@"Defaults"])) {
       NSRunAlertPanel(@"Recon", @"Sorry, default profiles and profile folders cannot be deleted.",   
                       @"OK", nil, nil);
       
@@ -1307,7 +1304,8 @@
 
 - (IBAction)saveDocument:(id)sender
 {
-   //ANSLog(@"SAVY?");
+   NSError *error;
+   [[self managedObjectContext] save:&error];
 }
 - (IBAction)saveDocumentTo:(id)sender
 {

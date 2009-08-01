@@ -12,6 +12,8 @@
 #import "XMLController.h"
 #import "PrefsController.h"
 
+#import "NSManagedObjectContext-helper.h"
+
 #import <Foundation/NSFileManager.h>
 
 // Managed Objects
@@ -75,7 +77,7 @@
 - (void)dealloc
 {
    //ANSLog(@"");
-   NSLog(@"SessionController: deallocating");      
+   //NSLog(@"SessionController: deallocating");      
    
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc removeObserver:self];
@@ -126,7 +128,6 @@ inManagedObjectContext:(NSManagedObjectContext *)context
  
    [self initNmapController];   
 
-//   [session retain];
    return session;
 }
 
@@ -137,12 +138,12 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 {
    Profile *profile = [s profile];
    
-   // Make sure profile is a copied profile
-   if ([[profile name] hasPrefix:@"Copy"] == NO)
-   {
-      profile = [[self copyProfile:profile] autorelease];
-      s.profile = profile;
-   }
+//   // Make sure profile is a copied profile
+//   if ([[profile name] hasPrefix:@"Copy"] == NO)
+//   {
+//      profile = [[self copyProfile:profile] autorelease];
+//      s.profile = profile;
+//   }
 
    self.session = s;
    self.sessionUUID = [s UUID];
@@ -159,23 +160,12 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 }
 
 // -------------------------------------------------------------------------------
-//	copyProfile: Return a copy of the profile
+//	copyProfile: Return a copy of the profile, filed under the hidden "Saved Sessions" folder
 // -------------------------------------------------------------------------------
 - (Profile *)copyProfile:(Profile *)profile
-{
-   NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];   
-   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Profile"    
-                                             inManagedObjectContext:[profile managedObjectContext]];
-   [request setEntity:entity];
-
-   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", @"Saved Sessions"];   
-   [request setPredicate:predicate];
-
-   NSError *error = nil;   
-   NSArray *array = [[profile managedObjectContext] executeFetchRequest:request error:&error];   
-   
-//   NSArray *array = [[profile managedObjectContext] fetchObjectsForEntityName:@"Profile" 
-//                                                             withPredicate:@"name == 'Saved Sessions'"];
+{   
+   NSArray *array = [[profile managedObjectContext] fetchObjectsForEntityName:@"Profile" 
+                                                             withPredicate:@"name == 'Saved Sessions'"];
    
    // Saved Sessions Folder
    Profile *savedSessions = [array lastObject];
@@ -214,7 +204,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 }
 
 // -------------------------------------------------------------------------------
-//	initNmapController
+//	initNmapController: Initialize an Nmap Controller for this Session Controller
 // -------------------------------------------------------------------------------
 - (void)initNmapController
 {
@@ -256,7 +246,6 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    self.isRunning = TRUE;
    [session setStatus:@"Running"];
    
-   // TODO: WORK IN PROGRESS
    // Setup a timer to read the progress
    resultsTimer = [[NSTimer scheduledTimerWithTimeInterval:0.8
                                              target:self
@@ -266,17 +255,14 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    
    [nmapController startScan];
 
-//   // Call XMLController with session directory and managedObjectContext
-//   [xmlController parseXMLFile:sessionOutputFile inSession:session];
+//   // DEBUGGING!
+//   //[xmlController parseXMLFile:sessionOutputFile inSession:session];
+//   [self successfulRunNotification:nil];
 }
 
 // -------------------------------------------------------------------------------
 //	readProgress: Called by the resultsTimer.  Parses nmap-output.xml for 'taskprogress'
 //               to update the status bar in the Sessions Drawer.
-//
-//               TODO: Need to add synchronization to this function.  Sometimes it
-//                     gets called after the completion notification from NmapController
-//                     is received.
 // -------------------------------------------------------------------------------
 - (void)readProgress:(NSTimer *)aTimer
 {
@@ -316,10 +302,19 @@ inManagedObjectContext:(NSManagedObjectContext *)context
          
          if ((a1 != nil) && (a2 != nil))
          {
-            [session setStatus:[a objectAtIndex:0]];
-            [session setProgress:[NSNumber numberWithFloat:[[a objectAtIndex:1] floatValue]]];
+            // If notifications have already hit, no need to update status
+            if ( ([[session status] isEqualToString:@"Done"]) ||
+                 ([[session status] isEqualToString:@"Aborted"])
+               )
+            {
+               return;
+            }
+            else
+            {   
+               [session setStatus:[a objectAtIndex:0]];
+               [session setProgress:[NSNumber numberWithFloat:[[a objectAtIndex:1] floatValue]]];
+            }
          }
-   //      //ANSLog(@"%@ \\ %@", [a objectAtIndex:0], [a objectAtIndex:1]);      
       }
    }
 }
@@ -349,19 +344,20 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 //	successfulRunNotification: NmapController notifies us that the NTask has completed.
 // -------------------------------------------------------------------------------
 - (void)successfulRunNotification: (NSNotification *)notification
-{
+{    
    @synchronized(lock)
-   {
+   {      
       // Invalidate the progess timer
       [resultsTimer invalidate];
       
       // Call XMLController with session directory and managedObjectContext
+      [session setStatus:@"Parsing output"];
       [xmlController parseXMLFile:sessionOutputFile inSession:session];      
-      NSLog(@"Done");
+
       self.isRunning = FALSE;
       [session setStatus:@"Done"];
       [session setProgress:[NSNumber numberWithFloat:100]];   
-      
+
       // Set up "Console" pointers
       NSString *nmapOutputStdout = [sessionOutputFile stringByReplacingOccurrencesOfString:@"nmap-output.xml" 
                                                                                 withString:@"nmap-stdout.txt"];
@@ -384,15 +380,14 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 - (void)abortedRunNotification: (NSNotification *)notification
 {
    @synchronized(lock)
-   {
-      //ANSLog(@"Aborting %@", sessionUUID);      
+   {       
       // Invalidate the progess timer
       [resultsTimer invalidate];   
 
       self.isRunning = FALSE;
       [session setStatus:@"Aborted"];
       [session setProgress:[NSNumber numberWithFloat:0]];
-         
+
       if (deleteAfterAbort == TRUE)
       {            
          NSManagedObjectContext *context = [session managedObjectContext];
@@ -402,7 +397,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
       // Send notification to SessionManager that session is complete
       NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
       [nc postNotificationName:@"SCabortedRun" object:self];         
-   }
+   }         
 }
 
 // -------------------------------------------------------------------------------
@@ -436,7 +431,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 }   
 
 // -------------------------------------------------------------------------------
-//	stringWithUUID
+//	stringWithUUID: Returns a unique identifier for Session.  
+//                 This helps avoid conflicts when creating session directories.
 // -------------------------------------------------------------------------------
 + (NSString *)stringWithUUID 
 {

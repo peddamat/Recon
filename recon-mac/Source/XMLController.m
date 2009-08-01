@@ -111,6 +111,7 @@
    {
       [temporaryContext save:&error];
       [[session managedObjectContext] refreshObject:session mergeChanges:NO];
+      [[session managedObjectContext] save:&error];
    }
 }
 
