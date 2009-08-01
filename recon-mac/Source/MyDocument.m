@@ -206,20 +206,32 @@
 // -------------------------------------------------------------------------------
 //	updateSupportFolder: If the user updates the output folder in the Prefs Controller
 //                      we've gotta relocate the Persistent Store.
-//
-//                      TODO: ManagedObjectContext isn't being updated properly...
 // -------------------------------------------------------------------------------
 - (void)updateSupportFolder:(NSNotification *)notification
 {
    NSError *error;   
+   
+   [[self managedObjectContext] save:&error];
+   
    NSURL *url = [NSURL fileURLWithPath: [[prefsController reconSupportFolder]
                                          stringByAppendingPathComponent: @"Library.sessions"]];       
+   
+   // Grab store coordinator
+   NSPersistentStoreCoordinator *currentPersistentStoreCoordinator =
+                                 [[self managedObjectContext] persistentStoreCoordinator];
+   
+   // Grab current persistent store
+   NSArray *persistentStores = [currentPersistentStoreCoordinator persistentStores];
+   
+   // Remove current persistent store
+   [currentPersistentStoreCoordinator removePersistentStore:[persistentStores lastObject] error:&error];
    
    // Set a custom Persistent Store location
    [self configurePersistentStoreCoordinatorForURL:url ofType:NSSQLiteStoreType error:&error];              
    
    // Add some default profiles   
    [self addDefaultProfiles];   
+   [self expandProfileView];
    
    // Load queued sessions in the persistent store into session manager
    [self addQueuedSessions];   
