@@ -80,8 +80,8 @@
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc removeObserver:self];
       
-//   [standardOutput release];
-//   [standardError release];
+   [standardOutput release];
+   [standardError release];
    [outputFilePath release];   
    [task release];
    

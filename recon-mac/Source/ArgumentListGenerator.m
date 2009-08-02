@@ -155,10 +155,6 @@
 
 - (void)dealloc
 {
-   [nmapArgsBool release];
-   [nmapArgsString release];
-   [nmapArgsBoolReverse release];
-   [nmapArgsStringReverse release];
    [super dealloc];
 }
 

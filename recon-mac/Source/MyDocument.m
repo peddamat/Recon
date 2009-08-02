@@ -448,7 +448,7 @@ static float vigourOfShake = 0.01f;
       }
 
       // TODO: Why for thou crasheth?
-//      [a release];
+      [a release];
    }
 }
 

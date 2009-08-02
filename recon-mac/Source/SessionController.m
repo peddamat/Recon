@@ -127,6 +127,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    self.nmapArguments = [a convertProfileToArgs:profile withTarget:sessionTarget withOutputFile:sessionOutputFile];   
 
    [self initNmapController];   
+   
+   [a release];
 
    return session;
 }
@@ -155,6 +157,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    self.nmapArguments = [a convertProfileToArgs:profile withTarget:[s target] withOutputFile:sessionOutputFile];   
 
    [self initNmapController];   
+   
+   [a release];
    
    return session;  
 }

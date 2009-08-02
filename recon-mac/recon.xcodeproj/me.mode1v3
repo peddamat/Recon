@@ -280,7 +280,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>4</integer>
+									<integer>10</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -337,7 +337,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>8CD983101025404D00492108</string>
+										<string>8CD983351025485F00492108</string>
 										<key>history</key>
 										<array>
 											<string>8C79EDAC10028F6300A4648B</string>
@@ -378,7 +378,6 @@
 											<string>8CC73CC410228E2000296388</string>
 											<string>8CC73CF110228F7F00296388</string>
 											<string>8CC73D061022914000296388</string>
-											<string>8CC73D071022914000296388</string>
 											<string>8CC73D321022AB3A00296388</string>
 											<string>8CD5E84E10242EAF002FBDFA</string>
 											<string>8CD5E92C1024548E002FBDFA</string>
@@ -391,12 +390,13 @@
 											<string>8CD981D11024F49300492108</string>
 											<string>8CD981EC1024F65B00492108</string>
 											<string>8CD982051024F82300492108</string>
-											<string>8CD982F910253FE200492108</string>
 											<string>8CD982FA10253FE200492108</string>
 											<string>8CD982FB10253FE200492108</string>
 											<string>8CD982FC10253FE200492108</string>
 											<string>8CD9830D1025404D00492108</string>
-											<string>8CD9830E1025404D00492108</string>
+											<string>8CD98317102546E400492108</string>
+											<string>8CD9832A1025475E00492108</string>
+											<string>8CD9832B1025475E00492108</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -489,6 +489,14 @@
 											<string>8CD9830110253FE200492108</string>
 											<string>8CD9830210253FE200492108</string>
 											<string>8CD9830F1025404D00492108</string>
+											<string>8CD9831A102546E400492108</string>
+											<string>8CD9831B102546E400492108</string>
+											<string>8CD9831C102546E400492108</string>
+											<string>8CD9831D102546E400492108</string>
+											<string>8CD9831E102546E400492108</string>
+											<string>8CD9831F102546E400492108</string>
+											<string>8CD9832C1025475E00492108</string>
+											<string>8CD9832D1025475E00492108</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -950,7 +958,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MyDocument.m</string>
+										<string>SessionController.m</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
