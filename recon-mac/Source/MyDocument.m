@@ -5,13 +5,17 @@
 //  Created by Sumanth Peddamatham on 7/1/09.
 //  Copyright bafoontecha.com 2009 . All rights reserved.
 //
+#import <Cocoa/Cocoa.h>
+#import <QuartzCore/CoreAnimation.h>
 
 #import "MyDocument.h"
 #import "SessionManager.h"
 #import "SessionController.h"
 #import "ArgumentListGenerator.h"
 
+// Helper categories from the interwebs
 #import "NSManagedObjectContext-helper.h"
+#import "NSTreeController-DMExtensions.h"
 
 #import "Host.h"
 #import "Port.h"
@@ -85,7 +89,7 @@
 - (void)windowControllerDidLoadNib:(NSWindowController *)windowController 
 {
    [super windowControllerDidLoadNib:windowController];
-   
+      
    self.selectedSetting = 0;
    self.selectedResult = 0;
 
@@ -211,8 +215,6 @@
 {
    NSError *error;   
    
-   [[self managedObjectContext] save:&error];
-   
    NSURL *url = [NSURL fileURLWithPath: [[prefsController reconSupportFolder]
                                          stringByAppendingPathComponent: @"Library.sessions"]];       
    
@@ -222,9 +224,15 @@
    
    // Grab current persistent store
    NSArray *persistentStores = [currentPersistentStoreCoordinator persistentStores];
+
+   // If this isn't the first time running Recon, clean up...
+   if ([persistentStores count] != 0)
+   {
+      [[self managedObjectContext] save:&error];
    
-   // Remove current persistent store
-   [currentPersistentStoreCoordinator removePersistentStore:[persistentStores lastObject] error:&error];
+      // Remove current persistent store
+      [currentPersistentStoreCoordinator removePersistentStore:[persistentStores lastObject] error:&error];
+   }
    
    // Set a custom Persistent Store location
    [self configurePersistentStoreCoordinatorForURL:url ofType:NSSQLiteStoreType error:&error];              
@@ -255,7 +263,26 @@
 // -------------------------------------------------------------------------------
 - (void)finishFirstRun:(NSNotification *)notification
 {
+   NSLog(@"Finish first run");
    
+   // Load up Persistent Store
+   NSError *error;
+   NSURL *url = [NSURL fileURLWithPath: [[prefsController reconSupportFolder]
+                                         stringByAppendingPathComponent: @"Library.sessions"]];       
+   
+   // Set a custom Persistent Store location
+   [self configurePersistentStoreCoordinatorForURL:url ofType:NSSQLiteStoreType error:&error];              
+   
+   // Add some default scanning profiles   
+   [self addDefaultProfiles];   
+   
+   // Load queued sessions in the persistent store into session manager
+   [self addQueuedSessions];
+   
+   [profilesDrawer close];
+   [sessionsDrawer close];
+   
+   // Expand profile view hack
    [self performSelector:@selector(expandProfileView) withObject:self afterDelay:0.1];            
    [self performSelector:@selector(expandDrawers) withObject:self afterDelay:0.5];                  
 }
@@ -336,6 +363,28 @@
    [interfacesPopUp selectItemAtIndex:0];   
 }
 
+static int numberOfShakes = 8;
+static float durationOfShake = 0.5f;
+static float vigourOfShake = 0.01f;
+// Shaker, courtesy of http://www.cimgf.com/2008/02/27/core-animation-tutorial-window-shake-effect/
+- (CAKeyframeAnimation *)shakeAnimation:(NSRect)frame
+{
+   CAKeyframeAnimation *shakeAnimation = [CAKeyframeAnimation animation];
+	
+   CGMutablePathRef shakePath = CGPathCreateMutable();
+   CGPathMoveToPoint(shakePath, NULL, NSMinX(frame), NSMinY(frame));
+	int index;
+	for (index = 0; index < numberOfShakes; ++index)
+	{
+		CGPathAddLineToPoint(shakePath, NULL, NSMinX(frame) - frame.size.width * vigourOfShake, NSMinY(frame));
+		CGPathAddLineToPoint(shakePath, NULL, NSMinX(frame) + frame.size.width * vigourOfShake, NSMinY(frame));
+	}
+   CGPathCloseSubpath(shakePath);
+   shakeAnimation.path = shakePath;
+   shakeAnimation.duration = durationOfShake;
+   return shakeAnimation;
+}
+
 #pragma mark -
 #pragma mark SessionManager methods
 // -------------------------------------------------------------------------------
@@ -387,15 +436,19 @@
       // Flash textfield to indicate entry error
       else
       {
-         nmapErrorCount = 1.0;
-         nmapErrorTimer = [[NSTimer scheduledTimerWithTimeInterval:0.05
-                                                   target:self
-                                                 selector:@selector(indicateEntryError:)
-                                                 userInfo:nil
-                                                  repeats:YES] retain]; 
+         [nmapCommandTextField setAnimations:[NSDictionary dictionaryWithObject:[self shakeAnimation:[nmapCommandTextField frame]] forKey:@"frameOrigin"]];
+         [[nmapCommandTextField animator] setFrameOrigin:[nmapCommandTextField frame].origin];
+      
+//         nmapErrorCount = 1.0;
+//         nmapErrorTimer = [[NSTimer scheduledTimerWithTimeInterval:0.07
+//                                                   target:self
+//                                                 selector:@selector(indicateEntryError:)
+//                                                 userInfo:nil
+//                                                  repeats:YES] retain]; 
       }
 
-      [a release];
+      // TODO: Why for thou crasheth?
+//      [a release];
    }
 }
 
@@ -427,7 +480,7 @@
 //	processQueue: Begin processing session queue.
 // -------------------------------------------------------------------------------
 - (IBAction)processQueue:(id)sender
-{   
+{  
    [sessionManager processQueue];
 }
 
@@ -617,13 +670,9 @@
                                            inManagedObjectContext:[self managedObjectContext]]; 
    [profile setValue: @"New Profile" forKey: @"name"]; 
    [profile setValue:profileParent forKey:@"parent"];
-
-//   [profileController editColumn:0 row:1 withEvent:nil select:YES];
    
    // Expand the profiles window
-//   [profilesOutlineView expandItem:nil expandChildren:YES];   
-   [profileController rearrangeObjects];
-   [[self managedObjectContext] processPendingChanges];
+   [profilesOutlineView expandItem:nil expandChildren:YES];   
 }
 
 // -------------------------------------------------------------------------------

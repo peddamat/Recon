@@ -12,8 +12,8 @@
 
    @property (readwrite, retain) NSTask *task;   
 
-   @property (readwrite, retain) NSMutableData *standardOutput;
-   @property (readwrite, retain) NSMutableData *standardError;
+   @property (readwrite, assign) NSMutableData *standardOutput;
+   @property (readwrite, assign) NSMutableData *standardError;
    @property (readwrite, retain) NSString *outputFilePath;
    @property (readwrite, assign) BOOL hasRun;
 
@@ -44,8 +44,8 @@
       [task setStandardOutput:[NSPipe pipe]];
       [task setStandardError:[NSPipe pipe]];   
       
-      self.standardOutput = [[[NSMutableData alloc] init] autorelease];
-      self.standardError = [[[NSMutableData alloc] init] autorelease];
+      self.standardOutput = [[NSMutableData alloc] init];
+      self.standardError = [[NSMutableData alloc] init];
             
       NSFileHandle *standardOutputFile = [[task standardOutput] fileHandleForReading];
       NSFileHandle *standardErrorFile = [[task standardError] fileHandleForReading];

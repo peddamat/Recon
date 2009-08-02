@@ -42,6 +42,9 @@
 		8CC32794100CDFE400483939 /* NetstatConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC32793100CDFE400483939 /* NetstatConnection.m */; };
 		8CC329D1100DF9D700483939 /* BonjourListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC329D0100DF9D700483939 /* BonjourListener.m */; };
 		8CC73CFE102290F100296388 /* NSManagedObjectContext-helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC73CFD102290F100296388 /* NSManagedObjectContext-helper.m */; };
+		8CD980E61024BFA200492108 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD980E41024BFA200492108 /* Quartz.framework */; };
+		8CD980E71024BFA200492108 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD980E51024BFA200492108 /* QuartzCore.framework */; };
+		8CD9819A1024F3E100492108 /* NSTreeController-DMExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD981991024F3E100492108 /* NSTreeController-DMExtensions.m */; };
 		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */; settings = {ATTRIBUTES = (); }; };
@@ -137,6 +140,10 @@
 		8CC329CF100DF9D700483939 /* BonjourListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BonjourListener.h; path = Source/BonjourListener.h; sourceTree = "<group>"; };
 		8CC329D0100DF9D700483939 /* BonjourListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BonjourListener.m; path = Source/BonjourListener.m; sourceTree = "<group>"; };
 		8CC73CFD102290F100296388 /* NSManagedObjectContext-helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext-helper.m"; path = "Source/NSManagedObjectContext-helper.m"; sourceTree = "<group>"; };
+		8CD980E41024BFA200492108 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
+		8CD980E51024BFA200492108 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		8CD981981024F3E100492108 /* NSTreeController-DMExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSTreeController-DMExtensions.h"; path = "Source/NSTreeController-DMExtensions.h"; sourceTree = "<group>"; };
+		8CD981991024F3E100492108 /* NSTreeController-DMExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTreeController-DMExtensions.m"; path = "Source/NSTreeController-DMExtensions.m"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -149,6 +156,8 @@
 				8C79F2EE10033DF200A4648B /* Growl.framework in Frameworks */,
 				8CC32789100CDCA700483939 /* Security.framework in Frameworks */,
 				8C4163861010D6310066A4F8 /* BWToolkitFramework.framework in Frameworks */,
+				8CD980E61024BFA200492108 /* Quartz.framework in Frameworks */,
+				8CD980E71024BFA200492108 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +227,8 @@
 				8C79E2B30FFCF0FF00A4648B /* PrefsController.m */,
 				8C79F30910033EF200A4648B /* SPGrowlController.h */,
 				8C79F30A10033EF200A4648B /* SPGrowlController.m */,
+				8CD981981024F3E100492108 /* NSTreeController-DMExtensions.h */,
+				8CD981991024F3E100492108 /* NSTreeController-DMExtensions.m */,
 				8C7E9C731014D34E00762319 /* NSManagedObjectContext-helper.h */,
 				8CC73CFD102290F100296388 /* NSManagedObjectContext-helper.m */,
 				8C55E41E100524A5002F5013 /* NSTask+OneLineTasksWithOutput.m */,
@@ -254,6 +265,8 @@
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8CD980E41024BFA200492108 /* Quartz.framework */,
+				8CD980E51024BFA200492108 /* QuartzCore.framework */,
 				1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */,
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
@@ -412,6 +425,7 @@
 				8CAA7D8A101CF83E00EF43A3 /* IpIdSeqValue.m in Sources */,
 				8CAA7DEA101D037800EF43A3 /* Port_Script.m in Sources */,
 				8CC73CFE102290F100296388 /* NSManagedObjectContext-helper.m in Sources */,
+				8CD9819A1024F3E100492108 /* NSTreeController-DMExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

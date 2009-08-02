@@ -125,7 +125,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 
    // Convert selected profile to nmap arguments
    self.nmapArguments = [a convertProfileToArgs:profile withTarget:sessionTarget withOutputFile:sessionOutputFile];   
- 
+
    [self initNmapController];   
 
    return session;
@@ -153,7 +153,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    // Convert selected profile to nmap arguments   
    ArgumentListGenerator *a = [[ArgumentListGenerator alloc] init];
    self.nmapArguments = [a convertProfileToArgs:profile withTarget:[s target] withOutputFile:sessionOutputFile];   
-   
+
    [self initNmapController];   
    
    return session;  
@@ -316,6 +316,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
             }
          }
       }
+      
+      [aString release];
    }
 }
 

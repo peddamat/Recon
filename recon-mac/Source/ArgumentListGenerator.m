@@ -184,7 +184,7 @@
    NSNumber *numYes = [NSNumber numberWithInt:0];
 
    // Array to store generated argument list
-   NSMutableArray *nmapArgs = [[NSMutableArray alloc] init];
+   NSMutableArray *nmapArgs = [[[NSMutableArray alloc] init] autorelease];
 
    // First iterate through boolean arguments
    for (NSString *dictKey in nmapArgsBool)
