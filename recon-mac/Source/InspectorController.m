@@ -184,11 +184,40 @@
                                                              withPredicate:@"name = 'Quick Scan'"];
    Profile *profile = [array lastObject];
    
+   // Grab default route using 'route' (HACKY)
+   // Prepare a task object
+   NSTask *localTask = [[NSTask alloc] init];
+   [localTask setLaunchPath:@"/bin/tcsh"];     // For some reason, using /bin/sh screws up the debug console   
+   [localTask setArguments:[NSArray arrayWithObjects: @"-c", @"route -n get default | grep gateway | tail -n 1 | awk '{print $2}'", nil]];
+   
+   // Create the pipe to read from
+   NSPipe *outPipe = [[NSPipe alloc] init];
+   [localTask setStandardOutput:outPipe];
+   [outPipe release];
+   
+   // Start the process
+   [localTask launch];
+   
+   // Read the output
+   NSData *data = [[outPipe fileHandleForReading]
+                   readDataToEndOfFile];
+   
+   // Make sure the localTask terminates normally
+   [localTask waitUntilExit];
+   [localTask release];
+   
+   // Convert to a string
+   NSString *defaultIp = [[NSString alloc] initWithData:data
+                                             encoding:NSUTF8StringEncoding];
+   
+   defaultIp = [defaultIp stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+   
    // Queue and launch the session
    Session *newSession =
    [sessionManager queueSessionWithProfile:profile 
-                                withTarget:[NSString stringWithFormat:@"192.168.0.1/%d",[self cidrForInterface:@"en0"]]];
-   
+//                                withTarget:[NSString stringWithFormat:@"192.168.0.1/%d",[self cidrForInterface:@"en0"]]];
+                                withTarget:[NSString stringWithFormat:@"%@/%d", defaultIp, [self cidrForInterface:@"en0"]]];
+      
    [sessionManager launchSession:newSession];      
 
 }
