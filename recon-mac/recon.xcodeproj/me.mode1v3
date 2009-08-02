@@ -280,9 +280,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>26</integer>
-									<integer>24</integer>
-									<integer>1</integer>
+									<integer>36</integer>
+									<integer>34</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -308,7 +307,7 @@
 							<real>244</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>340 55 1082 823 0 0 1440 878 </string>
+						<string>539 55 1082 823 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -326,7 +325,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>InspectorController.m</string>
+								<string>MyDocument.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -334,11 +333,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>InspectorController.m</string>
+										<string>MyDocument.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>8C16D2F0102565B700BC79DB</string>
+										<string>8C16D31110256A3700BC79DB</string>
 										<key>history</key>
 										<array>
 											<string>8C79EDAC10028F6300A4648B</string>
@@ -388,7 +387,6 @@
 											<string>8CD9819D1024F43200492108</string>
 											<string>8CD981D11024F49300492108</string>
 											<string>8CD981EC1024F65B00492108</string>
-											<string>8CD982051024F82300492108</string>
 											<string>8CD982FA10253FE200492108</string>
 											<string>8CD982FB10253FE200492108</string>
 											<string>8CD982FC10253FE200492108</string>
@@ -396,8 +394,9 @@
 											<string>8CD98317102546E400492108</string>
 											<string>8CD9832A1025475E00492108</string>
 											<string>8C16D2BD1025618800BC79DB</string>
-											<string>8C16D2E01025648A00BC79DB</string>
-											<string>8C16D2E11025648A00BC79DB</string>
+											<string>8C16D2FD1025676600BC79DB</string>
+											<string>8C16D308102569DC00BC79DB</string>
+											<string>8C16D309102569DC00BC79DB</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -466,6 +465,13 @@
 											<string>8C16D2DD102563C200BC79DB</string>
 											<string>8C16D2E21025648A00BC79DB</string>
 											<string>8C16D2E31025648A00BC79DB</string>
+											<string>8C16D2FF1025676600BC79DB</string>
+											<string>8C16D3051025684700BC79DB</string>
+											<string>8C16D3061025684700BC79DB</string>
+											<string>8C16D30A102569DC00BC79DB</string>
+											<string>8C16D30B102569DC00BC79DB</string>
+											<string>8C16D30C102569DC00BC79DB</string>
+											<string>8C16D30D102569DC00BC79DB</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -479,7 +485,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {794, 777}}</string>
 								<key>RubberWindowFrame</key>
-								<string>340 55 1082 823 0 0 1440 878 </string>
+								<string>539 55 1082 823 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -499,7 +505,7 @@
 								<key>Frame</key>
 								<string>{{0, 782}, {794, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>340 55 1082 823 0 0 1440 878 </string>
+								<string>539 55 1082 823 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -681,14 +687,16 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>8C16D2FA1025666100BC79DB</string>
+		<string>8C16D2FB1025666100BC79DB</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>8C79E12C0FFBB30500A4648B</string>
 		<string>/Users/me/Source/Obj-C/recon-mac/recon.xcodeproj</string>
-		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
-	<string>340 55 1082 823 0 0 1440 878 </string>
+	<string>539 55 1082 823 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -1057,7 +1065,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

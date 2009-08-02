@@ -81,6 +81,7 @@ extern NSString * const BAFSavedSessionsDirectory;
    
    IBOutlet NSTableView *portsTableView;   
    IBOutlet NSTableView *resultsPortsTableView;   
+   IBOutlet NSTableView *inspectorResultsPortsTableView;  // TODO: Move this to InspectorController.h
    IBOutlet NSTableView *osesTableView;      
    IBOutlet NSArrayController *portsInHostController;      
    

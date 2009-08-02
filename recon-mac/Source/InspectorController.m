@@ -207,8 +207,8 @@
    [localTask release];
    
    // Convert to a string
-   NSString *defaultIp = [[NSString alloc] initWithData:data
-                                             encoding:NSUTF8StringEncoding];
+   NSString *defaultIp = [[[NSString alloc] initWithData:data
+                                             encoding:NSUTF8StringEncoding] autorelease];
    
    defaultIp = [defaultIp stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
    
@@ -219,7 +219,6 @@
                                 withTarget:[NSString stringWithFormat:@"%@/%d", defaultIp, [self cidrForInterface:@"en0"]]];
       
    [sessionManager launchSession:newSession];      
-
 }
 
 - (IBAction)checkForServices:(id)sender

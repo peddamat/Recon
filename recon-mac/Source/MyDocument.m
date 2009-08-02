@@ -172,6 +172,10 @@
    [resultsPortsTableView setTarget:self];
    [resultsPortsTableView setDoubleAction:@selector(resultsPortsTableDoubleClick)];   
 
+   // TODO: Move this to Inspector Controller!!!
+   [inspectorResultsPortsTableView setTarget:self];
+   [inspectorResultsPortsTableView setDoubleAction:@selector(resultsPortsTableDoubleClick)];   
+   
    // Populate network interfaces Popup Button
    [self getNetworkInterfaces];
    [self populateInterfacePopUp];   
@@ -307,7 +311,7 @@
 // -------------------------------------------------------------------------------
 - (void)awakeFromNib
 {
-   //ANSLog(@"MyDocument: awakeFromNib!");
+   //NSLog(@"MyDocument: awakeFromNib!");
 }
 
 // -------------------------------------------------------------------------------
@@ -836,7 +840,7 @@ static float vigourOfShake = 0.01f;
 
 - (IBAction)sessionDrawerRun:(id)sender
 {
-   //ANSLog(@"MyDocument: launching session");
+   NSLog(@"MyDocument: launching session");
    NSArray *selectedSessions = [sessionsController selectedObjects];
    
    if ([selectedSessions count] > 1)
