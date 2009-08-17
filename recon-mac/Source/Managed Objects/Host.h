@@ -2,7 +2,7 @@
 //  Host.h
 //  recon
 //
-//  Created by Sumanth Peddamatham on 8/15/09.
+//  Created by Sumanth Peddamatham on 8/17/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
@@ -12,6 +12,7 @@
 @class OsMatch;
 @class Port;
 @class TcpTsSeqValue;
+@class HostNote;
 @class Session;
 @class OsClass;
 @class IpIdSeqValue;
@@ -32,6 +33,7 @@
 @property (nonatomic, retain) NSString * uptimeLastBoot;
 @property (nonatomic, retain) NSString * tcpSequenceDifficulty;
 @property (nonatomic, retain) NSString * hostname;
+@property (nonatomic, retain) NSNumber * isSelected;
 @property (nonatomic, retain) NSSet* tcpsequencevalues;
 @property (nonatomic, retain) NSSet* osmatches;
 @property (nonatomic, retain) NSSet* ports;
@@ -65,8 +67,8 @@
 - (void)addTcptssequencevalues:(NSSet *)value;
 - (void)removeTcptssequencevalues:(NSSet *)value;
 
-- (void)addNotesObject:(NSManagedObject *)value;
-- (void)removeNotesObject:(NSManagedObject *)value;
+- (void)addNotesObject:(HostNote *)value;
+- (void)removeNotesObject:(HostNote *)value;
 - (void)addNotes:(NSSet *)value;
 - (void)removeNotes:(NSSet *)value;
 

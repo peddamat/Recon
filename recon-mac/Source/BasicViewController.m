@@ -117,6 +117,22 @@
       
       [self searchLocalNetwork:self];
    }
+   else if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Find printers"])
+   {
+      // Unselect all sessions to prevent users from thinking an old
+      // session's results are the new results
+      [sessionsArrayController setSelectionIndex:1000];
+      
+      [self searchLocalNetworkForPrinters:self];
+   }
+   else if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Find file"])
+   {
+      // Unselect all sessions to prevent users from thinking an old
+      // session's results are the new results
+      [sessionsArrayController setSelectionIndex:1000];
+      
+      [self searchLocalNetworkForShares:self];
+   }   
    else if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"See the machines"])
    {
       [self refreshConnectionsList:self];
@@ -201,11 +217,63 @@
    // Grab the Session Manager object
    SessionManager *sessionManager = [SessionManager sharedSessionManager];
 
-   // Grab the Quick Scan profile
+   // Grab the Quick Scan+ profile
    NSArray *array = [managedObjectContext fetchObjectsForEntityName:@"Profile"
-                                                             withPredicate:@"name = 'Quick Scan'"];
+                                                      withPredicate:@"name = 'Find Local+' AND parent.name LIKE[c] '_Internal Defaults'"];
    Profile *profile = [array lastObject];
    
+   NSString *defaultIp = [self grabDefaultIp];
+   
+   // Queue and launch the session
+   Session *newSession =
+   [sessionManager queueSessionWithProfile:profile 
+                                withTarget:[NSString stringWithFormat:@"%@/%d", defaultIp, [self cidrForInterface:@"en0"]]];
+      
+   [sessionManager launchSession:newSession];      
+}
+
+- (IBAction)searchLocalNetworkForPrinters:(id)sender;
+{
+   // Grab the Session Manager object
+   SessionManager *sessionManager = [SessionManager sharedSessionManager];
+   
+   // Grab the Quick Scan+ profile
+   NSArray *array = [managedObjectContext fetchObjectsForEntityName:@"Profile"
+                                                      withPredicate:@"name = 'Find Printers' AND parent.name LIKE[c] '_Internal Defaults'"];
+   Profile *profile = [array lastObject];
+   
+   NSString *defaultIp = [self grabDefaultIp];
+   
+   // Queue and launch the session
+   Session *newSession =
+   [sessionManager queueSessionWithProfile:profile 
+                                withTarget:[NSString stringWithFormat:@"%@/%d", defaultIp, [self cidrForInterface:@"en0"]]];
+   
+   [sessionManager launchSession:newSession];      
+}
+
+- (IBAction)searchLocalNetworkForShares:(id)sender;
+{
+   // Grab the Session Manager object
+   SessionManager *sessionManager = [SessionManager sharedSessionManager];
+   
+   // Grab the Quick Scan+ profile
+   NSArray *array = [managedObjectContext fetchObjectsForEntityName:@"Profile"
+                                                      withPredicate:@"name = 'Find Shares' AND parent.name LIKE[c] '_Internal Defaults'"];
+   Profile *profile = [array lastObject];
+   
+   NSString *defaultIp = [self grabDefaultIp];
+   
+   // Queue and launch the session
+   Session *newSession =
+   [sessionManager queueSessionWithProfile:profile 
+                                withTarget:[NSString stringWithFormat:@"%@/%d", defaultIp, [self cidrForInterface:@"en0"]]];
+   
+   [sessionManager launchSession:newSession];      
+}
+
+- (NSString *)grabDefaultIp
+{
    // Grab default route using 'route' (HACKY)
    // Prepare a task object
    NSTask *localTask = [[NSTask alloc] init];
@@ -230,16 +298,11 @@
    
    // Convert to a string
    NSString *defaultIp = [[[NSString alloc] initWithData:data
-                                             encoding:NSUTF8StringEncoding] autorelease];
+                                                encoding:NSUTF8StringEncoding] autorelease];
    
    defaultIp = [defaultIp stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
    
-   // Queue and launch the session
-   Session *newSession =
-   [sessionManager queueSessionWithProfile:profile 
-                                withTarget:[NSString stringWithFormat:@"%@/%d", defaultIp, [self cidrForInterface:@"en0"]]];
-      
-   [sessionManager launchSession:newSession];      
+   return defaultIp;
 }
 
 - (IBAction)checkForServices:(id)sender
@@ -249,7 +312,7 @@
    
    // Grab the Quick Scan profile
    NSArray *array = [managedObjectContext fetchObjectsForEntityName:@"Profile"
-                                                      withPredicate:@"name = 'Quick Scan'"];
+                                                      withPredicate:@"name = 'Find Local' AND parent.name LIKE[c] '_Internal Defaults'"];
    Profile *profile = [array lastObject];
    
    // Queue and launch the session

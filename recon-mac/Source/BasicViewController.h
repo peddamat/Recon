@@ -93,6 +93,9 @@
 int bitcount (unsigned int n);
 - (int)cidrForInterface:(NSString *)ifName;
 - (IBAction)searchLocalNetwork:(id)sender;
+- (IBAction)searchLocalNetworkForPrinters:(id)sender;
+- (IBAction)searchLocalNetworkForShares:(id)sender;
+- (NSString *)grabDefaultIp;
 - (IBAction)checkForServices:(id)sender;
 
 // See connected computers mode

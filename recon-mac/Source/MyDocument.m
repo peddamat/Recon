@@ -221,9 +221,12 @@
    [notesSideBarContent setFrame:[notesSideBarPlaceholder bounds]];
    [notesSideBarPlaceholder addSubview:notesSideBarContent];
    
-   [targetBarPlaceholder setWantsLayer:YES];
+//   [targetBarPlaceholder setWantsLayer:YES];
       
    closedDrawers = NO;
+   
+//   [self switchToAdvanced:nil];
+//   [notesDrawer close];
 }
 
 - (void)displayViewController:(ManagingViewController *)vc
@@ -440,9 +443,12 @@ static float vigourOfShake = 0.01f;
    [workspaceAdvancedContent setFrame:[workspacePlaceholder frame]];
    [[workspacePlaceholder animator] replaceSubview:[[workspacePlaceholder subviews] lastObject]
                                               with:workspaceAdvancedContent];
-      
-   [notesDrawer open];
-   [sessionsDrawer open];
+
+   if ([mainWindow isZoomed] == NO)
+   {
+      [notesDrawer open];
+      [sessionsDrawer open];
+   }
 }
 
 - (IBAction)switchToProfileEditor:(id)sender
@@ -519,7 +525,7 @@ static float vigourOfShake = 0.01f;
 //   if ( ([modeSwitchBar selectedSegment] == 1) || ([modeSwitchBar selectedSegment] == 2))
       sessionTarget = [[[[[targetBarPlaceholder subviews] lastObject] subviews] objectAtIndex:0] stringValue];
    
-   NSLog(@"%@", [[[targetBarPlaceholder subviews] lastObject] subviews]);
+//   NSLog(@"%@", [[[targetBarPlaceholder subviews] lastObject] subviews]);
    
    // Read the manual entry textfield, tokenize the string, and pull out
    //  arguments that start with '-', ie. nmap commands
@@ -655,16 +661,18 @@ static float vigourOfShake = 0.01f;
       if (count == 0)
       {
          NSManagedObjectContext *context = [self managedObjectContext]; 
-         Profile *profileParent = nil; 
+         Profile *profileParent = nil;
+         NSString *plistPath = nil;
+         NSArray *a = nil;
          
          // Add Defaults parent folder
          profileParent = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
          [profileParent setValue: @"Defaults" forKey: @"name"]; 
          [profileParent setIsEnabled:NO];            
 
-         // Add a few defaults         
-         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Default Profiles" ofType:@"plist"];                  
-         NSArray *a = [NSArray arrayWithContentsOfFile:plistPath];
+         // Add defaults         
+         plistPath = [[NSBundle mainBundle] pathForResource:@"Default Advanced Profiles" ofType:@"plist"];                  
+         a = [NSArray arrayWithContentsOfFile:plistPath];
          
          Profile *profile = nil; 
          
@@ -677,6 +685,22 @@ static float vigourOfShake = 0.01f;
          
          // TODO: add --version-light
          // TODO: add --script-all
+
+         // Add Defaults parent folder
+         profileParent = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+         [profileParent setValue: @"_Internal Defaults" forKey: @"name"]; 
+         [profileParent setIsEnabled:NO];            
+         
+         // Add defaults         
+         plistPath = [[NSBundle mainBundle] pathForResource:@"Default Basic Profiles" ofType:@"plist"];                  
+         a = [NSArray arrayWithContentsOfFile:plistPath];
+                  
+         for (id defaultProfile in a)
+         {
+            profile = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
+            [profile setValuesForKeysWithDictionary:defaultProfile];
+            [profile setValue:profileParent forKey:@"parent"];            
+         }         
          
          // Add Saved Sessions parent folder
          profileParent = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" inManagedObjectContext:context]; 
@@ -835,9 +859,10 @@ static float vigourOfShake = 0.01f;
     ([menuItem action] == @selector(sessionDrawerShowInFinder:))       
     )
    {
-//      NSInteger clickedRow = [sessionsTableView clickedRow];
-//      if (clickedRow == -1) {
-      if ([[sessionsArrayController selectionIndexes] count] == 0) {
+
+      if (([self clickedSessionInDrawer] == nil) &&
+         ([self selectedSessionInDrawer] == nil))
+      {
          enabled = NO;
       }
       else 
@@ -914,6 +939,12 @@ static float vigourOfShake = 0.01f;
    if ([mainWindow isZoomed] == NO)
    {
       HostNote *h = [notesInHostArrayController newObject];
+      
+      if (h == nil) {
+         NSBeep();
+         return;
+      }
+      
       h.date = [NSDate date];
       h.name = @"New Note";
       [notesInHostArrayController addObject:h];

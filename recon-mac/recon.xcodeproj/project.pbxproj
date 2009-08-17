@@ -33,10 +33,11 @@
 		8C55E43810052E72002F5013 /* SessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C55E43710052E72002F5013 /* SessionManager.m */; };
 		8C5613BE103628F00030B321 /* ColorGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5613BD103628F00030B321 /* ColorGradientView.m */; };
 		8C5613EA103638340030B321 /* NotesTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5613E9103638340030B321 /* NotesTableView.m */; };
-		8C5909F81038F8870074656C /* Default Profiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C5909F71038F8870074656C /* Default Profiles.plist */; };
+		8C5909F81038F8870074656C /* Default Basic Profiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C5909F71038F8870074656C /* Default Basic Profiles.plist */; };
 		8C590A6A103906D80074656C /* notepadTemplate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8C590A68103906D80074656C /* notepadTemplate.gif */; };
 		8C590A6B103906D80074656C /* twodocsTemplate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8C590A69103906D80074656C /* twodocsTemplate.gif */; };
 		8C5FF41F101B6F5B00856055 /* reconwithwall-darker-zoom.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8C5FF41E101B6F5B00856055 /* reconwithwall-darker-zoom.icns */; };
+		8C77C410103963CD003D6589 /* Default Advanced Profiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C77C40F103963CD003D6589 /* Default Advanced Profiles.plist */; };
 		8C79E1960FFBC09600A4648B /* XMLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E1920FFBC09600A4648B /* XMLController.m */; };
 		8C79E1970FFBC09600A4648B /* ArgumentListGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E1950FFBC09600A4648B /* ArgumentListGenerator.m */; };
 		8C79E2300FFC23D800A4648B /* SessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E22F0FFC23D800A4648B /* SessionController.m */; };
@@ -163,10 +164,11 @@
 		8C5613BD103628F00030B321 /* ColorGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorGradientView.m; path = Source/ColorGradientView.m; sourceTree = "<group>"; };
 		8C5613E8103638340030B321 /* NotesTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotesTableView.h; path = Source/NotesTableView.h; sourceTree = "<group>"; };
 		8C5613E9103638340030B321 /* NotesTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotesTableView.m; path = Source/NotesTableView.m; sourceTree = "<group>"; };
-		8C5909F71038F8870074656C /* Default Profiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Default Profiles.plist"; path = "Resources/Default Profiles.plist"; sourceTree = "<group>"; };
+		8C5909F71038F8870074656C /* Default Basic Profiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Default Basic Profiles.plist"; path = "Resources/Default Basic Profiles.plist"; sourceTree = "<group>"; };
 		8C590A68103906D80074656C /* notepadTemplate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = notepadTemplate.gif; path = Resources/notepadTemplate.gif; sourceTree = "<group>"; };
 		8C590A69103906D80074656C /* twodocsTemplate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = twodocsTemplate.gif; path = Resources/twodocsTemplate.gif; sourceTree = "<group>"; };
 		8C5FF41E101B6F5B00856055 /* reconwithwall-darker-zoom.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "reconwithwall-darker-zoom.icns"; path = "Resources/reconwithwall-darker-zoom.icns"; sourceTree = "<group>"; };
+		8C77C40F103963CD003D6589 /* Default Advanced Profiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Default Advanced Profiles.plist"; path = "Resources/Default Advanced Profiles.plist"; sourceTree = "<group>"; };
 		8C79E1920FFBC09600A4648B /* XMLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLController.m; path = Source/XMLController.m; sourceTree = "<group>"; };
 		8C79E1930FFBC09600A4648B /* XMLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLController.h; path = Source/XMLController.h; sourceTree = "<group>"; };
 		8C79E1940FFBC09600A4648B /* ArgumentListGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArgumentListGenerator.h; path = Source/ArgumentListGenerator.h; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C77C411103963D5003D6589 /* Property Lists */,
 				8C126DAF1037EA3900654B65 /* XIBs */,
 				8C3D299E102F76820007B87E /* Images */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
@@ -335,7 +338,6 @@
 				8C79F4C51003E3BA00A4648B /* Growl Registration Ticket.growlRegDict */,
 				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
 				8C5FF41E101B6F5B00856055 /* reconwithwall-darker-zoom.icns */,
-				8C5909F71038F8870074656C /* Default Profiles.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -388,6 +390,15 @@
 				8C3D2B63102FABD60007B87E /* iTerm.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8C77C411103963D5003D6589 /* Property Lists */ = {
+			isa = PBXGroup;
+			children = (
+				8C5909F71038F8870074656C /* Default Basic Profiles.plist */,
+				8C77C40F103963CD003D6589 /* Default Advanced Profiles.plist */,
+			);
+			name = "Property Lists";
 			sourceTree = "<group>";
 		};
 		8C79E4D50FFE9FA500A4648B /* Managed Objects */ = {
@@ -598,9 +609,10 @@
 				8C28A3081038BA4A005A7B7C /* notesDrawerTemplate.png in Resources */,
 				8C28A30C1038BD8D005A7B7C /* basicToolbarTemplate.png in Resources */,
 				8C28A3121038BFDB005A7B7C /* advancedToolbarTemplate.png in Resources */,
-				8C5909F81038F8870074656C /* Default Profiles.plist in Resources */,
+				8C5909F81038F8870074656C /* Default Basic Profiles.plist in Resources */,
 				8C590A6A103906D80074656C /* notepadTemplate.gif in Resources */,
 				8C590A6B103906D80074656C /* twodocsTemplate.gif in Resources */,
+				8C77C410103963CD003D6589 /* Default Advanced Profiles.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

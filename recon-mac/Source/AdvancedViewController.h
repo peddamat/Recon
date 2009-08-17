@@ -93,6 +93,8 @@
 
 @property (readonly) MyTerminalView *consoleOutputView;
 
+-(IBAction)submitEmailBugReport:(id)sender;
+
 - (void)createHostsMenu;
 - (void)createPortsInHostMenu;
 - (void)createPortsInSessionMenu;
@@ -119,5 +121,10 @@
 - (void)closeSessionsInternalView;
 
 - (IBAction)addNote:(id)sender;
+
+- (IBAction)hostsInSessionCheckAll:(id)sender;
+- (IBAction)hostsInSessionCheckNone:(id)sender;
+- (IBAction)hostsInSessionCheckSelected:(id)sender;
+- (IBAction)hostsInSessionQueueSelected:(id)sender;
 
 @end

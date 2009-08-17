@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="331"/>
+			<integer value="447"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -588,18 +588,11 @@
 									<reference key="NSOnImage" ref="385016679"/>
 									<reference key="NSMixedImage" ref="150129030"/>
 								</object>
-								<object class="NSMenuItem" id="933411382">
+								<object class="NSMenuItem" id="970959258">
 									<reference key="NSMenu" ref="1014831983"/>
-									<string key="NSTitle">SetUID Nmap</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="385016679"/>
-									<reference key="NSMixedImage" ref="150129030"/>
-								</object>
-								<object class="NSMenuItem" id="759195859">
-									<reference key="NSMenu" ref="1014831983"/>
-									<string key="NSTitle">Un-SetUID Nmap</string>
-									<string key="NSKeyEquiv"/>
+									<string key="NSTitle">Add Note to Host</string>
+									<string key="NSKeyEquiv">n</string>
+									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="385016679"/>
 									<reference key="NSMixedImage" ref="150129030"/>
@@ -614,11 +607,18 @@
 									<reference key="NSOnImage" ref="385016679"/>
 									<reference key="NSMixedImage" ref="150129030"/>
 								</object>
-								<object class="NSMenuItem" id="970959258">
+								<object class="NSMenuItem" id="933411382">
 									<reference key="NSMenu" ref="1014831983"/>
-									<string key="NSTitle">Add Note</string>
-									<string key="NSKeyEquiv">n</string>
-									<int key="NSKeyEquivModMask">1048576</int>
+									<string key="NSTitle">SetUID Nmap</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="385016679"/>
+									<reference key="NSMixedImage" ref="150129030"/>
+								</object>
+								<object class="NSMenuItem" id="759195859">
+									<reference key="NSMenu" ref="1014831983"/>
+									<string key="NSTitle">Un-SetUID Nmap</string>
+									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="385016679"/>
 									<reference key="NSMixedImage" ref="150129030"/>
@@ -671,15 +671,6 @@
 									<reference key="NSMenu" ref="200699227"/>
 									<string key="NSTitle">Advanced Mode</string>
 									<string type="base64-UTF8" key="NSKeyEquiv">75yFA</string>
-									<int key="NSKeyEquivModMask">1048576</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="385016679"/>
-									<reference key="NSMixedImage" ref="150129030"/>
-								</object>
-								<object class="NSMenuItem" id="679192596">
-									<reference key="NSMenu" ref="200699227"/>
-									<string key="NSTitle">Profile Editor</string>
-									<string type="base64-UTF8" key="NSKeyEquiv">75yGA</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="385016679"/>
@@ -1220,14 +1211,6 @@
 						<reference key="destination" ref="458637655"/>
 					</object>
 					<int key="connectionID">472</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">switchToProfileEditor:</string>
-						<reference key="source" ref="569835777"/>
-						<reference key="destination" ref="679192596"/>
-					</object>
-					<int key="connectionID">473</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1796,7 +1779,6 @@
 							<reference ref="622763339"/>
 							<reference ref="458637655"/>
 							<reference ref="1071079495"/>
-							<reference ref="679192596"/>
 							<reference ref="112522316"/>
 							<reference ref="502234385"/>
 							<reference ref="882485425"/>
@@ -1877,8 +1859,8 @@
 							<reference ref="933411382"/>
 							<reference ref="445261090"/>
 							<reference ref="759195859"/>
-							<reference ref="754237320"/>
 							<reference ref="970959258"/>
+							<reference ref="754237320"/>
 						</object>
 						<reference key="parent" ref="920185227"/>
 					</object>
@@ -1925,11 +1907,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">463</int>
 						<reference key="object" ref="443477960"/>
-						<reference key="parent" ref="200699227"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">470</int>
-						<reference key="object" ref="679192596"/>
 						<reference key="parent" ref="200699227"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -2123,7 +2100,6 @@
 					<string>461.IBPluginDependency</string>
 					<string>462.IBPluginDependency</string>
 					<string>463.IBPluginDependency</string>
-					<string>470.IBPluginDependency</string>
 					<string>476.IBPluginDependency</string>
 					<string>479.IBPluginDependency</string>
 					<string>485.IBPluginDependency</string>
@@ -2215,7 +2191,7 @@
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
-					<string>{{619, 593}, {243, 243}}</string>
+					<string>{{621, 593}, {243, 243}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2276,7 +2252,7 @@
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
-					<string>{{721, 523}, {250, 313}}</string>
+					<string>{{721, 543}, {250, 293}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2291,8 +2267,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{665, 693}, {201, 143}}</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{665, 693}, {203, 143}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2369,7 +2344,13 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addNote:</string>
 							<string>focusInputField:</string>
+							<string>hostsInSessionCheckAll:</string>
+							<string>hostsInSessionCheckNone:</string>
+							<string>hostsInSessionCheckSelected:</string>
+							<string>hostsInSessionQueueSelected:</string>
 							<string>modeSwitch:</string>
+							<string>segControlClicked:</string>
+							<string>submitEmailBugReport:</string>
 							<string>switchToConsole:</string>
 							<string>switchToHostsInSession:</string>
 							<string>switchToPortsInHost:</string>
@@ -2377,6 +2358,12 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -2404,6 +2391,7 @@
 							<string>notesInternalView</string>
 							<string>notesLabel</string>
 							<string>notesTableView</string>
+							<string>notesTextView</string>
 							<string>osesInSessionController</string>
 							<string>osesTableView</string>
 							<string>outputPlaceholder</string>
@@ -2411,6 +2399,7 @@
 							<string>portsInHostContextMenu</string>
 							<string>portsInHostController</string>
 							<string>portsInHostView</string>
+							<string>portsInSessionContextMenu</string>
 							<string>portsInSessionController</string>
 							<string>portsTableView</string>
 							<string>resultsPortsTableView</string>
@@ -2420,6 +2409,7 @@
 							<string>sessionsLabel</string>
 							<string>sessionsScrollView</string>
 							<string>sideBarAdvancedContent</string>
+							<string>sidebarSplitView</string>
 							<string>targetBarAdvancedContent</string>
 							<string>testy</string>
 							<string>workspaceAdvancedContent</string>
@@ -2439,7 +2429,8 @@
 							<string>NSArrayController</string>
 							<string>BWSplitView</string>
 							<string>NSTextField</string>
-							<string>NSTableView</string>
+							<string>NotesTableView</string>
+							<string>NSTextView</string>
 							<string>NSArrayController</string>
 							<string>NSTableView</string>
 							<string>NSView</string>
@@ -2447,6 +2438,7 @@
 							<string>NSMenu</string>
 							<string>NSArrayController</string>
 							<string>NSView</string>
+							<string>NSMenu</string>
 							<string>NSArrayController</string>
 							<string>NSTableView</string>
 							<string>NSTableView</string>
@@ -2456,6 +2448,7 @@
 							<string>NSTextField</string>
 							<string>NSScrollView</string>
 							<string>NSView</string>
+							<string>BWSplitView</string>
 							<string>NSView</string>
 							<string>NSButton</string>
 							<string>NSView</string>
@@ -2625,6 +2618,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Source/NSManagedObjectContext-helper.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NotesTableView</string>
+					<string key="superclassName">NSTableView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Source/NotesTableView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

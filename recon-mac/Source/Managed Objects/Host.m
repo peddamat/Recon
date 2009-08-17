@@ -2,7 +2,7 @@
 //  Host.m
 //  recon
 //
-//  Created by Sumanth Peddamatham on 8/15/09.
+//  Created by Sumanth Peddamatham on 8/17/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
@@ -12,6 +12,7 @@
 #import "OsMatch.h"
 #import "Port.h"
 #import "TcpTsSeqValue.h"
+#import "HostNote.h"
 #import "Session.h"
 #import "OsClass.h"
 #import "IpIdSeqValue.h"
@@ -30,6 +31,7 @@
 @dynamic uptimeLastBoot;
 @dynamic tcpSequenceDifficulty;
 @dynamic hostname;
+@dynamic isSelected;
 @dynamic tcpsequencevalues;
 @dynamic osmatches;
 @dynamic ports;

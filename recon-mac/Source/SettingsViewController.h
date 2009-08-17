@@ -8,6 +8,8 @@
 
 #import "ManagingViewController.h"
 
+@class Profile;
+
 @interface SettingsViewController : ManagingViewController {
    
    IBOutlet NSView *workspaceSettingsContent;   

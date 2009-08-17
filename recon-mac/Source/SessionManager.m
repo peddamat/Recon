@@ -80,7 +80,13 @@ static SessionManager *sharedSessionManager = nil;
    // Store a reference to the Session Controller
    [sessionControllerQueue setObject:newSessionController 
                           forKey:[newSessionController sessionUUID]];  
-      
+   
+   if ([sessionTarget length] > 150)
+   {
+      sessionTarget = [sessionTarget substringWithRange:NSMakeRange(0, 150)];
+      sessionTarget = [NSString stringWithFormat:@"%@...", sessionTarget];
+   }
+   
    // Fire off a Growl notification
 	[[SPGrowlController sharedGrowlController] 
     notifyWithTitle:@"Queued Nmap Session" 
@@ -115,6 +121,14 @@ static SessionManager *sharedSessionManager = nil;
    // Fire off a Growl notification
    if (notify == YES)
    {
+      NSString *sessionTarget = [newSession target];
+      
+      if ([sessionTarget length] > 150)
+      {
+         sessionTarget = [sessionTarget substringWithRange:NSMakeRange(0, 150)];
+         sessionTarget = [NSString stringWithFormat:@"%@...", sessionTarget];
+      }
+      
       [[SPGrowlController sharedGrowlController] 
        notifyWithTitle:@"Queued Nmap Session" 
        description:[NSString stringWithFormat: @"Target: %@", [session target]] 
@@ -155,10 +169,18 @@ static SessionManager *sharedSessionManager = nil;
    {
       if ([sc isRunning] == FALSE)
       {
+         NSString *sessionTarget = [[sc session] target];
+         
+         if ([sessionTarget length] > 150)
+         {
+            sessionTarget = [sessionTarget substringWithRange:NSMakeRange(0, 150)];
+            sessionTarget = [NSString stringWithFormat:@"%@...", sessionTarget];
+         }
+         
          // Growl notifier
          [[SPGrowlController sharedGrowlController] 
           notifyWithTitle:@"Starting Nmap Session" 
-          description:[NSString stringWithFormat: @"Target: %@", [[sc session] target]] 
+          description:[NSString stringWithFormat: @"Target: %@", sessionTarget] 
           notificationName:@"Connected"];    
          
          [sc startScan];
@@ -186,10 +208,18 @@ static SessionManager *sharedSessionManager = nil;
       // If the session isn't running, start it
       if([sc isRunning] == FALSE) 
       {
+         NSString *sessionTarget = [[sc session] target];
+         
+         if ([sessionTarget length] > 150)
+         {
+            sessionTarget = [sessionTarget substringWithRange:NSMakeRange(0, 150)];
+            sessionTarget = [NSString stringWithFormat:@"%@...", sessionTarget];
+         }
+         
          // Growl notifier
          [[SPGrowlController sharedGrowlController] 
           notifyWithTitle:@"Starting Nmap Session" 
-          description:[NSString stringWithFormat: @"Target: %@", [[sc session] target]] 
+          description:[NSString stringWithFormat: @"Target: %@", sessionTarget] 
           notificationName:@"Connected"];                     
          
          [sc startScan];
@@ -318,9 +348,17 @@ static SessionManager *sharedSessionManager = nil;
    Session *completedSelection = [sc session];
    [sessionsArrayController setSelectedObjects:[NSArray arrayWithObject:completedSelection]];   
    
+   NSString *sessionTarget = [completedSelection target];
+   
+   if ([sessionTarget length] > 150)
+   {
+      sessionTarget = [sessionTarget substringWithRange:NSMakeRange(0, 150)];
+      sessionTarget = [NSString stringWithFormat:@"%@...", sessionTarget];
+   }
+   
 	[[SPGrowlController sharedGrowlController] 
     notifyWithTitle:@"Session complete"                                                   
-    description:[NSString stringWithFormat: @"Target: %@", [completedSelection target]]     
+    description:[NSString stringWithFormat: @"Target: %@", sessionTarget]     
     notificationName:@"Connected"];     
    
    //ANSLog(@"SessionManager: Completed: %@\n\n", sessionUUID);   
@@ -343,9 +381,17 @@ static SessionManager *sharedSessionManager = nil;
    Session *completedSelection = [sc session];
    [sessionsArrayController setSelectedObjects:[NSArray arrayWithObject:completedSelection]];      
    
+   NSString *sessionTarget = [completedSelection target];
+   
+   if ([sessionTarget length] > 150)
+   {
+      sessionTarget = [sessionTarget substringWithRange:NSMakeRange(0, 150)];
+      sessionTarget = [NSString stringWithFormat:@"%@...", sessionTarget];
+   }
+   
 	[[SPGrowlController sharedGrowlController] 
     notifyWithTitle:@"Session aborted"                                                   
-    description:[NSString stringWithFormat: @"Target: %@", [completedSelection target]]     
+    description:[NSString stringWithFormat: @"Target: %@", sessionTarget]     
     notificationName:@"Connected"];    
    
    //ANSLog(@"SessionManager: Aborted run: %@\n\n", sessionUUID);
@@ -368,9 +414,17 @@ static SessionManager *sharedSessionManager = nil;
    Session *completedSelection = [sc session];
    [sessionsArrayController setSelectedObjects:[NSArray arrayWithObject:completedSelection]];      
    
+   NSString *sessionTarget = [completedSelection target];
+   
+   if ([sessionTarget length] > 150)
+   {
+      sessionTarget = [sessionTarget substringWithRange:NSMakeRange(0, 150)];
+      sessionTarget = [NSString stringWithFormat:@"%@...", sessionTarget];
+   }
+   
 	[[SPGrowlController sharedGrowlController] 
     notifyWithTitle:@"Session ended unsuccessfully"     
-    description:[NSString stringWithFormat: @"Target: %@", [completedSelection target]]     
+    description:[NSString stringWithFormat: @"Target: %@", sessionTarget]     
     notificationName:@"Connected"];            
    
    //ANSLog(@"SessionManager: Unsuccessfully run: %@\n\n", sessionUUID);

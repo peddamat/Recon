@@ -56,121 +56,67 @@
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>Quick Scan+</string>
+		<string>Find Local+</string>
 		<key>versionDetection</key>
+		<true/>
+		<key>enableAggressive</key>
 		<true/>
 		<key>timingTemplateTag</key>
 		<integer>4</integer>
 		<key>osDetection</key>
-		<true/>
-		<key>fastScan</key>
 		<true/>
 		<key>lastAccessDate</key>
 		<date>2009-08-17T03:02:33Z</date>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>Quick Scan</string>
-		<key>timingTemplateTag</key>
-		<integer>4</integer>
-		<key>fastScan</key>
+		<string>Find Printers</string>
+		<key>versionDetection</key>
 		<true/>
-		<key>lastAccessDate</key>
-		<date>2009-08-17T03:01:07Z</date>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>Ping Scan</string>
-		<key>nonTcpScanTag</key>
-		<integer>4</integer>
-		<key>icmpPing</key>
-		<true/>
-		<key>ackPing</key>
-		<true/>
-		<key>ackPingString</key>
-		<string>21,23,80,3389</string>
-		<key>lastAccessDate</key>
-		<date>2009-08-17T02:59:10Z</date>
-	</dict>
-	<dict>
-		<key>lastAccessDate</key>
-		<date>2009-08-17T02:59:10Z</date>
-		<key>name</key>
-		<string>Intense Scan-Ping</string>
-		<key>timingTemplateTag</key>
-		<integer>4</integer>
 		<key>enableAggressive</key>
-		<integer>1</integer>
-		<key>dontPing</key>
 		<true/>
-	</dict>
-	<dict>
-		<key>lastAccessDate</key>
-		<date>2009-08-17T02:59:10Z</date>
-		<key>name</key>
-		<string>Intense Scan+TCP</string>
 		<key>timingTemplateTag</key>
 		<integer>4</integer>
-		<key>enableAggressive</key>
-		<integer>1</integer>
-		<key>icmpPing</key>
+		<key>osDetection</key>
 		<true/>
 		<key>portsToScan</key>
 		<true/>
 		<key>portsToScanString</key>
-		<string>1-65535</string>
-		<key>synPing</key>
+		<string>21,23,80,280,515,631</string>
+		<key>scriptScan</key>
 		<true/>
-		<key>synPingString</key>
-		<string>22,25,80</string>
-		<key>ackPing</key>
-		<true/>
-		<key>ackPingString</key>
-		<string>21,23,80,3389</string>
+		<key>lastAccessDate</key>
+		<date>2009-08-17T03:02:33Z</date>
 	</dict>
 	<dict>
-		<key>lastAccessDate</key>
-		<date>2009-08-17T02:59:10Z</date>
 		<key>name</key>
-		<string>Intense Scan+UDP</string>
+		<string>Find Shares</string>
+		<key>versionDetection</key>
+		<true/>
+		<key>enableAggressive</key>
+		<true/>
 		<key>timingTemplateTag</key>
 		<integer>4</integer>
-		<key>enableAggressive</key>
-		<integer>1</integer>
-		<key>tcpScanTag</key>
-		<integer>5</integer>
-		<key>nonTcpScanTag</key>
-		<integer>1</integer>
-		<key>icmpPing</key>
+		<key>osDetection</key>
 		<true/>
-		<key>synPing</key>
+		<key>portsToScan</key>
 		<true/>
-		<key>synPingString</key>
-		<string>22,25,80</string>
-		<key>ackPing</key>
+		<key>portsToScanString</key>
+		<string>21,23,80,280,515,631</string>
+		<key>scriptScan</key>
 		<true/>
-		<key>ackPingString</key>
-		<string>21,23,80,3389</string>
+		<key>lastAccessDate</key>
+		<date>2009-08-17T03:02:33Z</date>
 	</dict>
 	<dict>
-		<key>lastAccessDate</key>
-		<date>2009-08-17T02:59:10Z</date>
 		<key>name</key>
-		<string>Intense Scan</string>
+		<string>Find Local</string>
+		<key>fastScan</key>
+		<true/>
 		<key>timingTemplateTag</key>
 		<integer>4</integer>
-		<key>enableAggressive</key>
-		<integer>1</integer>
-		<key>icmpPing</key>
-		<true/>
-		<key>synPing</key>
-		<true/>
-		<key>synPingString</key>
-		<string>22,25,80</string>
-		<key>ackPing</key>
-		<true/>
-		<key>ackPingString</key>
-		<string>21,23,80,3389</string>
+		<key>lastAccessDate</key>
+		<date>2009-08-17T03:02:33Z</date>
 	</dict>
 </array>
 </plist>

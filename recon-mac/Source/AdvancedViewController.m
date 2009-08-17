@@ -587,18 +587,24 @@
 //                            console...
 // -------------------------------------------------------------------------------
 - (void)receivedStringFromConsole:(NSNotification *)notification
-{
-   NSLog(@"AdvancedViewController: receivedStringFromConsole: %@", [notification object]);
-   
+{   
    NSString *selectedText = [notification object];
+   selectedText = [selectedText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+   selectedText = [selectedText stringByTrimmingCharactersInSet:[NSCharacterSet punctuationCharacterSet]];         
    
    // Only grab the first line of the selected text
-   NSArray *line = [selectedText componentsSeparatedByString:@"\n"];
+//   NSArray *line = [selectedText componentsSeparatedByString:@"\n"];
    
    // Prepend the string to the target combo box
    
    NSString *currentString = [sessionTarget stringValue];
-   currentString = [NSString stringWithFormat:@"%@, %@", selectedText, currentString];
+   currentString = [currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+   currentString = [currentString stringByTrimmingCharactersInSet:[NSCharacterSet punctuationCharacterSet]];      
+   
+   if ([currentString isEqualToString:@""])
+      currentString = [NSString stringWithFormat:@"%@", selectedText];
+   else
+      currentString = [NSString stringWithFormat:@"%@, %@", selectedText, currentString];
    [sessionTarget setStringValue:currentString];
 }
 
@@ -611,9 +617,11 @@
    NSLog(@"AdvancedViewController: receivedStringFromConsoleAlternate: %@", [notification object]);
    
    NSString *selectedText = [notification object];
+   selectedText = [selectedText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+   selectedText = [selectedText stringByTrimmingCharactersInSet:[NSCharacterSet punctuationCharacterSet]];            
    
    // Only grab the first line of the selected text
-   NSArray *line = [selectedText componentsSeparatedByString:@"\n"];
+//   NSArray *line = [selectedText componentsSeparatedByString:@"\n"];
    
    // Set the session target equal to the selected text
    
@@ -627,6 +635,12 @@
 {
    //   [NSApp sendAction:@selector(addNote:) to:nil from:self];
    HostNote *h = [notesInHostController newObject];
+   
+   if (h == nil) {
+      NSBeep();
+      return;
+   }
+   
    h.date = [NSDate date];
    h.name = @"New Note";
    [notesInHostController addObject:h];
@@ -650,7 +664,97 @@
 }
 
 #pragma mark -
+#pragma mark Hosts In Session Context Menu handlers
+
+- (IBAction)hostsInSessionCheckAll:(id)sender
+{
+   NSArray *a = [hostsInSessionController arrangedObjects];
+   
+   for (id h in a)
+   {
+      [h setIsSelected:[NSNumber numberWithBool:YES]];
+   }
+}
+
+- (IBAction)hostsInSessionCheckNone:(id)sender;
+{
+   NSArray *a = [hostsInSessionController arrangedObjects];
+   
+   for (id h in a)
+   {
+      [h setIsSelected:[NSNumber numberWithBool:NO]];
+   }
+}
+
+- (IBAction)hostsInSessionCheckSelected:(id)sender;
+{
+   NSArray *a = [hostsInSessionController selectedObjects];
+   
+   for (id h in a)
+   {
+      [h setIsSelected:[NSNumber numberWithBool:YES]];
+   }
+}
+
+- (IBAction)hostsInSessionQueueSelected:(id)sender
+{
+   // First check the selected sessions, just in case the user forgot...
+   [self hostsInSessionCheckSelected:nil];
+   
+   NSArray *a = [hostsInSessionController arrangedObjects];   
+   NSString *currentString = @"";
+   NSString *selectedText = nil;
+
+   // Prepend the string to the target combo box
+   for (Host *h in a)
+   {  
+      if ([[h isSelected] isEqualToNumber:[NSNumber numberWithInt:1]])
+      {
+         if ([h hostname] == nil)
+            selectedText = [h ipv4Address];
+         else
+            selectedText = [h hostname]; 
+         
+         if ([currentString isEqualToString:@""])
+            currentString = [NSString stringWithFormat:@"%@", selectedText];
+         else
+            currentString = [NSString stringWithFormat:@"%@, %@", selectedText, currentString];
+         [sessionTarget setStringValue:currentString];
+      }
+   }
+}
+
+
+#pragma mark -
 #pragma mark Testing
+
+-(IBAction)submitEmailBugReport:(id)sender
+{
+   
+   // This line defines our entire mailto link. Notice that the link is formed
+   // like a standard GET query might be formed, with each parameter, subject
+   // and body, follow the email address with a ? and are separated by a &.
+   // I use the %@ formatting string to add the contents of the lastResult and
+   // songData objects to the body of the message. You should change these to
+   // whatever information you want to include in the body.
+   NSString* mailtoLink = [NSString
+                           stringWithFormat:@"mailto:sam@flexistentialist.org?subject=iScrobbler \
+                           Bug Report&body=--Please explain the circumstances of the bug \
+                           here--\nThanks for contributing!\n\nResult Data \
+                           Dump:\n\n"];
+   
+   // This creates a URL string by adding percent escapes. Since the URL is
+   // just being used locally, I don't know if this is always necessary,
+   // however I thought it would be a good idea to stick to standards.
+   NSURL *url = [NSURL URLWithString:[(NSString*)
+                                      CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)mailtoLink,
+                                                                              NULL, NULL, kCFStringEncodingUTF8) autorelease]];
+   
+   // This just opens the URL in the workspace, to be opened up by Mail.app,
+   // with data already entered in the subject, to and body fields.
+   [[NSWorkspace sharedWorkspace] openURL:url];
+   
+}
 
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal
 {
