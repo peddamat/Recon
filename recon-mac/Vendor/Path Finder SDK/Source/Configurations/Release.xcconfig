@@ -1,0 +1,24 @@
+#include "./Common.xcconfig"
+
+// build universal
+ARCHS = ppc i386
+// ARCHS = $(ARCHS_STANDARD_32_64_BIT)
+
+// Accelerated Obj-C dispatch
+GCC_FAST_OBJC_DISPATCH = YES
+
+// fast and small
+GCC_OPTIMIZATION_LEVEL = s
+
+DEPLOYMENT_POSTPROCESSING = YES
+STRIP_INSTALLED_PRODUCT = YES
+COPY_PHASE_STRIP = YES
+
+// strip the application *after* linking, not during
+SEPARATE_STRIP = YES
+
+// this warning only works when optimized code is on
+GCC_WARN_UNINITIALIZED_AUTOS = YES
+
+// bundles must have globals
+STRIP_STYLE = non-global

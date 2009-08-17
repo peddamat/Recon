@@ -1,0 +1,532 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */; };
+		8D15AC2D0486D014006FF6A4 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */; };
+		8D15AC2E0486D014006FF6A4 /* MyDocument.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2A37F4B4FDCFA73011CA2CEA /* MyDocument.nib */; };
+		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
+		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		AA4A325C0813B4D4004CF0BC /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4A325B0813B4D4004CF0BC /* MyDocument.m */; };
+		AA7DD4BB0813C63E0099356A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA7DD4B10813C63E0099356A /* Localizable.strings */; };
+		AAC065A10813AD9B00C772D9 /* NTPathFinderRemoteUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC0659F0813AD9B00C772D9 /* NTPathFinderRemoteUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAC065A20813AD9B00C772D9 /* NTPathFinderRemoteUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = AAC065A00813AD9B00C772D9 /* NTPathFinderRemoteUtilities.c */; };
+		AAC066AD0813B45000C772D9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC066AC0813B45000C772D9 /* Carbon.framework */; };
+		AAC066AE0813B45000C772D9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC066AC0813B45000C772D9 /* Carbon.framework */; };
+		AAC6B3B006E2A5CA008E0C90 /* PathFinderRemote.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC6B3AF06E2A5CA008E0C90 /* PathFinderRemote.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAE5228906E284630064C2F7 /* NTPathFinderRemote.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE5228706E284630064C2F7 /* NTPathFinderRemote.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAE5228A06E284630064C2F7 /* NTPathFinderRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE5228806E284630064C2F7 /* NTPathFinderRemote.m */; };
+		AAE5287306E297070064C2F7 /* NTPathFinderConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE5287106E297070064C2F7 /* NTPathFinderConnection.h */; };
+		AAE5287406E297070064C2F7 /* NTPathFinderConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE5287206E297070064C2F7 /* NTPathFinderConnection.m */; };
+		AAE5287906E2973B0064C2F7 /* NTPathFinderProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE5287706E2973B0064C2F7 /* NTPathFinderProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAE528D406E29F1F0064C2F7 /* PathFinderRemote.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AAE5227B06E283FC0064C2F7 /* PathFinderRemote.framework */; };
+		AAE5291506E2A41B0064C2F7 /* PathFinderRemote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE5227B06E283FC0064C2F7 /* PathFinderRemote.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AAE5227E06E284180064C2F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AAE5227A06E283FC0064C2F7;
+			remoteInfo = "Path Finder Remote Framework";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AAE5291406E2A4000064C2F7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AAE528D406E29F1F0064C2F7 /* PathFinderRemote.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		20428DD6092367DA00AD736E /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../Configurations/Debug.xcconfig; sourceTree = SOURCE_ROOT; };
+		20428DD7092367DA00AD736E /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../Configurations/Release.xcconfig; sourceTree = SOURCE_ROOT; };
+		2A37F4AEFDCFA73011CA2CEA /* MyDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDocument.h; sourceTree = "<group>"; };
+		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2A37F4B5FDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MyDocument.nib; sourceTree = "<group>"; };
+		2A37F4B7FDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
+		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32DBCF750370BD2300C91783 /* Path Finder Remote_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Path Finder Remote_Prefix.pch"; sourceTree = "<group>"; };
+		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D15AC370486D014006FF6A4 /* Path Finder Remote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Path Finder Remote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA4A325B0813B4D4004CF0BC /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
+		AA7DD4B20813C63E0099356A /* Dutch */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Dutch; path = "Framework Resources/Dutch.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AA7DD4B30813C63E0099356A /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = "Framework Resources/English.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AA7DD4B40813C63E0099356A /* Finnish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Finnish; path = "Framework Resources/Finnish.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AA7DD4B50813C63E0099356A /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = French; path = "Framework Resources/French.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AA7DD4B60813C63E0099356A /* German */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = German; path = "Framework Resources/German.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AA7DD4B70813C63E0099356A /* Italian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Italian; path = "Framework Resources/Italian.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AA7DD4B80813C63E0099356A /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Japanese; path = "Framework Resources/Japanese.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AA7DD4B90813C63E0099356A /* Norwegian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Norwegian; path = "Framework Resources/Norwegian.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AA7DD4BA0813C63E0099356A /* Spanish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Spanish; path = "Framework Resources/Spanish.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AA8E311908190D44004C7558 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = "Framework Resources/zh_TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AAC0659F0813AD9B00C772D9 /* NTPathFinderRemoteUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTPathFinderRemoteUtilities.h; sourceTree = "<group>"; };
+		AAC065A00813AD9B00C772D9 /* NTPathFinderRemoteUtilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NTPathFinderRemoteUtilities.c; sourceTree = "<group>"; };
+		AAC066AC0813B45000C772D9 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		AAC6B39B06E2A520008E0C90 /* PathFinderRemote-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "PathFinderRemote-Info.plist"; sourceTree = "<group>"; };
+		AAC6B3AF06E2A5CA008E0C90 /* PathFinderRemote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathFinderRemote.h; sourceTree = "<group>"; };
+		AAE5227B06E283FC0064C2F7 /* PathFinderRemote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PathFinderRemote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAE5228706E284630064C2F7 /* NTPathFinderRemote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTPathFinderRemote.h; sourceTree = "<group>"; };
+		AAE5228806E284630064C2F7 /* NTPathFinderRemote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTPathFinderRemote.m; sourceTree = "<group>"; };
+		AAE5287106E297070064C2F7 /* NTPathFinderConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTPathFinderConnection.h; sourceTree = "<group>"; };
+		AAE5287206E297070064C2F7 /* NTPathFinderConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTPathFinderConnection.m; sourceTree = "<group>"; };
+		AAE5287706E2973B0064C2F7 /* NTPathFinderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTPathFinderProtocol.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D15AC330486D014006FF6A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAE5291506E2A41B0064C2F7 /* PathFinderRemote.framework in Frameworks */,
+				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
+				AAC066AE0813B45000C772D9 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAE5227906E283FC0064C2F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAC066AD0813B45000C772D9 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A8FEA54F5311CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AAC066AC0813B45000C772D9 /* Carbon.framework */,
+				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
+				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FB0FE9D524F11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D15AC370486D014006FF6A4 /* Path Finder Remote.app */,
+				AAE5227B06E283FC0064C2F7 /* PathFinderRemote.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A37F4AAFDCFA73011CA2CEA /* Path Finder Remote */ = {
+			isa = PBXGroup;
+			children = (
+				20428DD6092367DA00AD736E /* Debug.xcconfig */,
+				20428DD7092367DA00AD736E /* Release.xcconfig */,
+				AAE5228406E2842D0064C2F7 /* Framework */,
+				2A37F4ABFDCFA73011CA2CEA /* Classes */,
+				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
+				2A37F4B8FDCFA73011CA2CEA /* Resources */,
+				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
+				19C28FB0FE9D524F11CA2CBB /* Products */,
+			);
+			name = "Path Finder Remote";
+			sourceTree = "<group>";
+		};
+		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2A37F4AEFDCFA73011CA2CEA /* MyDocument.h */,
+				AA4A325B0813B4D4004CF0BC /* MyDocument.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		2A37F4AFFDCFA73011CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32DBCF750370BD2300C91783 /* Path Finder Remote_Prefix.pch */,
+				2A37F4B0FDCFA73011CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA7DD4B10813C63E0099356A /* Localizable.strings */,
+				2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */,
+				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
+				2A37F4B4FDCFA73011CA2CEA /* MyDocument.nib */,
+				8D15AC360486D014006FF6A4 /* Info.plist */,
+				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */,
+				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AAE5228406E2842D0064C2F7 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				AAE5228806E284630064C2F7 /* NTPathFinderRemote.m */,
+				AAC065A00813AD9B00C772D9 /* NTPathFinderRemoteUtilities.c */,
+				AAE5287206E297070064C2F7 /* NTPathFinderConnection.m */,
+				AAE5287D06E297C40064C2F7 /* Headers */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		AAE5287D06E297C40064C2F7 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				AAC6B39B06E2A520008E0C90 /* PathFinderRemote-Info.plist */,
+				AAC0659F0813AD9B00C772D9 /* NTPathFinderRemoteUtilities.h */,
+				AAC6B3AF06E2A5CA008E0C90 /* PathFinderRemote.h */,
+				AAE5228706E284630064C2F7 /* NTPathFinderRemote.h */,
+				AAE5287706E2973B0064C2F7 /* NTPathFinderProtocol.h */,
+				AAE5287106E297070064C2F7 /* NTPathFinderConnection.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		AAE5227606E283FC0064C2F7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAE5228906E284630064C2F7 /* NTPathFinderRemote.h in Headers */,
+				AAE5287306E297070064C2F7 /* NTPathFinderConnection.h in Headers */,
+				AAE5287906E2973B0064C2F7 /* NTPathFinderProtocol.h in Headers */,
+				AAC6B3B006E2A5CA008E0C90 /* PathFinderRemote.h in Headers */,
+				AAC065A10813AD9B00C772D9 /* NTPathFinderRemoteUtilities.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D15AC270486D014006FF6A4 /* Path Finder Remote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA506DF008556DFA000B659F /* Build configuration list for PBXNativeTarget "Path Finder Remote" */;
+			buildPhases = (
+				8D15AC2B0486D014006FF6A4 /* Resources */,
+				8D15AC300486D014006FF6A4 /* Sources */,
+				8D15AC330486D014006FF6A4 /* Frameworks */,
+				AAE5291406E2A4000064C2F7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AAE5227F06E284180064C2F7 /* PBXTargetDependency */,
+			);
+			name = "Path Finder Remote";
+			productInstallPath = "$(HOME)/Applications";
+			productName = "Path Finder Remote";
+			productReference = 8D15AC370486D014006FF6A4 /* Path Finder Remote.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AAE5227A06E283FC0064C2F7 /* PathFinderRemote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA506DEC08556DFA000B659F /* Build configuration list for PBXNativeTarget "PathFinderRemote" */;
+			buildPhases = (
+				AAE5227606E283FC0064C2F7 /* Headers */,
+				AAE5227706E283FC0064C2F7 /* Resources */,
+				AAE5227806E283FC0064C2F7 /* Sources */,
+				AAE5227906E283FC0064C2F7 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PathFinderRemote;
+			productName = "Path Finder Remote Framework";
+			productReference = AAE5227B06E283FC0064C2F7 /* PathFinderRemote.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = AA506DF408556DFA000B659F /* Build configuration list for PBXProject "Path Finder Remote" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				Dutch,
+				Finnish,
+				Italian,
+				Norwegian,
+				Spanish,
+				zh_TW,
+			);
+			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Path Finder Remote */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D15AC270486D014006FF6A4 /* Path Finder Remote */,
+				AAE5227A06E283FC0064C2F7 /* PathFinderRemote */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D15AC2B0486D014006FF6A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D15AC2C0486D014006FF6A4 /* Credits.rtf in Resources */,
+				8D15AC2D0486D014006FF6A4 /* MainMenu.nib in Resources */,
+				8D15AC2E0486D014006FF6A4 /* MyDocument.nib in Resources */,
+				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAE5227706E283FC0064C2F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA7DD4BB0813C63E0099356A /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D15AC300486D014006FF6A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D15AC320486D014006FF6A4 /* main.m in Sources */,
+				AA4A325C0813B4D4004CF0BC /* MyDocument.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAE5227806E283FC0064C2F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAE5228A06E284630064C2F7 /* NTPathFinderRemote.m in Sources */,
+				AAE5287406E297070064C2F7 /* NTPathFinderConnection.m in Sources */,
+				AAC065A20813AD9B00C772D9 /* NTPathFinderRemoteUtilities.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AAE5227F06E284180064C2F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AAE5227A06E283FC0064C2F7 /* PathFinderRemote */;
+			targetProxy = AAE5227E06E284180064C2F7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		089C165FFE840EACC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C1660FE840EACC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2A37F4B4FDCFA73011CA2CEA /* MyDocument.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A37F4B5FDCFA73011CA2CEA /* English */,
+			);
+			name = MyDocument.nib;
+			sourceTree = "<group>";
+		};
+		2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A37F4B7FDCFA73011CA2CEA /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+		2A37F4B9FDCFA73011CA2CEA /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A37F4BAFDCFA73011CA2CEA /* English */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		AA7DD4B10813C63E0099356A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA7DD4B20813C63E0099356A /* Dutch */,
+				AA7DD4B30813C63E0099356A /* English */,
+				AA7DD4B40813C63E0099356A /* Finnish */,
+				AA7DD4B50813C63E0099356A /* French */,
+				AA7DD4B60813C63E0099356A /* German */,
+				AA7DD4B70813C63E0099356A /* Italian */,
+				AA7DD4B80813C63E0099356A /* Japanese */,
+				AA7DD4B90813C63E0099356A /* Norwegian */,
+				AA7DD4BA0813C63E0099356A /* Spanish */,
+				AA8E311908190D44004C7558 /* zh_TW */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AA506DED08556DFA000B659F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Path Finder Remote_Prefix.pch";
+				INFOPLIST_FILE = "PathFinderRemote-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PRODUCT_NAME = PathFinderRemote;
+			};
+			name = Debug;
+		};
+		AA506DEE08556DFA000B659F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Path Finder Remote_Prefix.pch";
+				INFOPLIST_FILE = "PathFinderRemote-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PRODUCT_NAME = PathFinderRemote;
+			};
+			name = Release;
+		};
+		AA506DF108556DFA000B659F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Path Finder Remote_Prefix.pch";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PREBINDING = NO;
+				PRODUCT_NAME = "Path Finder Remote";
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		AA506DF208556DFA000B659F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Path Finder Remote_Prefix.pch";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PREBINDING = NO;
+				PRODUCT_NAME = "Path Finder Remote";
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		AA506DF508556DFA000B659F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20428DD6092367DA00AD736E /* Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		AA506DF608556DFA000B659F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20428DD7092367DA00AD736E /* Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA506DEC08556DFA000B659F /* Build configuration list for PBXNativeTarget "PathFinderRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA506DED08556DFA000B659F /* Debug */,
+				AA506DEE08556DFA000B659F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AA506DF008556DFA000B659F /* Build configuration list for PBXNativeTarget "Path Finder Remote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA506DF108556DFA000B659F /* Debug */,
+				AA506DF208556DFA000B659F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AA506DF408556DFA000B659F /* Build configuration list for PBXProject "Path Finder Remote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA506DF508556DFA000B659F /* Debug */,
+				AA506DF608556DFA000B659F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+}

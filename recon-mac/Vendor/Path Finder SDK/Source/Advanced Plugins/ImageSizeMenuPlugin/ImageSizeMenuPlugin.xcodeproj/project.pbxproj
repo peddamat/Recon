@@ -1,0 +1,415 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		202089540BF91469009FECC1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 202089410BF91467009FECC1 /* InfoPlist.strings */; };
+		2036470D0B8565790008C2B5 /* ImageSizeMenuPlugin_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2036470C0B8565790008C2B5 /* ImageSizeMenuPlugin_Prefix.pch */; };
+		203647100B8565860008C2B5 /* NTImageSizeMenuPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 2036470E0B8565860008C2B5 /* NTImageSizeMenuPlugin.h */; };
+		203647110B8565860008C2B5 /* NTImageSizeMenuPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036470F0B8565860008C2B5 /* NTImageSizeMenuPlugin.m */; };
+		20CA32130B6089500060C9C3 /* NTMenuPluginProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 20CA32120B6089500060C9C3 /* NTMenuPluginProtocol.h */; };
+		20CD1E810546699A00A37B05 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		20D998DE0B630C3E001B5DB6 /* CocoatechCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D998D60B630C3D001B5DB6 /* CocoatechCore.framework */; };
+		20D998DF0B630C3E001B5DB6 /* CocoatechFile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D998D70B630C3D001B5DB6 /* CocoatechFile.framework */; };
+		20D998E10B630C3E001B5DB6 /* CocoaTechStrings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D998D90B630C3E001B5DB6 /* CocoaTechStrings.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2017C6DF0EF08CEF00BC0BBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2017C6DB0EF08CEF00BC0BBA /* CocoatechFile.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = CocoatechFile;
+		};
+		2017C6E10EF08CF700BC0BBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2017C6DB0EF08CEF00BC0BBA /* CocoatechFile.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = CocoatechFile;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		2017C6DB0EF08CEF00BC0BBA /* CocoatechFile.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoatechFile.xcodeproj; path = ../../CocoatechFile/CocoatechFile.xcodeproj; sourceTree = SOURCE_ROOT; };
+		202089420BF91468009FECC1 /* cs */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089430BF91468009FECC1 /* da */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089440BF91468009FECC1 /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089450BF91468009FECC1 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089460BF91468009FECC1 /* es */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089470BF91468009FECC1 /* fi */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089480BF91468009FECC1 /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089490BF91468009FECC1 /* it */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2020894A0BF91468009FECC1 /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2020894B0BF91468009FECC1 /* ko */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2020894C0BF91468009FECC1 /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2020894D0BF91468009FECC1 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2020894E0BF91468009FECC1 /* pl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2020894F0BF91468009FECC1 /* pt */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089500BF91468009FECC1 /* ru */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089510BF91468009FECC1 /* sv */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089520BF91468009FECC1 /* zh_CN */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		202089530BF91468009FECC1 /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2036470C0B8565790008C2B5 /* ImageSizeMenuPlugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ImageSizeMenuPlugin_Prefix.pch; sourceTree = "<group>"; };
+		2036470E0B8565860008C2B5 /* NTImageSizeMenuPlugin.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTImageSizeMenuPlugin.h; sourceTree = "<group>"; };
+		2036470F0B8565860008C2B5 /* NTImageSizeMenuPlugin.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTImageSizeMenuPlugin.m; sourceTree = "<group>"; };
+		20BBA2490E4FC10C00D09852 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../../Configurations/Debug.xcconfig; sourceTree = SOURCE_ROOT; };
+		20BBA24A0E4FC10C00D09852 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../../Configurations/Release.xcconfig; sourceTree = SOURCE_ROOT; };
+		20CA32120B6089500060C9C3 /* NTMenuPluginProtocol.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = NTMenuPluginProtocol.h; path = ../../CocoatechProtocols/NTMenuPluginProtocol.h; sourceTree = SOURCE_ROOT; };
+		20CD1E840546699A00A37B05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20CD1E850546699A00A37B05 /* ImageSizeMenuPlugin.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageSizeMenuPlugin.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		20D998D60B630C3D001B5DB6 /* CocoatechCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoatechCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		20D998D70B630C3D001B5DB6 /* CocoatechFile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoatechFile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		20D998D90B630C3E001B5DB6 /* CocoaTechStrings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaTechStrings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		20CD1E800546699A00A37B05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20CD1E810546699A00A37B05 /* Cocoa.framework in Frameworks */,
+				20D998DE0B630C3E001B5DB6 /* CocoatechCore.framework in Frameworks */,
+				20D998DF0B630C3E001B5DB6 /* CocoatechFile.framework in Frameworks */,
+				20D998E10B630C3E001B5DB6 /* CocoaTechStrings.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* Image Converter */ = {
+			isa = PBXGroup;
+			children = (
+				20BBA2490E4FC10C00D09852 /* Debug.xcconfig */,
+				20BBA24A0E4FC10C00D09852 /* Release.xcconfig */,
+				2017C6D70EF08CDD00BC0BBA /* Project References */,
+				08FB77AFFE84173DC02AAC07 /* Source */,
+				20B382F60416B27F00000103 /* Headers */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				19C28FB8FE9D52D311CA2CBB /* Products */,
+			);
+			name = "Image Converter";
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				20D998D60B630C3D001B5DB6 /* CocoatechCore.framework */,
+				20D998D70B630C3D001B5DB6 /* CocoatechFile.framework */,
+				20D998D90B630C3E001B5DB6 /* CocoaTechStrings.framework */,
+				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
+				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
+			);
+			name = "Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				202089410BF91467009FECC1 /* InfoPlist.strings */,
+				20CD1E840546699A00A37B05 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AFFE84173DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				20CA32120B6089500060C9C3 /* NTMenuPluginProtocol.h */,
+				2036470F0B8565860008C2B5 /* NTImageSizeMenuPlugin.m */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				089C1672FE841209C02AAC07 /* Foundation.framework */,
+				089C167FFE841241C02AAC07 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FB8FE9D52D311CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				20CD1E850546699A00A37B05 /* ImageSizeMenuPlugin.plugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2017C6D70EF08CDD00BC0BBA /* Project References */ = {
+			isa = PBXGroup;
+			children = (
+				2017C6DB0EF08CEF00BC0BBA /* CocoatechFile.xcodeproj */,
+			);
+			name = "Project References";
+			sourceTree = "<group>";
+		};
+		2017C6DC0EF08CEF00BC0BBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2017C6E00EF08CEF00BC0BBA /* CocoatechFile.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		20B382F60416B27F00000103 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				2036470C0B8565790008C2B5 /* ImageSizeMenuPlugin_Prefix.pch */,
+				2036470E0B8565860008C2B5 /* NTImageSizeMenuPlugin.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		20CD1E720546699A00A37B05 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20CA32130B6089500060C9C3 /* NTMenuPluginProtocol.h in Headers */,
+				2036470D0B8565790008C2B5 /* ImageSizeMenuPlugin_Prefix.pch in Headers */,
+				203647100B8565860008C2B5 /* NTImageSizeMenuPlugin.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		20CD1E710546699A00A37B05 /* ImageSizeMenuPlugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA506E0508556E54000B659F /* Build configuration list for PBXNativeTarget "ImageSizeMenuPlugin" */;
+			buildPhases = (
+				20CD1E720546699A00A37B05 /* Headers */,
+				20CD1E780546699A00A37B05 /* Resources */,
+				20CD1E7C0546699A00A37B05 /* Sources */,
+				20CD1E800546699A00A37B05 /* Frameworks */,
+				20CD1E820546699A00A37B05 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2017C6E20EF08CF700BC0BBA /* PBXTargetDependency */,
+			);
+			name = ImageSizeMenuPlugin;
+			productName = "Image Converter";
+			productReference = 20CD1E850546699A00A37B05 /* ImageSizeMenuPlugin.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = AA506E0908556E54000B659F /* Build configuration list for PBXProject "ImageSizeMenuPlugin" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				cz,
+				da,
+				Dutch,
+				Finnish,
+				Italian,
+				no,
+				Spanish,
+				Swedish,
+				cs,
+				zh_TW,
+				en,
+				de,
+				es,
+				fi,
+				fr,
+				it,
+				ja,
+				ko,
+				nb,
+				nl,
+				pl,
+				pt,
+				ru,
+				sv,
+				zh_CN,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* Image Converter */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2017C6DC0EF08CEF00BC0BBA /* Products */;
+					ProjectRef = 2017C6DB0EF08CEF00BC0BBA /* CocoatechFile.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				20CD1E710546699A00A37B05 /* ImageSizeMenuPlugin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2017C6E00EF08CEF00BC0BBA /* CocoatechFile.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CocoatechFile.framework;
+			remoteRef = 2017C6DF0EF08CEF00BC0BBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		20CD1E780546699A00A37B05 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				202089540BF91469009FECC1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		20CD1E820546699A00A37B05 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		20CD1E7C0546699A00A37B05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				203647110B8565860008C2B5 /* NTImageSizeMenuPlugin.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2017C6E20EF08CF700BC0BBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoatechFile;
+			targetProxy = 2017C6E10EF08CF700BC0BBA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		202089410BF91467009FECC1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				202089420BF91468009FECC1 /* cs */,
+				202089430BF91468009FECC1 /* da */,
+				202089440BF91468009FECC1 /* de */,
+				202089450BF91468009FECC1 /* en */,
+				202089460BF91468009FECC1 /* es */,
+				202089470BF91468009FECC1 /* fi */,
+				202089480BF91468009FECC1 /* fr */,
+				202089490BF91468009FECC1 /* it */,
+				2020894A0BF91468009FECC1 /* ja */,
+				2020894B0BF91468009FECC1 /* ko */,
+				2020894C0BF91468009FECC1 /* nb */,
+				2020894D0BF91468009FECC1 /* nl */,
+				2020894E0BF91468009FECC1 /* pl */,
+				2020894F0BF91468009FECC1 /* pt */,
+				202089500BF91468009FECC1 /* ru */,
+				202089510BF91468009FECC1 /* sv */,
+				202089520BF91468009FECC1 /* zh_CN */,
+				202089530BF91468009FECC1 /* zh_TW */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AA506E0608556E54000B659F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ImageSizeMenuPlugin_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = ImageSizeMenuPlugin;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+		AA506E0708556E54000B659F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ImageSizeMenuPlugin_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = ImageSizeMenuPlugin;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+		AA506E0A08556E54000B659F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20BBA2490E4FC10C00D09852 /* Debug.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = ../../CocoatechProtocols/;
+			};
+			name = Debug;
+		};
+		AA506E0B08556E54000B659F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20BBA24A0E4FC10C00D09852 /* Release.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = ../../CocoatechProtocols/;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA506E0508556E54000B659F /* Build configuration list for PBXNativeTarget "ImageSizeMenuPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA506E0608556E54000B659F /* Debug */,
+				AA506E0708556E54000B659F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AA506E0908556E54000B659F /* Build configuration list for PBXProject "ImageSizeMenuPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA506E0A08556E54000B659F /* Debug */,
+				AA506E0B08556E54000B659F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

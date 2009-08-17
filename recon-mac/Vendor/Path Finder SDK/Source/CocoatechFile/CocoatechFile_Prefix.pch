@@ -1,0 +1,23 @@
+//
+// Prefix header for all source files of the 'CocoatechCore' target in the 'CocoatechCore' project.
+//
+
+#import <Carbon/Carbon.h>
+
+#ifdef __OBJC__
+#import <Cocoa/Cocoa.h>
+#import <QTKit/QTKit.h>
+#import <DiscRecordingUI/DiscRecordingUI.h>
+#import <DiskArbitration/DiskArbitration.h>
+
+#import <CocoatechCore/CocoatechCore.h>
+#import <CocoatechStrings/CocoatechStrings.h>
+
+#import "CocoatechFileConstants.h"
+#import "NTFileDesc.h"
+#import "NTFileDesc-NTUtilities.h"
+#import "NTFileDesc-Compare.h"
+#import "NTFileDesc-DirectoryContents.h"
+#import "NTFileDesc-State.h"
+#endif
+

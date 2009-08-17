@@ -1,0 +1,24 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {clear = id; copy = id; cut = id; paste = id; }; 
+            CLASS = NTCustomIconView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSImageView; 
+        }, 
+        {
+            ACTIONS = {changeAllButtonAction = id; }; 
+            CLASS = NTOpenWithUIController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                contentView = NSView; 
+                objectController = NSObjectController; 
+                popUpArrayController = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = NTOpenWithUIView; LANGUAGE = ObjC; SUPERCLASS = NSView; }
+    ); 
+    IBVersion = 1; 
+}

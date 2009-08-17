@@ -1,0 +1,1277 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		200330000DA43FF400C648DE /* NTLoginItemMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 20032FFE0DA43FF400C648DE /* NTLoginItemMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		200330010DA43FF400C648DE /* NTLoginItemMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 20032FFF0DA43FF400C648DE /* NTLoginItemMgr.m */; };
+		2008E5160D77DC1F00936C6D /* NTVolumeMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2008E5140D77DC1F00936C6D /* NTVolumeMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2008E5170D77DC1F00936C6D /* NTVolumeMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2008E5150D77DC1F00936C6D /* NTVolumeMgr.m */; };
+		201CAE580DA1949300812F19 /* NTSharedFileListMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 201CAE560DA1949300812F19 /* NTSharedFileListMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		201CAE590DA1949300812F19 /* NTSharedFileListMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 201CAE570DA1949300812F19 /* NTSharedFileListMgr.m */; };
+		2025A1AF0F464B9700FD8519 /* NSDocument-NTExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 2025A1AD0F464B9700FD8519 /* NSDocument-NTExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2025A1B00F464B9700FD8519 /* NSDocument-NTExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2025A1AE0F464B9700FD8519 /* NSDocument-NTExtensions.m */; };
+		20264F4C0E5D53A200685D2C /* NTFolderWatcherManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 20264F4A0E5D53A200685D2C /* NTFolderWatcherManager.h */; };
+		20264F4D0E5D53A200685D2C /* NTFolderWatcherManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20264F4B0E5D53A200685D2C /* NTFolderWatcherManager.m */; };
+		202769C80E4570DA001C7E26 /* NTVolumeModifiedWatcherThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 202769C60E4570DA001C7E26 /* NTVolumeModifiedWatcherThread.h */; };
+		202769C90E4570DA001C7E26 /* NTVolumeModifiedWatcherThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 202769C70E4570DA001C7E26 /* NTVolumeModifiedWatcherThread.m */; };
+		2030A15E0ADE214E0079DB27 /* NTFSDeleteThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 2030A15A0ADE214E0079DB27 /* NTFSDeleteThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2030A15F0ADE214E0079DB27 /* NTFSDeleteThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030A15B0ADE214E0079DB27 /* NTFSDeleteThread.m */; };
+		2030A1AE0ADE23A70079DB27 /* CocoatechFileConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 2030A1AD0ADE23A70079DB27 /* CocoatechFileConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2030A1D00ADE243F0079DB27 /* NTFileDeleter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2030A1CC0ADE243F0079DB27 /* NTFileDeleter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2030A1D10ADE243F0079DB27 /* NTFileDeleter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030A1CD0ADE243F0079DB27 /* NTFileDeleter.m */; };
+		2030A1D60ADE24550079DB27 /* NTSecureDelete.h in Headers */ = {isa = PBXBuildFile; fileRef = 2030A1D40ADE24550079DB27 /* NTSecureDelete.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2030A1D70ADE24550079DB27 /* NTSecureDelete.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030A1D50ADE24550079DB27 /* NTSecureDelete.m */; };
+		203B60830D4AD14F0000299F /* NTListSizeCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 203B60810D4AD14F0000299F /* NTListSizeCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		203B60840D4AD14F0000299F /* NTListSizeCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B60820D4AD14F0000299F /* NTListSizeCalculator.m */; };
+		203B63C10D4ADA270000299F /* NTSizeCalculatorTreeOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 203B63BF0D4ADA270000299F /* NTSizeCalculatorTreeOperation.h */; };
+		203B63C20D4ADA270000299F /* NTSizeCalculatorTreeOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B63C00D4ADA270000299F /* NTSizeCalculatorTreeOperation.m */; };
+		203B63C80D4ADD780000299F /* NTSizeCalculatorTreeMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 203B63C60D4ADD780000299F /* NTSizeCalculatorTreeMgr.h */; };
+		203B63C90D4ADD780000299F /* NTSizeCalculatorTreeMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B63C70D4ADD780000299F /* NTSizeCalculatorTreeMgr.m */; };
+		204A61C70D44081400B6EB88 /* NTOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 204A61C50D44081400B6EB88 /* NTOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204A61C80D44081400B6EB88 /* NTOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 204A61C60D44081400B6EB88 /* NTOperation.m */; };
+		204CED320ADCB91400B25AD4 /* NTCarbonFileInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CED300ADCB91400B25AD4 /* NTCarbonFileInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CED330ADCB91400B25AD4 /* NTCarbonFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CED310ADCB91400B25AD4 /* NTCarbonFileInfo.m */; };
+		204CED380ADCB93600B25AD4 /* NTFileModifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CED360ADCB93600B25AD4 /* NTFileModifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CED390ADCB93600B25AD4 /* NTFileModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CED370ADCB93600B25AD4 /* NTFileModifier.m */; };
+		204CEDE30ADCBBBD00B25AD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 204CEDE20ADCBBBD00B25AD4 /* QTKit.framework */; };
+		204CEE3F0ADCBD3B00B25AD4 /* NTMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CEE3D0ADCBD3B00B25AD4 /* NTMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CEE400ADCBD3B00B25AD4 /* NTMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CEE3E0ADCBD3B00B25AD4 /* NTMetadata.m */; };
+		204CEE430ADCBD4400B25AD4 /* NTStringShare.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CEE410ADCBD4400B25AD4 /* NTStringShare.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CEE440ADCBD4400B25AD4 /* NTStringShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CEE420ADCBD4400B25AD4 /* NTStringShare.m */; };
+		204CEE780ADCBE4B00B25AD4 /* NTIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CEE720ADCBE4B00B25AD4 /* NTIcon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CEE790ADCBE4B00B25AD4 /* NTIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CEE730ADCBE4B00B25AD4 /* NTIcon.m */; };
+		204CEE7A0ADCBE4B00B25AD4 /* NTIconFamily.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CEE740ADCBE4B00B25AD4 /* NTIconFamily.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CEE7B0ADCBE4B00B25AD4 /* NTIconFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CEE750ADCBE4B00B25AD4 /* NTIconFamily.m */; };
+		204CEE7C0ADCBE4B00B25AD4 /* NTIconStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CEE760ADCBE4B00B25AD4 /* NTIconStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CEE7D0ADCBE4B00B25AD4 /* NTIconStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CEE770ADCBE4B00B25AD4 /* NTIconStore.m */; };
+		204CEF6C0ADCC1ED00B25AD4 /* NTGetAttrList.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CEF6A0ADCC1ED00B25AD4 /* NTGetAttrList.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CEF6D0ADCC1ED00B25AD4 /* NTGetAttrList.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CEF6B0ADCC1ED00B25AD4 /* NTGetAttrList.m */; };
+		204CEF7D0ADCC23200B25AD4 /* NTCGImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CEF7B0ADCC23200B25AD4 /* NTCGImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CEF7E0ADCC23200B25AD4 /* NTCGImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CEF7C0ADCC23200B25AD4 /* NTCGImage.m */; };
+		204CEF920ADCC28A00B25AD4 /* NTThumbnail.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CEF900ADCC28A00B25AD4 /* NTThumbnail.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CEF930ADCC28A00B25AD4 /* NTThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CEF910ADCC28A00B25AD4 /* NTThumbnail.m */; };
+		204CF04E0ADCCBFC00B25AD4 /* NTFSWatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CF04A0ADCCBFC00B25AD4 /* NTFSWatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CF04F0ADCCBFC00B25AD4 /* NTFSWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CF04B0ADCCBFC00B25AD4 /* NTFSWatcher.m */; };
+		204CF0500ADCCBFC00B25AD4 /* NTFSWatcherItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CF04C0ADCCBFC00B25AD4 /* NTFSWatcherItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CF0510ADCCBFC00B25AD4 /* NTFSWatcherItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CF04D0ADCCBFC00B25AD4 /* NTFSWatcherItem.m */; };
+		204CF0580ADCCC1400B25AD4 /* NTFNSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CF0520ADCCC1400B25AD4 /* NTFNSubscription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CF0590ADCCC1400B25AD4 /* NTFNSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CF0530ADCCC1400B25AD4 /* NTFNSubscription.m */; };
+		204CF05A0ADCCC1400B25AD4 /* NTFSSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CF0540ADCCC1400B25AD4 /* NTFSSubscription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CF05B0ADCCC1400B25AD4 /* NTFSSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CF0550ADCCC1400B25AD4 /* NTFSSubscription.m */; };
+		204CF05C0ADCCC1400B25AD4 /* NTKQueueSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CF0560ADCCC1400B25AD4 /* NTKQueueSubscription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CF05D0ADCCC1400B25AD4 /* NTKQueueSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CF0570ADCCC1400B25AD4 /* NTKQueueSubscription.m */; };
+		204CF06B0ADCCC8800B25AD4 /* NTFNMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CF0650ADCCC8800B25AD4 /* NTFNMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CF06C0ADCCC8800B25AD4 /* NTFNMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CF0660ADCCC8800B25AD4 /* NTFNMonitor.m */; };
+		204CF06D0ADCCC8800B25AD4 /* NTFSMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CF0670ADCCC8800B25AD4 /* NTFSMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CF06E0ADCCC8800B25AD4 /* NTFSMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CF0680ADCCC8800B25AD4 /* NTFSMonitor.m */; };
+		204CF06F0ADCCC8800B25AD4 /* NTKQueueMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 204CF0690ADCCC8800B25AD4 /* NTKQueueMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		204CF0700ADCCC8800B25AD4 /* NTKQueueMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 204CF06A0ADCCC8800B25AD4 /* NTKQueueMonitor.m */; };
+		20585EEA0B98CA22003B6A72 /* NTLaunchServiceHacks.h in Headers */ = {isa = PBXBuildFile; fileRef = 20585EE80B98CA22003B6A72 /* NTLaunchServiceHacks.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20585EEB0B98CA22003B6A72 /* NTLaunchServiceHacks.m in Sources */ = {isa = PBXBuildFile; fileRef = 20585EE90B98CA22003B6A72 /* NTLaunchServiceHacks.m */; };
+		20585EEE0B98CA35003B6A72 /* NTFileAttributeModifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 20585EEC0B98CA35003B6A72 /* NTFileAttributeModifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20585EEF0B98CA35003B6A72 /* NTFileAttributeModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 20585EED0B98CA35003B6A72 /* NTFileAttributeModifier.m */; };
+		2064D3590EE36EAE00DCD342 /* NTFileRep.h in Headers */ = {isa = PBXBuildFile; fileRef = 2064D3570EE36EAE00DCD342 /* NTFileRep.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2064D35A0EE36EAE00DCD342 /* NTFileRep.m in Sources */ = {isa = PBXBuildFile; fileRef = 2064D3580EE36EAE00DCD342 /* NTFileRep.m */; };
+		206A90E00B1525D6002005D1 /* NTSyncSizeCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 206A90DE0B1525D6002005D1 /* NTSyncSizeCalculator.h */; settings = {ATTRIBUTES = (); }; };
+		206A90E10B1525D6002005D1 /* NTSyncSizeCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 206A90DF0B1525D6002005D1 /* NTSyncSizeCalculator.m */; };
+		207B16870D57F90000956A30 /* NTSizeCalculatorTreeRoot.h in Headers */ = {isa = PBXBuildFile; fileRef = 207B16850D57F90000956A30 /* NTSizeCalculatorTreeRoot.h */; };
+		207B16880D57F90000956A30 /* NTSizeCalculatorTreeRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 207B16860D57F90000956A30 /* NTSizeCalculatorTreeRoot.m */; };
+		208136D40D4AB87A004F7C6E /* NTSizeCalculatorTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 208136D20D4AB87A004F7C6E /* NTSizeCalculatorTree.h */; };
+		208136D50D4AB87A004F7C6E /* NTSizeCalculatorTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 208136D30D4AB87A004F7C6E /* NTSizeCalculatorTree.m */; };
+		208136D80D4AB8BE004F7C6E /* NTSizeCalculatorTreeNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 208136D60D4AB8BE004F7C6E /* NTSizeCalculatorTreeNode.h */; };
+		208136D90D4AB8BE004F7C6E /* NTSizeCalculatorTreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 208136D70D4AB8BE004F7C6E /* NTSizeCalculatorTreeNode.m */; };
+		208B15BB0ADC5F1D00AF3CB0 /* CocoatechFile_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 208B15B90ADC5F1D00AF3CB0 /* CocoatechFile_Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B15BC0ADC5F1D00AF3CB0 /* CocoatechFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B15BA0ADC5F1D00AF3CB0 /* CocoatechFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B15F00ADC634E00AF3CB0 /* NTFileDesc-Compare.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B15DE0ADC634E00AF3CB0 /* NTFileDesc-Compare.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B15F10ADC634E00AF3CB0 /* NTFileDesc-Compare.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B15DF0ADC634E00AF3CB0 /* NTFileDesc-Compare.m */; };
+		208B15F20ADC634E00AF3CB0 /* NTFileDesc-DirectoryContents.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B15E00ADC634E00AF3CB0 /* NTFileDesc-DirectoryContents.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B15F30ADC634E00AF3CB0 /* NTFileDesc-DirectoryContents.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B15E10ADC634E00AF3CB0 /* NTFileDesc-DirectoryContents.m */; };
+		208B15F40ADC634E00AF3CB0 /* NTFileDesc-NTUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B15E20ADC634E00AF3CB0 /* NTFileDesc-NTUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B15F50ADC634E00AF3CB0 /* NTFileDesc-NTUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B15E30ADC634E00AF3CB0 /* NTFileDesc-NTUtilities.m */; };
+		208B15F60ADC634E00AF3CB0 /* NTFileDesc-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B15E40ADC634E00AF3CB0 /* NTFileDesc-Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B15F70ADC634E00AF3CB0 /* NTFileDesc-Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B15E50ADC634E00AF3CB0 /* NTFileDesc-Private.m */; };
+		208B15F80ADC634E00AF3CB0 /* NTFileDesc-State.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B15E60ADC634E00AF3CB0 /* NTFileDesc-State.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B15F90ADC634E00AF3CB0 /* NTFileDesc-State.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B15E70ADC634E00AF3CB0 /* NTFileDesc-State.m */; };
+		208B15FA0ADC634E00AF3CB0 /* NTFileDesc.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B15E80ADC634E00AF3CB0 /* NTFileDesc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B15FB0ADC634E00AF3CB0 /* NTFileDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B15E90ADC634E00AF3CB0 /* NTFileDesc.m */; };
+		208B15FC0ADC634E00AF3CB0 /* NTFileDescData-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B15EA0ADC634E00AF3CB0 /* NTFileDescData-Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B15FD0ADC634E00AF3CB0 /* NTFileDescData-Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B15EB0ADC634E00AF3CB0 /* NTFileDescData-Private.m */; };
+		208B15FE0ADC634E00AF3CB0 /* NTFileDescData.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B15EC0ADC634E00AF3CB0 /* NTFileDescData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B15FF0ADC634E00AF3CB0 /* NTFileDescData.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B15ED0ADC634E00AF3CB0 /* NTFileDescData.m */; };
+		208B16000ADC634E00AF3CB0 /* NTFileDescMemCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B15EE0ADC634E00AF3CB0 /* NTFileDescMemCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B16010ADC634E00AF3CB0 /* NTFileDescMemCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B15EF0ADC634E00AF3CB0 /* NTFileDescMemCache.m */; };
+		208B16330ADC651800AF3CB0 /* NTVolumeNotificationMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B161F0ADC651800AF3CB0 /* NTVolumeNotificationMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B16340ADC651800AF3CB0 /* NTVolumeNotificationMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B16200ADC651800AF3CB0 /* NTVolumeNotificationMgr.m */; };
+		208B16350ADC651800AF3CB0 /* NTVolume.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B16210ADC651800AF3CB0 /* NTVolume.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B16360ADC651800AF3CB0 /* NTVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B16220ADC651800AF3CB0 /* NTVolume.m */; };
+		208B16370ADC651800AF3CB0 /* NTVolumeCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B16230ADC651800AF3CB0 /* NTVolumeCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B16380ADC651800AF3CB0 /* NTVolumeCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B16240ADC651800AF3CB0 /* NTVolumeCache.m */; };
+		208B16390ADC651800AF3CB0 /* NTVolumeSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B16250ADC651800AF3CB0 /* NTVolumeSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B163A0ADC651800AF3CB0 /* NTVolumeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B16260ADC651800AF3CB0 /* NTVolumeSpec.m */; };
+		208B163D0ADC651800AF3CB0 /* NTVolumeMounter.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B16290ADC651800AF3CB0 /* NTVolumeMounter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B163E0ADC651800AF3CB0 /* NTVolumeMounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B162A0ADC651800AF3CB0 /* NTVolumeMounter.m */; };
+		208B16410ADC651800AF3CB0 /* NTVolumesMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B162D0ADC651800AF3CB0 /* NTVolumesMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B16420ADC651800AF3CB0 /* NTVolumesMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B162E0ADC651800AF3CB0 /* NTVolumesMonitor.m */; };
+		208B16430ADC651800AF3CB0 /* NTVolumesSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B162F0ADC651800AF3CB0 /* NTVolumesSubscription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B16440ADC651800AF3CB0 /* NTVolumesSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B16300ADC651800AF3CB0 /* NTVolumesSubscription.m */; };
+		208B16490ADC658500AF3CB0 /* NTFSRefObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B16470ADC658500AF3CB0 /* NTFSRefObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208B164A0ADC658500AF3CB0 /* NTFSRefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 208B16480ADC658500AF3CB0 /* NTFSRefObject.m */; };
+		208DF9C00DA2B9D4006F7DA3 /* NTSharedFileListItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 208DF9BE0DA2B9D4006F7DA3 /* NTSharedFileListItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		208DF9C10DA2B9D4006F7DA3 /* NTSharedFileListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 208DF9BF0DA2B9D4006F7DA3 /* NTSharedFileListItem.m */; };
+		20907E3D0DB8610D0068871F /* NTLabelsMenuItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 20907E3B0DB8610D0068871F /* NTLabelsMenuItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20907E3E0DB8610D0068871F /* NTLabelsMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 20907E3C0DB8610D0068871F /* NTLabelsMenuItem.m */; };
+		20907E470DB869A60068871F /* NTLabelsMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = 20907E450DB869A60068871F /* NTLabelsMenuView.h */; };
+		20907E480DB869A60068871F /* NTLabelsMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20907E460DB869A60068871F /* NTLabelsMenuView.m */; };
+		2097BBF10D7A264E000143A6 /* NTVolumeMgrState.h in Headers */ = {isa = PBXBuildFile; fileRef = 2097BBEF0D7A264E000143A6 /* NTVolumeMgrState.h */; };
+		2097BBF20D7A264E000143A6 /* NTVolumeMgrState.m in Sources */ = {isa = PBXBuildFile; fileRef = 2097BBF00D7A264E000143A6 /* NTVolumeMgrState.m */; };
+		2099B69B0D4950D400CF70BF /* NTFSEventMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 2099B6990D4950D400CF70BF /* NTFSEventMessage.h */; };
+		2099B69C0D4950D400CF70BF /* NTFSEventMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2099B69A0D4950D400CF70BF /* NTFSEventMessage.m */; };
+		209E40810ADCA90F00DC888E /* NTResourceFork.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E407B0ADCA90F00DC888E /* NTResourceFork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E40820ADCA90F00DC888E /* NTResourceFork.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E407C0ADCA90F00DC888E /* NTResourceFork.m */; };
+		209E40830ADCA90F00DC888E /* NTResourceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E407D0ADCA90F00DC888E /* NTResourceInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E40840ADCA90F00DC888E /* NTResourceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E407E0ADCA90F00DC888E /* NTResourceInfo.m */; };
+		209E40850ADCA90F00DC888E /* NTResourceMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E407F0ADCA90F00DC888E /* NTResourceMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E40860ADCA90F00DC888E /* NTResourceMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E40800ADCA90F00DC888E /* NTResourceMgr.m */; };
+		209E40890ADCA91600DC888E /* NTFileTypeIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E40870ADCA91600DC888E /* NTFileTypeIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E408A0ADCA91600DC888E /* NTFileTypeIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E40880ADCA91600DC888E /* NTFileTypeIdentifier.m */; };
+		209E408D0ADCA92000DC888E /* NTImageTypeMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E408B0ADCA92000DC888E /* NTImageTypeMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E408E0ADCA92000DC888E /* NTImageTypeMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E408C0ADCA92000DC888E /* NTImageTypeMgr.m */; };
+		209E409C0ADCA96C00DC888E /* NTWeblocFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E409A0ADCA96C00DC888E /* NTWeblocFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E409D0ADCA96C00DC888E /* NTWeblocFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E409B0ADCA96C00DC888E /* NTWeblocFile.m */; };
+		209E40BA0ADCAA5B00DC888E /* NTAlias.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E40B60ADCAA5B00DC888E /* NTAlias.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E40BB0ADCAA5B00DC888E /* NTAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E40B70ADCAA5B00DC888E /* NTAlias.m */; };
+		209E40BC0ADCAA5B00DC888E /* NTAliasFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E40B80ADCAA5B00DC888E /* NTAliasFileManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E40BD0ADCAA5B00DC888E /* NTAliasFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E40B90ADCAA5B00DC888E /* NTAliasFileManager.m */; };
+		209E40CD0ADCAA8C00DC888E /* NTDefaultDirectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E40CB0ADCAA8C00DC888E /* NTDefaultDirectory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E40CE0ADCAA8C00DC888E /* NTDefaultDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E40CC0ADCAA8C00DC888E /* NTDefaultDirectory.m */; };
+		209E40EF0ADCAACF00DC888E /* NTFileCreation.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E40ED0ADCAACF00DC888E /* NTFileCreation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E40F00ADCAACF00DC888E /* NTFileCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E40EE0ADCAACF00DC888E /* NTFileCreation.m */; };
+		209E410A0ADCACBB00DC888E /* NTPathUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 209E41080ADCACBB00DC888E /* NTPathUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209E410B0ADCACBB00DC888E /* NTPathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E41090ADCACBB00DC888E /* NTPathUtilities.m */; };
+		20B08DE30B1526EB001AE8C1 /* NTFSSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 20B08DE10B1526EB001AE8C1 /* NTFSSize.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20B08DE40B1526EB001AE8C1 /* NTFSSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 20B08DE20B1526EB001AE8C1 /* NTFSSize.m */; };
+		20B61D2F0E22D82A003F1FE0 /* NTVolumeModifiedWatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 20B61D2D0E22D82A003F1FE0 /* NTVolumeModifiedWatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20B61D300E22D82A003F1FE0 /* NTVolumeModifiedWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 20B61D2E0E22D82A003F1FE0 /* NTVolumeModifiedWatcher.m */; };
+		20C10B0B0A3F6D9A00291B79 /* CocoaTechStrings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C10B0A0A3F6D9900291B79 /* CocoaTechStrings.framework */; };
+		20C44FA70D3EFA2A009EBEA8 /* NTFolderWatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 20C44FA50D3EFA2A009EBEA8 /* NTFolderWatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20C44FA80D3EFA2A009EBEA8 /* NTFolderWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C44FA60D3EFA2A009EBEA8 /* NTFolderWatcher.m */; };
+		20C561C40D173F8F00BDF389 /* NTQuickLookThumbnail.h in Headers */ = {isa = PBXBuildFile; fileRef = 20C561C20D173F8F00BDF389 /* NTQuickLookThumbnail.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20C561C50D173F8F00BDF389 /* NTQuickLookThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C561C30D173F8F00BDF389 /* NTQuickLookThumbnail.m */; };
+		20C561D00D173FFC00BDF389 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C561CF0D173FFC00BDF389 /* QuickLook.framework */; };
+		20C825110ADC920D00D25B44 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C825100ADC920D00D25B44 /* Carbon.framework */; };
+		20CCDE130D4002A5009522F0 /* NTSizeCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 20CCDE110D4002A5009522F0 /* NTSizeCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20CCDE140D4002A5009522F0 /* NTSizeCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CCDE120D4002A5009522F0 /* NTSizeCalculator.m */; };
+		20CCDE450D400961009522F0 /* NTSizeCalculatorMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 20CCDE430D400961009522F0 /* NTSizeCalculatorMgr.h */; };
+		20CCDE460D400961009522F0 /* NTSizeCalculatorMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CCDE440D400961009522F0 /* NTSizeCalculatorMgr.m */; };
+		20D4C00A0F11CD7D00B3A482 /* NTVolumeUnmounter.h in Headers */ = {isa = PBXBuildFile; fileRef = 20D4C0080F11CD7D00B3A482 /* NTVolumeUnmounter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20D4C00B0F11CD7D00B3A482 /* NTVolumeUnmounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D4C0090F11CD7D00B3A482 /* NTVolumeUnmounter.m */; };
+		20D4C0700F11E0EC00B3A482 /* NTVolumeModifiedRebuildThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 20D4C06E0F11E0EC00B3A482 /* NTVolumeModifiedRebuildThread.h */; };
+		20D4C0710F11E0EC00B3A482 /* NTVolumeModifiedRebuildThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D4C06F0F11E0EC00B3A482 /* NTVolumeModifiedRebuildThread.m */; };
+		20D9DCE60B7D5C2200B89AD5 /* NTFileListMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 20D9DCE40B7D5C2200B89AD5 /* NTFileListMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20D9DCE70B7D5C2200B89AD5 /* NTFileListMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D9DCE50B7D5C2200B89AD5 /* NTFileListMonitor.m */; };
+		20D9DCF90B7D5D8500B89AD5 /* NTFileListMonitorThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 20D9DCF70B7D5D8500B89AD5 /* NTFileListMonitorThread.h */; };
+		20D9DCFA0B7D5D8500B89AD5 /* NTFileListMonitorThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D9DCF80B7D5D8500B89AD5 /* NTFileListMonitorThread.m */; };
+		20DFD4F40ADDEB0700BB6ACC /* NTFileEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DFD4F20ADDEB0700BB6ACC /* NTFileEnvironment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20DFD4F50ADDEB0700BB6ACC /* NTFileEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 20DFD4F30ADDEB0700BB6ACC /* NTFileEnvironment.m */; };
+		20DFD5AF0ADDEF6700BB6ACC /* NTFileNamingManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DFD5AB0ADDEF6700BB6ACC /* NTFileNamingManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20DFD5B00ADDEF6700BB6ACC /* NTFileNamingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20DFD5AC0ADDEF6700BB6ACC /* NTFileNamingManager.m */; };
+		20DFD5B10ADDEF6700BB6ACC /* NTFilePreflightTests.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DFD5AD0ADDEF6700BB6ACC /* NTFilePreflightTests.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20DFD5B20ADDEF6700BB6ACC /* NTFilePreflightTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 20DFD5AE0ADDEF6700BB6ACC /* NTFilePreflightTests.m */; };
+		20DFD5EA0ADDEFED00BB6ACC /* images in Resources */ = {isa = PBXBuildFile; fileRef = 20DFD5CA0ADDEFED00BB6ACC /* images */; };
+		20DFD6250ADDF28600BB6ACC /* CocoatechCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20DFD6240ADDF28600BB6ACC /* CocoatechCore.framework */; };
+		20DFD62D0ADDF2E700BB6ACC /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20DFD62C0ADDF2E700BB6ACC /* IOKit.framework */; };
+		20DFD6320ADDF33800BB6ACC /* DiscRecordingUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20DFD6310ADDF33800BB6ACC /* DiscRecordingUI.framework */; };
+		20DFD6370ADDF38D00BB6ACC /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20DFD6360ADDF38D00BB6ACC /* QuickTime.framework */; };
+		20DFD67A0ADDF4F700BB6ACC /* NSImage-CocoatechFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DFD6780ADDF4F700BB6ACC /* NSImage-CocoatechFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20DFD67B0ADDF4F700BB6ACC /* NSImage-CocoatechFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 20DFD6790ADDF4F700BB6ACC /* NSImage-CocoatechFile.m */; };
+		20DFD6970ADDF9BF00BB6ACC /* NTIconCompositor.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DFD6950ADDF9BF00BB6ACC /* NTIconCompositor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20DFD6980ADDF9BF00BB6ACC /* NTIconCompositor.m in Sources */ = {isa = PBXBuildFile; fileRef = 20DFD6960ADDF9BF00BB6ACC /* NTIconCompositor.m */; };
+		20DFD6A60ADDF9D000BB6ACC /* NTLabelColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DFD69E0ADDF9D000BB6ACC /* NTLabelColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20DFD6A70ADDF9D000BB6ACC /* NTLabelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 20DFD69F0ADDF9D000BB6ACC /* NTLabelColor.m */; };
+		20DFD6A80ADDF9D000BB6ACC /* NTLabelColorMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DFD6A00ADDF9D000BB6ACC /* NTLabelColorMgr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20DFD6A90ADDF9D000BB6ACC /* NTLabelColorMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 20DFD6A10ADDF9D000BB6ACC /* NTLabelColorMgr.m */; };
+		20DFD6AA0ADDF9D000BB6ACC /* NTLabelLazyMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DFD6A20ADDF9D000BB6ACC /* NTLabelLazyMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20DFD6AB0ADDF9D000BB6ACC /* NTLabelLazyMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 20DFD6A30ADDF9D000BB6ACC /* NTLabelLazyMenu.m */; };
+		20DFD6AC0ADDF9D000BB6ACC /* NTLabelsModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 20DFD6A40ADDF9D000BB6ACC /* NTLabelsModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20DFD6AD0ADDF9D000BB6ACC /* NTLabelsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20DFD6A50ADDF9D000BB6ACC /* NTLabelsModel.m */; };
+		20E385030B64A4C000CC0D7B /* NTCustomIconView.h in Headers */ = {isa = PBXBuildFile; fileRef = 20E385010B64A4C000CC0D7B /* NTCustomIconView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20E385040B64A4C000CC0D7B /* NTCustomIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E385020B64A4C000CC0D7B /* NTCustomIconView.m */; };
+		20E5FE9A0B4F66590042CD80 /* NTLabelButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 20E5FE960B4F66590042CD80 /* NTLabelButtonCell.h */; };
+		20E5FE9B0B4F66590042CD80 /* NTLabelButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E5FE970B4F66590042CD80 /* NTLabelButtonCell.m */; };
+		20E5FE9C0B4F66590042CD80 /* NTLabelButtonMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 20E5FE980B4F66590042CD80 /* NTLabelButtonMatrix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20E5FE9D0B4F66590042CD80 /* NTLabelButtonMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E5FE990B4F66590042CD80 /* NTLabelButtonMatrix.m */; };
+		20E7AE460E807A860015EA05 /* DiskArbitration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E7AE450E807A860015EA05 /* DiskArbitration.framework */; };
+		20F12C600F4BD950004D50F8 /* NTPartitionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 20F12C5E0F4BD950004D50F8 /* NTPartitionInfo.h */; };
+		20F12C610F4BD950004D50F8 /* NTPartitionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F12C5F0F4BD950004D50F8 /* NTPartitionInfo.m */; };
+		20F23C480B98F5580016D7FB /* NTLaunchServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 20F23C460B98F5580016D7FB /* NTLaunchServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20F23C490B98F5580016D7FB /* NTLaunchServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F23C470B98F5580016D7FB /* NTLaunchServices.m */; };
+		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
+		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		208B15D40ADC5F6500AF3CB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 208B15C90ADC5F6500AF3CB0 /* CocoatechCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = CocoatechCore;
+		};
+		208B15D80ADC5F7000AF3CB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 208B15C90ADC5F6500AF3CB0 /* CocoatechCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = CocoatechCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		20032FFE0DA43FF400C648DE /* NTLoginItemMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTLoginItemMgr.h; sourceTree = "<group>"; };
+		20032FFF0DA43FF400C648DE /* NTLoginItemMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTLoginItemMgr.m; sourceTree = "<group>"; };
+		2008E5140D77DC1F00936C6D /* NTVolumeMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTVolumeMgr.h; sourceTree = "<group>"; };
+		2008E5150D77DC1F00936C6D /* NTVolumeMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTVolumeMgr.m; sourceTree = "<group>"; };
+		201CAE560DA1949300812F19 /* NTSharedFileListMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTSharedFileListMgr.h; sourceTree = "<group>"; };
+		201CAE570DA1949300812F19 /* NTSharedFileListMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTSharedFileListMgr.m; sourceTree = "<group>"; };
+		2025A1AD0F464B9700FD8519 /* NSDocument-NTExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDocument-NTExtensions.h"; sourceTree = "<group>"; };
+		2025A1AE0F464B9700FD8519 /* NSDocument-NTExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDocument-NTExtensions.m"; sourceTree = "<group>"; };
+		20264F4A0E5D53A200685D2C /* NTFolderWatcherManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTFolderWatcherManager.h; sourceTree = "<group>"; };
+		20264F4B0E5D53A200685D2C /* NTFolderWatcherManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTFolderWatcherManager.m; sourceTree = "<group>"; };
+		202769C60E4570DA001C7E26 /* NTVolumeModifiedWatcherThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTVolumeModifiedWatcherThread.h; sourceTree = "<group>"; };
+		202769C70E4570DA001C7E26 /* NTVolumeModifiedWatcherThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTVolumeModifiedWatcherThread.m; sourceTree = "<group>"; };
+		2030A15A0ADE214E0079DB27 /* NTFSDeleteThread.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFSDeleteThread.h; sourceTree = "<group>"; };
+		2030A15B0ADE214E0079DB27 /* NTFSDeleteThread.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFSDeleteThread.m; sourceTree = "<group>"; };
+		2030A1AD0ADE23A70079DB27 /* CocoatechFileConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoatechFileConstants.h; sourceTree = "<group>"; };
+		2030A1CC0ADE243F0079DB27 /* NTFileDeleter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFileDeleter.h; sourceTree = "<group>"; };
+		2030A1CD0ADE243F0079DB27 /* NTFileDeleter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFileDeleter.m; sourceTree = "<group>"; };
+		2030A1D40ADE24550079DB27 /* NTSecureDelete.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTSecureDelete.h; sourceTree = "<group>"; };
+		2030A1D50ADE24550079DB27 /* NTSecureDelete.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTSecureDelete.m; sourceTree = "<group>"; };
+		203B60810D4AD14F0000299F /* NTListSizeCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTListSizeCalculator.h; sourceTree = "<group>"; };
+		203B60820D4AD14F0000299F /* NTListSizeCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTListSizeCalculator.m; sourceTree = "<group>"; };
+		203B63BF0D4ADA270000299F /* NTSizeCalculatorTreeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTSizeCalculatorTreeOperation.h; sourceTree = "<group>"; };
+		203B63C00D4ADA270000299F /* NTSizeCalculatorTreeOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTSizeCalculatorTreeOperation.m; sourceTree = "<group>"; };
+		203B63C60D4ADD780000299F /* NTSizeCalculatorTreeMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTSizeCalculatorTreeMgr.h; sourceTree = "<group>"; };
+		203B63C70D4ADD780000299F /* NTSizeCalculatorTreeMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTSizeCalculatorTreeMgr.m; sourceTree = "<group>"; };
+		204A61C50D44081400B6EB88 /* NTOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTOperation.h; sourceTree = "<group>"; };
+		204A61C60D44081400B6EB88 /* NTOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTOperation.m; sourceTree = "<group>"; };
+		204CED300ADCB91400B25AD4 /* NTCarbonFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTCarbonFileInfo.h; sourceTree = "<group>"; };
+		204CED310ADCB91400B25AD4 /* NTCarbonFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTCarbonFileInfo.m; sourceTree = "<group>"; };
+		204CED360ADCB93600B25AD4 /* NTFileModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTFileModifier.h; sourceTree = "<group>"; };
+		204CED370ADCB93600B25AD4 /* NTFileModifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTFileModifier.m; sourceTree = "<group>"; };
+		204CEDE20ADCBBBD00B25AD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
+		204CEE3D0ADCBD3B00B25AD4 /* NTMetadata.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTMetadata.h; sourceTree = "<group>"; };
+		204CEE3E0ADCBD3B00B25AD4 /* NTMetadata.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTMetadata.m; sourceTree = "<group>"; };
+		204CEE410ADCBD4400B25AD4 /* NTStringShare.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTStringShare.h; sourceTree = "<group>"; };
+		204CEE420ADCBD4400B25AD4 /* NTStringShare.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTStringShare.m; sourceTree = "<group>"; };
+		204CEE720ADCBE4B00B25AD4 /* NTIcon.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTIcon.h; sourceTree = "<group>"; };
+		204CEE730ADCBE4B00B25AD4 /* NTIcon.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTIcon.m; sourceTree = "<group>"; };
+		204CEE740ADCBE4B00B25AD4 /* NTIconFamily.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTIconFamily.h; sourceTree = "<group>"; };
+		204CEE750ADCBE4B00B25AD4 /* NTIconFamily.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTIconFamily.m; sourceTree = "<group>"; };
+		204CEE760ADCBE4B00B25AD4 /* NTIconStore.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTIconStore.h; sourceTree = "<group>"; };
+		204CEE770ADCBE4B00B25AD4 /* NTIconStore.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTIconStore.m; sourceTree = "<group>"; };
+		204CEF6A0ADCC1ED00B25AD4 /* NTGetAttrList.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTGetAttrList.h; sourceTree = "<group>"; };
+		204CEF6B0ADCC1ED00B25AD4 /* NTGetAttrList.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTGetAttrList.m; sourceTree = "<group>"; };
+		204CEF7B0ADCC23200B25AD4 /* NTCGImage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTCGImage.h; sourceTree = "<group>"; };
+		204CEF7C0ADCC23200B25AD4 /* NTCGImage.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTCGImage.m; sourceTree = "<group>"; };
+		204CEF900ADCC28A00B25AD4 /* NTThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTThumbnail.h; sourceTree = "<group>"; };
+		204CEF910ADCC28A00B25AD4 /* NTThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTThumbnail.m; sourceTree = "<group>"; };
+		204CF04A0ADCCBFC00B25AD4 /* NTFSWatcher.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFSWatcher.h; sourceTree = "<group>"; };
+		204CF04B0ADCCBFC00B25AD4 /* NTFSWatcher.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFSWatcher.m; sourceTree = "<group>"; };
+		204CF04C0ADCCBFC00B25AD4 /* NTFSWatcherItem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFSWatcherItem.h; sourceTree = "<group>"; };
+		204CF04D0ADCCBFC00B25AD4 /* NTFSWatcherItem.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFSWatcherItem.m; sourceTree = "<group>"; };
+		204CF0520ADCCC1400B25AD4 /* NTFNSubscription.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFNSubscription.h; sourceTree = "<group>"; };
+		204CF0530ADCCC1400B25AD4 /* NTFNSubscription.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFNSubscription.m; sourceTree = "<group>"; };
+		204CF0540ADCCC1400B25AD4 /* NTFSSubscription.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFSSubscription.h; sourceTree = "<group>"; };
+		204CF0550ADCCC1400B25AD4 /* NTFSSubscription.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFSSubscription.m; sourceTree = "<group>"; };
+		204CF0560ADCCC1400B25AD4 /* NTKQueueSubscription.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTKQueueSubscription.h; sourceTree = "<group>"; };
+		204CF0570ADCCC1400B25AD4 /* NTKQueueSubscription.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTKQueueSubscription.m; sourceTree = "<group>"; };
+		204CF0650ADCCC8800B25AD4 /* NTFNMonitor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFNMonitor.h; sourceTree = "<group>"; };
+		204CF0660ADCCC8800B25AD4 /* NTFNMonitor.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFNMonitor.m; sourceTree = "<group>"; };
+		204CF0670ADCCC8800B25AD4 /* NTFSMonitor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFSMonitor.h; sourceTree = "<group>"; };
+		204CF0680ADCCC8800B25AD4 /* NTFSMonitor.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFSMonitor.m; sourceTree = "<group>"; };
+		204CF0690ADCCC8800B25AD4 /* NTKQueueMonitor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTKQueueMonitor.h; sourceTree = "<group>"; };
+		204CF06A0ADCCC8800B25AD4 /* NTKQueueMonitor.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTKQueueMonitor.m; sourceTree = "<group>"; };
+		20585EE80B98CA22003B6A72 /* NTLaunchServiceHacks.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTLaunchServiceHacks.h; sourceTree = "<group>"; };
+		20585EE90B98CA22003B6A72 /* NTLaunchServiceHacks.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTLaunchServiceHacks.m; sourceTree = "<group>"; };
+		20585EEC0B98CA35003B6A72 /* NTFileAttributeModifier.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFileAttributeModifier.h; sourceTree = "<group>"; };
+		20585EED0B98CA35003B6A72 /* NTFileAttributeModifier.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFileAttributeModifier.m; sourceTree = "<group>"; };
+		2064D3570EE36EAE00DCD342 /* NTFileRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTFileRep.h; sourceTree = "<group>"; };
+		2064D3580EE36EAE00DCD342 /* NTFileRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTFileRep.m; sourceTree = "<group>"; };
+		206A90DE0B1525D6002005D1 /* NTSyncSizeCalculator.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTSyncSizeCalculator.h; sourceTree = "<group>"; };
+		206A90DF0B1525D6002005D1 /* NTSyncSizeCalculator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTSyncSizeCalculator.m; sourceTree = "<group>"; };
+		207B16850D57F90000956A30 /* NTSizeCalculatorTreeRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTSizeCalculatorTreeRoot.h; sourceTree = "<group>"; };
+		207B16860D57F90000956A30 /* NTSizeCalculatorTreeRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTSizeCalculatorTreeRoot.m; sourceTree = "<group>"; };
+		208136D20D4AB87A004F7C6E /* NTSizeCalculatorTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTSizeCalculatorTree.h; sourceTree = "<group>"; };
+		208136D30D4AB87A004F7C6E /* NTSizeCalculatorTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTSizeCalculatorTree.m; sourceTree = "<group>"; };
+		208136D60D4AB8BE004F7C6E /* NTSizeCalculatorTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTSizeCalculatorTreeNode.h; sourceTree = "<group>"; };
+		208136D70D4AB8BE004F7C6E /* NTSizeCalculatorTreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTSizeCalculatorTreeNode.m; sourceTree = "<group>"; };
+		208B15B90ADC5F1D00AF3CB0 /* CocoatechFile_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CocoatechFile_Prefix.pch; sourceTree = "<group>"; };
+		208B15BA0ADC5F1D00AF3CB0 /* CocoatechFile.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CocoatechFile.h; sourceTree = "<group>"; };
+		208B15C90ADC5F6500AF3CB0 /* CocoatechCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoatechCore.xcodeproj; path = ../CocoatechCore/CocoatechCore.xcodeproj; sourceTree = SOURCE_ROOT; };
+		208B15DE0ADC634E00AF3CB0 /* NTFileDesc-Compare.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NTFileDesc-Compare.h"; sourceTree = "<group>"; };
+		208B15DF0ADC634E00AF3CB0 /* NTFileDesc-Compare.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NTFileDesc-Compare.m"; sourceTree = "<group>"; };
+		208B15E00ADC634E00AF3CB0 /* NTFileDesc-DirectoryContents.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NTFileDesc-DirectoryContents.h"; sourceTree = "<group>"; };
+		208B15E10ADC634E00AF3CB0 /* NTFileDesc-DirectoryContents.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NTFileDesc-DirectoryContents.m"; sourceTree = "<group>"; };
+		208B15E20ADC634E00AF3CB0 /* NTFileDesc-NTUtilities.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NTFileDesc-NTUtilities.h"; sourceTree = "<group>"; };
+		208B15E30ADC634E00AF3CB0 /* NTFileDesc-NTUtilities.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NTFileDesc-NTUtilities.m"; sourceTree = "<group>"; };
+		208B15E40ADC634E00AF3CB0 /* NTFileDesc-Private.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NTFileDesc-Private.h"; sourceTree = "<group>"; };
+		208B15E50ADC634E00AF3CB0 /* NTFileDesc-Private.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NTFileDesc-Private.m"; sourceTree = "<group>"; };
+		208B15E60ADC634E00AF3CB0 /* NTFileDesc-State.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NTFileDesc-State.h"; sourceTree = "<group>"; };
+		208B15E70ADC634E00AF3CB0 /* NTFileDesc-State.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NTFileDesc-State.m"; sourceTree = "<group>"; };
+		208B15E80ADC634E00AF3CB0 /* NTFileDesc.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFileDesc.h; sourceTree = "<group>"; };
+		208B15E90ADC634E00AF3CB0 /* NTFileDesc.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFileDesc.m; sourceTree = "<group>"; };
+		208B15EA0ADC634E00AF3CB0 /* NTFileDescData-Private.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NTFileDescData-Private.h"; sourceTree = "<group>"; };
+		208B15EB0ADC634E00AF3CB0 /* NTFileDescData-Private.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NTFileDescData-Private.m"; sourceTree = "<group>"; };
+		208B15EC0ADC634E00AF3CB0 /* NTFileDescData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFileDescData.h; sourceTree = "<group>"; };
+		208B15ED0ADC634E00AF3CB0 /* NTFileDescData.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFileDescData.m; sourceTree = "<group>"; };
+		208B15EE0ADC634E00AF3CB0 /* NTFileDescMemCache.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFileDescMemCache.h; sourceTree = "<group>"; };
+		208B15EF0ADC634E00AF3CB0 /* NTFileDescMemCache.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFileDescMemCache.m; sourceTree = "<group>"; };
+		208B161F0ADC651800AF3CB0 /* NTVolumeNotificationMgr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTVolumeNotificationMgr.h; sourceTree = "<group>"; };
+		208B16200ADC651800AF3CB0 /* NTVolumeNotificationMgr.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTVolumeNotificationMgr.m; sourceTree = "<group>"; };
+		208B16210ADC651800AF3CB0 /* NTVolume.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTVolume.h; sourceTree = "<group>"; };
+		208B16220ADC651800AF3CB0 /* NTVolume.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTVolume.m; sourceTree = "<group>"; };
+		208B16230ADC651800AF3CB0 /* NTVolumeCache.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTVolumeCache.h; sourceTree = "<group>"; };
+		208B16240ADC651800AF3CB0 /* NTVolumeCache.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTVolumeCache.m; sourceTree = "<group>"; };
+		208B16250ADC651800AF3CB0 /* NTVolumeSpec.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTVolumeSpec.h; sourceTree = "<group>"; };
+		208B16260ADC651800AF3CB0 /* NTVolumeSpec.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTVolumeSpec.m; sourceTree = "<group>"; };
+		208B16290ADC651800AF3CB0 /* NTVolumeMounter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTVolumeMounter.h; sourceTree = "<group>"; };
+		208B162A0ADC651800AF3CB0 /* NTVolumeMounter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTVolumeMounter.m; sourceTree = "<group>"; };
+		208B162D0ADC651800AF3CB0 /* NTVolumesMonitor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTVolumesMonitor.h; sourceTree = "<group>"; };
+		208B162E0ADC651800AF3CB0 /* NTVolumesMonitor.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTVolumesMonitor.m; sourceTree = "<group>"; };
+		208B162F0ADC651800AF3CB0 /* NTVolumesSubscription.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTVolumesSubscription.h; sourceTree = "<group>"; };
+		208B16300ADC651800AF3CB0 /* NTVolumesSubscription.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTVolumesSubscription.m; sourceTree = "<group>"; };
+		208B16470ADC658500AF3CB0 /* NTFSRefObject.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFSRefObject.h; sourceTree = "<group>"; };
+		208B16480ADC658500AF3CB0 /* NTFSRefObject.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFSRefObject.m; sourceTree = "<group>"; };
+		208DF9BE0DA2B9D4006F7DA3 /* NTSharedFileListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTSharedFileListItem.h; sourceTree = "<group>"; };
+		208DF9BF0DA2B9D4006F7DA3 /* NTSharedFileListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTSharedFileListItem.m; sourceTree = "<group>"; };
+		20907E3B0DB8610D0068871F /* NTLabelsMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTLabelsMenuItem.h; sourceTree = "<group>"; };
+		20907E3C0DB8610D0068871F /* NTLabelsMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTLabelsMenuItem.m; sourceTree = "<group>"; };
+		20907E450DB869A60068871F /* NTLabelsMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTLabelsMenuView.h; sourceTree = "<group>"; };
+		20907E460DB869A60068871F /* NTLabelsMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTLabelsMenuView.m; sourceTree = "<group>"; };
+		2097BBEF0D7A264E000143A6 /* NTVolumeMgrState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTVolumeMgrState.h; sourceTree = "<group>"; };
+		2097BBF00D7A264E000143A6 /* NTVolumeMgrState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTVolumeMgrState.m; sourceTree = "<group>"; };
+		2099B6990D4950D400CF70BF /* NTFSEventMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTFSEventMessage.h; sourceTree = "<group>"; };
+		2099B69A0D4950D400CF70BF /* NTFSEventMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTFSEventMessage.m; sourceTree = "<group>"; };
+		209E407B0ADCA90F00DC888E /* NTResourceFork.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTResourceFork.h; sourceTree = "<group>"; };
+		209E407C0ADCA90F00DC888E /* NTResourceFork.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTResourceFork.m; sourceTree = "<group>"; };
+		209E407D0ADCA90F00DC888E /* NTResourceInfo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTResourceInfo.h; sourceTree = "<group>"; };
+		209E407E0ADCA90F00DC888E /* NTResourceInfo.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTResourceInfo.m; sourceTree = "<group>"; };
+		209E407F0ADCA90F00DC888E /* NTResourceMgr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTResourceMgr.h; sourceTree = "<group>"; };
+		209E40800ADCA90F00DC888E /* NTResourceMgr.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTResourceMgr.m; sourceTree = "<group>"; };
+		209E40870ADCA91600DC888E /* NTFileTypeIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFileTypeIdentifier.h; sourceTree = "<group>"; };
+		209E40880ADCA91600DC888E /* NTFileTypeIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFileTypeIdentifier.m; sourceTree = "<group>"; };
+		209E408B0ADCA92000DC888E /* NTImageTypeMgr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTImageTypeMgr.h; sourceTree = "<group>"; };
+		209E408C0ADCA92000DC888E /* NTImageTypeMgr.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTImageTypeMgr.m; sourceTree = "<group>"; };
+		209E409A0ADCA96C00DC888E /* NTWeblocFile.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTWeblocFile.h; sourceTree = "<group>"; };
+		209E409B0ADCA96C00DC888E /* NTWeblocFile.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTWeblocFile.m; sourceTree = "<group>"; };
+		209E40B60ADCAA5B00DC888E /* NTAlias.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTAlias.h; sourceTree = "<group>"; };
+		209E40B70ADCAA5B00DC888E /* NTAlias.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTAlias.m; sourceTree = "<group>"; };
+		209E40B80ADCAA5B00DC888E /* NTAliasFileManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTAliasFileManager.h; sourceTree = "<group>"; };
+		209E40B90ADCAA5B00DC888E /* NTAliasFileManager.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTAliasFileManager.m; sourceTree = "<group>"; };
+		209E40CB0ADCAA8C00DC888E /* NTDefaultDirectory.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTDefaultDirectory.h; sourceTree = "<group>"; };
+		209E40CC0ADCAA8C00DC888E /* NTDefaultDirectory.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTDefaultDirectory.m; sourceTree = "<group>"; };
+		209E40ED0ADCAACF00DC888E /* NTFileCreation.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFileCreation.h; sourceTree = "<group>"; };
+		209E40EE0ADCAACF00DC888E /* NTFileCreation.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFileCreation.m; sourceTree = "<group>"; };
+		209E41080ADCACBB00DC888E /* NTPathUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTPathUtilities.h; sourceTree = "<group>"; };
+		209E41090ADCACBB00DC888E /* NTPathUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTPathUtilities.m; sourceTree = "<group>"; };
+		20B08DE10B1526EB001AE8C1 /* NTFSSize.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFSSize.h; sourceTree = "<group>"; };
+		20B08DE20B1526EB001AE8C1 /* NTFSSize.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFSSize.m; sourceTree = "<group>"; };
+		20B61D2D0E22D82A003F1FE0 /* NTVolumeModifiedWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTVolumeModifiedWatcher.h; sourceTree = "<group>"; };
+		20B61D2E0E22D82A003F1FE0 /* NTVolumeModifiedWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTVolumeModifiedWatcher.m; sourceTree = "<group>"; };
+		20C10B0A0A3F6D9900291B79 /* CocoaTechStrings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoaTechStrings.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		20C44FA50D3EFA2A009EBEA8 /* NTFolderWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTFolderWatcher.h; sourceTree = "<group>"; };
+		20C44FA60D3EFA2A009EBEA8 /* NTFolderWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTFolderWatcher.m; sourceTree = "<group>"; };
+		20C561C20D173F8F00BDF389 /* NTQuickLookThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTQuickLookThumbnail.h; sourceTree = "<group>"; };
+		20C561C30D173F8F00BDF389 /* NTQuickLookThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTQuickLookThumbnail.m; sourceTree = "<group>"; };
+		20C561CF0D173FFC00BDF389 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = /System/Library/Frameworks/QuickLook.framework; sourceTree = "<absolute>"; };
+		20C825100ADC920D00D25B44 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		20CCDE110D4002A5009522F0 /* NTSizeCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTSizeCalculator.h; sourceTree = "<group>"; };
+		20CCDE120D4002A5009522F0 /* NTSizeCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTSizeCalculator.m; sourceTree = "<group>"; };
+		20CCDE430D400961009522F0 /* NTSizeCalculatorMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTSizeCalculatorMgr.h; sourceTree = "<group>"; };
+		20CCDE440D400961009522F0 /* NTSizeCalculatorMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTSizeCalculatorMgr.m; sourceTree = "<group>"; };
+		20D4C0080F11CD7D00B3A482 /* NTVolumeUnmounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTVolumeUnmounter.h; sourceTree = "<group>"; };
+		20D4C0090F11CD7D00B3A482 /* NTVolumeUnmounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTVolumeUnmounter.m; sourceTree = "<group>"; };
+		20D4C06E0F11E0EC00B3A482 /* NTVolumeModifiedRebuildThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTVolumeModifiedRebuildThread.h; sourceTree = "<group>"; };
+		20D4C06F0F11E0EC00B3A482 /* NTVolumeModifiedRebuildThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTVolumeModifiedRebuildThread.m; sourceTree = "<group>"; };
+		20D9DCE40B7D5C2200B89AD5 /* NTFileListMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTFileListMonitor.h; sourceTree = "<group>"; };
+		20D9DCE50B7D5C2200B89AD5 /* NTFileListMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTFileListMonitor.m; sourceTree = "<group>"; };
+		20D9DCF70B7D5D8500B89AD5 /* NTFileListMonitorThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTFileListMonitorThread.h; sourceTree = "<group>"; };
+		20D9DCF80B7D5D8500B89AD5 /* NTFileListMonitorThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTFileListMonitorThread.m; sourceTree = "<group>"; };
+		20DFD4F20ADDEB0700BB6ACC /* NTFileEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFileEnvironment.h; sourceTree = "<group>"; };
+		20DFD4F30ADDEB0700BB6ACC /* NTFileEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFileEnvironment.m; sourceTree = "<group>"; };
+		20DFD5AB0ADDEF6700BB6ACC /* NTFileNamingManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFileNamingManager.h; sourceTree = "<group>"; };
+		20DFD5AC0ADDEF6700BB6ACC /* NTFileNamingManager.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFileNamingManager.m; sourceTree = "<group>"; };
+		20DFD5AD0ADDEF6700BB6ACC /* NTFilePreflightTests.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTFilePreflightTests.h; sourceTree = "<group>"; };
+		20DFD5AE0ADDEF6700BB6ACC /* NTFilePreflightTests.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTFilePreflightTests.m; sourceTree = "<group>"; };
+		20DFD5CA0ADDEFED00BB6ACC /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		20DFD6240ADDF28600BB6ACC /* CocoatechCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CocoatechCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		20DFD62C0ADDF2E700BB6ACC /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		20DFD6310ADDF33800BB6ACC /* DiscRecordingUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiscRecordingUI.framework; path = /System/Library/Frameworks/DiscRecordingUI.framework; sourceTree = "<absolute>"; };
+		20DFD6360ADDF38D00BB6ACC /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
+		20DFD6780ADDF4F700BB6ACC /* NSImage-CocoatechFile.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = "NSImage-CocoatechFile.h"; sourceTree = "<group>"; };
+		20DFD6790ADDF4F700BB6ACC /* NSImage-CocoatechFile.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NSImage-CocoatechFile.m"; sourceTree = "<group>"; };
+		20DFD6950ADDF9BF00BB6ACC /* NTIconCompositor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTIconCompositor.h; sourceTree = "<group>"; };
+		20DFD6960ADDF9BF00BB6ACC /* NTIconCompositor.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTIconCompositor.m; sourceTree = "<group>"; };
+		20DFD69E0ADDF9D000BB6ACC /* NTLabelColor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTLabelColor.h; sourceTree = "<group>"; };
+		20DFD69F0ADDF9D000BB6ACC /* NTLabelColor.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTLabelColor.m; sourceTree = "<group>"; };
+		20DFD6A00ADDF9D000BB6ACC /* NTLabelColorMgr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTLabelColorMgr.h; sourceTree = "<group>"; };
+		20DFD6A10ADDF9D000BB6ACC /* NTLabelColorMgr.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTLabelColorMgr.m; sourceTree = "<group>"; };
+		20DFD6A20ADDF9D000BB6ACC /* NTLabelLazyMenu.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTLabelLazyMenu.h; sourceTree = "<group>"; };
+		20DFD6A30ADDF9D000BB6ACC /* NTLabelLazyMenu.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTLabelLazyMenu.m; sourceTree = "<group>"; };
+		20DFD6A40ADDF9D000BB6ACC /* NTLabelsModel.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTLabelsModel.h; sourceTree = "<group>"; };
+		20DFD6A50ADDF9D000BB6ACC /* NTLabelsModel.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTLabelsModel.m; sourceTree = "<group>"; };
+		20E385010B64A4C000CC0D7B /* NTCustomIconView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTCustomIconView.h; sourceTree = "<group>"; };
+		20E385020B64A4C000CC0D7B /* NTCustomIconView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTCustomIconView.m; sourceTree = "<group>"; };
+		20E5FE960B4F66590042CD80 /* NTLabelButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTLabelButtonCell.h; sourceTree = "<group>"; };
+		20E5FE970B4F66590042CD80 /* NTLabelButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTLabelButtonCell.m; sourceTree = "<group>"; };
+		20E5FE980B4F66590042CD80 /* NTLabelButtonMatrix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTLabelButtonMatrix.h; sourceTree = "<group>"; };
+		20E5FE990B4F66590042CD80 /* NTLabelButtonMatrix.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTLabelButtonMatrix.m; sourceTree = "<group>"; };
+		20E7AE450E807A860015EA05 /* DiskArbitration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiskArbitration.framework; path = /System/Library/Frameworks/DiskArbitration.framework; sourceTree = "<absolute>"; };
+		20EF87010988603D006FA8BB /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../Configurations/Debug.xcconfig; sourceTree = SOURCE_ROOT; };
+		20EF87020988603D006FA8BB /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../Configurations/Release.xcconfig; sourceTree = SOURCE_ROOT; };
+		20F12C5E0F4BD950004D50F8 /* NTPartitionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTPartitionInfo.h; sourceTree = "<group>"; };
+		20F12C5F0F4BD950004D50F8 /* NTPartitionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTPartitionInfo.m; sourceTree = "<group>"; };
+		20F23C460B98F5580016D7FB /* NTLaunchServices.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NTLaunchServices.h; sourceTree = "<group>"; };
+		20F23C470B98F5580016D7FB /* NTLaunchServices.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NTLaunchServices.m; sourceTree = "<group>"; };
+		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8DC2EF5B0486A6940098B216 /* CocoatechFile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoatechFile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DC2EF560486A6940098B216 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */,
+				20C10B0B0A3F6D9A00291B79 /* CocoaTechStrings.framework in Frameworks */,
+				20C825110ADC920D00D25B44 /* Carbon.framework in Frameworks */,
+				204CEDE30ADCBBBD00B25AD4 /* QTKit.framework in Frameworks */,
+				20DFD6250ADDF28600BB6ACC /* CocoatechCore.framework in Frameworks */,
+				20DFD62D0ADDF2E700BB6ACC /* IOKit.framework in Frameworks */,
+				20DFD6320ADDF33800BB6ACC /* DiscRecordingUI.framework in Frameworks */,
+				20DFD6370ADDF38D00BB6ACC /* QuickTime.framework in Frameworks */,
+				20C561D00D173FFC00BDF389 /* QuickLook.framework in Frameworks */,
+				20E7AE460E807A860015EA05 /* DiskArbitration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DC2EF5B0486A6940098B216 /* CocoatechFile.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* CocoatechCore */ = {
+			isa = PBXGroup;
+			children = (
+				208B15BA0ADC5F1D00AF3CB0 /* CocoatechFile.h */,
+				208B15B90ADC5F1D00AF3CB0 /* CocoatechFile_Prefix.pch */,
+				2030A1AD0ADE23A70079DB27 /* CocoatechFileConstants.h */,
+				20EF89ED09886BDE006FA8BB /* Project References */,
+				20EF87050988604D006FA8BB /* Configurations */,
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				089C1665FE841158C02AAC07 /* Resources */,
+				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = CocoatechCore;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				20C10B0A0A3F6D9900291B79 /* CocoaTechStrings.framework */,
+				20DFD6240ADDF28600BB6ACC /* CocoatechCore.framework */,
+				1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */,
+				1058C7B2FEA5585E11CA2CBB /* Other Frameworks */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C1665FE841158C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				20DFD5CA0ADDEFED00BB6ACC /* images */,
+				8DC2EF5A0486A6940098B216 /* Info.plist */,
+				089C1666FE841158C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				20E5FEA00B4F66620042CD80 /* Labels */,
+				20C44F960D3EF714009EBEA8 /* FSEvents */,
+				20D9DCEA0B7D5C3F00B89AD5 /* Kqueues */,
+				2017DAA20D42E20A0047C424 /* NTFileDesc */,
+				2017DAA50D42E2250047C424 /* Images and Icons */,
+				2017DAA80D42E2690047C424 /* Deleting */,
+				20D4C00E0F11CD9400B3A482 /* Mount - Unmount */,
+				2017DAAB0D42E2CC0047C424 /* Volumes */,
+				208DF9C50DA2BA4F006F7DA3 /* Shared File List Mgr */,
+				2017DAAE0D42E35C0047C424 /* Other */,
+				20B07E8B0AD7502F00A25B54 /* Headers */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20E7AE450E807A860015EA05 /* DiskArbitration.framework */,
+				20C561CF0D173FFC00BDF389 /* QuickLook.framework */,
+				1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */,
+				20DFD6360ADDF38D00BB6ACC /* QuickTime.framework */,
+				20DFD6310ADDF33800BB6ACC /* DiscRecordingUI.framework */,
+				20DFD62C0ADDF2E700BB6ACC /* IOKit.framework */,
+				20C825100ADC920D00D25B44 /* Carbon.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7B2FEA5585E11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0867D6A5FE840307C02AAC07 /* AppKit.framework */,
+				204CEDE20ADCBBBD00B25AD4 /* QTKit.framework */,
+				D2F7E79907B2D74100F64583 /* CoreData.framework */,
+				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		2017DAA20D42E20A0047C424 /* NTFileDesc */ = {
+			isa = PBXGroup;
+			children = (
+				208B15E90ADC634E00AF3CB0 /* NTFileDesc.m */,
+				208B16480ADC658500AF3CB0 /* NTFSRefObject.m */,
+				208B15DF0ADC634E00AF3CB0 /* NTFileDesc-Compare.m */,
+				208B15E10ADC634E00AF3CB0 /* NTFileDesc-DirectoryContents.m */,
+				208B15E30ADC634E00AF3CB0 /* NTFileDesc-NTUtilities.m */,
+				208B15E70ADC634E00AF3CB0 /* NTFileDesc-State.m */,
+				208B15E50ADC634E00AF3CB0 /* NTFileDesc-Private.m */,
+				209E40B90ADCAA5B00DC888E /* NTAliasFileManager.m */,
+				209E40B70ADCAA5B00DC888E /* NTAlias.m */,
+				209E40880ADCA91600DC888E /* NTFileTypeIdentifier.m */,
+				208B15ED0ADC634E00AF3CB0 /* NTFileDescData.m */,
+				208B15EB0ADC634E00AF3CB0 /* NTFileDescData-Private.m */,
+				204CEE3E0ADCBD3B00B25AD4 /* NTMetadata.m */,
+				208B15EF0ADC634E00AF3CB0 /* NTFileDescMemCache.m */,
+				2064D3580EE36EAE00DCD342 /* NTFileRep.m */,
+			);
+			name = NTFileDesc;
+			sourceTree = "<group>";
+		};
+		2017DAA50D42E2250047C424 /* Images and Icons */ = {
+			isa = PBXGroup;
+			children = (
+				20E385020B64A4C000CC0D7B /* NTCustomIconView.m */,
+				204CEE750ADCBE4B00B25AD4 /* NTIconFamily.m */,
+				20DFD6790ADDF4F700BB6ACC /* NSImage-CocoatechFile.m */,
+				20DFD6960ADDF9BF00BB6ACC /* NTIconCompositor.m */,
+				209E408C0ADCA92000DC888E /* NTImageTypeMgr.m */,
+				204CEF910ADCC28A00B25AD4 /* NTThumbnail.m */,
+				204CEF7C0ADCC23200B25AD4 /* NTCGImage.m */,
+				204CEE730ADCBE4B00B25AD4 /* NTIcon.m */,
+				20C561C30D173F8F00BDF389 /* NTQuickLookThumbnail.m */,
+				204CEE770ADCBE4B00B25AD4 /* NTIconStore.m */,
+			);
+			name = "Images and Icons";
+			sourceTree = "<group>";
+		};
+		2017DAA80D42E2690047C424 /* Deleting */ = {
+			isa = PBXGroup;
+			children = (
+				2030A15B0ADE214E0079DB27 /* NTFSDeleteThread.m */,
+				2030A1CD0ADE243F0079DB27 /* NTFileDeleter.m */,
+				2030A1D50ADE24550079DB27 /* NTSecureDelete.m */,
+			);
+			name = Deleting;
+			sourceTree = "<group>";
+		};
+		2017DAAB0D42E2CC0047C424 /* Volumes */ = {
+			isa = PBXGroup;
+			children = (
+				2008E5150D77DC1F00936C6D /* NTVolumeMgr.m */,
+				2097BBF00D7A264E000143A6 /* NTVolumeMgrState.m */,
+				208B16200ADC651800AF3CB0 /* NTVolumeNotificationMgr.m */,
+				208B16220ADC651800AF3CB0 /* NTVolume.m */,
+				208B16240ADC651800AF3CB0 /* NTVolumeCache.m */,
+				208B16260ADC651800AF3CB0 /* NTVolumeSpec.m */,
+				208B16300ADC651800AF3CB0 /* NTVolumesSubscription.m */,
+				208B162E0ADC651800AF3CB0 /* NTVolumesMonitor.m */,
+				20D4C06B0F11DD1300B3A482 /* Volume Modified watcher */,
+			);
+			name = Volumes;
+			sourceTree = "<group>";
+		};
+		2017DAAE0D42E35C0047C424 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				204A61C60D44081400B6EB88 /* NTOperation.m */,
+				20585EE90B98CA22003B6A72 /* NTLaunchServiceHacks.m */,
+				20F23C470B98F5580016D7FB /* NTLaunchServices.m */,
+				20585EED0B98CA35003B6A72 /* NTFileAttributeModifier.m */,
+				20DFD4F30ADDEB0700BB6ACC /* NTFileEnvironment.m */,
+				204CED310ADCB91400B25AD4 /* NTCarbonFileInfo.m */,
+				209E40CC0ADCAA8C00DC888E /* NTDefaultDirectory.m */,
+				2025A1AE0F464B9700FD8519 /* NSDocument-NTExtensions.m */,
+				204CEF6B0ADCC1ED00B25AD4 /* NTGetAttrList.m */,
+				209E41090ADCACBB00DC888E /* NTPathUtilities.m */,
+				204CEE420ADCBD4400B25AD4 /* NTStringShare.m */,
+				20DFD5AC0ADDEF6700BB6ACC /* NTFileNamingManager.m */,
+				20DFD5AE0ADDEF6700BB6ACC /* NTFilePreflightTests.m */,
+				204CED370ADCB93600B25AD4 /* NTFileModifier.m */,
+				209E40EE0ADCAACF00DC888E /* NTFileCreation.m */,
+				209E409B0ADCA96C00DC888E /* NTWeblocFile.m */,
+				209E407C0ADCA90F00DC888E /* NTResourceFork.m */,
+				209E407E0ADCA90F00DC888E /* NTResourceInfo.m */,
+				209E40800ADCA90F00DC888E /* NTResourceMgr.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		202880EE0D413D96002C205C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				20CCDE440D400961009522F0 /* NTSizeCalculatorMgr.m */,
+				203B63C50D4ADA430000299F /* Tree */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		203B60870D4AD16E0000299F /* List Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				203B60820D4AD14F0000299F /* NTListSizeCalculator.m */,
+			);
+			name = "List Calculator";
+			sourceTree = "<group>";
+		};
+		203B63C50D4ADA430000299F /* Tree */ = {
+			isa = PBXGroup;
+			children = (
+				203B63C70D4ADD780000299F /* NTSizeCalculatorTreeMgr.m */,
+				208136D30D4AB87A004F7C6E /* NTSizeCalculatorTree.m */,
+				207B16860D57F90000956A30 /* NTSizeCalculatorTreeRoot.m */,
+				208136D70D4AB8BE004F7C6E /* NTSizeCalculatorTreeNode.m */,
+				203B63C00D4ADA270000299F /* NTSizeCalculatorTreeOperation.m */,
+			);
+			name = Tree;
+			sourceTree = "<group>";
+		};
+		208B15CA0ADC5F6500AF3CB0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				208B15D50ADC5F6500AF3CB0 /* CocoatechCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		208DF9C50DA2BA4F006F7DA3 /* Shared File List Mgr */ = {
+			isa = PBXGroup;
+			children = (
+				201CAE570DA1949300812F19 /* NTSharedFileListMgr.m */,
+				208DF9BF0DA2B9D4006F7DA3 /* NTSharedFileListItem.m */,
+				20032FFF0DA43FF400C648DE /* NTLoginItemMgr.m */,
+			);
+			name = "Shared File List Mgr";
+			sourceTree = "<group>";
+		};
+		20907E2F0DB85F1C0068871F /* View based Labels Menu Item */ = {
+			isa = PBXGroup;
+			children = (
+				20907E3C0DB8610D0068871F /* NTLabelsMenuItem.m */,
+				20907E460DB869A60068871F /* NTLabelsMenuView.m */,
+			);
+			name = "View based Labels Menu Item";
+			sourceTree = "<group>";
+		};
+		20AE50380B74673D00CF54B8 /* Folder Size Manager */ = {
+			isa = PBXGroup;
+			children = (
+				20CCDE120D4002A5009522F0 /* NTSizeCalculator.m */,
+				206A90DF0B1525D6002005D1 /* NTSyncSizeCalculator.m */,
+				20B08DE20B1526EB001AE8C1 /* NTFSSize.m */,
+				202880EE0D413D96002C205C /* Manager */,
+			);
+			name = "Folder Size Manager";
+			sourceTree = "<group>";
+		};
+		20B07E8B0AD7502F00A25B54 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				20F12C5E0F4BD950004D50F8 /* NTPartitionInfo.h */,
+				20D4C0080F11CD7D00B3A482 /* NTVolumeUnmounter.h */,
+				20907E3B0DB8610D0068871F /* NTLabelsMenuItem.h */,
+				20907E450DB869A60068871F /* NTLabelsMenuView.h */,
+				20B61D2D0E22D82A003F1FE0 /* NTVolumeModifiedWatcher.h */,
+				2064D3570EE36EAE00DCD342 /* NTFileRep.h */,
+				20D4C06E0F11E0EC00B3A482 /* NTVolumeModifiedRebuildThread.h */,
+				208136D60D4AB8BE004F7C6E /* NTSizeCalculatorTreeNode.h */,
+				202769C60E4570DA001C7E26 /* NTVolumeModifiedWatcherThread.h */,
+				2008E5140D77DC1F00936C6D /* NTVolumeMgr.h */,
+				2025A1AD0F464B9700FD8519 /* NSDocument-NTExtensions.h */,
+				20264F4A0E5D53A200685D2C /* NTFolderWatcherManager.h */,
+				208DF9BE0DA2B9D4006F7DA3 /* NTSharedFileListItem.h */,
+				2099B6990D4950D400CF70BF /* NTFSEventMessage.h */,
+				2097BBEF0D7A264E000143A6 /* NTVolumeMgrState.h */,
+				20032FFE0DA43FF400C648DE /* NTLoginItemMgr.h */,
+				207B16850D57F90000956A30 /* NTSizeCalculatorTreeRoot.h */,
+				203B63BF0D4ADA270000299F /* NTSizeCalculatorTreeOperation.h */,
+				20CCDE430D400961009522F0 /* NTSizeCalculatorMgr.h */,
+				203B63C60D4ADD780000299F /* NTSizeCalculatorTreeMgr.h */,
+				201CAE560DA1949300812F19 /* NTSharedFileListMgr.h */,
+				20C44FA50D3EFA2A009EBEA8 /* NTFolderWatcher.h */,
+				208136D20D4AB87A004F7C6E /* NTSizeCalculatorTree.h */,
+				203B60810D4AD14F0000299F /* NTListSizeCalculator.h */,
+				20F23C460B98F5580016D7FB /* NTLaunchServices.h */,
+				204A61C50D44081400B6EB88 /* NTOperation.h */,
+				20C561C20D173F8F00BDF389 /* NTQuickLookThumbnail.h */,
+				20585EEC0B98CA35003B6A72 /* NTFileAttributeModifier.h */,
+				20CCDE110D4002A5009522F0 /* NTSizeCalculator.h */,
+				20585EE80B98CA22003B6A72 /* NTLaunchServiceHacks.h */,
+				20D9DCF70B7D5D8500B89AD5 /* NTFileListMonitorThread.h */,
+				20B08DE10B1526EB001AE8C1 /* NTFSSize.h */,
+				206A90DE0B1525D6002005D1 /* NTSyncSizeCalculator.h */,
+				209E40B60ADCAA5B00DC888E /* NTAlias.h */,
+				2030A15A0ADE214E0079DB27 /* NTFSDeleteThread.h */,
+				2030A1D40ADE24550079DB27 /* NTSecureDelete.h */,
+				20DFD6950ADDF9BF00BB6ACC /* NTIconCompositor.h */,
+				20E5FE980B4F66590042CD80 /* NTLabelButtonMatrix.h */,
+				20E5FE960B4F66590042CD80 /* NTLabelButtonCell.h */,
+				20E385010B64A4C000CC0D7B /* NTCustomIconView.h */,
+				209E40B80ADCAA5B00DC888E /* NTAliasFileManager.h */,
+				2030A1CC0ADE243F0079DB27 /* NTFileDeleter.h */,
+				204CED300ADCB91400B25AD4 /* NTCarbonFileInfo.h */,
+				20DFD69E0ADDF9D000BB6ACC /* NTLabelColor.h */,
+				20DFD6A00ADDF9D000BB6ACC /* NTLabelColorMgr.h */,
+				20DFD6A20ADDF9D000BB6ACC /* NTLabelLazyMenu.h */,
+				20DFD6A40ADDF9D000BB6ACC /* NTLabelsModel.h */,
+				20DFD5AB0ADDEF6700BB6ACC /* NTFileNamingManager.h */,
+				20DFD6780ADDF4F700BB6ACC /* NSImage-CocoatechFile.h */,
+				204CEF7B0ADCC23200B25AD4 /* NTCGImage.h */,
+				204CF0650ADCCC8800B25AD4 /* NTFNMonitor.h */,
+				20DFD5AD0ADDEF6700BB6ACC /* NTFilePreflightTests.h */,
+				204CF0670ADCCC8800B25AD4 /* NTFSMonitor.h */,
+				204CF0540ADCCC1400B25AD4 /* NTFSSubscription.h */,
+				204CF0520ADCCC1400B25AD4 /* NTFNSubscription.h */,
+				204CF0560ADCCC1400B25AD4 /* NTKQueueSubscription.h */,
+				204CF04C0ADCCBFC00B25AD4 /* NTFSWatcherItem.h */,
+				204CF04A0ADCCBFC00B25AD4 /* NTFSWatcher.h */,
+				204CF0690ADCCC8800B25AD4 /* NTKQueueMonitor.h */,
+				20DFD4F20ADDEB0700BB6ACC /* NTFileEnvironment.h */,
+				204CEF900ADCC28A00B25AD4 /* NTThumbnail.h */,
+				204CEF6A0ADCC1ED00B25AD4 /* NTGetAttrList.h */,
+				209E408B0ADCA92000DC888E /* NTImageTypeMgr.h */,
+				204CEE3D0ADCBD3B00B25AD4 /* NTMetadata.h */,
+				209E40ED0ADCAACF00DC888E /* NTFileCreation.h */,
+				204CEE720ADCBE4B00B25AD4 /* NTIcon.h */,
+				204CEE740ADCBE4B00B25AD4 /* NTIconFamily.h */,
+				204CEE760ADCBE4B00B25AD4 /* NTIconStore.h */,
+				209E41080ADCACBB00DC888E /* NTPathUtilities.h */,
+				204CED360ADCB93600B25AD4 /* NTFileModifier.h */,
+				209E40870ADCA91600DC888E /* NTFileTypeIdentifier.h */,
+				209E409A0ADCA96C00DC888E /* NTWeblocFile.h */,
+				209E40CB0ADCAA8C00DC888E /* NTDefaultDirectory.h */,
+				204CEE410ADCBD4400B25AD4 /* NTStringShare.h */,
+				209E407B0ADCA90F00DC888E /* NTResourceFork.h */,
+				209E407D0ADCA90F00DC888E /* NTResourceInfo.h */,
+				209E407F0ADCA90F00DC888E /* NTResourceMgr.h */,
+				208B16470ADC658500AF3CB0 /* NTFSRefObject.h */,
+				208B15DE0ADC634E00AF3CB0 /* NTFileDesc-Compare.h */,
+				208B15E00ADC634E00AF3CB0 /* NTFileDesc-DirectoryContents.h */,
+				208B15E20ADC634E00AF3CB0 /* NTFileDesc-NTUtilities.h */,
+				208B15E40ADC634E00AF3CB0 /* NTFileDesc-Private.h */,
+				208B15E60ADC634E00AF3CB0 /* NTFileDesc-State.h */,
+				208B15E80ADC634E00AF3CB0 /* NTFileDesc.h */,
+				208B15EA0ADC634E00AF3CB0 /* NTFileDescData-Private.h */,
+				208B15EC0ADC634E00AF3CB0 /* NTFileDescData.h */,
+				208B15EE0ADC634E00AF3CB0 /* NTFileDescMemCache.h */,
+				208B161F0ADC651800AF3CB0 /* NTVolumeNotificationMgr.h */,
+				208B16210ADC651800AF3CB0 /* NTVolume.h */,
+				208B16230ADC651800AF3CB0 /* NTVolumeCache.h */,
+				208B16250ADC651800AF3CB0 /* NTVolumeSpec.h */,
+				208B16290ADC651800AF3CB0 /* NTVolumeMounter.h */,
+				20D9DCE40B7D5C2200B89AD5 /* NTFileListMonitor.h */,
+				208B162D0ADC651800AF3CB0 /* NTVolumesMonitor.h */,
+				208B162F0ADC651800AF3CB0 /* NTVolumesSubscription.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		20C44F960D3EF714009EBEA8 /* FSEvents */ = {
+			isa = PBXGroup;
+			children = (
+				20C44FA60D3EFA2A009EBEA8 /* NTFolderWatcher.m */,
+				20264F4B0E5D53A200685D2C /* NTFolderWatcherManager.m */,
+				2099B69A0D4950D400CF70BF /* NTFSEventMessage.m */,
+				203B60870D4AD16E0000299F /* List Calculator */,
+				20AE50380B74673D00CF54B8 /* Folder Size Manager */,
+			);
+			name = FSEvents;
+			sourceTree = "<group>";
+		};
+		20D4C00E0F11CD9400B3A482 /* Mount - Unmount */ = {
+			isa = PBXGroup;
+			children = (
+				208B162A0ADC651800AF3CB0 /* NTVolumeMounter.m */,
+				20D4C0090F11CD7D00B3A482 /* NTVolumeUnmounter.m */,
+				20F12C5F0F4BD950004D50F8 /* NTPartitionInfo.m */,
+			);
+			name = "Mount - Unmount";
+			sourceTree = "<group>";
+		};
+		20D4C06B0F11DD1300B3A482 /* Volume Modified watcher */ = {
+			isa = PBXGroup;
+			children = (
+				20B61D2E0E22D82A003F1FE0 /* NTVolumeModifiedWatcher.m */,
+				202769C70E4570DA001C7E26 /* NTVolumeModifiedWatcherThread.m */,
+				20D4C06F0F11E0EC00B3A482 /* NTVolumeModifiedRebuildThread.m */,
+			);
+			name = "Volume Modified watcher";
+			sourceTree = "<group>";
+		};
+		20D9DCEA0B7D5C3F00B89AD5 /* Kqueues */ = {
+			isa = PBXGroup;
+			children = (
+				204CF0660ADCCC8800B25AD4 /* NTFNMonitor.m */,
+				204CF0680ADCCC8800B25AD4 /* NTFSMonitor.m */,
+				204CF06A0ADCCC8800B25AD4 /* NTKQueueMonitor.m */,
+				204CF04B0ADCCBFC00B25AD4 /* NTFSWatcher.m */,
+				204CF04D0ADCCBFC00B25AD4 /* NTFSWatcherItem.m */,
+				204CF0530ADCCC1400B25AD4 /* NTFNSubscription.m */,
+				204CF0550ADCCC1400B25AD4 /* NTFSSubscription.m */,
+				204CF0570ADCCC1400B25AD4 /* NTKQueueSubscription.m */,
+				20D9DCE50B7D5C2200B89AD5 /* NTFileListMonitor.m */,
+				20D9DCF80B7D5D8500B89AD5 /* NTFileListMonitorThread.m */,
+			);
+			name = Kqueues;
+			sourceTree = "<group>";
+		};
+		20E5FEA00B4F66620042CD80 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				20DFD69F0ADDF9D000BB6ACC /* NTLabelColor.m */,
+				20DFD6A10ADDF9D000BB6ACC /* NTLabelColorMgr.m */,
+				20DFD6A30ADDF9D000BB6ACC /* NTLabelLazyMenu.m */,
+				20DFD6A50ADDF9D000BB6ACC /* NTLabelsModel.m */,
+				20E5FE970B4F66590042CD80 /* NTLabelButtonCell.m */,
+				20E5FE990B4F66590042CD80 /* NTLabelButtonMatrix.m */,
+				20907E2F0DB85F1C0068871F /* View based Labels Menu Item */,
+			);
+			name = Labels;
+			sourceTree = "<group>";
+		};
+		20EF87050988604D006FA8BB /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				20EF87010988603D006FA8BB /* Debug.xcconfig */,
+				20EF87020988603D006FA8BB /* Release.xcconfig */,
+			);
+			name = Configurations;
+			sourceTree = "<group>";
+		};
+		20EF89ED09886BDE006FA8BB /* Project References */ = {
+			isa = PBXGroup;
+			children = (
+				208B15C90ADC5F6500AF3CB0 /* CocoatechCore.xcodeproj */,
+			);
+			name = "Project References";
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8DC2EF500486A6940098B216 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				208B15BB0ADC5F1D00AF3CB0 /* CocoatechFile_Prefix.pch in Headers */,
+				208B15BC0ADC5F1D00AF3CB0 /* CocoatechFile.h in Headers */,
+				208B15F00ADC634E00AF3CB0 /* NTFileDesc-Compare.h in Headers */,
+				208B15F20ADC634E00AF3CB0 /* NTFileDesc-DirectoryContents.h in Headers */,
+				208B15F40ADC634E00AF3CB0 /* NTFileDesc-NTUtilities.h in Headers */,
+				208B15F60ADC634E00AF3CB0 /* NTFileDesc-Private.h in Headers */,
+				208B15F80ADC634E00AF3CB0 /* NTFileDesc-State.h in Headers */,
+				208B15FA0ADC634E00AF3CB0 /* NTFileDesc.h in Headers */,
+				208B15FC0ADC634E00AF3CB0 /* NTFileDescData-Private.h in Headers */,
+				208B15FE0ADC634E00AF3CB0 /* NTFileDescData.h in Headers */,
+				208B16000ADC634E00AF3CB0 /* NTFileDescMemCache.h in Headers */,
+				208B16330ADC651800AF3CB0 /* NTVolumeNotificationMgr.h in Headers */,
+				208B16350ADC651800AF3CB0 /* NTVolume.h in Headers */,
+				208B16370ADC651800AF3CB0 /* NTVolumeCache.h in Headers */,
+				208B16390ADC651800AF3CB0 /* NTVolumeSpec.h in Headers */,
+				208B163D0ADC651800AF3CB0 /* NTVolumeMounter.h in Headers */,
+				208B16410ADC651800AF3CB0 /* NTVolumesMonitor.h in Headers */,
+				208B16430ADC651800AF3CB0 /* NTVolumesSubscription.h in Headers */,
+				208B16490ADC658500AF3CB0 /* NTFSRefObject.h in Headers */,
+				209E40810ADCA90F00DC888E /* NTResourceFork.h in Headers */,
+				209E40830ADCA90F00DC888E /* NTResourceInfo.h in Headers */,
+				209E40850ADCA90F00DC888E /* NTResourceMgr.h in Headers */,
+				209E40890ADCA91600DC888E /* NTFileTypeIdentifier.h in Headers */,
+				209E408D0ADCA92000DC888E /* NTImageTypeMgr.h in Headers */,
+				209E409C0ADCA96C00DC888E /* NTWeblocFile.h in Headers */,
+				209E40BA0ADCAA5B00DC888E /* NTAlias.h in Headers */,
+				209E40BC0ADCAA5B00DC888E /* NTAliasFileManager.h in Headers */,
+				209E40CD0ADCAA8C00DC888E /* NTDefaultDirectory.h in Headers */,
+				209E40EF0ADCAACF00DC888E /* NTFileCreation.h in Headers */,
+				209E410A0ADCACBB00DC888E /* NTPathUtilities.h in Headers */,
+				204CED320ADCB91400B25AD4 /* NTCarbonFileInfo.h in Headers */,
+				204CED380ADCB93600B25AD4 /* NTFileModifier.h in Headers */,
+				204CEE3F0ADCBD3B00B25AD4 /* NTMetadata.h in Headers */,
+				204CEE430ADCBD4400B25AD4 /* NTStringShare.h in Headers */,
+				204CEE780ADCBE4B00B25AD4 /* NTIcon.h in Headers */,
+				204CEE7A0ADCBE4B00B25AD4 /* NTIconFamily.h in Headers */,
+				204CEE7C0ADCBE4B00B25AD4 /* NTIconStore.h in Headers */,
+				204CEF6C0ADCC1ED00B25AD4 /* NTGetAttrList.h in Headers */,
+				204CEF7D0ADCC23200B25AD4 /* NTCGImage.h in Headers */,
+				204CEF920ADCC28A00B25AD4 /* NTThumbnail.h in Headers */,
+				204CF04E0ADCCBFC00B25AD4 /* NTFSWatcher.h in Headers */,
+				204CF0500ADCCBFC00B25AD4 /* NTFSWatcherItem.h in Headers */,
+				204CF0580ADCCC1400B25AD4 /* NTFNSubscription.h in Headers */,
+				204CF05A0ADCCC1400B25AD4 /* NTFSSubscription.h in Headers */,
+				204CF05C0ADCCC1400B25AD4 /* NTKQueueSubscription.h in Headers */,
+				204CF06B0ADCCC8800B25AD4 /* NTFNMonitor.h in Headers */,
+				204CF06D0ADCCC8800B25AD4 /* NTFSMonitor.h in Headers */,
+				204CF06F0ADCCC8800B25AD4 /* NTKQueueMonitor.h in Headers */,
+				20DFD4F40ADDEB0700BB6ACC /* NTFileEnvironment.h in Headers */,
+				20DFD5AF0ADDEF6700BB6ACC /* NTFileNamingManager.h in Headers */,
+				20DFD5B10ADDEF6700BB6ACC /* NTFilePreflightTests.h in Headers */,
+				20DFD67A0ADDF4F700BB6ACC /* NSImage-CocoatechFile.h in Headers */,
+				20DFD6970ADDF9BF00BB6ACC /* NTIconCompositor.h in Headers */,
+				20DFD6A60ADDF9D000BB6ACC /* NTLabelColor.h in Headers */,
+				20DFD6A80ADDF9D000BB6ACC /* NTLabelColorMgr.h in Headers */,
+				20DFD6AA0ADDF9D000BB6ACC /* NTLabelLazyMenu.h in Headers */,
+				20DFD6AC0ADDF9D000BB6ACC /* NTLabelsModel.h in Headers */,
+				2030A15E0ADE214E0079DB27 /* NTFSDeleteThread.h in Headers */,
+				2030A1AE0ADE23A70079DB27 /* CocoatechFileConstants.h in Headers */,
+				2030A1D00ADE243F0079DB27 /* NTFileDeleter.h in Headers */,
+				2030A1D60ADE24550079DB27 /* NTSecureDelete.h in Headers */,
+				206A90E00B1525D6002005D1 /* NTSyncSizeCalculator.h in Headers */,
+				20B08DE30B1526EB001AE8C1 /* NTFSSize.h in Headers */,
+				20E5FE9A0B4F66590042CD80 /* NTLabelButtonCell.h in Headers */,
+				20E5FE9C0B4F66590042CD80 /* NTLabelButtonMatrix.h in Headers */,
+				20E385030B64A4C000CC0D7B /* NTCustomIconView.h in Headers */,
+				20D9DCE60B7D5C2200B89AD5 /* NTFileListMonitor.h in Headers */,
+				20D9DCF90B7D5D8500B89AD5 /* NTFileListMonitorThread.h in Headers */,
+				20585EEA0B98CA22003B6A72 /* NTLaunchServiceHacks.h in Headers */,
+				20585EEE0B98CA35003B6A72 /* NTFileAttributeModifier.h in Headers */,
+				20F23C480B98F5580016D7FB /* NTLaunchServices.h in Headers */,
+				20C561C40D173F8F00BDF389 /* NTQuickLookThumbnail.h in Headers */,
+				20C44FA70D3EFA2A009EBEA8 /* NTFolderWatcher.h in Headers */,
+				20CCDE130D4002A5009522F0 /* NTSizeCalculator.h in Headers */,
+				20CCDE450D400961009522F0 /* NTSizeCalculatorMgr.h in Headers */,
+				204A61C70D44081400B6EB88 /* NTOperation.h in Headers */,
+				2099B69B0D4950D400CF70BF /* NTFSEventMessage.h in Headers */,
+				208136D40D4AB87A004F7C6E /* NTSizeCalculatorTree.h in Headers */,
+				208136D80D4AB8BE004F7C6E /* NTSizeCalculatorTreeNode.h in Headers */,
+				203B60830D4AD14F0000299F /* NTListSizeCalculator.h in Headers */,
+				203B63C10D4ADA270000299F /* NTSizeCalculatorTreeOperation.h in Headers */,
+				203B63C80D4ADD780000299F /* NTSizeCalculatorTreeMgr.h in Headers */,
+				207B16870D57F90000956A30 /* NTSizeCalculatorTreeRoot.h in Headers */,
+				2008E5160D77DC1F00936C6D /* NTVolumeMgr.h in Headers */,
+				2097BBF10D7A264E000143A6 /* NTVolumeMgrState.h in Headers */,
+				201CAE580DA1949300812F19 /* NTSharedFileListMgr.h in Headers */,
+				208DF9C00DA2B9D4006F7DA3 /* NTSharedFileListItem.h in Headers */,
+				200330000DA43FF400C648DE /* NTLoginItemMgr.h in Headers */,
+				20907E3D0DB8610D0068871F /* NTLabelsMenuItem.h in Headers */,
+				20907E470DB869A60068871F /* NTLabelsMenuView.h in Headers */,
+				20B61D2F0E22D82A003F1FE0 /* NTVolumeModifiedWatcher.h in Headers */,
+				202769C80E4570DA001C7E26 /* NTVolumeModifiedWatcherThread.h in Headers */,
+				20264F4C0E5D53A200685D2C /* NTFolderWatcherManager.h in Headers */,
+				2064D3590EE36EAE00DCD342 /* NTFileRep.h in Headers */,
+				20D4C00A0F11CD7D00B3A482 /* NTVolumeUnmounter.h in Headers */,
+				20D4C0700F11E0EC00B3A482 /* NTVolumeModifiedRebuildThread.h in Headers */,
+				2025A1AF0F464B9700FD8519 /* NSDocument-NTExtensions.h in Headers */,
+				20F12C600F4BD950004D50F8 /* NTPartitionInfo.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8DC2EF4F0486A6940098B216 /* CocoatechFile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "CocoatechFile" */;
+			buildPhases = (
+				8DC2EF500486A6940098B216 /* Headers */,
+				8DC2EF520486A6940098B216 /* Resources */,
+				8DC2EF540486A6940098B216 /* Sources */,
+				8DC2EF560486A6940098B216 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				208B15D90ADC5F7000AF3CB0 /* PBXTargetDependency */,
+			);
+			name = CocoatechFile;
+			productInstallPath = "$(HOME)/Library/Frameworks";
+			productName = CocoatechCore;
+			productReference = 8DC2EF5B0486A6940098B216 /* CocoatechFile.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "CocoatechFile" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 0867D691FE84028FC02AAC07 /* CocoatechCore */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 208B15CA0ADC5F6500AF3CB0 /* Products */;
+					ProjectRef = 208B15C90ADC5F6500AF3CB0 /* CocoatechCore.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8DC2EF4F0486A6940098B216 /* CocoatechFile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		208B15D50ADC5F6500AF3CB0 /* CocoatechCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CocoatechCore.framework;
+			remoteRef = 208B15D40ADC5F6500AF3CB0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8DC2EF520486A6940098B216 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */,
+				20DFD5EA0ADDEFED00BB6ACC /* images in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DC2EF540486A6940098B216 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				208B15F10ADC634E00AF3CB0 /* NTFileDesc-Compare.m in Sources */,
+				208B15F30ADC634E00AF3CB0 /* NTFileDesc-DirectoryContents.m in Sources */,
+				208B15F50ADC634E00AF3CB0 /* NTFileDesc-NTUtilities.m in Sources */,
+				208B15F70ADC634E00AF3CB0 /* NTFileDesc-Private.m in Sources */,
+				208B15F90ADC634E00AF3CB0 /* NTFileDesc-State.m in Sources */,
+				208B15FB0ADC634E00AF3CB0 /* NTFileDesc.m in Sources */,
+				208B15FD0ADC634E00AF3CB0 /* NTFileDescData-Private.m in Sources */,
+				208B15FF0ADC634E00AF3CB0 /* NTFileDescData.m in Sources */,
+				208B16010ADC634E00AF3CB0 /* NTFileDescMemCache.m in Sources */,
+				208B16340ADC651800AF3CB0 /* NTVolumeNotificationMgr.m in Sources */,
+				208B16360ADC651800AF3CB0 /* NTVolume.m in Sources */,
+				208B16380ADC651800AF3CB0 /* NTVolumeCache.m in Sources */,
+				208B163A0ADC651800AF3CB0 /* NTVolumeSpec.m in Sources */,
+				208B163E0ADC651800AF3CB0 /* NTVolumeMounter.m in Sources */,
+				208B16420ADC651800AF3CB0 /* NTVolumesMonitor.m in Sources */,
+				208B16440ADC651800AF3CB0 /* NTVolumesSubscription.m in Sources */,
+				208B164A0ADC658500AF3CB0 /* NTFSRefObject.m in Sources */,
+				209E40820ADCA90F00DC888E /* NTResourceFork.m in Sources */,
+				209E40840ADCA90F00DC888E /* NTResourceInfo.m in Sources */,
+				209E40860ADCA90F00DC888E /* NTResourceMgr.m in Sources */,
+				209E408A0ADCA91600DC888E /* NTFileTypeIdentifier.m in Sources */,
+				209E408E0ADCA92000DC888E /* NTImageTypeMgr.m in Sources */,
+				209E409D0ADCA96C00DC888E /* NTWeblocFile.m in Sources */,
+				209E40BB0ADCAA5B00DC888E /* NTAlias.m in Sources */,
+				209E40BD0ADCAA5B00DC888E /* NTAliasFileManager.m in Sources */,
+				209E40CE0ADCAA8C00DC888E /* NTDefaultDirectory.m in Sources */,
+				209E40F00ADCAACF00DC888E /* NTFileCreation.m in Sources */,
+				209E410B0ADCACBB00DC888E /* NTPathUtilities.m in Sources */,
+				204CED330ADCB91400B25AD4 /* NTCarbonFileInfo.m in Sources */,
+				204CED390ADCB93600B25AD4 /* NTFileModifier.m in Sources */,
+				204CEE400ADCBD3B00B25AD4 /* NTMetadata.m in Sources */,
+				204CEE440ADCBD4400B25AD4 /* NTStringShare.m in Sources */,
+				204CEE790ADCBE4B00B25AD4 /* NTIcon.m in Sources */,
+				204CEE7B0ADCBE4B00B25AD4 /* NTIconFamily.m in Sources */,
+				204CEE7D0ADCBE4B00B25AD4 /* NTIconStore.m in Sources */,
+				204CEF6D0ADCC1ED00B25AD4 /* NTGetAttrList.m in Sources */,
+				204CEF7E0ADCC23200B25AD4 /* NTCGImage.m in Sources */,
+				204CEF930ADCC28A00B25AD4 /* NTThumbnail.m in Sources */,
+				204CF04F0ADCCBFC00B25AD4 /* NTFSWatcher.m in Sources */,
+				204CF0510ADCCBFC00B25AD4 /* NTFSWatcherItem.m in Sources */,
+				204CF0590ADCCC1400B25AD4 /* NTFNSubscription.m in Sources */,
+				204CF05B0ADCCC1400B25AD4 /* NTFSSubscription.m in Sources */,
+				204CF05D0ADCCC1400B25AD4 /* NTKQueueSubscription.m in Sources */,
+				204CF06C0ADCCC8800B25AD4 /* NTFNMonitor.m in Sources */,
+				204CF06E0ADCCC8800B25AD4 /* NTFSMonitor.m in Sources */,
+				204CF0700ADCCC8800B25AD4 /* NTKQueueMonitor.m in Sources */,
+				20DFD4F50ADDEB0700BB6ACC /* NTFileEnvironment.m in Sources */,
+				20DFD5B00ADDEF6700BB6ACC /* NTFileNamingManager.m in Sources */,
+				20DFD5B20ADDEF6700BB6ACC /* NTFilePreflightTests.m in Sources */,
+				20DFD67B0ADDF4F700BB6ACC /* NSImage-CocoatechFile.m in Sources */,
+				20DFD6980ADDF9BF00BB6ACC /* NTIconCompositor.m in Sources */,
+				20DFD6A70ADDF9D000BB6ACC /* NTLabelColor.m in Sources */,
+				20DFD6A90ADDF9D000BB6ACC /* NTLabelColorMgr.m in Sources */,
+				20DFD6AB0ADDF9D000BB6ACC /* NTLabelLazyMenu.m in Sources */,
+				20DFD6AD0ADDF9D000BB6ACC /* NTLabelsModel.m in Sources */,
+				2030A15F0ADE214E0079DB27 /* NTFSDeleteThread.m in Sources */,
+				2030A1D10ADE243F0079DB27 /* NTFileDeleter.m in Sources */,
+				2030A1D70ADE24550079DB27 /* NTSecureDelete.m in Sources */,
+				206A90E10B1525D6002005D1 /* NTSyncSizeCalculator.m in Sources */,
+				20B08DE40B1526EB001AE8C1 /* NTFSSize.m in Sources */,
+				20E5FE9B0B4F66590042CD80 /* NTLabelButtonCell.m in Sources */,
+				20E5FE9D0B4F66590042CD80 /* NTLabelButtonMatrix.m in Sources */,
+				20E385040B64A4C000CC0D7B /* NTCustomIconView.m in Sources */,
+				20D9DCE70B7D5C2200B89AD5 /* NTFileListMonitor.m in Sources */,
+				20D9DCFA0B7D5D8500B89AD5 /* NTFileListMonitorThread.m in Sources */,
+				20585EEB0B98CA22003B6A72 /* NTLaunchServiceHacks.m in Sources */,
+				20585EEF0B98CA35003B6A72 /* NTFileAttributeModifier.m in Sources */,
+				20F23C490B98F5580016D7FB /* NTLaunchServices.m in Sources */,
+				20C561C50D173F8F00BDF389 /* NTQuickLookThumbnail.m in Sources */,
+				20C44FA80D3EFA2A009EBEA8 /* NTFolderWatcher.m in Sources */,
+				20CCDE140D4002A5009522F0 /* NTSizeCalculator.m in Sources */,
+				20CCDE460D400961009522F0 /* NTSizeCalculatorMgr.m in Sources */,
+				204A61C80D44081400B6EB88 /* NTOperation.m in Sources */,
+				2099B69C0D4950D400CF70BF /* NTFSEventMessage.m in Sources */,
+				208136D50D4AB87A004F7C6E /* NTSizeCalculatorTree.m in Sources */,
+				208136D90D4AB8BE004F7C6E /* NTSizeCalculatorTreeNode.m in Sources */,
+				203B60840D4AD14F0000299F /* NTListSizeCalculator.m in Sources */,
+				203B63C20D4ADA270000299F /* NTSizeCalculatorTreeOperation.m in Sources */,
+				203B63C90D4ADD780000299F /* NTSizeCalculatorTreeMgr.m in Sources */,
+				207B16880D57F90000956A30 /* NTSizeCalculatorTreeRoot.m in Sources */,
+				2008E5170D77DC1F00936C6D /* NTVolumeMgr.m in Sources */,
+				2097BBF20D7A264E000143A6 /* NTVolumeMgrState.m in Sources */,
+				201CAE590DA1949300812F19 /* NTSharedFileListMgr.m in Sources */,
+				208DF9C10DA2B9D4006F7DA3 /* NTSharedFileListItem.m in Sources */,
+				200330010DA43FF400C648DE /* NTLoginItemMgr.m in Sources */,
+				20907E3E0DB8610D0068871F /* NTLabelsMenuItem.m in Sources */,
+				20907E480DB869A60068871F /* NTLabelsMenuView.m in Sources */,
+				20B61D300E22D82A003F1FE0 /* NTVolumeModifiedWatcher.m in Sources */,
+				202769C90E4570DA001C7E26 /* NTVolumeModifiedWatcherThread.m in Sources */,
+				20264F4D0E5D53A200685D2C /* NTFolderWatcherManager.m in Sources */,
+				2064D35A0EE36EAE00DCD342 /* NTFileRep.m in Sources */,
+				20D4C00B0F11CD7D00B3A482 /* NTVolumeUnmounter.m in Sources */,
+				20D4C0710F11E0EC00B3A482 /* NTVolumeModifiedRebuildThread.m in Sources */,
+				2025A1B00F464B9700FD8519 /* NSDocument-NTExtensions.m in Sources */,
+				20F12C610F4BD950004D50F8 /* NTPartitionInfo.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		208B15D90ADC5F7000AF3CB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoatechCore;
+			targetProxy = 208B15D80ADC5F7000AF3CB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C1667FE841158C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91AE08733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CocoatechFile_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				PRODUCT_NAME = CocoatechFile;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		1DEB91AF08733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CocoatechFile_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				PRODUCT_NAME = CocoatechFile;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		1DEB91B208733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20EF87010988603D006FA8BB /* Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		1DEB91B308733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20EF87020988603D006FA8BB /* Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "CocoatechFile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91AE08733DA50010E9CD /* Debug */,
+				1DEB91AF08733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "CocoatechFile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91B208733DA50010E9CD /* Debug */,
+				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = NTSVNUIController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {contentView = NSView; objectController = NSObjectController; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = NTSampleUIView; LANGUAGE = ObjC; SUPERCLASS = NSView; }
+    ); 
+    IBVersion = 1; 
+}

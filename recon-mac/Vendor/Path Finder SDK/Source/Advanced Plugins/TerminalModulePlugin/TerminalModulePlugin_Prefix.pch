@@ -1,0 +1,7 @@
+
+#ifdef __OBJC__
+#import <Cocoa/Cocoa.h>
+#import <Quartz/Quartz.h>
+#import <CocoatechStrings/CocoatechStrings.h>
+#import <CocoatechCore/CocoatechCore.h>
+#endif

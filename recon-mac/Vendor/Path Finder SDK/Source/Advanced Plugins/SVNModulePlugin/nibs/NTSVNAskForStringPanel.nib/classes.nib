@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {OKButton = id; cancelButton = id; }; 
+            CLASS = NTSVNAskForStringController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {objectController = id; }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

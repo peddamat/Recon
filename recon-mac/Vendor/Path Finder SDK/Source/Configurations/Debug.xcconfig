@@ -1,0 +1,6 @@
+#include "./Common.xcconfig"
+
+// no optimization
+GCC_OPTIMIZATION_LEVEL = 0
+
+GCC_PREPROCESSOR_DEFINITIONS = DEBUG_BUILD

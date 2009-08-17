@@ -1,0 +1,19 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                commandPopupAction = id; 
+                currentDirectoryButtonAction = id; 
+                doItButtonAction = id; 
+                selectionButtonAction = id; 
+                volumesButtonAction = id; 
+            }; 
+            CLASS = MyDocument; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {commandPopUp = id; outputTextView = id; pathText = id; pathText2 = id; }; 
+            SUPERCLASS = NSDocument; 
+        }
+    ); 
+    IBVersion = 1; 
+}

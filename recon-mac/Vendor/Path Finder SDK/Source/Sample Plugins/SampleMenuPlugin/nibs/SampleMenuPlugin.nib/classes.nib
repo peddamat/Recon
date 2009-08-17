@@ -1,0 +1,19 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                getInfoAction = id; 
+                getSelectionAction = id; 
+                homePageAction = id; 
+                newTextDocumentAction = id; 
+                showHomeDirectoryAction = id; 
+            }; 
+            CLASS = NPSampleMenuPluginWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {objectController = id; }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

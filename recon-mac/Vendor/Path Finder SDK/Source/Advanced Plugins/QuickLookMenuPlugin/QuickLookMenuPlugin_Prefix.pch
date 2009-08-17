@@ -1,0 +1,10 @@
+//
+// Prefix header for all source files of the 'QuicklookMenuPlugin' target in the 'QuicklookMenuPlugin' project.
+//
+
+#ifdef __OBJC__
+#import <Cocoa/Cocoa.h>
+#import <Quartz/Quartz.h>
+#import <CocoatechStrings/CocoatechStrings.h>
+#import <CocoatechCore/CocoatechCore.h>
+#endif
