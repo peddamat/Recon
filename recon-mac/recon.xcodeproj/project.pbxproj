@@ -38,6 +38,8 @@
 		8C590A6B103906D80074656C /* twodocsTemplate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8C590A69103906D80074656C /* twodocsTemplate.gif */; };
 		8C5FF41F101B6F5B00856055 /* reconwithwall-darker-zoom.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8C5FF41E101B6F5B00856055 /* reconwithwall-darker-zoom.icns */; };
 		8C77C410103963CD003D6589 /* Default Advanced Profiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C77C40F103963CD003D6589 /* Default Advanced Profiles.plist */; };
+		8C77C55B1039DAF4003D6589 /* Recon - Object Graph.graffle in Resources */ = {isa = PBXBuildFile; fileRef = 8C77C5591039DAF4003D6589 /* Recon - Object Graph.graffle */; };
+		8C77C55C1039DAF4003D6589 /* Recon-template-new.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 8C77C55A1039DAF4003D6589 /* Recon-template-new.dmg */; };
 		8C79E1960FFBC09600A4648B /* XMLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E1920FFBC09600A4648B /* XMLController.m */; };
 		8C79E1970FFBC09600A4648B /* ArgumentListGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E1950FFBC09600A4648B /* ArgumentListGenerator.m */; };
 		8C79E2300FFC23D800A4648B /* SessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E22F0FFC23D800A4648B /* SessionController.m */; };
@@ -169,6 +171,8 @@
 		8C590A69103906D80074656C /* twodocsTemplate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = twodocsTemplate.gif; path = Resources/twodocsTemplate.gif; sourceTree = "<group>"; };
 		8C5FF41E101B6F5B00856055 /* reconwithwall-darker-zoom.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "reconwithwall-darker-zoom.icns"; path = "Resources/reconwithwall-darker-zoom.icns"; sourceTree = "<group>"; };
 		8C77C40F103963CD003D6589 /* Default Advanced Profiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Default Advanced Profiles.plist"; path = "Resources/Default Advanced Profiles.plist"; sourceTree = "<group>"; };
+		8C77C5591039DAF4003D6589 /* Recon - Object Graph.graffle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Recon - Object Graph.graffle"; path = "Resources/Recon - Object Graph.graffle"; sourceTree = "<group>"; };
+		8C77C55A1039DAF4003D6589 /* Recon-template-new.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Recon-template-new.dmg"; path = "Resources/Recon-template-new.dmg"; sourceTree = "<group>"; };
 		8C79E1920FFBC09600A4648B /* XMLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLController.m; path = Source/XMLController.m; sourceTree = "<group>"; };
 		8C79E1930FFBC09600A4648B /* XMLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLController.h; path = Source/XMLController.h; sourceTree = "<group>"; };
 		8C79E1940FFBC09600A4648B /* ArgumentListGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArgumentListGenerator.h; path = Source/ArgumentListGenerator.h; sourceTree = "<group>"; };
@@ -300,6 +304,8 @@
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 				8C79F52E1003ED7E00A4648B /* Resources */,
+				8C77C5591039DAF4003D6589 /* Recon - Object Graph.graffle */,
+				8C77C55A1039DAF4003D6589 /* Recon-template-new.dmg */,
 			);
 			name = "nmapX-coredata";
 			sourceTree = "<group>";
@@ -613,6 +619,8 @@
 				8C590A6A103906D80074656C /* notepadTemplate.gif in Resources */,
 				8C590A6B103906D80074656C /* twodocsTemplate.gif in Resources */,
 				8C77C410103963CD003D6589 /* Default Advanced Profiles.plist in Resources */,
+				8C77C55B1039DAF4003D6589 /* Recon - Object Graph.graffle in Resources */,
+				8C77C55C1039DAF4003D6589 /* Recon-template-new.dmg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
