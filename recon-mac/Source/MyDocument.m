@@ -222,11 +222,7 @@
    [notesSideBarPlaceholder addSubview:notesSideBarContent];
    
    [targetBarPlaceholder setWantsLayer:YES];
-   
-   // Close drawers
-//   [notesDrawer close];
-//   [sessionsDrawer close];
-   
+      
    closedDrawers = NO;
 }
 

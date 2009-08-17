@@ -239,6 +239,28 @@
 }
 
 #pragma mark -
+#pragma mark Interface twiddling handlers
+// -------------------------------------------------------------------------------
+//	segControlClicked: Delete/Play/Add segmented control in the lower-right
+// -------------------------------------------------------------------------------
+- (IBAction)segControlClicked:(id)sender
+{
+   switch ([sender selectedSegment]) {
+      case 0:
+         [sidebarSplitView toggleCollapse:testy];
+         break;
+      case 1:
+         [NSApp sendAction:@selector(toggleSessions:) to:nil from:self];
+         break;
+      case 2:
+         [NSApp sendAction:@selector(toggleNotes:) to:nil from:self];
+         break;         
+      default:
+         break;
+   }
+}
+
+#pragma mark -
 #pragma mark Table click handlers
 
 // -------------------------------------------------------------------------------

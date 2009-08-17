@@ -68,7 +68,9 @@
    IBOutlet NSTextField *sessionsLabel;
    IBOutlet NSTextField *ipTextField;
    IBOutlet NSTextField *hostStatusTextField;   
-   
+
+   IBOutlet BWSplitView *mainSplitView;
+   IBOutlet BWSplitView *sidebarSplitView;  
    IBOutlet BWSplitView *notesInternalView;
    IBOutlet BWSplitView *sessionsInternalView;
    
@@ -77,8 +79,7 @@
    IBOutlet NSButton *testy;
       
    IBOutlet NSScrollView *sessionsScrollView;
-   
-   IBOutlet BWSplitView *mainSplitView;
+
 }
 
 @property (readonly) NSArray *osSortDescriptor;
@@ -102,6 +103,8 @@
 - (IBAction)switchToScriptOutput:(id)sender;
 - (IBAction)switchToConsole:(id)sender;
 - (IBAction)switchToHostsInSession:(id)sender;
+
+- (IBAction)segControlClicked:(id)sender;
 
 - (void)runCommandInNewConsoleTab:(NSString *)command;
 - (void)addStringToCurrentConsoleTab:(NSString *)string;

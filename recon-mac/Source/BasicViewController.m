@@ -111,6 +111,10 @@
    
    if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Find computers"])
    {
+      // Unselect all sessions to prevent users from thinking an old
+      // session's results are the new results
+      [sessionsArrayController setSelectionIndex:1000];
+      
       [self searchLocalNetwork:self];
    }
    else if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"See the machines"])
@@ -119,6 +123,10 @@
    }
    else if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Check what services"])
    {
+      // Unselect all sessions to prevent users from thinking an old
+      // session's results are the new results
+      [sessionsArrayController setSelectionIndex:1000];
+      
       [self checkForServices:self];
    }
    else if ([[taskSelectionPopUp titleOfSelectedItem] hasPrefix:@"Find Bonjour"])
@@ -134,7 +142,7 @@
 - (IBAction)changeInspectorTask:(id)sender
 {
    //NSLog(@"InspectorController: changeInspectorTask: %d", [sender tag]);
-   
+      
    if ([[sender title] hasPrefix:@"Find Bonjour"])
    {
       self.autoRefresh = NO;
@@ -162,7 +170,7 @@
             
    }  
    else
-   {
+   {      
       self.autoRefresh = NO;
       [scanButton setTitle:@"Scan"];      
       [autoRefreshButton setEnabled:FALSE];      

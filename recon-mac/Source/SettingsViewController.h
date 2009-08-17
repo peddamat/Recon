@@ -31,6 +31,7 @@
    NSArray *profileSortDescriptor;      
    NSArray *sessionSortDescriptor;        
    
+   IBOutlet NSMenu *profilesContextMenu;
 }
 
 @property (readonly) NSArray *osSortDescriptor;
@@ -44,5 +45,8 @@
 - (void)expandProfileView;
 - (IBAction)addProfile:(id)sender;
 - (IBAction)deleteProfile:(id)sender;
+
+- (IBAction)copyProfile:(id)sender;
+- (void)addProfileToUserProfiles:(Profile *)profile;
 
 @end

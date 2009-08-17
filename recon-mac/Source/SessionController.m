@@ -117,7 +117,8 @@ inManagedObjectContext:(NSManagedObjectContext *)context
    [session setDate:[NSDate date]];       // Store session start date
    [session setUUID:[self sessionUUID]];  // Store session UUID
    [session setStatus:@"Queued"];         // Store session status
-   session.profile = profileCopy;         // Store session profile
+   [session setProfile:profileCopy];      // Store session profile
+   
          
    [self createSessionDirectory:sessionUUID];
          

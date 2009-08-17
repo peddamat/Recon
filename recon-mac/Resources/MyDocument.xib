@@ -8,6 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="100387"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -357,7 +358,7 @@
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<string key="NSWindowContentMinSize">{700, 450}</string>
 				<object class="NSView" key="NSWindowView" id="606638319">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">274</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -371,13 +372,11 @@
 									<int key="NSvFlags">274</int>
 									<string key="NSFrameSize">{680, 36}</string>
 									<reference key="NSSuperview" ref="590494387"/>
-									<reference key="NSWindow"/>
 									<string key="NSClassName">NSView</string>
 								</object>
 							</object>
 							<string key="NSFrame">{{0, 414}, {700, 36}}</string>
 							<reference key="NSSuperview" ref="606638319"/>
-							<reference key="NSWindow"/>
 							<object class="NSColor" key="BWGBFillStartingColor">
 								<int key="NSColorSpace">2</int>
 								<bytes key="NSRGB">MC42ODYyNzQ1MyAwLjY4NjI3NDUzIDAuNjg2Mjc0NTMAA</bytes>
@@ -414,19 +413,15 @@
 									<int key="NSvFlags">274</int>
 									<string key="NSFrameSize">{700, 415}</string>
 									<reference key="NSSuperview" ref="558742749"/>
-									<reference key="NSWindow"/>
 									<string key="NSClassName">NSView</string>
 								</object>
 							</object>
 							<string key="NSFrame">{{0, -1}, {700, 415}}</string>
 							<reference key="NSSuperview" ref="606638319"/>
-							<reference key="NSWindow"/>
 							<string key="NSClassName">NSView</string>
 						</object>
 					</object>
 					<string key="NSFrameSize">{700, 450}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{700, 528}</string>
@@ -858,7 +853,7 @@ MUNGRUY4NTJFMoaShJiZmZqDwBUnBINBMh6VhoY</bytes>
 				<string key="NSClassName">PrefsController</string>
 			</object>
 			<object class="NSCustomView" id="329132478">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1134,6 +1129,7 @@ MUNGRUY4NTJFMoaShJiZmZqDwBUnBINBMh6VhoY</bytes>
 					</object>
 				</object>
 				<string key="NSFrameSize">{680, 194}</string>
+				<reference key="NSSuperview"/>
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSDrawer" id="1014421950">
@@ -2265,6 +2261,8 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 					<string>nmapOutputStdout</string>
 					<string>nmapOutputStderr</string>
 					<string>nmapOutputXml</string>
+					<string>profile</string>
+					<string>nameForSelectedProfile</string>
 				</object>
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
@@ -2275,6 +2273,7 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 				<bool key="NSAvoidsEmptySelection">YES</bool>
 				<bool key="NSPreservesSelection">YES</bool>
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
+				<bool key="NSAutomaticallyRearrangesObjects">YES</bool>
 			</object>
 			<object class="NSArrayController" id="448211903">
 				<bool key="NSEditable">YES</bool>
@@ -2375,7 +2374,6 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 				<bool key="NSSelectsInsertedObjects">YES</bool>
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
-				<bool key="NSAutomaticallyRearrangesObjects">YES</bool>
 			</object>
 			<object class="NSArrayController" id="74771273">
 				<object class="NSMutableArray" key="NSDeclaredKeys">
@@ -3306,6 +3304,26 @@ IG1lIHRvIHlvdXIgbG9jYWwgY29weSwgb3IgZG93bmxvYWQgaXQgA</string>
 						<reference key="destination" ref="985563958"/>
 					</object>
 					<int key="connectionID">106739</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.nameForSelectedProfile</string>
+						<reference key="source" ref="300532055"/>
+						<reference key="destination" ref="596541794"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="300532055"/>
+							<reference key="NSDestination" ref="596541794"/>
+							<string key="NSLabel">value: arrangedObjects.nameForSelectedProfile</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.nameForSelectedProfile</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSConditionallySetsEditable</string>
+								<reference key="NS.object.0" ref="6"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">106751</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4552,7 +4570,7 @@ ZQCUhAEqhIQMe19OU1NpemU9ZmZ9moHgAYHyAIaGA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{23, 69}, {680, 194}}</string>
+					<string>{{23, 70}, {680, 194}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4723,7 +4741,7 @@ ZQCUhAEqhIQMe19OU1NpemU9ZmZ9moHgAYHyAIaGA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">106743</int>
+			<int key="maxID">106751</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

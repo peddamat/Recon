@@ -8,6 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="106474"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -212,7 +213,7 @@
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSCustomView" id="263063179">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">4370</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2895,7 +2896,7 @@
 											<object class="NSScroller" id="358960883">
 												<reference key="NSNextResponder" ref="614964253"/>
 												<int key="NSvFlags">256</int>
-												<string key="NSFrame">{{540, 1}, {15, 835}}</string>
+												<string key="NSFrame">{{540, 1}, {15, 821}}</string>
 												<reference key="NSSuperview" ref="614964253"/>
 												<bool key="NSEnabled">YES</bool>
 												<reference key="NSTarget" ref="614964253"/>
@@ -2955,6 +2956,7 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{743, 835}</string>
+				<reference key="NSSuperview"/>
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSTreeController" id="992770007">
@@ -3092,6 +3094,20 @@
 				<bool key="NSAvoidsEmptySelection">YES</bool>
 				<bool key="NSSelectsInsertedObjects">YES</bool>
 				<string key="NSTreeContentChildrenKey">children</string>
+			</object>
+			<object class="NSMenu" id="1672">
+				<string key="NSTitle"/>
+				<object class="NSMutableArray" key="NSMenuItems">
+					<bool key="EncodedWithXMLCoder">YES</bool>
+					<object class="NSMenuItem" id="71255617">
+						<reference key="NSMenu" ref="1672"/>
+						<string key="NSTitle">Copy</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="356710719"/>
+						<reference key="NSMixedImage" ref="367198273"/>
+					</object>
+				</object>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -6242,6 +6258,30 @@
 					</object>
 					<int key="connectionID">106477</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">profilesContextMenu</string>
+						<reference key="source" ref="488872867"/>
+						<reference key="destination" ref="1672"/>
+					</object>
+					<int key="connectionID">106495</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">copyProfile:</string>
+						<reference key="source" ref="488872867"/>
+						<reference key="destination" ref="71255617"/>
+					</object>
+					<int key="connectionID">106498</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">menu</string>
+						<reference key="source" ref="960033366"/>
+						<reference key="destination" ref="1672"/>
+					</object>
+					<int key="connectionID">106499</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -8163,6 +8203,21 @@
 						<reference key="object" ref="366820849"/>
 						<reference key="parent" ref="845827938"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">106491</int>
+						<reference key="object" ref="1672"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="71255617"/>
+						</object>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Profiles Context Menu</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">106496</int>
+						<reference key="object" ref="71255617"/>
+						<reference key="parent" ref="1672"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -8426,6 +8481,9 @@
 					<string>106474.IBPluginDependency</string>
 					<string>106475.IBPluginDependency</string>
 					<string>106484.IBPluginDependency</string>
+					<string>106491.IBEditorWindowLastContentRect</string>
+					<string>106491.IBPluginDependency</string>
+					<string>106496.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -8688,6 +8746,9 @@
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.brandonwalkin.BWToolkit</string>
 					<string>com.brandonwalkin.BWToolkit</string>
+					<string>{{45, 777}, {90, 23}}</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -8710,7 +8771,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">106490</int>
+			<int key="maxID">106499</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -8746,10 +8807,12 @@
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addProfile:</string>
+							<string>copyProfile:</string>
 							<string>deleteProfile:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -8759,6 +8822,7 @@
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>nonTcpScanPopUp</string>
+							<string>profilesContextMenu</string>
 							<string>profilesOutlineView</string>
 							<string>profilesTreeController</string>
 							<string>sideBarSettingsContent</string>
@@ -8771,6 +8835,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSPopUpButton</string>
+							<string>NSMenu</string>
 							<string>NSOutlineView</string>
 							<string>NSTreeController</string>
 							<string>NSView</string>

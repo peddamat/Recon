@@ -121,6 +121,36 @@
 }
 
 #pragma mark -
+#pragma mark Context menu handlers
+
+- (IBAction)copyProfile:(id)sender
+{
+   Profile *selectedProfile = [[profilesTreeController selectedObjects] lastObject];
+   [self addProfileToUserProfiles:selectedProfile];
+}
+
+// -------------------------------------------------------------------------------
+//	addProfileToUserProfiles: Insert a copy of the profile into "User Profiles"
+// -------------------------------------------------------------------------------
+- (void)addProfileToUserProfiles:(Profile *)profile
+{   
+   NSArray *array = [[profile managedObjectContext] fetchObjectsForEntityName:@"Profile" 
+                                                                withPredicate:@"name == 'User Profiles'"];
+   
+   // Saved Sessions Folder
+   Profile *userProfiles = [array lastObject];
+   
+   // Make a copy of the selected profile
+   Profile *profileCopy = [NSEntityDescription insertNewObjectForEntityForName:@"Profile" 
+                                                        inManagedObjectContext:managedObjectContext];
+   NSDictionary *values = [profile dictionaryWithValuesForKeys:[[profileCopy entity] attributeKeys]];      
+   [profileCopy setValuesForKeysWithDictionary:values];      
+   [profileCopy setName:[NSString stringWithFormat:@"Copy of %@",[profile name]]];
+   [profileCopy setIsEnabled:[NSNumber numberWithBool:YES]];   
+   [profileCopy setParent:userProfiles];
+}
+
+#pragma mark -
 #pragma mark Sort Descriptors
 
 // -------------------------------------------------------------------------------
