@@ -135,6 +135,7 @@ extern NSString * const BAFSavedSessionsDirectory;
 
 - (void)addQueuedSessions;
 - (void)addDefaultProfiles;
+- (IBAction)emailSelectedSessions:(id)sender;
 
 // Preference window stuff
 - (IBAction)setuidNmap:(id)sender;

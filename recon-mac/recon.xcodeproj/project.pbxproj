@@ -40,6 +40,9 @@
 		8C77C410103963CD003D6589 /* Default Advanced Profiles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C77C40F103963CD003D6589 /* Default Advanced Profiles.plist */; };
 		8C77C55B1039DAF4003D6589 /* Recon - Object Graph.graffle in Resources */ = {isa = PBXBuildFile; fileRef = 8C77C5591039DAF4003D6589 /* Recon - Object Graph.graffle */; };
 		8C77C55C1039DAF4003D6589 /* Recon-template-new.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 8C77C55A1039DAF4003D6589 /* Recon-template-new.dmg */; };
+		8C77C64E103A33F1003D6589 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C77C64D103A33F1003D6589 /* ScriptingBridge.framework */; };
+		8C77C659103A348C003D6589 /* Mail.app in Resources */ = {isa = PBXBuildFile; fileRef = 8C77C658103A348C003D6589 /* Mail.app */; };
+		8C77C65A103A349F003D6589 /* Mail.app in Sources */ = {isa = PBXBuildFile; fileRef = 8C77C658103A348C003D6589 /* Mail.app */; };
 		8C79E1960FFBC09600A4648B /* XMLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E1920FFBC09600A4648B /* XMLController.m */; };
 		8C79E1970FFBC09600A4648B /* ArgumentListGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E1950FFBC09600A4648B /* ArgumentListGenerator.m */; };
 		8C79E2300FFC23D800A4648B /* SessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C79E22F0FFC23D800A4648B /* SessionController.m */; };
@@ -83,6 +86,20 @@
 		8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4ACFDCFA73011CA2CEA /* MyDocument.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		8C77C652103A340D003D6589 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.app";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).h",
+			);
+			script = "sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		8C3D2B60102FABD60007B87E /* PBXContainerItemProxy */ = {
@@ -173,6 +190,8 @@
 		8C77C40F103963CD003D6589 /* Default Advanced Profiles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Default Advanced Profiles.plist"; path = "Resources/Default Advanced Profiles.plist"; sourceTree = "<group>"; };
 		8C77C5591039DAF4003D6589 /* Recon - Object Graph.graffle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Recon - Object Graph.graffle"; path = "Resources/Recon - Object Graph.graffle"; sourceTree = "<group>"; };
 		8C77C55A1039DAF4003D6589 /* Recon-template-new.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Recon-template-new.dmg"; path = "Resources/Recon-template-new.dmg"; sourceTree = "<group>"; };
+		8C77C64D103A33F1003D6589 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		8C77C658103A348C003D6589 /* Mail.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Mail.app; path = /Applications/Mail.app; sourceTree = "<absolute>"; };
 		8C79E1920FFBC09600A4648B /* XMLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLController.m; path = Source/XMLController.m; sourceTree = "<group>"; };
 		8C79E1930FFBC09600A4648B /* XMLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLController.h; path = Source/XMLController.h; sourceTree = "<group>"; };
 		8C79E1940FFBC09600A4648B /* ArgumentListGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArgumentListGenerator.h; path = Source/ArgumentListGenerator.h; sourceTree = "<group>"; };
@@ -234,7 +253,7 @@
 		8CDEBE3A1029A1D800765DF6 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Source/SettingsViewController.h; sourceTree = "<group>"; };
 		8CDEBE3B1029A1D800765DF6 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Source/SettingsViewController.m; sourceTree = "<group>"; };
 		8CDEC0EA1029C39500765DF6 /* Settings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Settings.xib; path = Resources/Settings.xib; sourceTree = "<group>"; };
-		8D15AC370486D014006FF6A4 /* Recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* recon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = recon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +271,7 @@
 				8C014C8F102D591B00FEEBB7 /* iTerm.framework in Frameworks */,
 				8C3D2C30102FAD5B0007B87E /* CocoatechCore.framework in Frameworks */,
 				8C3D2C32102FAD6C0007B87E /* CocoaTechStrings.framework in Frameworks */,
+				8C77C64E103A33F1003D6589 /* ScriptingBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +308,7 @@
 		19C28FB0FE9D524F11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D15AC370486D014006FF6A4 /* Recon.app */,
+				8D15AC370486D014006FF6A4 /* recon.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -306,6 +326,7 @@
 				8C79F52E1003ED7E00A4648B /* Resources */,
 				8C77C5591039DAF4003D6589 /* Recon - Object Graph.graffle */,
 				8C77C55A1039DAF4003D6589 /* Recon-template-new.dmg */,
+				8C77C64D103A33F1003D6589 /* ScriptingBridge.framework */,
 			);
 			name = "nmapX-coredata";
 			sourceTree = "<group>";
@@ -320,6 +341,7 @@
 				8CDEBDEC102998E600765DF6 /* Advanced View */,
 				8CDEBE501029A1F600765DF6 /* Settings View */,
 				8C79E4D50FFE9FA500A4648B /* Managed Objects */,
+				8C77C656103A3468003D6589 /* Scripting Bridge */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -405,6 +427,14 @@
 				8C77C40F103963CD003D6589 /* Default Advanced Profiles.plist */,
 			);
 			name = "Property Lists";
+			sourceTree = "<group>";
+		};
+		8C77C656103A3468003D6589 /* Scripting Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				8C77C658103A348C003D6589 /* Mail.app */,
+			);
+			name = "Scripting Bridge";
 			sourceTree = "<group>";
 		};
 		8C79E4D50FFE9FA500A4648B /* Managed Objects */ = {
@@ -540,6 +570,7 @@
 				8C79F2F510033E1B00A4648B /* CopyFiles */,
 			);
 			buildRules = (
+				8C77C652103A340D003D6589 /* PBXBuildRule */,
 			);
 			dependencies = (
 				8C3D2C26102FAC990007B87E /* PBXTargetDependency */,
@@ -547,7 +578,7 @@
 			name = Recon;
 			productInstallPath = "$(HOME)/Applications";
 			productName = "nmapX-coredata";
-			productReference = 8D15AC370486D014006FF6A4 /* Recon.app */;
+			productReference = 8D15AC370486D014006FF6A4 /* recon.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -621,6 +652,7 @@
 				8C77C410103963CD003D6589 /* Default Advanced Profiles.plist in Resources */,
 				8C77C55B1039DAF4003D6589 /* Recon - Object Graph.graffle in Resources */,
 				8C77C55C1039DAF4003D6589 /* Recon-template-new.dmg in Resources */,
+				8C77C659103A348C003D6589 /* Mail.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +663,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C77C65A103A349F003D6589 /* Mail.app in Sources */,
 				8D15AC310486D014006FF6A4 /* MyDocument.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				775BDEF1067A8BF0009058FE /* MyDocument.xcdatamodel in Sources */,

@@ -19,6 +19,9 @@
 #import "Session.h"
 #import "HostNote.h"
 
+#import <ScriptingBridge/SBApplication.h>
+#import "Mail.h"
+
 
 @implementation MyDocument
 
@@ -239,6 +242,7 @@
       return;
    }
 }
+
 
 #pragma mark -
 #pragma mark First run handlers
@@ -642,6 +646,84 @@ static float vigourOfShake = 0.01f;
          [object setStatus:@"Aborted"];
          [object setProgress:[NSNumber numberWithFloat:0.0]];
       }
+   }   
+}
+
+- (IBAction)emailSelectedSessions:(id)sender
+{
+   // Grab selected sessions
+   NSArray *sessions = [sessionsArrayController selectedObjects];
+
+   NSString *subject = nil;
+   if ([sessions count] == 1)
+      subject = [NSString stringWithFormat:@"Recon scan results: %d session", [sessions count]];
+   else
+      subject = [NSString stringWithFormat:@"Recon scan results: %d sessions", [sessions count]];
+   
+   // Create the body for the email
+   NSString *body = @"";
+   int count = 1;
+   for (id a in sessions)
+   {
+      body = [body stringByAppendingString:[NSString stringWithFormat:@"Session %d:\n", count++]];
+      body = [body stringByAppendingString:[NSString stringWithFormat:@"---------------------------------------------------------------\n"]];            
+      body = [body stringByAppendingString:[NSString stringWithFormat:@"\t Date: %@\n", [a date]]];       
+      body = [body stringByAppendingString:[NSString stringWithFormat:@"\t Target: %@\n", [a target]]]; 
+      body = [body stringByAppendingString:[NSString stringWithFormat:@"\t Hosts up: %@\n", [a hostsUp]]]; 
+      body = [body stringByAppendingString:[NSString stringWithFormat:@"\t Hosts down: %@\n", [a hostsDown]]]; 
+      body = [body stringByAppendingString:[NSString stringWithFormat:@"\t Hosts total: %@\n", [a hostsTotal]]];       
+      body = [body stringByAppendingString:[NSString stringWithFormat:@"---------------------------------------------------------------\n\n"]];      
+   }
+   
+   body = [body stringByAppendingString:[NSString stringWithFormat:@"\n\n\n"]];
+   
+   @try
+   {
+      MailApplication *mail = 
+      [SBApplication applicationWithBundleIdentifier:@"com.apple.mail"];
+      MailOutgoingMessage *mailMessage =
+      [[[[mail classForScriptingClass:@"outgoing message"] alloc]
+        initWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:
+                            subject, @"subject",
+                            body, @"content",
+                            nil]] autorelease];
+      [[mail outgoingMessages] addObject:mailMessage];
+      
+//      MailToRecipient *recipient =
+//      [[[[mail classForScriptingClass:@"to recipient"] alloc]
+//        initWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:
+//                            @"Rob Napier", @"name",
+//                            @"sb@robnapier.net", @"address",
+//                            nil]] autorelease];
+//      [[mailMessage toRecipients] addObject:recipient];
+      
+      // Loop through selected sessions and attach nmap xml files
+      
+      // Retrieve currently selected session 
+      NSString *savedSessionsDirectory = [prefsController reconSessionFolder];
+      
+      MailAttachment *attachment = nil;
+      
+      for (id a in sessions)
+      {      
+         NSString *sessionXMLpath = [savedSessionsDirectory stringByAppendingPathComponent:[a UUID]];
+         
+         attachment =
+         [[[[mail classForScriptingClass:@"attachment"] alloc]
+           initWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:
+                               sessionXMLpath, @"filename",                               
+//                               [a nmapOutputXml], @"filename",
+                               nil]] autorelease];
+         [[[mailMessage content] paragraphs] addObject:attachment];
+
+      }
+      
+      [mailMessage setVisible:YES];
+      [mail activate];
+   }
+   @catch (NSException *e)
+   {
+      NSLog(@"Exception:%@");
    }   
 }
 
